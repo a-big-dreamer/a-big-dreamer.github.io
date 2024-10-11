@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>vite 环境变量配置文件</title>
+      <link href="/2024/10/11/vite%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+      <url>/2024/10/11/vite%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Vite 环境变量和模式文档：<a href="https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files">https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files</a></p><p>对于项目开发来说，我们往往需要在不同环境下使用不同的配置，比如开发环境、测试环境、生产环境等。</p><p>常用的环境有 </p><ul><li>dev – 开发环境</li><li>test – 测试环境</li><li>prod – 生产环境</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+          <category> 工程化 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vite </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2024/10/10/hello-world/"/>
       <url>/2024/10/10/hello-world/</url>
@@ -13,18 +40,14 @@
       
       <categories>
           
-          <category> web前端 </category>
+          <category> hexo </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> jQuery </tag>
-            
-            <tag> 表格 </tag>
-            
-            <tag> 表单验证 </tag>
+            <tag> hexo </tag>
             
         </tags>
       
