@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #86afc6;
+  background: #7a6960;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2680,8 +2680,10 @@ ul.breadcrumb li + li:last-child {
   padding-right: 5px;
   margin-left: 15px;
 }
-.mypost {
+.my-post {
   position: relative;
+  width: 400px;
+  padding: 1px 10px;
   margin-bottom: 1rem;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -2703,11 +2705,8 @@ a.my-post-title-link:before {
   transform: scale(1.1);
   box-shadow: 10px 10px 15px 2px rgba(0,0,0,0.12), 0 0 6px 0 rgba(104,104,105,0.1);
   border-radius: 30px;
-  width: 400px;
-  padding: 1px 10px;
   margin-left: 25px;
   font-size: 16px;
-  transition-duration: 0.15s;
 }
 @media (max-width: 767px) {
   .my-post:hover {
@@ -2774,4 +2773,5 @@ div.post-block.tag .collection-title h2 {
   right: 10px;
   top: unset;
   bottom: 20vh;
+  z-index: 999999;
 }

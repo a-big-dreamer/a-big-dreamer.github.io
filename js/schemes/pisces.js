@@ -35,7 +35,7 @@ var Affix = {
     if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom';
     return false;
   },
-  getPinnedOffset: function() {
+  getPinnedOffset: function () {
     if (this.pinnedOffset) return this.pinnedOffset;
     this.element.classList.remove('affix-top', 'affix-bottom');
     this.element.classList.add('affix');
@@ -47,6 +47,7 @@ var Affix = {
   checkPosition: function() {
     if (window.getComputedStyle(this.element).display === 'none') return;
     let height = this.element.offsetHeight;
+    
     let { offset } = this;
     let offsetTop = offset.top;
     let offsetBottom = offset.bottom;
@@ -60,6 +61,7 @@ var Affix = {
       this.element.classList.remove('affix', 'affix-top', 'affix-bottom');
       this.element.classList.add(affixType);
     }
+    
     if (affix === 'bottom') {
       this.element.style.top = scrollHeight - height - offsetBottom + 'px';
     }
