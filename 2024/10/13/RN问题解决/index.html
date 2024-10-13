@@ -19,16 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"github.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="目前最新版本为 0.74.4，其相关依赖不太稳定，尝试使用 0.74.2 版本操作 创建项目时报错：RN error ErrorRN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)  raw.githu">
+    <meta name="description" content="2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作 创建项目时报错：RN error ErrorRN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RN问题解决">
 <meta property="og:url" content="https://github.com/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="目前最新版本为 0.74.4，其相关依赖不太稳定，尝试使用 0.74.2 版本操作 创建项目时报错：RN error ErrorRN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)  raw.githu">
+<meta property="og:description" content="2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作 创建项目时报错：RN error ErrorRN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://github.com/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png">
+<meta property="og:image" content="https://github.com/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png">
 <meta property="article:published_time" content="2024-10-13T14:33:05.000Z">
-<meta property="article:modified_time" content="2024-10-13T14:50:50.696Z">
+<meta property="article:modified_time" content="2024-10-13T15:03:37.180Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="React Native">
 <meta name="twitter:card" content="summary">
@@ -246,7 +247,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-10-13 22:33:05 / 修改时间：22:50:50" itemprop="dateCreated datePublished" datetime="2024-10-13T22:33:05+08:00">2024-10-13</time>
+      <time title="创建时间：2024-10-13 22:33:05 / 修改时间：23:03:37" itemprop="dateCreated datePublished" datetime="2024-10-13T22:33:05+08:00">2024-10-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,7 +298,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>目前最新版本为 0.74.4，其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
+    <div class="post-body" itemprop="articleBody"><p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
 <h1 id="创建项目时报错：RN-error-Error"><a href="#创建项目时报错：RN-error-Error" class="headerlink" title="创建项目时报错：RN error Error"></a>创建项目时报错：<strong>RN error Error</strong></h1><p><strong><font style="color:#DF2A3F;">RN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)</font></strong></p>
 <blockquote>
 <p><strong><font style="color:#C75C00;">raw.githubusercontent.com</font></strong> 是 GitHub 提供的一个服务，用于直接访问存储在 GitHub 仓库中的原始文件（如文本文件、脚本等），而无需下载整个仓库。</p>
@@ -323,13 +324,12 @@
 <p>DNS 服务可能是 <strong>域名</strong> 与 <strong>ip</strong> 未绑定的原因</p>
 <p>我们需要查看 <font style="color:#C75C00;background-color:rgb(249, 242, 244);">C:\Windows\System32\drivers\etc</font><code>里查看是否有</code><font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 与其对应的 <strong>ip</strong> 绑定，没有的话我们需要去查看 <font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 所对应的 **ip **</p>
 <ul>
-<li>进入该网址 <a target="_blank" rel="noopener" href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="alt text"></li>
-<li>下图所框便是其对应的 <strong>ip</strong></li>
-</ul>
-.png)
-
-<ul>
-<li>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</li>
+<li><p>进入该网址 <a target="_blank" rel="noopener" href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="alt text"></p>
+</li>
+<li><p>下图所框便是其对应的 <strong>ip</strong><img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png" class="" title="alt text"></p>
+</li>
+<li><p>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</p>
+</li>
 </ul>
 <blockquote>
 <p>185.199.108.133 raw.githubusercontent.com</p>
