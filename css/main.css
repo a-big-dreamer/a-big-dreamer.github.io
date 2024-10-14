@@ -1339,7 +1339,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #4e99a3;
+    background: #a87aff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1962,12 +1962,12 @@ pre code {
 }
 @media (min-width: 992px) {
   .post-body {
-    text-align: justify;
+    text-align: match-parent;
   }
 }
 @media (max-width: 991px) {
   .post-body {
-    text-align: justify;
+    text-align: match-parent;
   }
 }
 .post-body h1 .header-anchor,
