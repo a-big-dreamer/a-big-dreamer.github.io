@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="移除不必要权限例如，在\[项目名]\android\app\src\main\下AndroidManifest.xml中写入如下代码">
+    <meta name="description" content="移除不必要权限 例如，在\[项目名]\android\app\src\main\下AndroidManifest.xml中写入如下代码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RN优化">
 <meta property="og:url" content="https://a-big-dreamer.github.io/2024/10/13/RN%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="移除不必要权限例如，在\[项目名]\android\app\src\main\下AndroidManifest.xml中写入如下代码">
+<meta property="og:description" content="移除不必要权限 例如，在\[项目名]\android\app\src\main\下AndroidManifest.xml中写入如下代码">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-13T14:42:22.000Z">
 <meta property="article:modified_time" content="2024-10-16T01:20:27.080Z">
@@ -320,20 +320,33 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="移除不必要权限"><a href="#移除不必要权限" class="headerlink" title="移除不必要权限"></a>移除不必要权限</h2><p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="移除不必要权限">移除不必要权限</h2>
+<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
 <span id="more"></span>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <!-- more -->
 <p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:<span class="attribute">android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> xmlns:<span class="attribute">tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
-<ul>
-<li><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</li>
-<li><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</li>
-<li><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</li>
-<li><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</li>
-<li><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</li>
-<li><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
+</li>
+<li class="lvl-2">
+<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
+</li>
+<li class="lvl-2">
+<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
+</li>
+<li class="lvl-2">
+<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
+</li>
 </ul>
 
     </div>
@@ -349,11 +362,11 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/wechatpay.jpg" alt="A Big Dreamer 微信">
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="/images/alipay.jpg" alt="A Big Dreamer 支付宝">
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
         <span>支付宝</span>
       </div>
 
@@ -460,14 +473,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">7k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">18 分钟</span>
+    <span title="站点阅读时长">26 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">

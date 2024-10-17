@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://a-big-dreamer.github.io/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/image-1.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/image-2.png">
 <meta property="article:published_time" content="2024-10-16T00:37:38.000Z">
-<meta property="article:modified_time" content="2024-10-16T03:44:07.169Z">
+<meta property="article:modified_time" content="2024-10-17T09:29:21.617Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-typeof-%E4%B8%8E-instanceof-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD"><span class="nav-number">1.</span> <span class="nav-text">1. typeof 与 instanceof 类型判断</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-typeof-%E4%B8%8E-instanceof-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD"><span class="nav-number">1.</span> <span class="nav-text">1. typeof 与 instanceof 类型判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E3%80%81-%E3%80%81Object-is-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">2. &#x3D;&#x3D; 、&#x3D;&#x3D;&#x3D; 、Object.is() 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%A7%84%E5%88%99"><span class="nav-number">2.1.1.</span> <span class="nav-text">&#x3D;&#x3D; 比较规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-2"><span class="nav-number">2.2.</span> <span class="nav-text">&#x3D;&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%A7%84%E5%88%99-2"><span class="nav-number">2.2.1.</span> <span class="nav-text">&#x3D;&#x3D;&#x3D; 比较规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-is"><span class="nav-number">2.3.</span> <span class="nav-text">Object.is()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-is-%E7%9A%84%E6%AF%94%E8%BE%83%E8%A7%84%E5%88%99"><span class="nav-number">2.3.1.</span> <span class="nav-text">Object.is()的比较规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -265,9 +265,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-10-16 08:37:38 / 修改时间：11:44:07" itemprop="dateCreated datePublished" datetime="2024-10-16T08:37:38+08:00">2024-10-16</time>
+      <time title="创建时间：2024-10-16 08:37:38" itemprop="dateCreated datePublished" datetime="2024-10-16T08:37:38+08:00">2024-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-17 17:29:21" itemprop="dateModified" datetime="2024-10-17T17:29:21+08:00">2024-10-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,14 +307,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>288</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -319,27 +325,176 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="1-typeof-与-instanceof-类型判断"><a href="#1-typeof-与-instanceof-类型判断" class="headerlink" title="1. typeof 与 instanceof 类型判断"></a>1. typeof 与 instanceof 类型判断</h2><blockquote>
+    <div class="post-body" itemprop="articleBody"><h2 id="1-typeof-与-instanceof-类型判断">1. <code>typeof</code> 与 <code>instanceof</code> 类型判断</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<blockquote>
 <p><code>typeof</code> 是否能正确判断类型？<code>instanceof</code>能否正确判断对象的原理是什么？</p>
 </blockquote>
 <p><code>typeof</code> 对于原始类型来说，除了 <code>null</code> 都可以显示正确的类型。判断 <code>null</code> 对应的结果为 <code>object</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="number">1</span>); <span class="comment">// number</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="string">&quot;1&quot;</span>); <span class="comment">// string</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="literal">undefined</span>); <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="literal">true</span>); <span class="comment">// boolean</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="title class_">Symbol</span>()); <span class="comment">// symbol</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="number">10n</span>); <span class="comment">// bigint</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="literal">null</span>); <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
-
 <img data-src="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/image.png" class="" title="typeof 与 instanceof 类型判断">
-
 <p><code>typeof</code> 对于对象来说，除了函数都会显示 <code>object</code>，所以说 <code>typeof</code> 不能准确判断对象的类型。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> []); <span class="comment">// object</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> &#123;&#125;); <span class="comment">// object</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;); <span class="comment">// function</span></span><br></pre></td></tr></table></figure>
-
 <img data-src="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/image-1.png" class="" title="typeof 与 instanceof 类型判断">
-
 <p>所以 <code>typeof</code> 不能正确判断类型。</p>
 <blockquote>
 <p>如果我们想判断一个对象的正确类型，我们可以考虑使用 <code>instanceof</code>，因为内部机制是通过原型链来判断的。但对于原始数据类型，使用 <code>instanceof</code> 是无法判断的。</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1 <span class="keyword">instanceof</span> <span class="title class_">Person</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str <span class="keyword">instanceof</span> <span class="title class_">String</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <img data-src="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/image-2.png" class="" title="typeof 与 instanceof 类型判断">
-
-<p>&#x3D;&#x3D;注意：<code>instanceof</code> 可以判断对象的正确类型，但由于原型链的关系，对于其类型的父类进行判断也是返回 <code>true</code>。&#x3D;&#x3D;</p>
+<div class="warning">
+<p><strong>注意：</strong><br>
+<code>instanceof</code> 可以判断对象的正确类型，但由于原型链的关系，对于其类型的父类进行判断也是返回 <code>true</code>。</p>
+</div>
+</details>
+<h2 id="2-、-、Object-is-的区别">2. <code>==</code> 、<code>===</code> 、<code>Object.is()</code> 的区别</h2>
+<h3 id=""><code>==</code></h3>
+<details>
+<summary>查看</summary>
+相等（==）运算符（宽松比较）检查其两个操作数是否相等，返回一个布尔值结果。当比较双方数据类型不同时，它会尝试转换不同类型的操作数，并进行比较
+<h4 id="比较规则"><code>==</code> 比较规则</h4>
+<ol>
+<li class="lvl-3">
+<p>如果操作数具有相同的类型，则按如下方式进行比较：</p>
+<ul class="lvl-2">
+<li class="lvl-5">对象（Object）：仅当两个操作数引用同一个对象时返回 true。</li>
+<li class="lvl-5">字符串（String）：仅当两个操作数具有相同的字符且顺序相同时返回 true。</li>
+<li class="lvl-5">数字（Number）：如果两个操作数的值相同，则返回 true。+0 和 -0 被视为相同的值。如果任何一个操作数是 NaN，返回 false；所以，<mark>NaN 永远不等于 NaN</mark>。</li>
+<li class="lvl-5">布尔值（Boolean）：仅当操作数都为 true 或都为 false 时返回 true。</li>
+<li class="lvl-5">大整型（BigInt）：仅当两个操作数的值相同时返回 true。</li>
+<li class="lvl-5">符号（Symbol）：仅当两个操作数引用相同的符号时返回 true。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="title class_">NaN</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="title class_">NaN</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a == b); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>如果其中一个操作数为 null 或 undefined，另一个操作数也必须为 null 或 undefined 以返回 true。否则返回 false。（null 和 undefined 除了与null 和 undefined 比较为 true，其他值都返回 false）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> c = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> d = <span class="literal">undefined</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a == b); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a == c); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b == d); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a == d); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>如果其中一个操作数是对象，另一个是原始值，则将对象转换为原始值。</p>
+<ul class="lvl-2">
+<li class="lvl-6">在这一步，两个操作数都被转换为原始值（字符串、数字、布尔值、符号和大整型中的一个）。剩余的转换将分情况完成。
+<ul class="lvl-4">
+<li class="lvl-8">如果是相同的类型，使用步骤 1 进行比较。</li>
+<li class="lvl-8">如果其中一个操作数是符号(Symbol)而另一个不是，返回 false。</li>
+<li class="lvl-8">如果其中一个操作数是布尔值而另一个不是，则将布尔值转换为数字：<mark>true 转换为 1，false 转换为 0</mark>。然后再次对两个操作数进行宽松比较。</li>
+<li class="lvl-8">数字与字符串：<mark>将字符串转换为数字</mark>。转换失败将导致 NaN，这将保证相等比较为 false。</li>
+<li class="lvl-8">数字与大整型：按数值进行比较。如果数字的值为 ±∞ 或 NaN，返回 false。</li>
+<li class="lvl-8">字符串与大整型：<mark>使用与 BigInt() 构造函数相同的算法将字符串转换为大整型数</mark>。如果转换失败，返回 false。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="tips">
+<p><strong>对象转为原始值</strong><br>
+对象将依次调用它的 <code>[Symbol.toPrimitive]()</code>（将 default 作为 hint 值）、valueOf() 和 toString() 方法，将其转换为原始值。<mark>注意，原始值转换会在 toString() 方法之前调用 valueOf() 方法</mark>。<br>
+<code>[Symbol.toPrimitive]()</code> 方法，如果存在，则必须返回原始值，返回对象，会导致 TypeError。<mark>对于 valueOf() 和 toString()，如果其中一个返回对象，则忽略其返回值，从而使用另一个的返回值；如果两者都不存在，或者两者都没有返回一个原始值，则抛出 TypeError</mark>。</p>
+</div>
+<p><strong>示例</strong></p>
+<p>定义一个干净的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a[<span class="title class_">Symbol</span>.<span class="property">toPrimitive</span>]); <span class="comment">// undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">toString</span>()); <span class="comment">// [object Object]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">valueOf</span>()); <span class="comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>实现该对象的<code>[Symbol.toPrimitive]</code>方法，使其返回一个原始值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">   [<span class="title class_">Symbol</span>.<span class="property">toPrimitive</span>](hint) &#123;</span><br><span class="line">         <span class="keyword">if</span> (hint === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span> (hint === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;abc&#x27;</span></span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此处运用了隐式转换 导致使用强制数字类型转换算法 使得能满足 hint===&#x27;number&#x27; 条件        </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(+a == <span class="number">42</span>); <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 此处 new String 导致使用强制字符串类型转换算法 使得能满足 hint===&#x27;string&#x27; 条件 </span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">String</span>(a) == <span class="string">&#x27;abc&#x27;</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a == <span class="literal">null</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<div class="warning">
+<p><strong>注意</strong><br>
+当未对对象使用强制类型转换时，会返回默认值。但<code>Symbol.toPrimitive</code> 返回的 null 或 undefined 与 null 和 undefined 进行宽松比较(==)时仍为 false，hint 值是 number 时，返回的必须是数字字符串或数字，否则与数字或数字字符串进行宽松比较时仍为 false</p>
+</div>
+<div class="tips">
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a> 和 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date">Symbol</a> 对象是唯一重写 <code>[Symbol.toPrimitive]()</code> 方法的对象。</p>
+<p>对于 Date，如果 hint 是 “string” 或 “default”，<code>[Symbol.toPrimitive]()</code> 将会调用 toString。如果 toString 属性不存在，则调用 valueOf。如果 valueOf 也不存在，则抛出一个TypeError。</p>
+<p>对于 Symbol，hint 参数未使用时，Symbol 的 <code>[Symbol.toPrimitive]()</code> 方法返回 Symbol 对象的原始值作为数据类型返回。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sym = <span class="title class_">Symbol</span>(<span class="string">&quot;example&quot;</span>);</span><br><span class="line">sym === sym[<span class="title class_">Symbol</span>.<span class="property">toPrimitive</span>](); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>当对象不存在<code>Symbol.toPrimitive</code>时，会根据 <code>toString()</code> 和 <code>valueOf()</code> 的返回值作为原始值进行比较。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">      <span class="title function_">valueOf</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="title function_">toString</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;abc&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(a == <span class="number">42</span>); <span class="comment">// true</span></span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(a == <span class="string">&#x27;abc&#x27;</span>); <span class="comment">// false</span></span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">new</span> <span class="title class_">String</span>(a) == <span class="string">&#x27;abc&#x27;</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<div class="tips">
+<p>一般来说，valueOf 的优先级高于 toString。但当其使用强制字符串类型转换时，会根据 toString 的返回值作为原始值进行比较。</p>
+</div>
+</details>
+<h3 id="-2"><code>===</code></h3>
+<details>
+<summary>查看</summary>
+严格相等（===）运算符与 == 运算符之间最显著的区别是，严格相等运算符不尝试类型转换。相反，严格相等运算符总是认为不同类型的操作数是不同的，即只要类型不同进行 `===` 操作时，结果即为 `false`。严格相等运算符本质上只执行第 1 步，然后对所有其他情况返回 `false`。
+<div class="warning">
+<p>上面的算法有一个“故意违反”：如果其中一个操作数是 document.all，则它被视为 undefined。这意味着 document.all == null 是 true，但 document.all === undefined &amp;&amp; document.all === null 是 false。 —— <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Equality">MDN文章描述</a></p>
+</div>
+<h4 id="比较规则-2"><code>===</code> 比较规则</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果操作数的类型不同，则返回 false。</p>
+</li>
+<li class="lvl-2">
+<p>如果两个操作数都是对象，只有当它们指向同一个对象时才返回 true。</p>
+</li>
+<li class="lvl-2">
+<p>如果两个操作数都为 null，或者两个操作数都为 undefined，返回 true。</p>
+</li>
+<li class="lvl-2">
+<p>如果两个操作数有任意一个为 NaN，返回 false。</p>
+</li>
+<li class="lvl-2">
+<p>否则，比较两个操作数的值：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><mark>数字类型必须拥有相同的数值。+0 和 -0 会被认为是相同的值。</mark></li>
+<li class="lvl-4">字符串类型必须拥有相同顺序的相同字符。</li>
+<li class="lvl-4">布尔运算符必须同时为 true 或同时为 false。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(-<span class="number">0</span> === +<span class="number">0</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">0</span> === -<span class="number">0</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">NaN</span> === <span class="title class_">NaN</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</details>
+<h3 id="Object-is"><code>Object.is()</code></h3>
+<details>
+<summary>查看</summary>
+<p><code>Object.is()</code> 静态方法确定两个值是否为相同值。</p>
+<h4 id="Object-is-的比较规则"><code>Object.is()</code>的比较规则</h4>
+<p>如果出现以下几种情况，则返回 true，即比较的两个值相同</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>都是 undefined</p>
+</li>
+<li class="lvl-2">
+<p>都是 null</p>
+</li>
+<li class="lvl-2">
+<p>都是 true 或者都是 false</p>
+</li>
+<li class="lvl-2">
+<p>都是长度相同、字符相同、顺序相同的字符串</p>
+</li>
+<li class="lvl-2">
+<p>都是相同的对象（意味着两个值都引用了内存中的同一对象）</p>
+</li>
+<li class="lvl-2">
+<p>都是 BigInt 且具有相同的数值</p>
+</li>
+<li class="lvl-2">
+<p>都是 symbol 且引用相同的 symbol 值</p>
+</li>
+<li class="lvl-2">
+<p>都是数字且</p>
+<ul class="lvl-2">
+<li class="lvl-4">都是 +0</li>
+<li class="lvl-4">都是 -0</li>
+<li class="lvl-4">都是 NaN</li>
+<li class="lvl-4">都有相同的值，非零且都不是 NaN</li>
+</ul>
+</li>
+</ul>
+<p><code>Object.is()</code> 与 == 运算符并不等价。== 运算符在测试相等性之前，会对两个操作数进行类型转换（如果它们不是相同的类型），这可能会导致一些非预期的行为，例如 “” == false 的结果是 true，但是 <code>Object.is()</code> 不会对其操作数进行类型转换。</p>
+<p><code>Object.is()</code> 也不等价于 === 运算符。<code>Object.is()</code> 和 === 之间的<mark>唯一区别在于它们处理带符号的 0 和 NaN 值的时候</mark>。=== 运算符（和 == 运算符）将数值 -0 和 +0 视为相等，但是会将 NaN 视为彼此不相等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="number">0</span>, -<span class="number">0</span>); <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(+<span class="number">0</span>, -<span class="number">0</span>); <span class="comment">// false</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(-<span class="number">0</span>, -<span class="number">0</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="title class_">NaN</span>, <span class="number">0</span> / <span class="number">0</span>); <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="title class_">NaN</span>, <span class="title class_">Number</span>.<span class="property">NaN</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</details>
+<h3 id="总结">总结</h3>
+<div class="tips">
+<p>对于 <code>==</code>，主要特点就是类型转换，而 <code>===</code> 和 <code>Object.is()</code> 则不进行类型转换。</p>
+<p>对于 <code>===</code>，主要特点就是严格相等，类型不同就是 <code>false</code>，与 <code>==</code> 类型相同时比较规则一致。</p>
+<p>对于 <code>Object.is()</code>，主要特点就是严格相等，类型不同就是 <code>false</code>，与 <code>==</code> 类型相同时比较规则一致。但与 <code>===</code> 不同的是，<code>Object.is()</code> 对于 0 和 -0、NaN 的处理不同，<code>Object.is()</code> 将数值 -0 和 +0 视为彼此不相等，但是会将 NaN 视为彼此相等，<code>===</code> 将数值 -0 和 +0 视为相等，但是会将 NaN 视为彼此不相等。</p>
+</div>
 
     </div>
 
@@ -354,11 +509,11 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/wechatpay.jpg" alt="A Big Dreamer 微信">
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="/images/alipay.jpg" alt="A Big Dreamer 支付宝">
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
         <span>支付宝</span>
       </div>
 
@@ -462,14 +617,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">7k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">18 分钟</span>
+    <span title="站点阅读时长">26 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">

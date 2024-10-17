@@ -325,73 +325,121 @@
     
     <div class="post-body" itemprop="articleBody"><p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
 <span id="more"></span>
-<h2 id="创建项目时报错：RN-error-Error"><a href="#创建项目时报错：RN-error-Error" class="headerlink" title="创建项目时报错：RN error Error"></a>创建项目时报错：<strong>RN error Error</strong></h2><p><strong><font style="color:#DF2A3F;">RN error Error: getaddrinfo ENOENT raw.githubusercontent.com at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)</font></strong></p>
+<h2 id="创建项目时报错：RN-error-Error">创建项目时报错：<strong>RN error Error</strong></h2>
+<p><strong><font style="color:#DF2A3F;">RN error Error: getaddrinfo ENOENT <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)</font></strong></p>
 <blockquote>
-<p><strong><font style="color:#C75C00;">raw.githubusercontent.com</font></strong> 是 GitHub 提供的一个服务，用于直接访问存储在 GitHub 仓库中的原始文件（如文本文件、脚本等），而无需下载整个仓库。<br>在 React Native (RN) 开发环境中，这个 URL 常见于以下几种场景（文心一言生成，可了解）：</p>
+<p><strong><font style="color:#C75C00;">raw.githubusercontent.com</font></strong> 是 GitHub 提供的一个服务，用于直接访问存储在 GitHub 仓库中的原始文件（如文本文件、脚本等），而无需下载整个仓库。在 React Native (RN) 开发环境中，这个 URL 常见于以下几种场景（文心一言生成，可了解）：</p>
 </blockquote>
-<ul>
-<li><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 ruby -e “$(curl -fsSL <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Homebrew/install/master/install)%22%EF%BC%8CHomebrew">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;，Homebrew</a> 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</li>
-<li><strong>脚本或配置文件获取</strong>: 在某些情况下，开发者可能会从 raw.githubusercontent.com 直接拉取脚本或配置文件到本地，作为项目初始化的一部分或者是运行某些自动化任务的需要。</li>
-<li><strong>快速分享和集成代码片段</strong>: 开发者可能会分享一些示例代码或者配置文件的链接，其他用户可以直接通过这些链接查看或下载内容，便于快速集成或参考。</li>
-<li><strong>持续集成&#x2F;部署脚本</strong>: 在 CI&#x2F;CD 流程中，可能会使用此类链接来动态获取最新的脚本或配置，确保构建过程使用的是最新或指定版本的资源。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 ruby -e “$(curl -fsSL <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”，Homebrew 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</p>
+</li>
+<li class="lvl-2">
+<p><strong>脚本或配置文件获取</strong>: 在某些情况下，开发者可能会从 <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> 直接拉取脚本或配置文件到本地，作为项目初始化的一部分或者是运行某些自动化任务的需要。</p>
+</li>
+<li class="lvl-2">
+<p><strong>快速分享和集成代码片段</strong>: 开发者可能会分享一些示例代码或者配置文件的链接，其他用户可以直接通过这些链接查看或下载内容，便于快速集成或参考。</p>
+</li>
+<li class="lvl-2">
+<p><strong>持续集成/部署脚本</strong>: 在 CI/CD 流程中，可能会使用此类链接来动态获取最新的脚本或配置，确保构建过程使用的是最新或指定版本的资源。</p>
+</li>
 </ul>
 <p>其最显著的是我们在启动项目时，会自动将模拟器启动</p>
 <p><strong>问题分析</strong></p>
-<ul>
-<li><font style="color:rgb(38, 38, 38);">为无法访问该域名的问题</font></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><font style="color:rgb(38, 38, 38);">为无法访问该域名的问题</font></p>
+</li>
 </ul>
 <p><strong>解决方案</strong></p>
-<ul>
-<li>检查网络设置</li>
-<li>使用代理服务</li>
-<li>更换 DNS 服务器等方法来解决访问限制</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>检查网络设置</p>
+</li>
+<li class="lvl-2">
+<p>使用代理服务</p>
+</li>
+<li class="lvl-2">
+<p>更换 DNS 服务器等方法来解决访问限制</p>
+</li>
 </ul>
 <p>DNS 服务可能是 <strong>域名</strong> 与 <strong>ip</strong> 未绑定的原因</p>
 <p>我们需要查看 <font style="color:#C75C00;background-color:rgb(249, 242, 244);">C:\Windows\System32\drivers\etc</font><code>里查看是否有</code><font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 与其对应的 <strong>ip</strong> 绑定，没有的话我们需要去查看 <font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 所对应的 <strong>ip</strong></p>
-<ul>
-<li><p>进入该网址 <a target="_blank" rel="noopener" href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="RN问题解决"></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进入该网址 <a target="_blank" rel="noopener" href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="RN问题解决"></p>
 </li>
-<li><p>下图所框便是其对应的 <strong>ip</strong><img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png" class="" title="RN问题解决"></p>
+<li class="lvl-2">
+<p>下图所框便是其对应的 <strong>ip</strong><img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png" class="" title="RN问题解决"></p>
 </li>
-<li><p>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</p>
+<li class="lvl-2">
+<p>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</p>
 </li>
 </ul>
 <blockquote>
-<p>185.199.108.133 raw.githubusercontent.com</p>
-<p>185.199.109.133 raw.githubusercontent.com</p>
-<p>185.199.110.133 raw.githubusercontent.com</p>
-<p>185.199.111.133 raw.githubusercontent.com</p>
+<p>185.199.108.133 <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.109.133 <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.110.133 <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.111.133 <a target="_blank" rel="noopener" href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
 </blockquote>
-<h2 id="下载-gradle-x-x-all-zip-太慢"><a href="#下载-gradle-x-x-all-zip-太慢" class="headerlink" title="下载 gradle-x.x-all.zip 太慢"></a>下载 <strong>gradle-x.x-all.zip 太慢</strong></h2><blockquote>
+<h2 id="下载-gradle-x-x-all-zip-太慢">下载 <strong>gradle-x.x-all.zip 太慢</strong></h2>
+<blockquote>
 <p>Downloading <a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/gradle-8.6-all.zip">https://services.gradle.org/distributions/gradle-8.6-all.zip</a></p>
 </blockquote>
 <p><strong><font style="color:#000000;">解决方案</font></strong></p>
-<ul>
-<li>配置镜像</li>
-<li>在 <font style="color:#C75C00;">[项目名]\android\gradle\wrapper\gradle-wrapper.properties</font> 中进行如下操作<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=<span class="keyword">wrapper</span>/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=<span class="number">10000</span></span><br><span class="line">validateDistributionUrl=<span class="keyword">true</span></span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=<span class="keyword">wrapper</span>/dists</span><br></pre></td></tr></table></figure></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>配置镜像</p>
+</li>
+<li class="lvl-2">
+<p>在 <font style="color:#C75C00;">[项目名]\android\gradle\wrapper\gradle-wrapper.properties</font> 中进行如下操作</p>
+</li>
 </ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=<span class="keyword">wrapper</span>/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=<span class="number">10000</span></span><br><span class="line">validateDistributionUrl=<span class="keyword">true</span></span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=<span class="keyword">wrapper</span>/dists</span><br></pre></td></tr></table></figure>
 <p>配置好之后仍满可以试试多次重新执行启动项目命令，当进度明显快了就可以了，第一次可能有点慢，因为要安装 <font style="color:#C75C00;">gradle-8.6-all.zip</font></p>
-<h2 id="依赖库下载太慢"><a href="#依赖库下载太慢" class="headerlink" title="依赖库下载太慢"></a>依赖库下载太慢</h2><p><strong>解决方案</strong></p>
-<ul>
-<li><font style="color:#C75C00;">[项目名]\android\build.gradle</font> 中 <font style="color:#C75C00;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">内有</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">google()</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">和</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">mavenCentral()</font><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">repositories</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">google</span>()</span></span><br><span class="line">    <span class="function"><span class="title">mavenCentral</span>()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><strong>google()</strong>: 这一行指定了Google的Maven仓库作为依赖项的来源。这对于下载Android SDK相关依赖、Jetpack库以及其他Google提供的库非常关键。</li>
-<li><strong>mavenCentral()</strong>: 这一行指定了Maven中央仓库，它是Java开发中最常用的依赖库仓库，包含了大量开源库和框架。</li>
-<li>但由于这两个仓库的服务器都在国外，我们也需要对其进行镜像处理，有两种解决方案：<ul>
-<li><strong>局部配置</strong>：直接在 <font style="color:#DF2A3F;">build.gradle</font> 的 <font style="color:#DF2A3F;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">中修改</font></li>
-<li><strong>全局配置</strong>： 在 <font style="color:#DF2A3F;">C:\Users[用户名].gradle</font> 文件夹下创建 <font style="color:#DF2A3F;">init.gradle</font> 文件，里面进行如下配置，这样我们就不需要每个项目都进行配置了<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 局部配置</span></span><br><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/google&#x27; &#125;</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/jcenter&#x27; &#125;</span></span><br><span class="line">    <span class="comment">// 此为阿里镜像下载源</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//mirrors.aliyun.com/macports/distfiles/gradle/&#x27; &#125;  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// 全局配置</span><br><span class="line">allprojects&#123;</span><br><span class="line">    <span class="attribute">repositories &#123;</span></span><br><span class="line"><span class="attribute">        def ALIYUN_REPOSITORY_URL = &#x27;https</span>://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">        all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url ALIYUN_REPOSITORY_URL</span><br><span class="line">            url ALIYUN_JCENTER_URL</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    buildscript&#123;</span><br><span class="line">        repositories &#123;</span><br><span class="line">            def ALIYUN_REPOSITORY_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">            def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">            all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">                if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                    def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maven &#123;</span><br><span class="line">                url ALIYUN_REPOSITORY_URL</span><br><span class="line">                url ALIYUN_JCENTER_URL</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure></li>
+<h2 id="依赖库下载太慢">依赖库下载太慢</h2>
+<p><strong>解决方案</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><font style="color:#C75C00;">[项目名]\android\build.gradle</font> 中 <font style="color:#C75C00;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">内有</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">google()</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">和</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">mavenCentral()</font></p>
+</li>
+</ul>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">repositories</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">google</span>()</span></span><br><span class="line">    <span class="function"><span class="title">mavenCentral</span>()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>google()</strong>: 这一行指定了Google的Maven仓库作为依赖项的来源。这对于下载Android SDK相关依赖、Jetpack库以及其他Google提供的库非常关键。</p>
+</li>
+<li class="lvl-2">
+<p><strong>mavenCentral()</strong>: 这一行指定了Maven中央仓库，它是Java开发中最常用的依赖库仓库，包含了大量开源库和框架。</p>
+</li>
+<li class="lvl-2">
+<p>但由于这两个仓库的服务器都在国外，我们也需要对其进行镜像处理，有两种解决方案：</p>
+<ul class="lvl-2">
+<li class="lvl-6"><strong>局部配置</strong>：直接在 <font style="color:#DF2A3F;">build.gradle</font> 的 <font style="color:#DF2A3F;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">中修改</font></li>
+<li class="lvl-6"><strong>全局配置</strong>： 在 <font style="color:#DF2A3F;">C:\Users[用户名].gradle</font> 文件夹下创建 <font style="color:#DF2A3F;">init.gradle</font> 文件，里面进行如下配置，这样我们就不需要每个项目都进行配置了</li>
 </ul>
 </li>
 </ul>
-<h2 id="调试断开后设备上打开报错"><a href="#调试断开后设备上打开报错" class="headerlink" title="调试断开后设备上打开报错"></a>调试断开后设备上打开报错</h2><p>当我们启动程序并连上设备后，我们可以看到页面资源，但当我们断开后再打开就会报错 <font style="color:#DF2A3F;"><strong>Unable to load script…</strong></font>，是因为我们的 <strong>JS代码和静态资源</strong> 并没有集成到Android项目中进行构建和发布</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 局部配置</span></span><br><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/google&#x27; &#125;</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/jcenter&#x27; &#125;</span></span><br><span class="line">    <span class="comment">// 此为阿里镜像下载源</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//mirrors.aliyun.com/macports/distfiles/gradle/&#x27; &#125;  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight roboconf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// 全局配置</span><br><span class="line">allprojects&#123;</span><br><span class="line">    <span class="attribute">repositories &#123;</span></span><br><span class="line"><span class="attribute">        def ALIYUN_REPOSITORY_URL = &#x27;https</span>://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">        all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url ALIYUN_REPOSITORY_URL</span><br><span class="line">            url ALIYUN_JCENTER_URL</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    buildscript&#123;</span><br><span class="line">        repositories &#123;</span><br><span class="line">            def ALIYUN_REPOSITORY_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">            def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">            all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">                if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                    def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maven &#123;</span><br><span class="line">                url ALIYUN_REPOSITORY_URL</span><br><span class="line">                url ALIYUN_JCENTER_URL</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h2 id="调试断开后设备上打开报错">调试断开后设备上打开报错</h2>
+<p>当我们启动程序并连上设备后，我们可以看到页面资源，但当我们断开后再打开就会报错 <font style="color:#DF2A3F;"><strong>Unable to load script…</strong></font>，是因为我们的 <strong>JS代码和静态资源</strong> 并没有集成到Android项目中进行构建和发布</p>
 <p><strong>解决方案</strong></p>
-<ul>
-<li>在 <font style="color:#DF2A3F;">[项目名]\android\app\src\main\</font> 目录下创建 <font style="color:#DF2A3F;">assets</font> 文件夹，并在下面创建 <font style="color:#DF2A3F;">index.android.bundle</font> 文件</li>
-<li>然后在控制台<strong>项目根目录</strong>运行命令 <font style="color:#DF2A3F;">npx react-native bundle –platform android –dev false –entry-file index.js –bundle-output android&#x2F;app&#x2F;src&#x2F;main&#x2F;assets&#x2F;index.android.bundle –assets-dest android&#x2F;app&#x2F;src&#x2F;main&#x2F;res</font></li>
-<li>当我们再次运行时，即使断开我们也可以看到我们的资源</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在 <font style="color:#DF2A3F;">[项目名]\android\app\src\main\</font> 目录下创建 <font style="color:#DF2A3F;">assets</font> 文件夹，并在下面创建 <font style="color:#DF2A3F;">index.android.bundle</font> 文件</p>
+</li>
+<li class="lvl-2">
+<p>然后在控制台<strong>项目根目录</strong>运行命令 <font style="color:#DF2A3F;">npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res</font></p>
+</li>
+<li class="lvl-2">
+<p>当我们再次运行时，即使断开我们也可以看到我们的资源</p>
+</li>
 </ul>
-<h2 id="error-Error-connect-ETIMEDOUT-185-199-108-133-443"><a href="#error-Error-connect-ETIMEDOUT-185-199-108-133-443" class="headerlink" title="error Error: connect ETIMEDOUT 185.199.108.133:443"></a>error Error: connect ETIMEDOUT 185.199.108.133:443</h2><p>过段时间重新尝试安装</p>
-<h2 id="error-unknown-command-‘run-android’"><a href="#error-unknown-command-‘run-android’" class="headerlink" title="error: unknown command ‘run-android’"></a>error: unknown command ‘run-android’</h2><p>依赖包删除重新 <code>npm i</code> 或 <code>yarn</code></p>
+<h2 id="error-Error-connect-ETIMEDOUT-185-199-108-133-443">error Error: connect ETIMEDOUT 185.199.108.133:443</h2>
+<p>过段时间重新尝试安装</p>
+<h2 id="error-unknown-command-‘run-android’">error: unknown command ‘run-android’</h2>
+<p>依赖包删除重新 <code>npm i</code> 或 <code>yarn</code></p>
 
     </div>
 
@@ -406,11 +454,11 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/wechatpay.jpg" alt="A Big Dreamer 微信">
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
         <span>微信</span>
       </div>
       <div>
-        <img src="/images/alipay.jpg" alt="A Big Dreamer 支付宝">
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
         <span>支付宝</span>
       </div>
 
@@ -517,14 +565,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">7k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">18 分钟</span>
+    <span title="站点阅读时长">26 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -1339,7 +1339,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ffa704;
+    background: #a6037e;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2956,6 +2956,71 @@ header.header {
 }
 :root {
   --content-bg-color: rgba(255,255,255,0.902);
+}
+details {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+}
+details:hover {
+  border-color: #337ecc;
+}
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  list-style: none;
+  position: relative;
+  padding-left: 25px;
+  transition: color 0.3s ease;
+  min-height: 1rem;
+  line-height: 1rem;
+}
+summary:hover {
+  color: #337ecc;
+}
+summary::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+details > *:not(summary) {
+  margin-top: 10px;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.tips {
+  padding-left: 10px;
+  background-color: rgba(52,152,219,0.3);
+  border-left: 4px solid #3498db;
+  color: #217bb8;
+}
+.success {
+  padding-left: 10px;
+  background-color: rgba(46,204,113,0.3);
+  border-left: 4px solid #2ecc71;
+  color: #25a35a;
+}
+.warning {
+  padding-left: 10px;
+  background-color: rgba(241,196,15,0.3);
+  border-left: 4px solid #f1c40f;
+  color: #c29d0b;
+}
+.danger {
+  padding-left: 10px;
+  background-color: rgba(231,76,60,0.3);
+  border-left: 4px solid #e74c3c;
+  color: #cf2b1a;
 }
 #tp-weather-widget .sw-container {
   left: unset;
