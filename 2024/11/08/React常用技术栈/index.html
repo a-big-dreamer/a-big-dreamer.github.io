@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="React常用技术栈(问卷编辑器)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React常用技术栈">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/index.html">
+<meta property="og:site_name" content="ABD&#39;s Blog">
+<meta property="og:description" content="React常用技术栈(问卷编辑器)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-08T10:03:17.000Z">
+<meta property="article:modified_time" content="2024-11-08T13:58:25.596Z">
+<meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/","path":"2024/11/08/React常用技术栈/","title":"React常用技术栈"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React常用技术栈 | ABD's Blog</title>
+    
+
+
+
+
+
+
+
+
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+  <style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+  <body
+    itemscope
+    itemtype="http://schema.org/WebPage"
+    
+    class="use-motion"
+    
+  >
+    <div class="headband"></div>
+
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ABD's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">梦想成为伟大的梦想家</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header> 
+  
+<aside class="sidebar">
+
+  <div
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
+  >
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-toc">文章目录</li>
+      <li class="sidebar-nav-overview">站点概览</li>
+    </ul>
+
+    <div class="sidebar-panel-container">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">创建项目环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-React-App-CRA"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create-React-App (CRA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vite"><span class="nav-number">1.1.2.</span> <span class="nav-text">Vite</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next-js"><span class="nav-number">1.1.3.</span> <span class="nav-text">Next.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="nav-number">1.2.</span> <span class="nav-text">代码规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ESLint"><span class="nav-number">1.2.1.</span> <span class="nav-text">ESLint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prettier"><span class="nav-number">1.2.2.</span> <span class="nav-text">Prettier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Husky"><span class="nav-number">1.2.3.</span> <span class="nav-text">Husky</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commit-lint"><span class="nav-number">1.2.4.</span> <span class="nav-text">commit-lint</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">扩展配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#craco-js"><span class="nav-number">1.3.1.</span> <span class="nav-text">craco.js</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">React 基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hooks"><span class="nav-number">3.</span> <span class="nav-text">Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%85%E5%A4%87"><span class="nav-number">3.1.</span> <span class="nav-text">必备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hooks-%E8%A7%84%E5%88%99"><span class="nav-number">3.3.</span> <span class="nav-text">Hooks 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hooks-%E5%BA%93"><span class="nav-number">3.4.</span> <span class="nav-text">hooks 库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">CSS 样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A-CSS"><span class="nav-number">4.1.</span> <span class="nav-text">普通 CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-Module"><span class="nav-number">4.2.</span> <span class="nav-text">CSS-Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-in-JS"><span class="nav-number">4.3.</span> <span class="nav-text">CSS-in-JS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classnames"><span class="nav-number">4.4.</span> <span class="nav-text">classnames</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">5.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI-%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">UI 组件库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">表单组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax-%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="nav-number">8.</span> <span class="nav-text">Ajax 网络请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">状态管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%96%E6%8B%BD%E6%8E%92%E5%BA%8F"><span class="nav-number">10.</span> <span class="nav-text">拖拽排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E8%A1%A8"><span class="nav-number">11.</span> <span class="nav-text">可视化图表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">13.</span> <span class="nav-text">测试</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A Big Dreamer"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">A Big Dreamer</p>
+  <div class="site-description" itemprop="description">A Big Dreamer's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a-big-dreamer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a-big-dreamer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+<!-- recent posts -->
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+        <div class="links-of-blogroll-title recent-posts-title">
+	    <i class="fa fa-history " aria-hidden="true"></i>
+            近期文章
+	</div>
+	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" title="前端知识点记录(个人理解)" target="">
+		    前端知识点记录(个人理解)
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" title="uniapp和taro学习知识点记录" target="">
+		    uniapp和taro学习知识点记录
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/" title="React常用技术栈" target="">
+		    React常用技术栈
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝" target="">
+		    深拷贝与浅拷贝
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/10/19/Vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" title="Vue3组件通信方式" target="">
+		    Vue3组件通信方式
+		    </a>
+		</li>
+	</ul>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="pjax">
+  </div>
+</aside>
+
+
+      </div>
+
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React常用技术栈 | ABD's Blog">
+      <meta itemprop="description" content="React常用技术栈(问卷编辑器)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React常用技术栈
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-08 18:03:17 / 修改时间：21:58:25" itemprop="dateCreated datePublished" datetime="2024-11-08T18:03:17+08:00">2024-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/React18/" itemprop="url" rel="index"><span itemprop="name">React18</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">React常用技术栈(问卷编辑器)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="创建项目环境">创建项目环境</h2>
+<h3 id="创建项目">创建项目</h3>
+<h4 id="Create-React-App-CRA"><a target="_blank" rel="noopener" href="https://create-react-app.bootcss.com/">Create-React-App (CRA)</a></h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用了 Webpack、Babel、ESLint 和其他优秀的项目作为基础层</p>
+</li>
+<li class="lvl-2">
+<p>创建项目命令</p>
+</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure>
+<h4 id="Vite"><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/">Vite</a></h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>创建项目命令</p>
+</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm create vite@latest my-app -- --template react</span><br></pre></td></tr></table></figure>
+<h4 id="Next-js"><a target="_blank" rel="noopener" href="https://www.nextjs.cn/">Next.js</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>Next.js 为您提供生产环境所需的所有功能以及最佳的开发体验：包括静态及服务器端融合渲染、 支持 TypeScript、智能化打包、 路由预取等功能 无需任何配置。</p>
+<p>适用于简单的<mark>C端</mark>应用</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>创建项目命令</p>
+</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx create-next-app@latest</span><br><span class="line"># or</span><br><span class="line">yarn create next-app</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>创建 TS 项目</p>
+</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx create-next-app@latest --typescript</span><br><span class="line"># or</span><br><span class="line">yarn create next-app --typescript</span><br></pre></td></tr></table></figure>
+<h3 id="代码规范">代码规范</h3>
+<h4 id="ESLint"><a target="_blank" rel="noopener" href="https://zh-hans.eslint.org/docs/latest/use/getting-started">ESLint</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>ESLint 是一个根据方案识别并报告 ECMAScript/JavaScript 代码问题的工具，其目的是使代码风格更加一致并避免错误</p>
+</blockquote>
+<h4 id="Prettier"><a target="_blank" rel="noopener" href="https://www.prettier.cn/">Prettier</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>Prettier 是一款代码格式化工具，可以将项目代码格式统一化,并且美化代码</p>
+</blockquote>
+<h4 id="Husky"><a target="_blank" rel="noopener" href="https://husky.nodejs.cn/get-started.html">Husky</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>Husky 是一个 Git Hooks 工具，它允许您在 Git 提交之前运行脚本，在提交或推送时自动检查你的提交消息、代码并运行测试。</p>
+</blockquote>
+<h4 id="commit-lint"><a target="_blank" rel="noopener" href="https://commitlint.js.org/">commit-lint</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>commitlint 是一个 git commit 校验约束工具。</p>
+</blockquote>
+<h3 id="扩展配置">扩展配置</h3>
+<h4 id="craco-js"><a target="_blank" rel="noopener" href="https://craco.js.org/">craco.js</a></h4>
+<p>介绍</p>
+<blockquote>
+<p>由于 CRA 的配置是被隐藏的,我们不应把它显示出来并对其进行修改,于是出现了 craco.js<br>
+通过 craco，开发者可以使用自定义覆盖原先配置，以满足项目的特定需求。例如：可以添加自定义 webpack 的 loader，plugin，修改 webpack 的输出路径等。</p>
+</blockquote>
+<h2 id="React-基础">React 基础</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/learn#writing-markup-with-jsx">JSX 语法</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/learn#components">函数组件</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/learn/passing-props-to-a-component">props</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.tslang.cn/">typescript</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?utm_source=ext_app_menu">开发者工具(React Developer Tools)</a></p>
+</li>
+</ul>
+<h2 id="Hooks">Hooks</h2>
+<h3 id="必备">必备</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useState">useState</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useEffect">useEffect</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useRef">useRef</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component">自定义 Hook</a></p>
+</li>
+</ul>
+<h3 id="了解">了解</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useMemo">useMemo</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useCallback">useCallback</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useContext">useContext</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useReducer">useReducer</a><br>
+…</p>
+</li>
+</ul>
+<h3 id="Hooks-规则">Hooks 规则</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>必须用 useXxx 格式来命名</p>
+</li>
+<li class="lvl-2">
+<p>只能在 <mark>组件内</mark> 和 <mark>其他Hook</mark> 中调用 Hook</p>
+</li>
+<li class="lvl-2">
+<p>必须保证每次的调用顺序一致 (不能放在 if/for 中)</p>
+</li>
+</ul>
+<h3 id="hooks-库">hooks 库</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://ahooks.js.org/zh-CN/">ahooks</a></p>
+<ul class="lvl-2">
+<li class="lvl-4">国内</li>
+<li class="lvl-4">推荐</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.reactuse.com/zh-Hans/category/state">react-use</a></p>
+</li>
+</ul>
+<h2 id="CSS-样式">CSS 样式</h2>
+<h3 id="普通-CSS">普通 CSS</h3>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">CSS 样式指南</a></p>
+<h3 id="CSS-Module">CSS-Module</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>CRA 内置,样式文件命名未<code>xxx.module.css</code></p>
+</li>
+<li class="lvl-2">
+<p>在 tsx 中通过 <code>import xxx from './xxx.module.css</code> 方式引入</p>
+</li>
+<li class="lvl-2">
+<p>在组件中通过 <code>className=&#123;xxx.xxx&#125;</code> 引入</p>
+</li>
+<li class="lvl-2">
+<p>样式名会自动添加前缀，避免样式冲突</p>
+</li>
+</ul>
+<h3 id="CSS-in-JS">CSS-in-JS</h3>
+<blockquote>
+<p>最初网页开发有一个原则,叫做 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Separation_of_concerns#HTML,_CSS,_JavaScript">关注点分离</a>,但 React 出现后,这个原则便不再使用了,因为 React 的组件化设计已经将关注点分离了,组件的样式应该与组件本身一起放在一起,而不是通过 CSS 文件来引入。</p>
+</blockquote>
+<p>在思想上 CSS in JS 和 JSX 差不多，简单来说，就是在 JS 环境中写 CSS 相关的样式</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://styled-components.com/">styled-components</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://github.com/vercel/styled-jsx">styled-jsx</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://emotion.sh/docs/introduction">emotion</a></p>
+</li>
+</ul>
+<p>优点:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>用 js 写,有逻辑有变量,非常灵活</p>
+</li>
+</ul>
+<p>缺点:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>JSX 和样式代码混在一块,代码较多,增加了编译成本</p>
+</li>
+</ul>
+<h3 id="classnames"><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/classnames">classnames</a></h3>
+<p>介绍</p>
+<blockquote>
+<p>classnames用于动态添加类名</p>
+</blockquote>
+<h2 id="路由">路由</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://reactrouter.com/en/main">React-Router</a></p>
+</li>
+<li class="lvl-2">
+<p>路由嵌套和 <a target="_blank" rel="noopener" href="https://reactrouter.com/en/main/components/outlet#outlet">Outlet</a></p>
+</li>
+<li class="lvl-2">
+<p>动态路由</p>
+</li>
+<li class="lvl-2">
+<p>页面跳转</p>
+</li>
+<li class="lvl-2">
+<p>获取参数</p>
+</li>
+</ul>
+<h2 id="UI-组件库">UI 组件库</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://ant.design/components/overview-cn/">Ant Design</a>(国内)</p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/">Material-UI</a>(国外)</p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.tailwindcss.cn/">Tailwind CSS</a>(补充)</p>
+</li>
+</ul>
+<h2 id="表单组件">表单组件</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>受控组件</p>
+</li>
+</ul>
+<blockquote>
+<p>受控组件是指在 React 中，表单元素的值由 React 组件的 state 管理的组件。这意味着表单元素的值是由 React 组件的状态决定的，而不是由 DOM 本身决定的。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://ant.design/components/form-cn#form-demo-nest-messages">AntDesign-Form-rules</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://react-hook-form.com/get-started#SchemaValidation">React-hook-form</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://formik.nodejs.cn/docs/guides/form-submission#e9aa8ce8af81">Formik</a></p>
+</li>
+</ul>
+<h2 id="Ajax-网络请求">Ajax 网络请求</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Fetch</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.axios-http.cn/">Axios</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://ahooks.js.org/zh-CN/guide/upgrade#%E5%85%A8%E6%96%B0%E7%9A%84-userequest">useRequest (ahooks)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="http://mockjs.com/">Mock.js</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.postman.com/">Postman (接口调试工具)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://javaguide.cn/system-design/basis/RESTfulAPI.html">Restful API</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://jwt.io/">JWT</a> 用户校验</p>
+</li>
+</ul>
+<h2 id="状态管理">状态管理</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>状态提升</p>
+</li>
+</ul>
+<blockquote>
+<p>状态提升是指将多个组件中需要共享的状态提升到它们的最近共同父组件中进行管理。这样可以确保这些组件能够访问和修改相同的状态，从而实现数据的同步和共享。</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useContext">useContext</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useReducer">useReducer</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://cn.redux.js.org/">Redux</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://cn.mobx.js.org/">Mobx</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://immerjs.github.io/immer/zh-CN/">Immer</a></p>
+</li>
+</ul>
+<blockquote>
+<p>Immer 是一个用于简化不可变数据操作的 JavaScript 库。它允许你在不可变数据结构上进行可变操作，同时自动产生新的不可变数据结构。这使得编写不可变数据管理的代码变得更加简单和直观</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://redux-undo.js.org/">Redux-undo</a>: Redux State Container 的简单撤消/重做功能</p>
+</li>
+</ul>
+<h2 id="拖拽排序">拖拽排序</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://react-dnd-cn.js.org/">React-dnd</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/react-beautiful-dnd">React-beautiful-dnd</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.itxst.com/sortablejs/neuinffi.html">Sortable.js</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/react-sortable-hoc">React-sortable-hoc</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://dndkit.com/">dnd-kit</a>(推荐)</p>
+</li>
+</ul>
+<h2 id="可视化图表">可视化图表</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/react-chartjs-2">react-chartjs-2</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://recharts.org/en-US/">Recharts</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/echarts-for-react">echarts-for-react</a></p>
+</li>
+</ul>
+<h2 id="性能优化">性能优化</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useMemo">useMemo</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/useCallback">useCallback</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/memo">React.memo</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://create-react-app.dev/docs/analyzing-the-bundle-size/">analyzing-the-bundle-size</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh-hans.react.dev/reference/react/lazy">lazy 路由懒加载</a></p>
+</li>
+<li class="lvl-2">
+<p>抽离公共代码进行缓存(craco 中配置,webpackConfig.optimization.splitChunks)</p>
+</li>
+</ul>
+<h2 id="测试">测试</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://www.jestjs.cn/">jest</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://testing-library.com/docs/react-testing-library/intro">React-Testing-Library</a></p>
+</li>
+<li class="lvl-2">
+<p>pre-commit 自动化测试</p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://storybook.nodejs.cn/">storybook</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/" title="React常用技术栈">https://a-big-dreamer.github.io/2024/11/08/React常用技术栈/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" rel="prev" title="深拷贝与浅拷贝">
+                  <i class="fa fa-angle-left"></i> 深拷贝与浅拷贝
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" rel="next" title="uniapp和taro学习知识点记录">
+                  uniapp和taro学习知识点记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+    </main><div id="tp-weather-widget"></div>
+<script>
+(function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+window.SeniverseWeatherWidget('show', {
+    flavor: "bubble",
+    location: "WW2CSZKC3PHE",
+    geolocation: true,
+    language: "zh-Hans",
+    unit: "c",
+    theme: "auto",
+    token: "67d8c8ef-0f03-4d08-b5ba-ac1a9f24ee70",
+    hover: "enabled",
+    container: "tp-weather-widget"
+})
+</script><!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS-->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+    server="netease"
+    id="12716149839"
+    type="playlist" 
+    mini="true"
+    fixed="true"
+    autoplay="true"
+    volume="0.4"
+    theme="#FADFA3"
+    order="random"
+    loop="all"
+    preload="auto"
+    mutex="true"
+    list-folded="true"
+    loop="all"
+    >
+</meting-js>
+<footer class="footer">
+      <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">A Big Dreamer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">13k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">48 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/10/2024 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+      </div>
+    </footer>
+
+    
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/a-big-dreamer" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+ 
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+ 
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '48vh',
+  right: 'unset',
+  left: '25px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"662c86997d536241ba7275fa2fbd4c45"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
+
+  <!-- 页面点击小红心 -->
+  <script
+    type="text/javascript"
+    src="/js/mouse-click-themes/clicklove.js"
+  ></script>
+</html>
