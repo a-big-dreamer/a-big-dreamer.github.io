@@ -1,177 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>RN优化</title>
-    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
-<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
-<span id="more"></span>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<!-- more -->
-<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;manifest xmlns:<span class="attribute">android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> xmlns:<span class="attribute">tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
-</li>
-<li class="lvl-2">
-<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
-</li>
-<li class="lvl-2">
-<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
-</li>
-<li class="lvl-2">
-<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
-</li>
-<li class="lvl-2">
-<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
-</li>
-<li class="lvl-2">
-<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RN问题解决</title>
-    <url>/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
-<span id="more"></span>
-<h2 id="创建项目时报错：RN-error-Error">创建项目时报错：<strong>RN error Error</strong></h2>
-<p><strong><font style="color:#DF2A3F;">RN error Error: getaddrinfo ENOENT <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)</font></strong></p>
-<blockquote>
-<p><strong><font style="color:#C75C00;">raw.githubusercontent.com</font></strong> 是 GitHub 提供的一个服务，用于直接访问存储在 GitHub 仓库中的原始文件（如文本文件、脚本等），而无需下载整个仓库。在 React Native (RN) 开发环境中，这个 URL 常见于以下几种场景（文心一言生成，可了解）：</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”，Homebrew 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</p>
-</li>
-<li class="lvl-2">
-<p><strong>脚本或配置文件获取</strong>: 在某些情况下，开发者可能会从 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> 直接拉取脚本或配置文件到本地，作为项目初始化的一部分或者是运行某些自动化任务的需要。</p>
-</li>
-<li class="lvl-2">
-<p><strong>快速分享和集成代码片段</strong>: 开发者可能会分享一些示例代码或者配置文件的链接，其他用户可以直接通过这些链接查看或下载内容，便于快速集成或参考。</p>
-</li>
-<li class="lvl-2">
-<p><strong>持续集成/部署脚本</strong>: 在 CI/CD 流程中，可能会使用此类链接来动态获取最新的脚本或配置，确保构建过程使用的是最新或指定版本的资源。</p>
-</li>
-</ul>
-<p>其最显著的是我们在启动项目时，会自动将模拟器启动</p>
-<p><strong>问题分析</strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><font style="color:rgb(38, 38, 38);">为无法访问该域名的问题</font></p>
-</li>
-</ul>
-<p><strong>解决方案</strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>检查网络设置</p>
-</li>
-<li class="lvl-2">
-<p>使用代理服务</p>
-</li>
-<li class="lvl-2">
-<p>更换 DNS 服务器等方法来解决访问限制</p>
-</li>
-</ul>
-<p>DNS 服务可能是 <strong>域名</strong> 与 <strong>ip</strong> 未绑定的原因</p>
-<p>我们需要查看 <font style="color:#C75C00;background-color:rgb(249, 242, 244);">C:\Windows\System32\drivers\etc</font><code>里查看是否有</code><font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 与其对应的 <strong>ip</strong> 绑定，没有的话我们需要去查看 <font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 所对应的 <strong>ip</strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>进入该网址 <a href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="RN问题解决"></p>
-</li>
-<li class="lvl-2">
-<p>下图所框便是其对应的 <strong>ip</strong><img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png" class="" title="RN问题解决"></p>
-</li>
-<li class="lvl-2">
-<p>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</p>
-</li>
-</ul>
-<blockquote>
-<p>185.199.108.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
-<p>185.199.109.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
-<p>185.199.110.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
-<p>185.199.111.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
-</blockquote>
-<h2 id="下载-gradle-x-x-all-zip-太慢">下载 <strong>gradle-x.x-all.zip 太慢</strong></h2>
-<blockquote>
-<p>Downloading <a href="https://services.gradle.org/distributions/gradle-8.6-all.zip">https://services.gradle.org/distributions/gradle-8.6-all.zip</a></p>
-</blockquote>
-<p><strong><font style="color:#000000;">解决方案</font></strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>配置镜像</p>
-</li>
-<li class="lvl-2">
-<p>在 <font style="color:#C75C00;">[项目名]\android\gradle\wrapper\gradle-wrapper.properties</font> 中进行如下操作</p>
-</li>
-</ul>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=<span class="keyword">wrapper</span>/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=<span class="number">10000</span></span><br><span class="line">validateDistributionUrl=<span class="keyword">true</span></span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=<span class="keyword">wrapper</span>/dists</span><br></pre></td></tr></table></figure>
-<p>配置好之后仍满可以试试多次重新执行启动项目命令，当进度明显快了就可以了，第一次可能有点慢，因为要安装 <font style="color:#C75C00;">gradle-8.6-all.zip</font></p>
-<h2 id="依赖库下载太慢">依赖库下载太慢</h2>
-<p><strong>解决方案</strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><font style="color:#C75C00;">[项目名]\android\build.gradle</font> 中 <font style="color:#C75C00;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">内有</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">google()</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">和</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">mavenCentral()</font></p>
-</li>
-</ul>
-<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">repositories</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">google</span>()</span></span><br><span class="line">    <span class="function"><span class="title">mavenCentral</span>()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>google()</strong>: 这一行指定了Google的Maven仓库作为依赖项的来源。这对于下载Android SDK相关依赖、Jetpack库以及其他Google提供的库非常关键。</p>
-</li>
-<li class="lvl-2">
-<p><strong>mavenCentral()</strong>: 这一行指定了Maven中央仓库，它是Java开发中最常用的依赖库仓库，包含了大量开源库和框架。</p>
-</li>
-<li class="lvl-2">
-<p>但由于这两个仓库的服务器都在国外，我们也需要对其进行镜像处理，有两种解决方案：</p>
-<ul class="lvl-2">
-<li class="lvl-6"><strong>局部配置</strong>：直接在 <font style="color:#DF2A3F;">build.gradle</font> 的 <font style="color:#DF2A3F;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">中修改</font></li>
-<li class="lvl-6"><strong>全局配置</strong>： 在 <font style="color:#DF2A3F;">C:\Users[用户名].gradle</font> 文件夹下创建 <font style="color:#DF2A3F;">init.gradle</font> 文件，里面进行如下配置，这样我们就不需要每个项目都进行配置了</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight fsharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 局部配置</span></span><br><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/google&#x27; &#125;</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/jcenter&#x27; &#125;</span></span><br><span class="line">    <span class="comment">// 此为阿里镜像下载源</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//mirrors.aliyun.com/macports/distfiles/gradle/&#x27; &#125;  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight roboconf"><table><tr><td class="code"><pre><span class="line">// 全局配置</span><br><span class="line">allprojects&#123;</span><br><span class="line">    <span class="attribute">repositories &#123;</span></span><br><span class="line"><span class="attribute">        def ALIYUN_REPOSITORY_URL = &#x27;https</span>://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">        all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url ALIYUN_REPOSITORY_URL</span><br><span class="line">            url ALIYUN_JCENTER_URL</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    buildscript&#123;</span><br><span class="line">        repositories &#123;</span><br><span class="line">            def ALIYUN_REPOSITORY_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">            def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">            all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">                if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                    def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maven &#123;</span><br><span class="line">                url ALIYUN_REPOSITORY_URL</span><br><span class="line">                url ALIYUN_JCENTER_URL</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-<h2 id="调试断开后设备上打开报错">调试断开后设备上打开报错</h2>
-<p>当我们启动程序并连上设备后，我们可以看到页面资源，但当我们断开后再打开就会报错 <font style="color:#DF2A3F;"><strong>Unable to load script…</strong></font>，是因为我们的 <strong>JS代码和静态资源</strong> 并没有集成到Android项目中进行构建和发布</p>
-<p><strong>解决方案</strong></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>在 <font style="color:#DF2A3F;">[项目名]\android\app\src\main\</font> 目录下创建 <font style="color:#DF2A3F;">assets</font> 文件夹，并在下面创建 <font style="color:#DF2A3F;">index.android.bundle</font> 文件</p>
-</li>
-<li class="lvl-2">
-<p>然后在控制台<strong>项目根目录</strong>运行命令 <font style="color:#DF2A3F;">npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res</font></p>
-</li>
-<li class="lvl-2">
-<p>当我们再次运行时，即使断开我们也可以看到我们的资源</p>
-</li>
-</ul>
-<h2 id="error-Error-connect-ETIMEDOUT-185-199-108-133-443">error Error: connect ETIMEDOUT 185.199.108.133:443</h2>
-<p>过段时间重新尝试安装</p>
-<h2 id="error-unknown-command-‘run-android’">error: unknown command ‘run-android’</h2>
-<p>依赖包删除重新 <code>npm i</code> 或 <code>yarn</code></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>React常用技术栈</title>
     <url>/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="创建项目环境">创建项目环境</h2>
@@ -552,6 +381,136 @@
       </tags>
   </entry>
   <entry>
+    <title>RN问题解决</title>
+    <url>/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
+<span id="more"></span>
+<h2 id="创建项目时报错：RN-error-Error">创建项目时报错：<strong>RN error Error</strong></h2>
+<p><strong><font style="color:#DF2A3F;">RN error Error: getaddrinfo ENOENT <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)</font></strong></p>
+<blockquote>
+<p><strong><font style="color:#C75C00;">raw.githubusercontent.com</font></strong> 是 GitHub 提供的一个服务，用于直接访问存储在 GitHub 仓库中的原始文件（如文本文件、脚本等），而无需下载整个仓库。在 React Native (RN) 开发环境中，这个 URL 常见于以下几种场景（文心一言生成，可了解）：</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”，Homebrew 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</p>
+</li>
+<li class="lvl-2">
+<p><strong>脚本或配置文件获取</strong>: 在某些情况下，开发者可能会从 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> 直接拉取脚本或配置文件到本地，作为项目初始化的一部分或者是运行某些自动化任务的需要。</p>
+</li>
+<li class="lvl-2">
+<p><strong>快速分享和集成代码片段</strong>: 开发者可能会分享一些示例代码或者配置文件的链接，其他用户可以直接通过这些链接查看或下载内容，便于快速集成或参考。</p>
+</li>
+<li class="lvl-2">
+<p><strong>持续集成/部署脚本</strong>: 在 CI/CD 流程中，可能会使用此类链接来动态获取最新的脚本或配置，确保构建过程使用的是最新或指定版本的资源。</p>
+</li>
+</ul>
+<p>其最显著的是我们在启动项目时，会自动将模拟器启动</p>
+<p><strong>问题分析</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><font style="color:rgb(38, 38, 38);">为无法访问该域名的问题</font></p>
+</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>检查网络设置</p>
+</li>
+<li class="lvl-2">
+<p>使用代理服务</p>
+</li>
+<li class="lvl-2">
+<p>更换 DNS 服务器等方法来解决访问限制</p>
+</li>
+</ul>
+<p>DNS 服务可能是 <strong>域名</strong> 与 <strong>ip</strong> 未绑定的原因</p>
+<p>我们需要查看 <font style="color:#C75C00;background-color:rgb(249, 242, 244);">C:\Windows\System32\drivers\etc</font><code>里查看是否有</code><font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 与其对应的 <strong>ip</strong> 绑定，没有的话我们需要去查看 <font style="color:rgb(199, 92, 0);">raw.githubusercontent.com</font> 所对应的 <strong>ip</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>进入该网址 <a href="https://www.ipaddress.com/">https://www.ipaddress.com/</a>，输入域名搜索<img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image.png" class="" title="RN问题解决"></p>
+</li>
+<li class="lvl-2">
+<p>下图所框便是其对应的 <strong>ip</strong><img data-src="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/image-1.png" class="" title="RN问题解决"></p>
+</li>
+<li class="lvl-2">
+<p>在<font style="color:#C75C00;">C:\Windows\System32\drivers\etc</font> 里的 <font style="color:#C75C00;">hosts</font> 里最下面写入对应的配置，保存后重新创建项目</p>
+</li>
+</ul>
+<blockquote>
+<p>185.199.108.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.109.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.110.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+<p>185.199.111.133 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a></p>
+</blockquote>
+<h2 id="下载-gradle-x-x-all-zip-太慢">下载 <strong>gradle-x.x-all.zip 太慢</strong></h2>
+<blockquote>
+<p>Downloading <a href="https://services.gradle.org/distributions/gradle-8.6-all.zip">https://services.gradle.org/distributions/gradle-8.6-all.zip</a></p>
+</blockquote>
+<p><strong><font style="color:#000000;">解决方案</font></strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>配置镜像</p>
+</li>
+<li class="lvl-2">
+<p>在 <font style="color:#C75C00;">[项目名]\android\gradle\wrapper\gradle-wrapper.properties</font> 中进行如下操作</p>
+</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=<span class="keyword">wrapper</span>/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=<span class="number">10000</span></span><br><span class="line">validateDistributionUrl=<span class="keyword">true</span></span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=<span class="keyword">wrapper</span>/dists</span><br></pre></td></tr></table></figure>
+<p>配置好之后仍满可以试试多次重新执行启动项目命令，当进度明显快了就可以了，第一次可能有点慢，因为要安装 <font style="color:#C75C00;">gradle-8.6-all.zip</font></p>
+<h2 id="依赖库下载太慢">依赖库下载太慢</h2>
+<p><strong>解决方案</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><font style="color:#C75C00;">[项目名]\android\build.gradle</font> 中 <font style="color:#C75C00;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">内有</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">google()</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">和</font> <font style="color:#C75C00;background-color:rgb(250, 250, 250);">mavenCentral()</font></p>
+</li>
+</ul>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">repositories</span> &#123;</span><br><span class="line">    <span class="function"><span class="title">google</span>()</span></span><br><span class="line">    <span class="function"><span class="title">mavenCentral</span>()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>google()</strong>: 这一行指定了Google的Maven仓库作为依赖项的来源。这对于下载Android SDK相关依赖、Jetpack库以及其他Google提供的库非常关键。</p>
+</li>
+<li class="lvl-2">
+<p><strong>mavenCentral()</strong>: 这一行指定了Maven中央仓库，它是Java开发中最常用的依赖库仓库，包含了大量开源库和框架。</p>
+</li>
+<li class="lvl-2">
+<p>但由于这两个仓库的服务器都在国外，我们也需要对其进行镜像处理，有两种解决方案：</p>
+<ul class="lvl-2">
+<li class="lvl-6"><strong>局部配置</strong>：直接在 <font style="color:#DF2A3F;">build.gradle</font> 的 <font style="color:#DF2A3F;background-color:rgb(250, 250, 250);">repositories</font> <font style="color:rgb(38, 38, 38);background-color:rgb(250, 250, 250);">中修改</font></li>
+<li class="lvl-6"><strong>全局配置</strong>： 在 <font style="color:#DF2A3F;">C:\Users[用户名].gradle</font> 文件夹下创建 <font style="color:#DF2A3F;">init.gradle</font> 文件，里面进行如下配置，这样我们就不需要每个项目都进行配置了</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight fsharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 局部配置</span></span><br><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/google&#x27; &#125;</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//maven.aliyun.com/repository/jcenter&#x27; &#125;</span></span><br><span class="line">    <span class="comment">// 此为阿里镜像下载源</span></span><br><span class="line">    <span class="keyword">maven</span> &#123; url <span class="symbol">&#x27;https</span><span class="operator">:</span><span class="comment">//mirrors.aliyun.com/macports/distfiles/gradle/&#x27; &#125;  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight roboconf"><table><tr><td class="code"><pre><span class="line">// 全局配置</span><br><span class="line">allprojects&#123;</span><br><span class="line">    <span class="attribute">repositories &#123;</span></span><br><span class="line"><span class="attribute">        def ALIYUN_REPOSITORY_URL = &#x27;https</span>://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">        all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                    project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url ALIYUN_REPOSITORY_URL</span><br><span class="line">            url ALIYUN_JCENTER_URL</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">            url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    buildscript&#123;</span><br><span class="line">        repositories &#123;</span><br><span class="line">            def ALIYUN_REPOSITORY_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/central/&#x27;</span><br><span class="line">            def ALIYUN_JCENTER_URL = &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/public/&#x27;</span><br><span class="line">            all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">                if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                    def url = repo<span class="variable">.url</span><span class="variable">.toString</span>()</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://repo1<span class="variable">.maven</span><span class="variable">.org</span>/maven2&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (url<span class="variable">.startsWith</span>(&#x27;https://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;) || url<span class="variable">.startsWith</span>(&#x27;http://jcenter<span class="variable">.bintray</span><span class="variable">.com</span>/&#x27;)) &#123;</span><br><span class="line">                        project<span class="variable">.logger</span><span class="variable">.lifecycle</span> &quot;Repository $&#123;repo<span class="variable">.url</span>&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                        remove repo</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            maven &#123;</span><br><span class="line">                url ALIYUN_REPOSITORY_URL</span><br><span class="line">                url ALIYUN_JCENTER_URL</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/google/&#x27;</span><br><span class="line">                url &#x27;https://maven<span class="variable">.aliyun</span><span class="variable">.com</span>/repository/gradle-plugin/&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h2 id="调试断开后设备上打开报错">调试断开后设备上打开报错</h2>
+<p>当我们启动程序并连上设备后，我们可以看到页面资源，但当我们断开后再打开就会报错 <font style="color:#DF2A3F;"><strong>Unable to load script…</strong></font>，是因为我们的 <strong>JS代码和静态资源</strong> 并没有集成到Android项目中进行构建和发布</p>
+<p><strong>解决方案</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在 <font style="color:#DF2A3F;">[项目名]\android\app\src\main\</font> 目录下创建 <font style="color:#DF2A3F;">assets</font> 文件夹，并在下面创建 <font style="color:#DF2A3F;">index.android.bundle</font> 文件</p>
+</li>
+<li class="lvl-2">
+<p>然后在控制台<strong>项目根目录</strong>运行命令 <font style="color:#DF2A3F;">npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res</font></p>
+</li>
+<li class="lvl-2">
+<p>当我们再次运行时，即使断开我们也可以看到我们的资源</p>
+</li>
+</ul>
+<h2 id="error-Error-connect-ETIMEDOUT-185-199-108-133-443">error Error: connect ETIMEDOUT 185.199.108.133:443</h2>
+<p>过段时间重新尝试安装</p>
+<h2 id="error-unknown-command-‘run-android’">error: unknown command ‘run-android’</h2>
+<p>依赖包删除重新 <code>npm i</code> 或 <code>yarn</code></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SASS星空</title>
     <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
@@ -598,6 +557,107 @@
         <tag>SASS</tag>
         <tag>CSS</tag>
         <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN优化</title>
+    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
+<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
+<span id="more"></span>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;manifest xmlns:<span class="attribute">android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> xmlns:<span class="attribute">tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
+</li>
+<li class="lvl-2">
+<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
+</li>
+<li class="lvl-2">
+<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
+</li>
+<li class="lvl-2">
+<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建RN项目</title>
+    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
+<ul class="lvl-0">
+<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
+</ul>
+<span id="more"></span>
+<h2 id="创建新项目">创建新项目</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
+</li>
+<li class="lvl-2">
+<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
+</li>
+</ul>
+<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue3组件通信方式</title>
+    <url>/2024/10/19/Vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>组件通信是指在前端开发中，不同组件之间进行数据传递和状态共享的过程。</p>
+<p>在 Vue3 中，组件通p信的方式有多种：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a href="#props">Props</a></p>
+</li>
+<li class="lvl-2">
+<p><a href="#emits">emits</a></p>
+</li>
+</ul>
+<h2 id="Props">Props</h2>
+<p>父组件传值给子组件（父传子）</p>
+<p><a href="https://cn.vuejs.org/guide/components/props">官方文档</a></p>
+<h2 id="emits">emits</h2>
+<p>子组件通知父组件触发一个事件，并且可以传值给父组件（子传父）</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue3</category>
+      </categories>
+      <tags>
+        <tag>Vue3</tag>
       </tags>
   </entry>
   <entry>
@@ -825,33 +885,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue3组件通信方式</title>
-    <url>/2024/10/19/Vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>组件通信是指在前端开发中，不同组件之间进行数据传递和状态共享的过程。</p>
-<p>在 Vue3 中，组件通p信的方式有多种：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><a href="#props">Props</a></p>
-</li>
-<li class="lvl-2">
-<p><a href="#emits">emits</a></p>
-</li>
-</ul>
-<h2 id="Props">Props</h2>
-<p>父组件传值给子组件（父传子）</p>
-<p><a href="https://cn.vuejs.org/guide/components/props">官方文档</a></p>
-<h2 id="emits">emits</h2>
-<p>子组件通知父组件触发一个事件，并且可以传值给父组件（子传父）</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>vite 环境变量配置文件</title>
     <url>/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>前提文档链接</strong></p>
@@ -974,6 +1007,106 @@
       </tags>
   </entry>
   <entry>
+    <title>深拷贝与浅拷贝</title>
+    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
+<li class="lvl-2">
+<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
+</li>
+<li class="lvl-2">
+<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
+</li>
+<li class="lvl-2">
+<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
+<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
+<p>语法</p>
+<blockquote>
+<p>Object.assign(target, …sources)</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
+</li>
+<li class="lvl-2">
+<p>sources：一个或多个包含要应用的属性的源对象。</p>
+</li>
+</ul>
+<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>字符串和 Symbol 类型属性都会被复制。</p>
+<div class="tips">
+<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
+</li>
+<li class="lvl-2">
+<p>可以拷贝 Symbol 类型属性。</p>
+</li>
+<li class="lvl-2">
+<p>原型链上的属性和不可枚举的属性不能被复制。</p>
+</li>
+<li class="lvl-2">
+<p>基本类型会被封装为对象。</p>
+</li>
+<li class="lvl-2">
+<p>异常会中断后续的复制。</p>
+</li>
+</ul>
+<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
+</li>
+<li class="lvl-2">
+<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
+</li>
+<li class="lvl-2">
+<p>不能替换或者模拟 Object.assign() 函数</p>
+</li>
+<li class="lvl-2">
+<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
+</li>
+</ul>
+<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
+<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对对象</p>
+</li>
+</ul>
+<h2 id="深拷贝的实现">深拷贝的实现</h2>
+<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
+<h3 id="2-函数库lodash">2. 函数库lodash</h3>
+<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>面经</category>
+        <category>深拷贝与浅拷贝</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端知识点记录(个人理解)</title>
     <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="1-字符实体">1. 字符实体</h2>
@@ -1043,6 +1176,206 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信小程序-学习笔记（学习中）</title>
+    <url>/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="双线程模型">双线程模型</h2>
+<p>微信小程序基于 WebView 环境下使用双线程模型架构, 其实本质就相当于开了一个浏览器, 基于Webkit的JSCore渲染一个页面进行展示, 其包含 JS 逻辑和视图渲染(DOM树的创建, CSS解析, 样式计算, Layout, Paint)都会发生在同一线程, 但其执行过多的JS逻辑会阻塞渲染, 导致页面卡顿。</p>
+<p>基于此, 小程序为了考虑性能和安全, 采用了<code>[双线程]</code>的架构。</p>
+<p>开启两个 WebView  线程, 一个执行渲染, 一个调用 JSCore 处理js逻辑, 再通过原生(微信客户端)的桥接(bridge)计算实现两个 WebView 线程之间的通信, 以达到页面渲染更新的效果。</p>
+<p>微信小程序后推出了<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/introduction.html">Skyline</a>渲染引擎, 其类似于Flutter渲染, 更加接近原生的体验。</p>
+<h2 id="为什么会出现-WXS">为什么会出现 WXS</h2>
+<p>由于双线程模型, 主要关于视图渲染的线程是不能直接调用JS逻辑的, 可能是由于两个线程之间频繁通信对原生应用的开销太大, 微信小程序底层并没有设置这种直接通信的方式, 但为了能够实现开发者的需求, 于是推出了 WSX 语法, 也就是在负责渲染视图的线程中也可以调用 JSCore, 进而实现页面与JS逻辑的通信。</p>
+<p>但尽量避免在 WSX 中编写复杂的逻辑, 因为其所在的线程还要进行视图渲染, 避免阻塞。</p>
+<h3 id="WXS-的使用方式一">WXS 的使用方式一</h3>
+<p>通过 <code>wxs</code> 标签的形式, wsx 标签中包裹 js 代码, 只能是 <mark>ES5</mark> 的语法, 并且需要进行导出, 导出使用<mark>CommonJs</mark>的方式。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;wxs <span class="variable language_">module</span>=<span class="string">&quot;format&quot;</span>&gt;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">formatPrice</span>(<span class="params">price</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;￥&#x27;</span> + price</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">module</span>.<span class="property">exports</span> = &#123; <span class="attr">formatPrice</span>: formatPrice &#125;</span><br><span class="line">&lt;/wxs&gt;</span><br></pre></td></tr></table></figure>
+<p>要在 <code>wxs</code> 标签中明确编写module属性, 为每一个<code>wxs</code>设置一个独特的标识, 通过该表示使用其中定义的方法。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">text</span> &#123;&#123;<span class="attr">format.formatPrice</span>(&#x27;<span class="attr">12414</span>&#x27;)&#125;&#125;&lt;/<span class="attr">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="WXS-的使用方式二">WXS 的使用方式二</h3>
+<p>定义以<code>.wxs</code>为后缀名的文件, 如<code>format.wxs</code></p>
+<p>在其中编写JS代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">formatPrice</span>(<span class="params">price</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;￥&quot;</span> + price;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; <span class="attr">formatPrice</span>: formatPrice &#125;;</span><br></pre></td></tr></table></figure>
+<p>在<code>wxml</code>中通过<code>wxs</code>标签引入该文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">wxs</span> <span class="attr">module</span>=<span class="string">&quot;format&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/utils/format.wxs&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="组件的样式细节">组件的样式细节</h2>
+<h3 id="组件内的样式对外部样式的影响">组件内的样式对外部样式的影响</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>组件内的class样式, 只对组件wxml内的节点生效, 对于引入组件的Page页面不生效</p>
+</li>
+<li class="lvl-2">
+<p>组件内不能使用id选择器、属性选择器、标签选择器(会对外部样式造成影响)</p>
+</li>
+</ul>
+<h3 id="外部样式对组件内样式的影响">外部样式对组件内样式的影响</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>外部使用class样式, 只对外部wxml的class生效, 对组件内是不生效的</p>
+</li>
+<li class="lvl-2">
+<p>外部使用了id选择器、属性选择器不会对组件内样式产生影响</p>
+</li>
+<li class="lvl-2">
+<p>外部使用了标签选择器, 会对组件内产生影响</p>
+</li>
+</ul>
+<h3 id="如何让class可以相互影响">如何让class可以相互影响</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>在Component对象中, 可以传入一个options属性, 其中options属性中有一个styleIsolation(隔离)属性</p>
+</li>
+<li class="lvl-2">
+<p>styleIsolation三个取值</p>
+<ul class="lvl-2">
+<li class="lvl-4">isolated: 默认值, 表示启用样式隔离, 在自定义组件内外, 使用class指定的样式将不会互相影响</li>
+<li class="lvl-4">apply-shared: 表示页面wxss样式将影响到自定义组件, 但自定义组件wxss中指定的样式不会影响页面</li>
+<li class="lvl-4">shared: 表示页面wxss样式将影响到自定义组件, 自定义组件wxss中指定的样式也会影响页面和其他设置了</li>
+</ul>
+</li>
+</ul>
+<h2 id="mark-传递参数的细节">mark 传递参数的细节</h2>
+<p>mark语法: <code>mark:[自定义名称]=&quot;xxx&quot;</code></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:dd</span>=<span class="string">&quot;111&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:name</span>=<span class="string">&quot;outer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:name1</span>=<span class="string">&quot;inner&quot;</span>&gt;</span>1111<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过mark传递参数, 会从被点击组件向上合并所有定义了mark属性的祖先组件, 得到一个合并后的mask对象, 即使事件通过catch拦截冒泡传递了。</p>
+<h2 id="自定义组件">自定义组件</h2>
+<h3 id="组件生命周期"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html#%E5%AE%9A%E4%B9%89%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95">组件生命周期</a></h3>
+<p>在<code>Component(&#123;&#125;)</code>中的<code>lifetimes</code>中写入对应组件生命周期函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">lifetimes</span>: &#123;</span><br><span class="line">    <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件被创建created&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">attached</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件被添加到组件树中attached&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">detached</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件从组件树中移除detached&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>created</code>: 组件实例被创建, 但节点树还未插入文档树</p>
+</li>
+<li class="lvl-2">
+<p><code>attached</code>: 组件实例被插入文档树后触发</p>
+</li>
+<li class="lvl-2">
+<p><code>ready</code>: 组件实例被创建, 并且节点树已经插入文档树后触发</p>
+</li>
+<li class="lvl-2">
+<p><code>moved</code>: 组件实例被移动到文档树 another-component 之前触发</p>
+</li>
+<li class="lvl-2">
+<p><code>detached</code>: 组件实例被从文档树移除后触发</p>
+</li>
+<li class="lvl-2">
+<p><code>error</code>: 组件实例发生错误时触发</p>
+</li>
+</ul>
+<h3 id="组件所在页面的生命周期"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html#%E7%BB%84%E4%BB%B6%E6%89%80%E5%9C%A8%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">组件所在页面的生命周期</a></h3>
+<p>在<code>Component(&#123;&#125;)</code>中的<code>pageLifetimes</code>中写入对应生命周期函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">pageLifetimes</span>: &#123;</span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面显示show&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面隐藏hide&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>load</code>: 页面加载时触发</p>
+</li>
+<li class="lvl-2">
+<p><code>show</code>: 页面显示时触发</p>
+</li>
+<li class="lvl-2">
+<p><code>hide</code>: 页面隐藏时触发</p>
+</li>
+<li class="lvl-2">
+<p>…</p>
+</li>
+</ul>
+<h3 id="插槽">插槽</h3>
+<p>微信小程序的自定义组件插槽与 Vue 的写法一致, 但微信小程序不支持默认插槽, 我们为了满足该业务需求, 我们可以通过伪类选择器<code>:empty</code>实现</p>
+<p>wxml代码结构</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;default&quot;</span>&gt;</span>默认值<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>wcss样式</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.default</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:empty</span> + <span class="selector-class">.default</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多个插槽">多个插槽</h3>
+<p>微信小程序要想使用多个插槽, 需要在 Components 函数对象参数中的 options 配置 <code>multipleSlots: true</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">options</span>: &#123;</span><br><span class="line">    <span class="attr">multipleSlots</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="微信小程序弹窗API">微信小程序弹窗API</h2>
+<h3 id="wx-showToast">wx.showToast</h3>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showToast.html">官方文档</a></p>
+<p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showToast</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;购买成功！&quot;</span>,</span><br><span class="line">  <span class="attr">icon</span>: <span class="string">&quot;success&quot;</span>,</span><br><span class="line">  <span class="attr">duration</span>: <span class="number">3000</span>,</span><br><span class="line">  <span class="attr">mask</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="wx-showMoadl">wx.showMoadl</h3>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showModal.html">官方文档</a></p>
+<p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showModal</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;确定购买吗&quot;</span>,</span><br><span class="line">  <span class="attr">content</span>: <span class="string">&quot;1241414&quot;</span>,</span><br><span class="line">  <span class="attr">confirmColor</span>: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">  <span class="attr">cancelColor</span>: <span class="string">&quot;blue&quot;</span>,</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">cancel</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;cancel&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">confirm</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;confirm&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="wx-showActionSheet">wx.showActionSheet</h3>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showActionSheet.html">官方文档</a></p>
+<p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showActionSheet</span>(&#123;</span><br><span class="line">  <span class="attr">alertText</span>: <span class="string">&quot;提示&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">itemList</span>: [<span class="string">&quot;选项1&quot;</span>, <span class="string">&quot;选项2&quot;</span>, <span class="string">&quot;选项3&quot;</span>],</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">tapIndex</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">fail</span>: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="微信小程序获取地址API">微信小程序获取地址API</h2>
+<p>API: <code>wx.getLocation</code></p>
+<p>使用该API的前提需要在<code>app.json</code>中进行配置</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;requiredPrivateInfos&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="string">&quot;getLocation&quot;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;permission&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scope.userLocation&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;获取位置信息&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">getLocation</span>(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="微信小程序获取界面上的节点信息">微信小程序获取界面上的节点信息</h2>
+<p>场景: <code>swiper</code> 轮播图组件有默认的高度, 假如其中放置图片, 但图片的高度不适配, 改动图片的 mode 属性为 <code>aspectFill</code> 会裁剪图片, 显得不美观, 为了解决此, 尝试获取图片高度, 改变 <code>swiiper</code> 的高度, 以是图片完美展示</p>
+<h3 id="步骤一">步骤一</h3>
+<p>创建 <code>SelectorQuery</code>, SelectorQuery 为查询节点信息的对象</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> query = wx.<span class="title function_">createSelectorQuery</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="步骤二">步骤二</h3>
+<p>获取图片组件的信息, 用<code>NodesRef SelectorQuery.select(string selector)</code>,<br>
+并通过 <code>SelectorQuery NodesRef.boundingClientRect(function callback)</code> 添加节点的布局位置的查询请求。</p>
+<p><code>NodesRef SelectorQuery.select(string selector)</code>: 在当前页面下选择第一个匹配选择器 selector 的节点。返回一个 NodesRef 对象实例，可以用于获取节点信息。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">query.<span class="title function_">select</span>(<span class="string">&quot;.banner-image&quot;</span>).<span class="title function_">boundingClientRect</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="步骤三">步骤三</h3>
+<p><code>NodesRef SelectorQuery.exec(function callback)</code>: 执行所有的请求。请求结果按请求次序构成数组, 在callback的第一个参数中返回。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">height</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="对该操作进行封装">对该操作进行封装</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">querySelect</span>(<span class="params">selector</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> query = wx.<span class="title function_">createSelectorQuery</span>();</span><br><span class="line">    query.<span class="title function_">select</span>(<span class="string">&quot;.banner-image&quot;</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line">    query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="微信小程序音源播放操作">微信小程序音源播放操作</h2>
+<h3 id="创建-InnerAudioContext-实例">创建 <code>InnerAudioContext</code> 实例</h3>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> audioContext = wx.<span class="title function_">createInnerAudioContext</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="设置-InnerAudioContext-实例的-src-和-autoplay-属性">设置 <code>InnerAudioContext</code> 实例的 src 和 autoplay 属性</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>src: 音频资源地址</p>
+</li>
+<li class="lvl-2">
+<p>autoplay: 是否自动播放</p>
+</li>
+</ul>
+<p>进行以上设置后, 在页面或相应的生命周期中加载完后即可自动播放</p>
+<p>但仅仅是用于可播放, 对于其更精细的操作可以查阅对应的<a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/InnerAudioContext.html">官方文档</a></p>
+<h2 id="图片懒加载没生效问题">图片懒加载没生效问题</h2>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;/assets/xxx.png&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;&quot;</span> <span class="attr">show-menu-by-longpress</span> <span class="attr">lazy-load</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image.png" class="" title="图片懒加载没生效问题">
+<p>lazy-load的图片不是出现在屏幕上才会开始加载，而是提前3个屏幕高度就会加载。所以说三个屏幕高度以内的图片是不会懒加载的，上下三屏即为三个屏幕高度。</p>
+<h2 id="text-组件">text 组件</h2>
+<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-1.png" class="" title="text 组件">
+<h2 id="navigator组件中的-open-type">navigator组件中的 open-type</h2>
+<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-2.png" class="" title="navigator中的 open-type">
+<p>注意：</p>
+<blockquote>
+<p>在进行页面跳转时，需要在路径的前面添加 / 斜线，否则跳转不成功<navigator url="/pages/list/list?id=10&num=hue" open-type="navigate">到商品列表页面</navigator></p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>navigate：只能跳转到非 TabBar 页面，不能跳转到 TabBar 页面，保留上一级页面</p>
+</li>
+<li class="lvl-2">
+<p>redirect：只能跳转到非 TabBar 页面，不能跳转到 TabBar 页面，关闭上一级页面</p>
+</li>
+<li class="lvl-2">
+<p>switchTab：只能跳转到 TabBar 页面，不能跳转到非 TabBar 页面，关闭其他所有的非 TabBar 页面</p>
+</li>
+<li class="lvl-2">
+<p>reLaunch：关闭所有页面，然后打开小程序中某一个页面</p>
+</li>
+<li class="lvl-2">
+<p>navigateBack返回上一页或者返回前几页，默认只能返回上一页</p>
+<ul class="lvl-2">
+<li class="lvl-4">delte：返回的层级，默认是 1，如果想返回几级，就写几</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+      <tags>
+        <tag>微信小程序</tag>
       </tags>
   </entry>
   <entry>
@@ -1249,339 +1582,6 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>面经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深拷贝与浅拷贝</title>
-    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
-<li class="lvl-2">
-<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
-</li>
-<li class="lvl-2">
-<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
-</li>
-<li class="lvl-2">
-<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
-</li>
-</ul>
-<span id="more"></span>
-<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
-<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
-<p>语法</p>
-<blockquote>
-<p>Object.assign(target, …sources)</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
-</li>
-<li class="lvl-2">
-<p>sources：一个或多个包含要应用的属性的源对象。</p>
-</li>
-</ul>
-<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
-<p>字符串和 Symbol 类型属性都会被复制。</p>
-<div class="tips">
-<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
-</div>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
-</li>
-<li class="lvl-2">
-<p>可以拷贝 Symbol 类型属性。</p>
-</li>
-<li class="lvl-2">
-<p>原型链上的属性和不可枚举的属性不能被复制。</p>
-</li>
-<li class="lvl-2">
-<p>基本类型会被封装为对象。</p>
-</li>
-<li class="lvl-2">
-<p>异常会中断后续的复制。</p>
-</li>
-</ul>
-<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
-</li>
-<li class="lvl-2">
-<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
-</li>
-<li class="lvl-2">
-<p>不能替换或者模拟 Object.assign() 函数</p>
-</li>
-<li class="lvl-2">
-<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
-</li>
-</ul>
-<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
-<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对对象</p>
-</li>
-</ul>
-<h2 id="深拷贝的实现">深拷贝的实现</h2>
-<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
-<h3 id="2-函数库lodash">2. 函数库lodash</h3>
-<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>面经</category>
-        <category>深拷贝与浅拷贝</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>微信小程序-学习笔记（学习中）</title>
-    <url>/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="双线程模型">双线程模型</h2>
-<p>微信小程序基于 WebView 环境下使用双线程模型架构, 其实本质就相当于开了一个浏览器, 基于Webkit的JSCore渲染一个页面进行展示, 其包含 JS 逻辑和视图渲染(DOM树的创建, CSS解析, 样式计算, Layout, Paint)都会发生在同一线程, 但其执行过多的JS逻辑会阻塞渲染, 导致页面卡顿。</p>
-<p>基于此, 小程序为了考虑性能和安全, 采用了<code>[双线程]</code>的架构。</p>
-<p>开启两个 WebView  线程, 一个执行渲染, 一个调用 JSCore 处理js逻辑, 再通过原生(微信客户端)的桥接(bridge)计算实现两个 WebView 线程之间的通信, 以达到页面渲染更新的效果。</p>
-<p>微信小程序后推出了<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/introduction.html">Skyline</a>渲染引擎, 其类似于Flutter渲染, 更加接近原生的体验。</p>
-<h2 id="为什么会出现-WXS">为什么会出现 WXS</h2>
-<p>由于双线程模型, 主要关于视图渲染的线程是不能直接调用JS逻辑的, 可能是由于两个线程之间频繁通信对原生应用的开销太大, 微信小程序底层并没有设置这种直接通信的方式, 但为了能够实现开发者的需求, 于是推出了 WSX 语法, 也就是在负责渲染视图的线程中也可以调用 JSCore, 进而实现页面与JS逻辑的通信。</p>
-<p>但尽量避免在 WSX 中编写复杂的逻辑, 因为其所在的线程还要进行视图渲染, 避免阻塞。</p>
-<h3 id="WXS-的使用方式一">WXS 的使用方式一</h3>
-<p>通过 <code>wxs</code> 标签的形式, wsx 标签中包裹 js 代码, 只能是 <mark>ES5</mark> 的语法, 并且需要进行导出, 导出使用<mark>CommonJs</mark>的方式。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;wxs <span class="variable language_">module</span>=<span class="string">&quot;format&quot;</span>&gt;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">formatPrice</span>(<span class="params">price</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;￥&#x27;</span> + price</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">module</span>.<span class="property">exports</span> = &#123; <span class="attr">formatPrice</span>: formatPrice &#125;</span><br><span class="line">&lt;/wxs&gt;</span><br></pre></td></tr></table></figure>
-<p>要在 <code>wxs</code> 标签中明确编写module属性, 为每一个<code>wxs</code>设置一个独特的标识, 通过该表示使用其中定义的方法。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">text</span> &#123;&#123;<span class="attr">format.formatPrice</span>(&#x27;<span class="attr">12414</span>&#x27;)&#125;&#125;&lt;/<span class="attr">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="WXS-的使用方式二">WXS 的使用方式二</h3>
-<p>定义以<code>.wxs</code>为后缀名的文件, 如<code>format.wxs</code></p>
-<p>在其中编写JS代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">formatPrice</span>(<span class="params">price</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;￥&quot;</span> + price;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; <span class="attr">formatPrice</span>: formatPrice &#125;;</span><br></pre></td></tr></table></figure>
-<p>在<code>wxml</code>中通过<code>wxs</code>标签引入该文件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">wxs</span> <span class="attr">module</span>=<span class="string">&quot;format&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/utils/format.wxs&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="组件的样式细节">组件的样式细节</h2>
-<h3 id="组件内的样式对外部样式的影响">组件内的样式对外部样式的影响</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>组件内的class样式, 只对组件wxml内的节点生效, 对于引入组件的Page页面不生效</p>
-</li>
-<li class="lvl-2">
-<p>组件内不能使用id选择器、属性选择器、标签选择器(会对外部样式造成影响)</p>
-</li>
-</ul>
-<h3 id="外部样式对组件内样式的影响">外部样式对组件内样式的影响</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>外部使用class样式, 只对外部wxml的class生效, 对组件内是不生效的</p>
-</li>
-<li class="lvl-2">
-<p>外部使用了id选择器、属性选择器不会对组件内样式产生影响</p>
-</li>
-<li class="lvl-2">
-<p>外部使用了标签选择器, 会对组件内产生影响</p>
-</li>
-</ul>
-<h3 id="如何让class可以相互影响">如何让class可以相互影响</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>在Component对象中, 可以传入一个options属性, 其中options属性中有一个styleIsolation(隔离)属性</p>
-</li>
-<li class="lvl-2">
-<p>styleIsolation三个取值</p>
-<ul class="lvl-2">
-<li class="lvl-4">isolated: 默认值, 表示启用样式隔离, 在自定义组件内外, 使用class指定的样式将不会互相影响</li>
-<li class="lvl-4">apply-shared: 表示页面wxss样式将影响到自定义组件, 但自定义组件wxss中指定的样式不会影响页面</li>
-<li class="lvl-4">shared: 表示页面wxss样式将影响到自定义组件, 自定义组件wxss中指定的样式也会影响页面和其他设置了</li>
-</ul>
-</li>
-</ul>
-<h2 id="mark-传递参数的细节">mark 传递参数的细节</h2>
-<p>mark语法: <code>mark:[自定义名称]=&quot;xxx&quot;</code></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:dd</span>=<span class="string">&quot;111&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:name</span>=<span class="string">&quot;outer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">mark:name1</span>=<span class="string">&quot;inner&quot;</span>&gt;</span>1111<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>通过mark传递参数, 会从被点击组件向上合并所有定义了mark属性的祖先组件, 得到一个合并后的mask对象, 即使事件通过catch拦截冒泡传递了。</p>
-<h2 id="自定义组件">自定义组件</h2>
-<h3 id="组件生命周期"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html#%E5%AE%9A%E4%B9%89%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95">组件生命周期</a></h3>
-<p>在<code>Component(&#123;&#125;)</code>中的<code>lifetimes</code>中写入对应组件生命周期函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">lifetimes</span>: &#123;</span><br><span class="line">    <span class="title function_">created</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件被创建created&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">attached</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件被添加到组件树中attached&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">detached</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;组件从组件树中移除detached&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>created</code>: 组件实例被创建, 但节点树还未插入文档树</p>
-</li>
-<li class="lvl-2">
-<p><code>attached</code>: 组件实例被插入文档树后触发</p>
-</li>
-<li class="lvl-2">
-<p><code>ready</code>: 组件实例被创建, 并且节点树已经插入文档树后触发</p>
-</li>
-<li class="lvl-2">
-<p><code>moved</code>: 组件实例被移动到文档树 another-component 之前触发</p>
-</li>
-<li class="lvl-2">
-<p><code>detached</code>: 组件实例被从文档树移除后触发</p>
-</li>
-<li class="lvl-2">
-<p><code>error</code>: 组件实例发生错误时触发</p>
-</li>
-</ul>
-<h3 id="组件所在页面的生命周期"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html#%E7%BB%84%E4%BB%B6%E6%89%80%E5%9C%A8%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">组件所在页面的生命周期</a></h3>
-<p>在<code>Component(&#123;&#125;)</code>中的<code>pageLifetimes</code>中写入对应生命周期函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">pageLifetimes</span>: &#123;</span><br><span class="line">    <span class="title function_">show</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面显示show&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">hide</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;页面隐藏hide&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>load</code>: 页面加载时触发</p>
-</li>
-<li class="lvl-2">
-<p><code>show</code>: 页面显示时触发</p>
-</li>
-<li class="lvl-2">
-<p><code>hide</code>: 页面隐藏时触发</p>
-</li>
-<li class="lvl-2">
-<p>…</p>
-</li>
-</ul>
-<h3 id="插槽">插槽</h3>
-<p>微信小程序的自定义组件插槽与 Vue 的写法一致, 但微信小程序不支持默认插槽, 我们为了满足该业务需求, 我们可以通过伪类选择器<code>:empty</code>实现</p>
-<p>wxml代码结构</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;default&quot;</span>&gt;</span>默认值<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>wcss样式</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.default</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:empty</span> + <span class="selector-class">.default</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="多个插槽">多个插槽</h3>
-<p>微信小程序要想使用多个插槽, 需要在 Components 函数对象参数中的 options 配置 <code>multipleSlots: true</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">options</span>: &#123;</span><br><span class="line">    <span class="attr">multipleSlots</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="微信小程序弹窗API">微信小程序弹窗API</h2>
-<h3 id="wx-showToast">wx.showToast</h3>
-<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showToast.html">官方文档</a></p>
-<p>示例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showToast</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;购买成功！&quot;</span>,</span><br><span class="line">  <span class="attr">icon</span>: <span class="string">&quot;success&quot;</span>,</span><br><span class="line">  <span class="attr">duration</span>: <span class="number">3000</span>,</span><br><span class="line">  <span class="attr">mask</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="wx-showMoadl">wx.showMoadl</h3>
-<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showModal.html">官方文档</a></p>
-<p>示例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showModal</span>(&#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;确定购买吗&quot;</span>,</span><br><span class="line">  <span class="attr">content</span>: <span class="string">&quot;1241414&quot;</span>,</span><br><span class="line">  <span class="attr">confirmColor</span>: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">  <span class="attr">cancelColor</span>: <span class="string">&quot;blue&quot;</span>,</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">cancel</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;cancel&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res.<span class="property">confirm</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;confirm&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="wx-showActionSheet">wx.showActionSheet</h3>
-<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showActionSheet.html">官方文档</a></p>
-<p>示例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">showActionSheet</span>(&#123;</span><br><span class="line">  <span class="attr">alertText</span>: <span class="string">&quot;提示&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">itemList</span>: [<span class="string">&quot;选项1&quot;</span>, <span class="string">&quot;选项2&quot;</span>, <span class="string">&quot;选项3&quot;</span>],</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">tapIndex</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">fail</span>: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(err);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="微信小程序获取地址API">微信小程序获取地址API</h2>
-<p>API: <code>wx.getLocation</code></p>
-<p>使用该API的前提需要在<code>app.json</code>中进行配置</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;requiredPrivateInfos&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="string">&quot;getLocation&quot;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;permission&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scope.userLocation&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;desc&quot;</span><span class="punctuation">:</span> <span class="string">&quot;获取位置信息&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-<p>示例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wx.<span class="title function_">getLocation</span>(&#123;</span><br><span class="line">  <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="微信小程序获取界面上的节点信息">微信小程序获取界面上的节点信息</h2>
-<p>场景: <code>swiper</code> 轮播图组件有默认的高度, 假如其中放置图片, 但图片的高度不适配, 改动图片的 mode 属性为 <code>aspectFill</code> 会裁剪图片, 显得不美观, 为了解决此, 尝试获取图片高度, 改变 <code>swiiper</code> 的高度, 以是图片完美展示</p>
-<h3 id="步骤一">步骤一</h3>
-<p>创建 <code>SelectorQuery</code>, SelectorQuery 为查询节点信息的对象</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> query = wx.<span class="title function_">createSelectorQuery</span>();</span><br></pre></td></tr></table></figure>
-<h3 id="步骤二">步骤二</h3>
-<p>获取图片组件的信息, 用<code>NodesRef SelectorQuery.select(string selector)</code>,<br>
-并通过 <code>SelectorQuery NodesRef.boundingClientRect(function callback)</code> 添加节点的布局位置的查询请求。</p>
-<p><code>NodesRef SelectorQuery.select(string selector)</code>: 在当前页面下选择第一个匹配选择器 selector 的节点。返回一个 NodesRef 对象实例，可以用于获取节点信息。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">query.<span class="title function_">select</span>(<span class="string">&quot;.banner-image&quot;</span>).<span class="title function_">boundingClientRect</span>();</span><br></pre></td></tr></table></figure>
-<h3 id="步骤三">步骤三</h3>
-<p><code>NodesRef SelectorQuery.exec(function callback)</code>: 执行所有的请求。请求结果按请求次序构成数组, 在callback的第一个参数中返回。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res.<span class="property">height</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="对该操作进行封装">对该操作进行封装</h3>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">querySelect</span>(<span class="params">selector</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> query = wx.<span class="title function_">createSelectorQuery</span>();</span><br><span class="line">    query.<span class="title function_">select</span>(<span class="string">&quot;.banner-image&quot;</span>).<span class="title function_">boundingClientRect</span>();</span><br><span class="line">    query.<span class="title function_">exec</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="微信小程序音源播放操作">微信小程序音源播放操作</h2>
-<h3 id="创建-InnerAudioContext-实例">创建 <code>InnerAudioContext</code> 实例</h3>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> audioContext = wx.<span class="title function_">createInnerAudioContext</span>();</span><br></pre></td></tr></table></figure>
-<h3 id="设置-InnerAudioContext-实例的-src-和-autoplay-属性">设置 <code>InnerAudioContext</code> 实例的 src 和 autoplay 属性</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>src: 音频资源地址</p>
-</li>
-<li class="lvl-2">
-<p>autoplay: 是否自动播放</p>
-</li>
-</ul>
-<p>进行以上设置后, 在页面或相应的生命周期中加载完后即可自动播放</p>
-<p>但仅仅是用于可播放, 对于其更精细的操作可以查阅对应的<a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/audio/InnerAudioContext.html">官方文档</a></p>
-<h2 id="图片懒加载没生效问题">图片懒加载没生效问题</h2>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;/assets/xxx.png&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;&quot;</span> <span class="attr">show-menu-by-longpress</span> <span class="attr">lazy-load</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image.png" class="" title="图片懒加载没生效问题">
-<p>lazy-load的图片不是出现在屏幕上才会开始加载，而是提前3个屏幕高度就会加载。所以说三个屏幕高度以内的图片是不会懒加载的，上下三屏即为三个屏幕高度。</p>
-<h2 id="text-组件">text 组件</h2>
-<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-1.png" class="" title="text 组件">
-<h2 id="navigator组件中的-open-type">navigator组件中的 open-type</h2>
-<img data-src="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image-2.png" class="" title="navigator中的 open-type">
-<p>注意：</p>
-<blockquote>
-<p>在进行页面跳转时，需要在路径的前面添加 / 斜线，否则跳转不成功<navigator url="/pages/list/list?id=10&num=hue" open-type="navigate">到商品列表页面</navigator></p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>navigate：只能跳转到非 TabBar 页面，不能跳转到 TabBar 页面，保留上一级页面</p>
-</li>
-<li class="lvl-2">
-<p>redirect：只能跳转到非 TabBar 页面，不能跳转到 TabBar 页面，关闭上一级页面</p>
-</li>
-<li class="lvl-2">
-<p>switchTab：只能跳转到 TabBar 页面，不能跳转到非 TabBar 页面，关闭其他所有的非 TabBar 页面</p>
-</li>
-<li class="lvl-2">
-<p>reLaunch：关闭所有页面，然后打开小程序中某一个页面</p>
-</li>
-<li class="lvl-2">
-<p>navigateBack返回上一页或者返回前几页，默认只能返回上一页</p>
-<ul class="lvl-2">
-<li class="lvl-4">delte：返回的层级，默认是 1，如果想返回几级，就写几</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>微信小程序</category>
-      </categories>
-      <tags>
-        <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建RN项目</title>
-    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
-<ul class="lvl-0">
-<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
-</ul>
-<span id="more"></span>
-<h2 id="创建新项目">创建新项目</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
-</li>
-<li class="lvl-2">
-<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
-</li>
-</ul>
-<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
       </tags>
   </entry>
 </search>
