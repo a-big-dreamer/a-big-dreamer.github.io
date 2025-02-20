@@ -21,26 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="A Big Dreamer&#39;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ABD&#39;s Blog">
-<meta property="og:url" content="https://a-big-dreamer.github.io/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/index.html">
+    <meta name="description" content="浏览器输入URL到页面展示过程            查看     在网址导航栏输入网站后   域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。   请求资源：浏览器向服务器发送请求，服务器返回资源。   渲染资源：浏览器将资源渲染到页面上。    浏览器渲染页面的的流程            查看     从服务器获取到资">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器基本原理">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="A Big Dreamer&#39;s Blog">
+<meta property="og:description" content="浏览器输入URL到页面展示过程            查看     在网址导航栏输入网站后   域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。   请求资源：浏览器向服务器发送请求，服务器返回资源。   渲染资源：浏览器将资源渲染到页面上。    浏览器渲染页面的的流程            查看     从服务器获取到资">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-19T09:18:14.000Z">
+<meta property="article:modified_time" content="2025-02-20T15:09:37.017Z">
 <meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="浏览器">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://a-big-dreamer.github.io/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/前端/工程化/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/","path":"2025/02/19/浏览器基本原理/","title":"浏览器基本原理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 工程化
-| ABD's Blog</title>
+<title>浏览器基本原理 | ABD's Blog</title>
     
 
 
@@ -129,11 +132,12 @@
     </div>
   </div>
 
-</header>  
+</header> 
+  
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -143,6 +147,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">浏览器输入URL到页面展示过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">浏览器渲染页面的的流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%B5%81-reflow-%E5%92%8C%E9%87%8D%E7%BB%98-repaint"><span class="nav-number">3.</span> <span class="nav-text">回流(reflow)和重绘(repaint)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%B5%81-reflow"><span class="nav-number">3.1.</span> <span class="nav-text">回流(reflow)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%B5%81-reflow-%E7%9A%84%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.1.</span> <span class="nav-text">回流(reflow)的触发方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%BB%98-repaint"><span class="nav-number">3.2.</span> <span class="nav-text">重绘(repaint)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E7%BB%98-repaint-%E7%9A%84%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">重绘(repaint)的触发方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#script%E6%A0%87%E7%AD%BE%E7%9A%84defer%E5%92%8Casync%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">script标签的defer和async属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#defer"><span class="nav-number">4.1.</span> <span class="nav-text">defer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async"><span class="nav-number">4.2.</span> <span class="nav-text">async</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer%E5%92%8Casync%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.3.</span> <span class="nav-text">defer和async的使用场景</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -220,50 +225,339 @@
   <div class="pjax">
   </div>
 </aside>
- 
+
+
       </div>
 
-      <div class="main-inner category posts-collapse">
+      <div class="main-inner post posts-expand">
+
+
   
 
+
 <div class="post-block">
-  <div class="post-content">
-    <div class="collection-title">
-      <h1 class="collection-header">工程化
-        <small>分类</small>
-      </h1>
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浏览器基本原理 | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浏览器基本原理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-19 17:18:14" itemprop="dateCreated datePublished" datetime="2025-02-19T17:18:14+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-20 23:09:37" itemprop="dateModified" datetime="2025-02-20T23:09:37+08:00">2025-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="浏览器输入URL到页面展示过程">浏览器输入URL到页面展示过程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<p>在网址导航栏输入网站后</p>
+<ol>
+<li class="lvl-3">
+<p>域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。</p>
+</li>
+<li class="lvl-3">
+<p>请求资源：浏览器向服务器发送请求，服务器返回资源。</p>
+</li>
+<li class="lvl-3">
+<p>渲染资源：浏览器将资源渲染到页面上。</p>
+</li>
+</ol>
+</details>
+<h2 id="浏览器渲染页面的的流程">浏览器渲染页面的的流程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<p>从服务器获取到资源后</p>
+<ol>
+<li class="lvl-3">
+<p>创建DOM树: 解析HTML标签，创建DOM树。</p>
+</li>
+<li class="lvl-3">
+<p>创建CSSOM树: 解析CSS样式，创建CSSOM树。</p>
+<ol>
+<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时，浏览器会向服务器请求CSS文件。</li>
+<li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>生成渲染树: 将DOM树和CSSOM树合并，生成渲染树(rander tree)。</p>
+<ol>
+<li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
+<li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
+</li>
+<li class="lvl-3">
+<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
+<ol>
+<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>渲染页面: 将渲染树渲染到页面上。</p>
+</li>
+</ol>
+</details>
+<h2 id="回流-reflow-和重绘-repaint">回流(reflow)和重绘(repaint)</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="回流-reflow">回流(reflow)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次确定节点的大小和位置, 称为布局。</p>
+</li>
+<li class="lvl-2">
+<p>之后对节点的大小和位置的修改, 称为回流(重排)。</p>
+</li>
+</ul>
+<h4 id="回流-reflow-的触发方式">回流(reflow)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>DOM结构发生改变(添加或移除的节点)。</p>
+</li>
+<li class="lvl-2">
+<p>改变布局(修改元素的宽度、高度、位置、边框、margin、padding、字体大小等)</p>
+</li>
+<li class="lvl-2">
+<p>修改了窗口尺寸(resize)</p>
+</li>
+<li class="lvl-2">
+<p>查询元素的尺寸和位置信息(offsetWidth、offsetHeight、offsetLeft、offsetTopget、getComputedStyle等)</p>
+</li>
+</ul>
+<h3 id="重绘-repaint">重绘(repaint)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次渲染称之为绘制(paint)。</p>
+</li>
+<li class="lvl-2">
+<p>之后重新渲染, 称为重绘。</p>
+</li>
+</ul>
+<h4 id="重绘-repaint-的触发方式">重绘(repaint)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改了元素的背景色、边框颜色、字体颜色等。</p>
+</li>
+</ul>
+<p><mark>回流一定会导致重绘</mark></p>
+<p>回流是一件很耗性能的事情，所以尽量避免。</p>
+<p>建议:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改样式时尽量一次性修改。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过cssText或添加class修改。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免频繁的操作DOM。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过DocumentFragment批量操作DOM或在父元素中将要操作的DOM操作完成,再一次性的操作。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免通过getComputedStyle获取尺寸位置等信息。</p>
+</li>
+<li class="lvl-2">
+<p>对某些元素使用position的absolute或fixed。</p>
+<ul class="lvl-2">
+<li class="lvl-4">其同样会造成回流, 但开销相对较小, 不会对其他元素产生影响。</li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="script标签的defer和async属性">script标签的defer和async属性</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="defer">defer</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer属性会告诉浏览器不用等待脚本下载, 而是继续解析HTML, 构建DOM Tree。</p>
+<ul class="lvl-2">
+<li class="lvl-4">脚本由浏览器来进行下载, 但不会阻塞DOM Tree的构建过程。</li>
+<li class="lvl-4">如果脚本提前下载好, 他会等待DOM Tree的构建完成, 在DOMContentLoaded事件之前执行。</li>
+<li class="lvl-4">所以DOMContentLoaded总是会等待defer中的代码先执行完成。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>对于多个defer的脚本, 浏览器会按照脚本的先后顺序执行。</p>
+</li>
+<li class="lvl-2">
+<p>由于设置defer后, 并不会阻塞DOM树的构建, 并且会交与浏览器对其下载, 所以推荐将设置defer的脚本放在head中, 减少其因下载损耗的事件, 一定程度上可以提高页面的性能。</p>
+</li>
+</ul>
+<p><mark>注意: defer仅适用于外部脚本, 对于script默认内容会被忽略。</mark></p>
+<h3 id="async">async</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>async是一个让脚本完全独立的:</p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器不会因async脚本而阻塞。</li>
+<li class="lvl-4">async脚本不能保证顺序, 它是独立下载, 独立运行, 不会等待其他脚本。</li>
+<li class="lvl-4">async不能保证在DOMContentLoaded之前或之后执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="defer和async的使用场景">defer和async的使用场景</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer通常用于需要文档解析后操作DOM的JS代码, 并且对多个JS文件有顺序要求.</p>
+</li>
+<li class="lvl-2">
+<p>async通常用于独立的脚本, 对其他脚本, 甚至没有DOM依赖的。</p>
+</li>
+</ul>
+</details>
+
     </div>
 
     
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-10-11T23:16:13+08:00"
-              content="2024-10-11">
-          10-11
-        </time>
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
       </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">vite 环境变量配置文件</span>
-          </a>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
       </div>
-
-      
-    </header>
-  </article>
 
   </div>
 </div>
- 
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="浏览器基本原理">https://a-big-dreamer.github.io/2025/02/19/浏览器基本原理/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 浏览器</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" rel="prev" title="前端知识点记录(个人理解)">
+                  <i class="fa fa-angle-left"></i> 前端知识点记录(个人理解)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
 
 
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
     </main><div id="tp-weather-widget"></div>
 <script>
@@ -430,7 +724,7 @@ darkmode.showWidget();
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f9ad515b8838d680cb5a04b0792832ca"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"6cd3c231a29595e4982c748ccdb211b2"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
   <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>

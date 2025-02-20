@@ -601,33 +601,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue3组件通信方式</title>
-    <url>/2024/10/19/Vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>组件通信是指在前端开发中，不同组件之间进行数据传递和状态共享的过程。</p>
-<p>在 Vue3 中，组件通p信的方式有多种：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><a href="#props">Props</a></p>
-</li>
-<li class="lvl-2">
-<p><a href="#emits">emits</a></p>
-</li>
-</ul>
-<h2 id="Props">Props</h2>
-<p>父组件传值给子组件（父传子）</p>
-<p><a href="https://cn.vuejs.org/guide/components/props">官方文档</a></p>
-<h2 id="emits">emits</h2>
-<p>子组件通知父组件触发一个事件，并且可以传值给父组件（子传父）</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue3</category>
-      </categories>
-      <tags>
-        <tag>Vue3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>uniapp和taro学习知识点记录</title>
     <url>/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="uniapp"><a href="https://uniapp.dcloud.net.cn/quickstart.html">uniapp</a></h2>
@@ -1064,12 +1037,12 @@ scheme://userinfo@host:port/path?query#fragment</p>
 <h2 id="4-字符编码">4. 字符编码</h2>
 <p>对于计算机来说只能识别 0 和 1，但我们所写的内容怎样编码交给计算机，计算机又怎样解码以展示给我们，所以我们需要一定的规范将其编码为二进制（01），并使计算机能根据此规范将二进制（01）解码展示我们所写的内容。</p>
 <p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
-<h2 id="DNS解析">DNS解析</h2>
+<h2 id="5-DNS解析">5. DNS解析</h2>
 <p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
 <p>域名的解析这一过程也是需要时间的, 我们可以尝试与解析域名, 以提高获取资源时的访问速度</p>
 <p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Number-prototype-toString-base-和-Number-prototype-toFixed-digits">Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
+<h2 id="6-Number-prototype-toString-base-和-Number-prototype-toFixed-digits">6. Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
 <p><code>toString(base)</code> 用于将数字转为字符串, 并且根据 base 值的不同可以将数字转为对应的进制, base 的范围为 2 到 36, 默认为 10<br>
 <code>toFixed(digits)</code> 用于将数字转为字符串, 并且保留 digits 位小数, digits 的值为 0 到 20, 默认为 0</p>
 ]]></content>
@@ -1082,7 +1055,7 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </tags>
   </entry>
   <entry>
-    <title>微信小程序-学习笔记（学习中）</title>
+    <title>微信小程序-学习笔记</title>
     <url>/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="双线程模型">双线程模型</h2>
 <p>微信小程序基于 WebView 环境下使用双线程模型架构, 其实本质就相当于开了一个浏览器, 基于Webkit的JSCore渲染一个页面进行展示, 其包含 JS 逻辑和视图渲染(DOM树的创建, CSS解析, 样式计算, Layout, Paint)都会发生在同一线程, 但其执行过多的JS逻辑会阻塞渲染, 导致页面卡顿。</p>
@@ -1585,6 +1558,189 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>面经</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浏览器基本原理</title>
+    <url>/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="浏览器输入URL到页面展示过程">浏览器输入URL到页面展示过程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<p>在网址导航栏输入网站后</p>
+<ol>
+<li class="lvl-3">
+<p>域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。</p>
+</li>
+<li class="lvl-3">
+<p>请求资源：浏览器向服务器发送请求，服务器返回资源。</p>
+</li>
+<li class="lvl-3">
+<p>渲染资源：浏览器将资源渲染到页面上。</p>
+</li>
+</ol>
+</details>
+<h2 id="浏览器渲染页面的的流程">浏览器渲染页面的的流程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<p>从服务器获取到资源后</p>
+<ol>
+<li class="lvl-3">
+<p>创建DOM树: 解析HTML标签，创建DOM树。</p>
+</li>
+<li class="lvl-3">
+<p>创建CSSOM树: 解析CSS样式，创建CSSOM树。</p>
+<ol>
+<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时，浏览器会向服务器请求CSS文件。</li>
+<li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>生成渲染树: 将DOM树和CSSOM树合并，生成渲染树(rander tree)。</p>
+<ol>
+<li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
+<li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
+</li>
+<li class="lvl-3">
+<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
+<ol>
+<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>渲染页面: 将渲染树渲染到页面上。</p>
+</li>
+</ol>
+</details>
+<h2 id="回流-reflow-和重绘-repaint">回流(reflow)和重绘(repaint)</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="回流-reflow">回流(reflow)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次确定节点的大小和位置, 称为布局。</p>
+</li>
+<li class="lvl-2">
+<p>之后对节点的大小和位置的修改, 称为回流(重排)。</p>
+</li>
+</ul>
+<h4 id="回流-reflow-的触发方式">回流(reflow)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>DOM结构发生改变(添加或移除的节点)。</p>
+</li>
+<li class="lvl-2">
+<p>改变布局(修改元素的宽度、高度、位置、边框、margin、padding、字体大小等)</p>
+</li>
+<li class="lvl-2">
+<p>修改了窗口尺寸(resize)</p>
+</li>
+<li class="lvl-2">
+<p>查询元素的尺寸和位置信息(offsetWidth、offsetHeight、offsetLeft、offsetTopget、getComputedStyle等)</p>
+</li>
+</ul>
+<h3 id="重绘-repaint">重绘(repaint)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次渲染称之为绘制(paint)。</p>
+</li>
+<li class="lvl-2">
+<p>之后重新渲染, 称为重绘。</p>
+</li>
+</ul>
+<h4 id="重绘-repaint-的触发方式">重绘(repaint)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改了元素的背景色、边框颜色、字体颜色等。</p>
+</li>
+</ul>
+<p><mark>回流一定会导致重绘</mark></p>
+<p>回流是一件很耗性能的事情，所以尽量避免。</p>
+<p>建议:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改样式时尽量一次性修改。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过cssText或添加class修改。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免频繁的操作DOM。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过DocumentFragment批量操作DOM或在父元素中将要操作的DOM操作完成,再一次性的操作。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免通过getComputedStyle获取尺寸位置等信息。</p>
+</li>
+<li class="lvl-2">
+<p>对某些元素使用position的absolute或fixed。</p>
+<ul class="lvl-2">
+<li class="lvl-4">其同样会造成回流, 但开销相对较小, 不会对其他元素产生影响。</li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="script标签的defer和async属性">script标签的defer和async属性</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="defer">defer</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer属性会告诉浏览器不用等待脚本下载, 而是继续解析HTML, 构建DOM Tree。</p>
+<ul class="lvl-2">
+<li class="lvl-4">脚本由浏览器来进行下载, 但不会阻塞DOM Tree的构建过程。</li>
+<li class="lvl-4">如果脚本提前下载好, 他会等待DOM Tree的构建完成, 在DOMContentLoaded事件之前执行。</li>
+<li class="lvl-4">所以DOMContentLoaded总是会等待defer中的代码先执行完成。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>对于多个defer的脚本, 浏览器会按照脚本的先后顺序执行。</p>
+</li>
+<li class="lvl-2">
+<p>由于设置defer后, 并不会阻塞DOM树的构建, 并且会交与浏览器对其下载, 所以推荐将设置defer的脚本放在head中, 减少其因下载损耗的事件, 一定程度上可以提高页面的性能。</p>
+</li>
+</ul>
+<p><mark>注意: defer仅适用于外部脚本, 对于script默认内容会被忽略。</mark></p>
+<h3 id="async">async</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>async是一个让脚本完全独立的:</p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器不会因async脚本而阻塞。</li>
+<li class="lvl-4">async脚本不能保证顺序, 它是独立下载, 独立运行, 不会等待其他脚本。</li>
+<li class="lvl-4">async不能保证在DOMContentLoaded之前或之后执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="defer和async的使用场景">defer和async的使用场景</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer通常用于需要文档解析后操作DOM的JS代码, 并且对多个JS文件有顺序要求.</p>
+</li>
+<li class="lvl-2">
+<p>async通常用于独立的脚本, 对其他脚本, 甚至没有DOM依赖的。</p>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>浏览器</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
 </search>
