@@ -53,7 +53,7 @@
 </blockquote>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”，Homebrew 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</p>
+<p><strong>依赖管理工具安装</strong>: 如 Homebrew 安装脚本 <code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code>，Homebrew 是一个 macOS 下的包管理器，广泛用于安装 RN 开发所需的工具链和依赖，比如 Node.js、watchman、Yarn 或者其他 CLI 工具。</p>
 </li>
 <li class="lvl-2">
 <p><strong>脚本或配置文件获取</strong>: 在某些情况下，开发者可能会从 <a href="http://raw.githubusercontent.com">raw.githubusercontent.com</a> 直接拉取脚本或配置文件到本地，作为项目初始化的一部分或者是运行某些自动化任务的需要。</p>
@@ -116,7 +116,7 @@
 <p>在 <font style="color:#C75C00;">[项目名]\android\gradle\wrapper\gradle-wrapper.properties</font> 中进行如下操作</p>
 </li>
 </ul>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=<span class="keyword">wrapper</span>/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle<span class="number">-8.6</span>-<span class="keyword">all</span>.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=<span class="number">10000</span></span><br><span class="line">validateDistributionUrl=<span class="keyword">true</span></span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=<span class="keyword">wrapper</span>/dists</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=wrapper/dists</span><br><span class="line"># 原网站下载</span><br><span class="line"># distributionUrl=https\://services.gradle.org/distributions/gradle-8.6-all.zip</span><br><span class="line"># 配置阿里镜像下载</span><br><span class="line">distributionUrl=https\://mirrors.aliyun.com/macports/distfiles/gradle/gradle-8.6-all.zip</span><br><span class="line"></span><br><span class="line">networkTimeout=10000</span><br><span class="line">validateDistributionUrl=true</span><br><span class="line">zipStoreBase=GRADLE_USER_HOME</span><br><span class="line">zipStorePath=wrapper/dists</span><br></pre></td></tr></table></figure>
 <p>配置好之后仍满可以试试多次重新执行启动项目命令，当进度明显快了就可以了，第一次可能有点慢，因为要安装 <font style="color:#C75C00;">gradle-8.6-all.zip</font></p>
 <h2 id="依赖库下载太慢">依赖库下载太慢</h2>
 <p><strong>解决方案</strong></p>
@@ -176,8 +176,8 @@
     <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
 <img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
-<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写</p>
-<p><strong>HTML结构</strong></p>
+<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
+<strong>HTML结构</strong></p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>SASS代码</strong><br>
 提示：</p>
@@ -209,7 +209,8 @@
 <p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
 </li>
 </ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>前端</category>
         <category>页面</category>
@@ -988,8 +989,8 @@
 <blockquote>
 <p>由于浏览器的识别和解析等原因，对于 <code>&lt;</code> 和 空格，换行的解析是有问题或合并操作的，但我们想要把其展示出来，就需要用到字符实体来编写了</p>
 </blockquote>
-<p>常见字符实体<br>
-<img data-src="%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95(%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3)/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" alt="常见字符实体"></p>
+<p>常见字符实体</p>
+<img data-src="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" class="" title="常见字符实体">
 <h2 id="2-URL-和-URI">2. URL 和 URI</h2>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -1039,7 +1040,7 @@ scheme://userinfo@host:port/path?query#fragment</p>
 <p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
 <h2 id="5-DNS解析">5. DNS解析</h2>
 <p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
-<p>域名的解析这一过程也是需要时间的, 我们可以尝试与解析域名, 以提高获取资源时的访问速度</p>
+<p>域名的解析这一过程也是需要时间的, 我们可以尝试预解析域名, 以提高获取资源时的访问速度</p>
 <p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="6-Number-prototype-toString-base-和-Number-prototype-toFixed-digits">6. Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
@@ -1568,16 +1569,34 @@ scheme://userinfo@host:port/path?query#fragment</p>
    <summary>
       <span>查看</span>
    </summary>
-<p>在网址导航栏输入网站后</p>
 <ol>
 <li class="lvl-3">
-<p>域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。</p>
+<p>输入URL并解析</p>
+<ul class="lvl-2">
+<li class="lvl-5">检查输入内容是否为关键字(自动补全或跳转搜索引擎或进入浏览器设置页面)</li>
+<li class="lvl-5">对URL进行合法性检查和格式化</li>
+</ul>
 </li>
 <li class="lvl-3">
-<p>请求资源：浏览器向服务器发送请求，服务器返回资源。</p>
+<p>域名解析: 域名解析器(DNS: domain name system)将域名解析为IP地址, 浏览器通过IP地址访问服务器。</p>
 </li>
 <li class="lvl-3">
-<p>渲染资源：浏览器将资源渲染到页面上。</p>
+<p>建立TCP连接(三次握手), 确保客户端与服务端双向通信能力。</p>
+</li>
+<li class="lvl-3">
+<p>发起HTTP/HTTPS请求。</p>
+</li>
+<li class="lvl-3">
+<p>服务器处理请求并返回响应。</p>
+</li>
+<li class="lvl-3">
+<p>浏览器解析与渲染。</p>
+</li>
+<li class="lvl-3">
+<p>加载动态资源与交互。</p>
+</li>
+<li class="lvl-3">
+<p>连接终止: TCP四次挥手。</p>
 </li>
 </ol>
 </details>
@@ -1589,17 +1608,17 @@ scheme://userinfo@host:port/path?query#fragment</p>
 <p>从服务器获取到资源后</p>
 <ol>
 <li class="lvl-3">
-<p>创建DOM树: 解析HTML标签，创建DOM树。</p>
+<p>创建DOM树: 解析HTML标签, 创建DOM树。</p>
 </li>
 <li class="lvl-3">
-<p>创建CSSOM树: 解析CSS样式，创建CSSOM树。</p>
+<p>创建CSSOM树: 解析CSS样式, 创建CSSOM树。</p>
 <ol>
-<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时，浏览器会向服务器请求CSS文件。</li>
+<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时, 浏览器会向服务器请求CSS文件。</li>
 <li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
 </ol>
 </li>
 <li class="lvl-3">
-<p>生成渲染树: 将DOM树和CSSOM树合并，生成渲染树(rander tree)。</p>
+<p>生成渲染树: 将DOM树和CSSOM树合并, 生成渲染树(rander tree)。</p>
 <ol>
 <li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
 <li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
@@ -1664,7 +1683,7 @@ scheme://userinfo@host:port/path?query#fragment</p>
 </li>
 </ul>
 <p><mark>回流一定会导致重绘</mark></p>
-<p>回流是一件很耗性能的事情，所以尽量避免。</p>
+<p>回流是一件很耗性能的事情, 所以尽量避免。</p>
 <p>建议:</p>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -1741,6 +1760,35 @@ scheme://userinfo@host:port/path?query#fragment</p>
       <tags>
         <tag>浏览器</tag>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS执行原理</title>
+    <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>, 简称ECS), 它是用于执行代码的调用栈。</p>
+<p>其首先执行的为全局代码块, 即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
+
+<p>在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局定义的变量、函数等加入到GO中, 但此时仅仅为初始化, 而不是赋值, 即此时除了函数和内置对象(String、Data、parseInt等), GO中的变量值为undefined。</p>
+
+<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象, 其对应的this和作用域链(<code>scope chain</code>)。</p>
+<p>每当执行一个函数时, 会创建一个函数执行上下文(<code>Function Execution Context</code>, 简称FEC)加入到ECS中, 并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象, 该AO会使用arguments作为初始化, 初始值为该函数传入的参数形成的伪数组对象, 此时VO指向该AO, 存储该执行上下文变量的初始化。</p>
+
+<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
+
+<p>当一个EC执行完后, 会从ECS中弹出, 与其VO关联的AO也会通过垃圾回收器清除。</p>
+<p>每一个EC都会对应一个专属的AO, 即使是同一个函数。</p>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
       </tags>
   </entry>
 </search>

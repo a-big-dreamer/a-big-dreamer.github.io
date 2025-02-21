@@ -95,7 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">14</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,18 +157,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -185,6 +185,11 @@
             近期文章
 	</div>
 	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" title="JS执行原理" target="">
+		    JS执行原理
+		    </a>
+		</li>
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="浏览器基本原理" target="">
 		    浏览器基本原理
@@ -205,11 +210,6 @@
 		    React常用技术栈
 		    </a>
 		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝" target="">
-		    深拷贝与浅拷贝
-		    </a>
-		</li>
 	</ul>
     </div>
       </div>
@@ -225,6 +225,461 @@
       </div>
 
       <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">JS执行原理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-21 22:04:01 / 修改时间：23:23:07" itemprop="dateCreated datePublished" datetime="2025-02-21T22:04:01+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>372</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>, 简称ECS), 它是用于执行代码的调用栈。</p>
+<p>其首先执行的为全局代码块, 即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
+
+<p>在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局定义的变量、函数等加入到GO中, 但此时仅仅为初始化, 而不是赋值, 即此时除了函数和内置对象(String、Data、parseInt等), GO中的变量值为undefined。</p>
+
+<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象, 其对应的this和作用域链(<code>scope chain</code>)。</p>
+<p>每当执行一个函数时, 会创建一个函数执行上下文(<code>Function Execution Context</code>, 简称FEC)加入到ECS中, 并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象, 该AO会使用arguments作为初始化, 初始值为该函数传入的参数形成的伪数组对象, 此时VO指向该AO, 存储该执行上下文变量的初始化。</p>
+
+<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
+
+<p>当一个EC执行完后, 会从ECS中弹出, 与其VO关联的AO也会通过垃圾回收器清除。</p>
+<p>每一个EC都会对应一个专属的AO, 即使是同一个函数。</p>
+</details>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/15/SASS%E6%98%9F%E7%A9%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/" class="post-title-link" itemprop="url">SASS星空</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-15 10:29:50" itemprop="dateCreated datePublished" datetime="2024-10-15T10:29:50+08:00">2024-10-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-21 22:06:40" itemprop="dateModified" datetime="2025-02-21T22:06:40+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%A1%B5%E9%9D%A2/" itemprop="url" rel="index"><span itemprop="name">页面</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>706</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>利用 box-shadow 和 SASS 实现星空效果</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">RN问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-13 22:33:05" itemprop="dateCreated datePublished" datetime="2024-10-13T22:33:05+08:00">2024-10-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-21 22:06:02" itemprop="dateModified" datetime="2025-02-21T22:06:02+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/APP/" itemprop="url" rel="index"><span itemprop="name">APP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/APP/React-Native/" itemprop="url" rel="index"><span itemprop="name">React Native</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">前端知识点记录(个人理解)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-24 20:20:37" itemprop="dateCreated datePublished" datetime="2024-11-24T20:20:37+08:00">2024-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-21 22:03:02" itemprop="dateModified" datetime="2025-02-21T22:03:02+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>844</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前端知识点记录(个人理解)</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -270,7 +725,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-20 23:09:37" itemprop="dateModified" datetime="2025-02-20T23:09:37+08:00">2025-02-20</time>
+      <time title="修改时间：2025-02-21 22:01:00" itemprop="dateModified" datetime="2025-02-21T22:01:00+08:00">2025-02-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,7 +744,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -312,16 +767,34 @@
    <summary>
       <span>查看</span>
    </summary>
-<p>在网址导航栏输入网站后</p>
 <ol>
 <li class="lvl-3">
-<p>域名解析：域名解析器（DNS: domain name system）将域名解析为IP地址，浏览器通过IP地址访问服务器。</p>
+<p>输入URL并解析</p>
+<ul class="lvl-2">
+<li class="lvl-5">检查输入内容是否为关键字(自动补全或跳转搜索引擎或进入浏览器设置页面)</li>
+<li class="lvl-5">对URL进行合法性检查和格式化</li>
+</ul>
 </li>
 <li class="lvl-3">
-<p>请求资源：浏览器向服务器发送请求，服务器返回资源。</p>
+<p>域名解析: 域名解析器(DNS: domain name system)将域名解析为IP地址, 浏览器通过IP地址访问服务器。</p>
 </li>
 <li class="lvl-3">
-<p>渲染资源：浏览器将资源渲染到页面上。</p>
+<p>建立TCP连接(三次握手), 确保客户端与服务端双向通信能力。</p>
+</li>
+<li class="lvl-3">
+<p>发起HTTP/HTTPS请求。</p>
+</li>
+<li class="lvl-3">
+<p>服务器处理请求并返回响应。</p>
+</li>
+<li class="lvl-3">
+<p>浏览器解析与渲染。</p>
+</li>
+<li class="lvl-3">
+<p>加载动态资源与交互。</p>
+</li>
+<li class="lvl-3">
+<p>连接终止: TCP四次挥手。</p>
 </li>
 </ol>
 </details>
@@ -333,17 +806,17 @@
 <p>从服务器获取到资源后</p>
 <ol>
 <li class="lvl-3">
-<p>创建DOM树: 解析HTML标签，创建DOM树。</p>
+<p>创建DOM树: 解析HTML标签, 创建DOM树。</p>
 </li>
 <li class="lvl-3">
-<p>创建CSSOM树: 解析CSS样式，创建CSSOM树。</p>
+<p>创建CSSOM树: 解析CSS样式, 创建CSSOM树。</p>
 <ol>
-<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时，浏览器会向服务器请求CSS文件。</li>
+<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时, 浏览器会向服务器请求CSS文件。</li>
 <li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
 </ol>
 </li>
 <li class="lvl-3">
-<p>生成渲染树: 将DOM树和CSSOM树合并，生成渲染树(rander tree)。</p>
+<p>生成渲染树: 将DOM树和CSSOM树合并, 生成渲染树(rander tree)。</p>
 <ol>
 <li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
 <li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
@@ -408,7 +881,7 @@
 </li>
 </ul>
 <p><mark>回流一定会导致重绘</mark></p>
-<p>回流是一件很耗性能的事情，所以尽量避免。</p>
+<p>回流是一件很耗性能的事情, 所以尽量避免。</p>
 <p>建议:</p>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -482,116 +955,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">前端知识点记录(个人理解)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-11-24 20:20:37" itemprop="dateCreated datePublished" datetime="2024-11-24T20:20:37+08:00">2024-11-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-19 17:20:20" itemprop="dateModified" datetime="2025-02-19T17:20:20+08:00">2025-02-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>849</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前端知识点记录(个人理解)</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -698,120 +1061,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">RN问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-13 22:33:05" itemprop="dateCreated datePublished" datetime="2024-10-13T22:33:05+08:00">2024-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-04 10:41:23" itemprop="dateModified" datetime="2024-12-04T10:41:23+08:00">2024-12-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/APP/" itemprop="url" rel="index"><span itemprop="name">APP</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/APP/React-Native/" itemprop="url" rel="index"><span itemprop="name">React Native</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1276,244 +1525,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="post-title-link" itemprop="url">深拷贝与浅拷贝</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-24 10:12:42" itemprop="dateCreated datePublished" datetime="2024-10-24T10:12:42+08:00">2024-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-29 17:28:56" itemprop="dateModified" datetime="2024-10-29T17:28:56+08:00">2024-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" itemprop="url" rel="index"><span itemprop="name">深拷贝与浅拷贝</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>961</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul class="lvl-0">
-<li class="lvl-2">
-<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
-</li>
-<li class="lvl-2">
-<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
-</li>
-<li class="lvl-2">
-<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" class="post-title-link" itemprop="url">前端面试题-类型判断</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-16 08:37:38" itemprop="dateCreated datePublished" datetime="2024-10-16T08:37:38+08:00">2024-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-24 10:11:51" itemprop="dateModified" datetime="2024-10-24T10:11:51+08:00">2024-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" itemprop="url" rel="index"><span itemprop="name">类型判断</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前端面试题-类型判断</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1580,7 +1591,7 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
