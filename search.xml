@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS执行原理</title>
+    <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>, 简称ECS), 它是用于执行代码的调用栈。</p>
+<p>其首先执行的为全局代码块, 即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png" class="" title="ECS">
+<p>在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局定义的变量、函数等加入到GO中, 但此时仅仅为初始化, 而不是赋值, 即此时除了函数和内置对象(String、Data、parseInt等), GO中的变量值为undefined。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png" class="" title="GO">
+<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象, 其对应的this和作用域链(<code>scope chain</code>)。</p>
+<p>每当执行一个函数时, 会创建一个函数执行上下文(<code>Function Execution Context</code>, 简称FEC)加入到ECS中, 并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象, 该AO会使用arguments作为初始化, 初始值为该函数传入的参数形成的伪数组对象, 此时VO指向该AO, 存储该执行上下文变量的初始化。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png" class="" title="AO">
+<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png" class="" title="全局VO">
+<p>当一个EC执行完后, 会从ECS中弹出, 与其VO关联的AO也会通过垃圾回收器清除。</p>
+<p>每一个EC都会对应一个专属的AO, 即使是同一个函数。</p>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RN优化</title>
     <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
@@ -169,56 +198,6 @@
       </categories>
       <tags>
         <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SASS星空</title>
-    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
-<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
-<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
-<strong>HTML结构</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>SASS代码</strong><br>
-提示：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
-</li>
-<li class="lvl-2">
-<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
-</li>
-<li class="lvl-2">
-<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
-</li>
-</ul>
-<blockquote>
-<p>npx sass index.scss index.css --no-source-map -w</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
-</li>
-<li class="lvl-2">
-<p>sass：安装 sass 自带的执行命令</p>
-</li>
-<li class="lvl-2">
-<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
-</li>
-<li class="lvl-2">
-<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
-</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>页面</category>
-      </categories>
-      <tags>
-        <tag>SASS</tag>
-        <tag>CSS</tag>
-        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -599,6 +578,56 @@
       </categories>
       <tags>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SASS星空</title>
+    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
+<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
+<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
+<strong>HTML结构</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>SASS代码</strong><br>
+提示：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
+</li>
+<li class="lvl-2">
+<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
+</li>
+<li class="lvl-2">
+<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
+</li>
+</ul>
+<blockquote>
+<p>npx sass index.scss index.css --no-source-map -w</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
+</li>
+<li class="lvl-2">
+<p>sass：安装 sass 自带的执行命令</p>
+</li>
+<li class="lvl-2">
+<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
+</li>
+<li class="lvl-2">
+<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>页面</category>
+      </categories>
+      <tags>
+        <tag>SASS</tag>
+        <tag>CSS</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1256,106 +1285,6 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </tags>
   </entry>
   <entry>
-    <title>深拷贝与浅拷贝</title>
-    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
-<li class="lvl-2">
-<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
-</li>
-<li class="lvl-2">
-<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
-</li>
-<li class="lvl-2">
-<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
-</li>
-</ul>
-<span id="more"></span>
-<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
-<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
-<p>语法</p>
-<blockquote>
-<p>Object.assign(target, …sources)</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
-</li>
-<li class="lvl-2">
-<p>sources：一个或多个包含要应用的属性的源对象。</p>
-</li>
-</ul>
-<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
-<p>字符串和 Symbol 类型属性都会被复制。</p>
-<div class="tips">
-<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
-</div>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
-</li>
-<li class="lvl-2">
-<p>可以拷贝 Symbol 类型属性。</p>
-</li>
-<li class="lvl-2">
-<p>原型链上的属性和不可枚举的属性不能被复制。</p>
-</li>
-<li class="lvl-2">
-<p>基本类型会被封装为对象。</p>
-</li>
-<li class="lvl-2">
-<p>异常会中断后续的复制。</p>
-</li>
-</ul>
-<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
-</li>
-<li class="lvl-2">
-<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
-</li>
-<li class="lvl-2">
-<p>不能替换或者模拟 Object.assign() 函数</p>
-</li>
-<li class="lvl-2">
-<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
-</li>
-</ul>
-<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
-<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对对象</p>
-</li>
-</ul>
-<h2 id="深拷贝的实现">深拷贝的实现</h2>
-<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
-<h3 id="2-函数库lodash">2. 函数库lodash</h3>
-<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>面经</category>
-        <category>深拷贝与浅拷贝</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端面试题-类型判断</title>
     <url>/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="1-typeof-与-instanceof-类型判断">1. <code>typeof</code> 与 <code>instanceof</code> 类型判断</h2>
@@ -1763,32 +1692,103 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </tags>
   </entry>
   <entry>
-    <title>JS执行原理</title>
-    <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><details>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>, 简称ECS), 它是用于执行代码的调用栈。</p>
-<p>其首先执行的为全局代码块, 即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
-
-<p>在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局定义的变量、函数等加入到GO中, 但此时仅仅为初始化, 而不是赋值, 即此时除了函数和内置对象(String、Data、parseInt等), GO中的变量值为undefined。</p>
-
-<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象, 其对应的this和作用域链(<code>scope chain</code>)。</p>
-<p>每当执行一个函数时, 会创建一个函数执行上下文(<code>Function Execution Context</code>, 简称FEC)加入到ECS中, 并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象, 该AO会使用arguments作为初始化, 初始值为该函数传入的参数形成的伪数组对象, 此时VO指向该AO, 存储该执行上下文变量的初始化。</p>
-
-<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
-
-<p>当一个EC执行完后, 会从ECS中弹出, 与其VO关联的AO也会通过垃圾回收器清除。</p>
-<p>每一个EC都会对应一个专属的AO, 即使是同一个函数。</p>
-</details>
+    <title>深拷贝与浅拷贝</title>
+    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
+<li class="lvl-2">
+<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
+</li>
+<li class="lvl-2">
+<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
+</li>
+<li class="lvl-2">
+<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
+<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
+<p>语法</p>
+<blockquote>
+<p>Object.assign(target, …sources)</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
+</li>
+<li class="lvl-2">
+<p>sources：一个或多个包含要应用的属性的源对象。</p>
+</li>
+</ul>
+<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>字符串和 Symbol 类型属性都会被复制。</p>
+<div class="tips">
+<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
+</li>
+<li class="lvl-2">
+<p>可以拷贝 Symbol 类型属性。</p>
+</li>
+<li class="lvl-2">
+<p>原型链上的属性和不可枚举的属性不能被复制。</p>
+</li>
+<li class="lvl-2">
+<p>基本类型会被封装为对象。</p>
+</li>
+<li class="lvl-2">
+<p>异常会中断后续的复制。</p>
+</li>
+</ul>
+<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
+</li>
+<li class="lvl-2">
+<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
+</li>
+<li class="lvl-2">
+<p>不能替换或者模拟 Object.assign() 函数</p>
+</li>
+<li class="lvl-2">
+<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
+</li>
+</ul>
+<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
+<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对对象</p>
+</li>
+</ul>
+<h2 id="深拷贝的实现">深拷贝的实现</h2>
+<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
+<h3 id="2-函数库lodash">2. 函数库lodash</h3>
+<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
 ]]></content>
       <categories>
         <category>前端</category>
-        <category>JS</category>
+        <category>面经</category>
+        <category>深拷贝与浅拷贝</category>
       </categories>
       <tags>
-        <tag>JS</tag>
+        <tag>面经</tag>
       </tags>
   </entry>
 </search>

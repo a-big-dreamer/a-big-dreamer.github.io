@@ -28,11 +28,16 @@
 <meta property="og:site_name" content="ABD&#39;s Blog">
 <meta property="og:description" content="查看      JS引擎内部有一个执行上下文栈(Execution Context Stack, 简称ECS), 它是用于执行代码的调用栈。 其首先执行的为全局代码块, 即Global Execution Context(GEC)全局执行上下文。  在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png">
 <meta property="article:published_time" content="2025-02-21T14:04:01.000Z">
 <meta property="article:modified_time" content="2025-02-21T15:23:07.905Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="JS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png">
 
 
 <link rel="canonical" href="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/">
@@ -321,14 +326,14 @@
     </summary>
 <p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>, 简称ECS), 它是用于执行代码的调用栈。</p>
 <p>其首先执行的为全局代码块, 即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
-
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png" class="" title="ECS">
 <p>在全局代码块执行前, 或者说在parse转为AST过程中, 会创建一个GO(Global Object)全局对象, 将全局定义的变量、函数等加入到GO中, 但此时仅仅为初始化, 而不是赋值, 即此时除了函数和内置对象(String、Data、parseInt等), GO中的变量值为undefined。</p>
-
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png" class="" title="GO">
 <p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象, 其对应的this和作用域链(<code>scope chain</code>)。</p>
 <p>每当执行一个函数时, 会创建一个函数执行上下文(<code>Function Execution Context</code>, 简称FEC)加入到ECS中, 并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象, 该AO会使用arguments作为初始化, 初始值为该函数传入的参数形成的伪数组对象, 此时VO指向该AO, 存储该执行上下文变量的初始化。</p>
-
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png" class="" title="AO">
 <p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
-
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png" class="" title="全局VO">
 <p>当一个EC执行完后, 会从ECS中弹出, 与其VO关联的AO也会通过垃圾回收器清除。</p>
 <p>每一个EC都会对应一个专属的AO, 即使是同一个函数。</p>
 </details>
