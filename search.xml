@@ -260,6 +260,88 @@
       </tags>
   </entry>
   <entry>
+    <title>JS闭包</title>
+    <url>/2025/02/22/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="闭包的定义">闭包的定义</h2>
+<details>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>MDN中对于JS闭包的解释：</p>
+<img data-src="/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png" class="" title="JS闭包">
+<p>词法环境即为函数定义时所在的作用域，也可以理解为VO。即一个函数，如果可以访问外部作用域的变量，那么该函数和周围环境的组合就是闭包。</p>
+<p>从该定义来看，JS中的函数都具有闭包的特性，都可以称之为闭包。但从严格意义来讲，JS中的一个函数，如果访问了外层作用域的变量，那它就是一个闭包。</p>
+</details>
+<h2 id="闭包导致的内存泄露">闭包导致的内存泄露</h2>
+<details>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>以如下代码为例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
+<p>bar函数与变量a形成了闭包，且通过bar引用了foo函数返回bar函数，在GO中存在bar对foo函数返回bar函数对象的引用，bar函数对象的<code>[[Scopes]]</code>属性又存在对foo函数的AO的引用，根据垃圾回收机制中标记清除算法的处理，bar变量即使以后未被调用，bar函数和foo函数的AO所占据的内存也不会被回收，就造成了内存泄漏。</p>
+<p>所以，对于闭包的内存泄漏，其实就是引用链中的对象无法被释放。</p>
+<p>解决方法：</p>
+<p>手动进行<code>bar = null</code>，手动释放对对象的引用。</p>
+</details>
+<h2 id="常见的垃圾回收机制（GC）算法">常见的垃圾回收机制（GC）算法</h2>
+<details>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>垃圾回收机制（Garbage Collection）简称GC。</p>
+<p>对于那些不再使用的对象，我们称之为垃圾，它需要被回收以释放更多的内存空间。</p>
+<p>在JS中，内存管理是自动的、无形的，就是由于GC的存在帮我们自动管理内存。</p>
+<p>常见的GC算法有：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>引用计数法</p>
+<ul class="lvl-2">
+<li class="lvl-4">每当存在对象的引用时，相应对象引用计数加1，当引用计数为0时，该对象被回收。</li>
+<li class="lvl-4">但容易产生循环引用，即两个对象的属性进行相互引用，形成环形链表，导致内存泄漏（两个引用对象的变量赋值为null，但其属性仍然存在引用，导致对象中的引用计数不为0）。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>标记清除法</p>
+<ul class="lvl-2">
+<li class="lvl-4">核心思路为<mark>可达性</mark>。</li>
+<li class="lvl-4">需要设置一个根对象（root object），在浏览器中为window，垃圾回收器会定时从根对象出发，找所有从根对象开始有引用的对象，对于没有引用的对象，就认为是不可用的对象，就会被垃圾回收其处理。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>标记整理法</p>
+<ul class="lvl-2">
+<li class="lvl-4">在标记清除法类似，不同的是，在回收的同时会将保留的对象搬运到连续的内存空间中，整合空闲空间，避免碎片化。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>分代收集法</p>
+</li>
+<li class="lvl-2">
+<p>增量收集法</p>
+<ul class="lvl-2">
+<li class="lvl-4">将回收分为几部处理，减少垃圾回收的延迟。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>闲时收集法</p>
+<ul class="lvl-2">
+<li class="lvl-4">在CPU空闲的时候进行回收。</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RN优化</title>
     <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
@@ -428,354 +510,6 @@
       </categories>
       <tags>
         <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>uniapp和taro学习知识点记录</title>
-    <url>/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="uniapp"><a href="https://uniapp.dcloud.net.cn/quickstart.html">uniapp</a></h2>
-<ol>
-<li class="lvl-3">
-<p>代码编写规范</p>
- <img data-src="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/uniapp.png" class="" title="代码编写规范">
-</li>
-<li class="lvl-3">
-<p>App.vue文件定义全局数据和公共样式</p>
-</li>
-<li class="lvl-3">
-<p>uni.scss文件定义全局变量</p>
-<ul class="lvl-2">
-<li class="lvl-5">自定义全局变量</li>
-<li class="lvl-5">覆盖 uni-app 内置全局变量</li>
-<li class="lvl-5">覆盖 uni-ui 样式</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p><code>onLoad()&#123;&#125;</code> 为页面的生命周期函数</p>
-</li>
-<li class="lvl-3">
-<p>获取全局数据</p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="title function_">getApp</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(app.<span class="property">globalData</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>获取当前路由</p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = <span class="title function_">getCurrentPages</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pages)</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>常用内置组件</p>
-<ul class="lvl-2">
-<li class="lvl-5"><code>view</code>: 视图容器,类似于传统 html 中的 div (uniapp 可以使用 div,但 div 不跨平台,需要经过转译)</li>
-<li class="lvl-5"><code>text</code>: 文本组件,用于包裹文本内容</li>
-<li class="lvl-5"><code>button</code>: 按钮组件,但在小程序端的主题和其他端的主题不一样(可以通过条件编译来统一风格)</li>
-<li class="lvl-5"><code>image</code>: 图片组件,默认宽度 320px,高度 240px,支持:
-<ul class="lvl-4">
-<li class="lvl-7">相对路径</li>
-<li class="lvl-7">绝对路径</li>
-<li class="lvl-7">导入</li>
-<li class="lvl-7">base64码</li>
-</ul>
-</li>
-<li class="lvl-5"><code>scroll-view</code>: 滚动容器,可设置横向或纵向滚动(scroll-y/x 必须存在,且容器要有高度/宽度)</li>
-<li class="lvl-5"><code>swiper</code>: 轮播图组件</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>路由跳转</p>
-<ul class="lvl-2">
-<li class="lvl-6">navigate
-<ul class="lvl-4">
-<li class="lvl-8">保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。</li>
-<li class="lvl-8">url: 需要跳转的应用内非 tabBar 的页面的路径 , 路径后可以带参数。参数与路径之间使用?分隔，参数键与参数值用=相连，不同参数用&amp;分隔；如 ‘path?key=value&amp;key2=value2’，path为下一个页面的路径，下一个页面的onLoad函数可得到传递的参数</li>
-</ul>
-</li>
-<li class="lvl-6">redirect
-<ul class="lvl-4">
-<li class="lvl-8">关闭当前页面，跳转到应用内的某个页面。</li>
-<li class="lvl-8">url: 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用?分隔，参数键与参数值用=相连，不同参数用&amp;分隔；如 ‘path?key=value&amp;key2=value2’</li>
-</ul>
-</li>
-<li class="lvl-6">switchTab
-<ul class="lvl-4">
-<li class="lvl-8">跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。</li>
-<li class="lvl-8">url: 需要跳转的 tabBar 页面的路径（需在 pages.json 的 tabBar 字段定义的页面），路径后不能带参数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>常见通信方式</p>
-</li>
-</ol>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>url查询字符串和<code>EventChannel</code></p>
-<ul class="lvl-2">
-<li class="lvl-4">
-<p>通过查询字符串方式传递的参数获取方式,如: <code>/pages/index/index?id=1&amp;name=2</code></p>
-<ul class="lvl-4">
-<li class="lvl-6">在<code>onLoad</code>页面生命周期中获取</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">onLoad</span>(<span class="function">(<span class="params">options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(options) <span class="comment">// &#123;id: &#x27;1&#x27;, name: &#x27;2&#x27;&#125;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-4">
-<li class="lvl-6">
-<p>通过<code>props</code>获取</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> props = <span class="title function_">defineProps</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="attr">id</span>: <span class="title class_">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(props); <span class="comment">// &#123;id: &#x27;1&#x27;, name: &#x27;2&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-4">
-<p><code>EventChannel</code></p>
-<ul class="lvl-4">
-<li class="lvl-6">Options 语法: <code>this.getOpenerEventChannel()</code></li>
-<li class="lvl-6">Composition 语法: <code>getCurrentInstance().proxy.getOpenerEventChannel()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>使用事件总线</p>
-<ul class="lvl-2">
-<li class="lvl-4">uni.$emit(eventName,object): 触发全局的自定义事件</li>
-<li class="lvl-4">uni.$on(eventName,callback): 监听全局的自定义事件,由 uni.$emit 触发</li>
-<li class="lvl-4">uni.$off(eventName,callback): 移除全局的自定义事件监听器</li>
-<li class="lvl-4">uni.$once(eventName,callback): 监听一个自定义事件，只能触发一次</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>全局数据 <code>globalData</code></p>
-<ul class="lvl-2">
-<li class="lvl-4">在<code>App.vue</code>中定义全局数据</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">globalData</span>: &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;big-dreamer&#x27;</span>,</span><br><span class="line">      <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<ul class="lvl-2">
-<li class="lvl-4">
-<p>在其他页面中获取全局数据</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">onLoad</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">getApp</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(app.<span class="property">globalData</span>); <span class="comment">// &#123;name: &#x27;big-dreamer&#x27;, age: 18&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-2">
-<p>本地数据存储</p>
-<ul class="lvl-2">
-<li class="lvl-4"><code>uni.setStorage(OBJECT)</code>: 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口。</li>
-<li class="lvl-4"><code>uni.setStorageSync(KEY, DATA)</code>: 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。</li>
-<li class="lvl-4"><code>uni.getStorage(OBJECT)</code>: 从本地缓存中异步获取指定 key 对应的内容。</li>
-<li class="lvl-4"><code>uni.getStorageSync(KEY)</code>: 从本地缓存中同步获取指定 key 对应的内容。</li>
-<li class="lvl-4"><code>uni.removeStorage(OBJECT)</code>: 从本地缓存中异步移除指定 key。</li>
-<li class="lvl-4"><code>uni.removeStorageSync(KEY)</code>: 从本地缓存中同步移除指定 key。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>Vuex</code> 和 <code>Pinia</code>,状态管理库</p>
-<ul class="lvl-2">
-<li class="lvl-4"><code>Pinia</code> 在main.js中注册</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">Pinia</span> <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">createSSRApp</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createApp</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">createSSRApp</span>(<span class="title class_">App</span>)</span><br><span class="line">  app.<span class="title function_">use</span>(<span class="title class_">Pinia</span>.<span class="title function_">createPinia</span>())</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    app,</span><br><span class="line">    <span class="title class_">Pinia</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-2">
-<li class="lvl-4">
-<p>创建store</p>
-</li>
-<li class="lvl-4">
-<p>使用</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="taro"><a href="https://docs.taro.zone/docs/">taro</a></h2>
-<p>建议使用 taro 开发小程序,其对于 h5 和 APP 的多端兼容不太好</p>
-<h3 id="开始使用-taro">开始使用 taro</h3>
-<ol>
-<li class="lvl-3">
-<p>安装 CLI</p>
- <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">npm install -g @tarojs/cli</span><br><span class="line">或</span><br><span class="line">yarn global add @tarojs/cli</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>创建项目</p>
- <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">taro init myApp</span><br><span class="line">或</span><br><span class="line">npx @tarojs/cli init myApp</span><br></pre></td></tr></table></figure>
-</li>
-<li class="lvl-3">
-<p>启动项目</p>
-</li>
-</ol>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>启动小程序 <code>npm run dev:weapp</code></p>
-</li>
-<li class="lvl-2">
-<p>启动 H5 端 <code>npm run dev:h5</code></p>
-</li>
-</ul>
-<h3 id="知识点记录">知识点记录</h3>
-<ol>
-<li class="lvl-3">
-<p>Taro + React 开发规范</p>
- <img data-src="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/taro.png" class="" title="Taro + React 开发规范">
-</li>
-<li class="lvl-3">
-<p>新建页面 <code>Taro create --name [页面名称]</code></p>
-</li>
-<li class="lvl-3">
-<p>通信方式</p>
-<ul class="lvl-2">
-<li class="lvl-5">
-<p>url查询字符串和只支持小程序端的 <code>EventChannel</code></p>
-<ul class="lvl-4">
-<li class="lvl-7">通过查询字符串方式传递的参数获取方式,如: <code>/pages/index/index?id=1&amp;name=2</code></li>
-<li class="lvl-7">通过 <code>onLoad</code>,<code>useLoad</code> 生命周期获取路由参数</li>
-<li class="lvl-7">通过 <code>Taro.getCurrentInstance().router.params</code> 获取</li>
-<li class="lvl-7">EventChannel 和 uniapp 语法相似,把 uniapp 换为 Taro</li>
-</ul>
-</li>
-<li class="lvl-5">
-<p>使用全局事件总线 <code>Taro.eventCenter</code></p>
-<ul class="lvl-4">
-<li class="lvl-7"><code>Taro.eventCenter.on(eventName,function)</code>: 监听事件</li>
-<li class="lvl-7"><code>Taro.eventCenter.trigger(eventName,object)</code>: 触发全局的自定义事件</li>
-<li class="lvl-7"><code>Taro.eventCenter.trigger(eventName,object)</code>: 取消监听事件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>跨端兼容方案</p>
-<ul class="lvl-2">
-<li class="lvl-7">内置环境变量 <code>process.env.TARO_ENV</code>,通过 if 对其值进行判断</li>
-<li class="lvl-7">统一接口的多端文件</li>
-</ul>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>多端开发</category>
-      </categories>
-      <tags>
-        <tag>uniapp</tag>
-        <tag>taro</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vite 环境变量配置文件</title>
-    <url>/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>前提文档链接</p>
-<p>Vite 环境变量和模式文档：<a href="https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files">https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files</a></p>
-<hr>
-<span id="more"></span>
-<h2 id="开发环境与配置文件">开发环境与配置文件</h2>
-<p>在项目开发中，我们往往需要在不同环境下使用不同的配置，比如开发环境、测试环境、生产环境等。</p>
-<p>在项目开发中，常见的环境有</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>dev</code> – 开发环境，外部用户无法访问，开发人员使用，版本变动大。</p>
-</li>
-<li class="lvl-2">
-<p><code>prod</code> – 生产环境，面向外部用户的环境，正式环境。</p>
-</li>
-<li class="lvl-2">
-<p><code>test</code> – 测试环境，外部用户无法访问，专门给测试人员使用的，版本相对稳定。</p>
-</li>
-<li class="lvl-2">
-<p><code>sit (System Integration Test)</code> – 集成环境，系统集成测试，开发人员自己测试流程是否走通。</p>
-</li>
-<li class="lvl-2">
-<p><code>uat (User Acceptance Test environment)</code> – 用户验收测试环境，主要面向要交付的人员进行验证测试。</p>
-</li>
-<li class="lvl-2">
-<p><code>pre</code> – 灰度环境，外部用户可以访问，但是服务器配置相对低，其它和生产一样。</p>
-</li>
-<li class="lvl-2">
-<p><code>fat (Feature Acceptance Test environment)</code> – 功能验收测试环境，用于软件测试者测试使用。在以 <a href="https://vitejs.cn/">Vite</a> 作为构建工具开发项目时，环境变量配置文件名为 <code>.env</code>，文件名后缀为 <code>.env.[mode]</code>，其中 <code>mode</code> 为环境名称，如 <code>dev</code>、<code>prod</code>、<code>test</code> 等。</p>
-</li>
-</ul>
-<p>根据 <code>mode</code> 的不同，可以配置不同的环境变量，例如</p>
-<blockquote>
-<p>.env.development<br>
-.env.production<br>
-.env.test</p>
-</blockquote>
-<p>默认情况下，Vite 会自动读取 <code>.env</code> 文件（通用配置），并根据 <code>NODE_ENV</code> 的值来确定当前环境。</p>
-<p>但对于一份指定模式的文件（例如 .env.production）会比通用形式的优先级更高（例如 .env）。且相同的配置项，指定模式的文件会覆盖通用配置。</p>
-<p>虽说环境有多种，但真正的开发模式只有两种</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>development</code>：开发模式下</p>
-</li>
-<li class="lvl-2">
-<p><code>production</code>：生产模式下</p>
-</li>
-</ul>
-<p>我们可以在不同的开发模式下配置多种环境，基于这种情况下，又习惯性的把 <code>开发环境</code> 和 <code>生产环境</code> 作为主环境，而在主环境下配置各种子环境，显示的把开发模式指定出来，便于开发人员理解，基于此，有些项目的环境目录会出现以下情况</p>
-<blockquote>
-<p>.env.development<br>
-.env.development.sit<br>
-.env.production<br>
-.env.production.uat</p>
-</blockquote>
-<h2 id="环境变量">环境变量</h2>
-<p>在 Vite 中，环境变量的命名规则默认为 <code>VITE_</code> 开头，例如 <code>VITE_API_URL</code>。</p>
-<p>官方解释</p>
-<blockquote>
-<p>为了防止意外地将一些环境变量泄漏到客户端，只有以 VITE_ 为前缀的变量才会暴露给经过 vite 处理的代码。例如下面这些环境变量：</p>
-</blockquote>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt; VITE_SOME_KEY=123</span><br><span class="line">&gt; DB_PASSWORD=foobar</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>只有 VITE_SOME_KEY 会被暴露为 import.meta.env.VITE_SOME_KEY 提供给客户端源码，而 DB_PASSWORD 则不会。</p>
-</blockquote>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt; console.log(import.meta.env.VITE_SOME_KEY) // 123</span><br><span class="line">&gt; console.log(import.meta.env.DB_PASSWORD) // undefined</span><br></pre></td></tr></table></figure>
-<p>如果修改默认前缀，请参阅 <a href="https://vitejs.cn/vite3-cn/config/shared-options.html#envprefix">envprefix</a>。</p>
-<h3 id="环境变量的使用">环境变量的使用</h3>
-<p>在项目中，有些公共部分是需要我们抽离出来，作为环境变量进行配置，例如：<code>API_BASE_URL</code>，<code>ROUTE_BASE_URL</code>等等。</p>
-<p>我们可以在 <code>.env.[mode]</code> 配置文件中填写</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">VITE_APP_API_URL=http://x.x.x.x:xx</span><br><span class="line">VITE_ROUTE_BASE_URL=/xxx</span><br></pre></td></tr></table></figure>
-<p>在项目中，我们可以通过 <code>import.meta.env.[变量名]</code> 来获取这些环境变量。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">env</span>.<span class="property">VITE_APP_API_URL</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">env</span>.<span class="property">VITE_ROUTE_BASE_URL</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="指定开发环境">指定开发环境</h3>
-<p>我们可以通过获取这些环境变量以达到不同环境下使用不同变量的功能，但我们如何确定当前环境或者当前模式呢？</p>
-<h4 id="指定开发环境的模式">指定开发环境的模式</h4>
-<p>开发环境的模式需要在配置文件中配置 <code>NODE_ENV</code> 变量，Vite 会自动读取该变量，并根据该变量的值来确定当前开发模式，默认为 <code>development</code>。</p>
-<p><code>NODE_ENV</code> 有两个值：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>development</code>：开发模式</p>
-</li>
-<li class="lvl-2">
-<p><code>production</code>：生产模式</p>
-</li>
-</ul>
-<p>在有些时候，我们不需要进行显示的配置，Vite 内部会自动根据当前环境来确定开发模式。例如：</p>
-<blockquote>
-<p>默认情况下，开发服务器 (dev 命令) 运行在 development (开发) 模式，而 build 命令（打包命令）则运行在 production (生产) 模式。</p>
-<p>这意味着当执行 vite build 时，它会自动加载 .env.production 中可能存在的环境变量。 ————<a href="https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files">官方解释</a></p>
-</blockquote>
-<h4 id="指定环境类型">指定环境类型</h4>
-<p>在上文我们提到了 <code>.env.[mode]</code> ，我们只需要改写 <code>mode</code> 值便可实现环境的创建，在真实情况下，<code>mode</code> 可以是任意值，但为了避免混淆，我们可以遵循以上的软规定。</p>
-<p>通过改变 mode 的值便可创建一个环境，但除了 <code>.env.development</code> 和 .<code>env.production</code> 可以被 Vite 自动识别在 dev命令 和 build 命令情况下读取变量外，其他的 mode 配置只会根据 <code>NODE_ENV</code> 的值来识别其对应的配置文件。</p>
-<p>我们还需要在启动命令中进行模式指定，在项目根目录的 <code>package.json</code> 中的执行脚本 <code>script</code> 中添加一条命令，如</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;dev-test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite --mode test&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
-<p>通过指定 <code>--mode</code> 参数，Vite 就会根据当前启动命令指定的模式来加载对应的 Vite 项目中 <code>.env.[mode]</code> mode 指定的配置文件。</p>
-<h4 id="示例">示例</h4>
-<p>在 <code>.env.development</code> 中配置</p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-2.png" class="" title="vite 环境变量配置文件">
-<p>我在封装的请求模块中引用 <code>VITE_APP_API_URL</code> 变量</p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-1.png" class="" title="vite 环境变量配置文件">
-<p>通过 <code>npm run dev</code> 启动项目，在网络请求中的 <code>baseURL</code> 显示为 <code>http://10.111.11.11:8080</code></p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-3.png" class="" title="vite 环境变量配置文件">
-<p>我们更换环境</p>
-<p>在 <code>.env.test</code> 中配置</p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-4.png" class="" title="vite 环境变量配置文件">
-<p>在 <code>package.json</code> 中添加一条命令</p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-5.png" class="" title="vite 环境变量配置文件">
-<p>运行 <code>npm run dev-test</code>，在网络请求中的 <code>baseURL</code> 显示为 <code>http://10.122.22.22:8001</code></p>
-<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-6.png" class="" title="vite 环境变量配置文件">
-<h4 id="注意事项">注意事项</h4>
-<p>当前 <code>Vite</code> 版本执行打包命令时，如果在 <code>.env,production</code> 中指定了 <code>NODE_ENV:production</code>，会报错，只需把该配置删除即可，打包时还是会读取 <code>.env,production</code> 的配置。</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>工程化</category>
-      </categories>
-      <tags>
-        <tag>vite</tag>
       </tags>
   </entry>
   <entry>
@@ -1209,6 +943,230 @@
       </tags>
   </entry>
   <entry>
+    <title>uniapp和taro学习知识点记录</title>
+    <url>/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="uniapp"><a href="https://uniapp.dcloud.net.cn/quickstart.html">uniapp</a></h2>
+<ol>
+<li class="lvl-3">
+<p>代码编写规范</p>
+ <img data-src="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/uniapp.png" class="" title="代码编写规范">
+</li>
+<li class="lvl-3">
+<p>App.vue文件定义全局数据和公共样式</p>
+</li>
+<li class="lvl-3">
+<p>uni.scss文件定义全局变量</p>
+<ul class="lvl-2">
+<li class="lvl-5">自定义全局变量</li>
+<li class="lvl-5">覆盖 uni-app 内置全局变量</li>
+<li class="lvl-5">覆盖 uni-ui 样式</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p><code>onLoad()&#123;&#125;</code> 为页面的生命周期函数</p>
+</li>
+<li class="lvl-3">
+<p>获取全局数据</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> app = <span class="title function_">getApp</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(app.<span class="property">globalData</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>获取当前路由</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> pages = <span class="title function_">getCurrentPages</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pages)</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>常用内置组件</p>
+<ul class="lvl-2">
+<li class="lvl-5"><code>view</code>: 视图容器,类似于传统 html 中的 div (uniapp 可以使用 div,但 div 不跨平台,需要经过转译)</li>
+<li class="lvl-5"><code>text</code>: 文本组件,用于包裹文本内容</li>
+<li class="lvl-5"><code>button</code>: 按钮组件,但在小程序端的主题和其他端的主题不一样(可以通过条件编译来统一风格)</li>
+<li class="lvl-5"><code>image</code>: 图片组件,默认宽度 320px,高度 240px,支持:
+<ul class="lvl-4">
+<li class="lvl-7">相对路径</li>
+<li class="lvl-7">绝对路径</li>
+<li class="lvl-7">导入</li>
+<li class="lvl-7">base64码</li>
+</ul>
+</li>
+<li class="lvl-5"><code>scroll-view</code>: 滚动容器,可设置横向或纵向滚动(scroll-y/x 必须存在,且容器要有高度/宽度)</li>
+<li class="lvl-5"><code>swiper</code>: 轮播图组件</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>路由跳转</p>
+<ul class="lvl-2">
+<li class="lvl-6">navigate
+<ul class="lvl-4">
+<li class="lvl-8">保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。</li>
+<li class="lvl-8">url: 需要跳转的应用内非 tabBar 的页面的路径 , 路径后可以带参数。参数与路径之间使用?分隔，参数键与参数值用=相连，不同参数用&amp;分隔；如 ‘path?key=value&amp;key2=value2’，path为下一个页面的路径，下一个页面的onLoad函数可得到传递的参数</li>
+</ul>
+</li>
+<li class="lvl-6">redirect
+<ul class="lvl-4">
+<li class="lvl-8">关闭当前页面，跳转到应用内的某个页面。</li>
+<li class="lvl-8">url: 需要跳转的应用内非 tabBar 的页面的路径，路径后可以带参数。参数与路径之间使用?分隔，参数键与参数值用=相连，不同参数用&amp;分隔；如 ‘path?key=value&amp;key2=value2’</li>
+</ul>
+</li>
+<li class="lvl-6">switchTab
+<ul class="lvl-4">
+<li class="lvl-8">跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。</li>
+<li class="lvl-8">url: 需要跳转的 tabBar 页面的路径（需在 pages.json 的 tabBar 字段定义的页面），路径后不能带参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>常见通信方式</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>url查询字符串和<code>EventChannel</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>通过查询字符串方式传递的参数获取方式,如: <code>/pages/index/index?id=1&amp;name=2</code></p>
+<ul class="lvl-4">
+<li class="lvl-6">在<code>onLoad</code>页面生命周期中获取</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">onLoad</span>(<span class="function">(<span class="params">options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(options) <span class="comment">// &#123;id: &#x27;1&#x27;, name: &#x27;2&#x27;&#125;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-4">
+<li class="lvl-6">
+<p>通过<code>props</code>获取</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> props = <span class="title function_">defineProps</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="title class_">String</span>,</span><br><span class="line">  <span class="attr">id</span>: <span class="title class_">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(props); <span class="comment">// &#123;id: &#x27;1&#x27;, name: &#x27;2&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-4">
+<p><code>EventChannel</code></p>
+<ul class="lvl-4">
+<li class="lvl-6">Options 语法: <code>this.getOpenerEventChannel()</code></li>
+<li class="lvl-6">Composition 语法: <code>getCurrentInstance().proxy.getOpenerEventChannel()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>使用事件总线</p>
+<ul class="lvl-2">
+<li class="lvl-4">uni.$emit(eventName,object): 触发全局的自定义事件</li>
+<li class="lvl-4">uni.$on(eventName,callback): 监听全局的自定义事件,由 uni.$emit 触发</li>
+<li class="lvl-4">uni.$off(eventName,callback): 移除全局的自定义事件监听器</li>
+<li class="lvl-4">uni.$once(eventName,callback): 监听一个自定义事件，只能触发一次</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>全局数据 <code>globalData</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">在<code>App.vue</code>中定义全局数据</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="attr">globalData</span>: &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;big-dreamer&#x27;</span>,</span><br><span class="line">      <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>在其他页面中获取全局数据</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">onLoad</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">getApp</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(app.<span class="property">globalData</span>); <span class="comment">// &#123;name: &#x27;big-dreamer&#x27;, age: 18&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-2">
+<p>本地数据存储</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>uni.setStorage(OBJECT)</code>: 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口。</li>
+<li class="lvl-4"><code>uni.setStorageSync(KEY, DATA)</code>: 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。</li>
+<li class="lvl-4"><code>uni.getStorage(OBJECT)</code>: 从本地缓存中异步获取指定 key 对应的内容。</li>
+<li class="lvl-4"><code>uni.getStorageSync(KEY)</code>: 从本地缓存中同步获取指定 key 对应的内容。</li>
+<li class="lvl-4"><code>uni.removeStorage(OBJECT)</code>: 从本地缓存中异步移除指定 key。</li>
+<li class="lvl-4"><code>uni.removeStorageSync(KEY)</code>: 从本地缓存中同步移除指定 key。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Vuex</code> 和 <code>Pinia</code>,状态管理库</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>Pinia</code> 在main.js中注册</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">Pinia</span> <span class="keyword">from</span> <span class="string">&#x27;pinia&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">createSSRApp</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createApp</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">createSSRApp</span>(<span class="title class_">App</span>)</span><br><span class="line">  app.<span class="title function_">use</span>(<span class="title class_">Pinia</span>.<span class="title function_">createPinia</span>())</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    app,</span><br><span class="line">    <span class="title class_">Pinia</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-2">
+<li class="lvl-4">
+<p>创建store</p>
+</li>
+<li class="lvl-4">
+<p>使用</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="taro"><a href="https://docs.taro.zone/docs/">taro</a></h2>
+<p>建议使用 taro 开发小程序,其对于 h5 和 APP 的多端兼容不太好</p>
+<h3 id="开始使用-taro">开始使用 taro</h3>
+<ol>
+<li class="lvl-3">
+<p>安装 CLI</p>
+ <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">npm install -g @tarojs/cli</span><br><span class="line">或</span><br><span class="line">yarn global add @tarojs/cli</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>创建项目</p>
+ <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">taro init myApp</span><br><span class="line">或</span><br><span class="line">npx @tarojs/cli init myApp</span><br></pre></td></tr></table></figure>
+</li>
+<li class="lvl-3">
+<p>启动项目</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>启动小程序 <code>npm run dev:weapp</code></p>
+</li>
+<li class="lvl-2">
+<p>启动 H5 端 <code>npm run dev:h5</code></p>
+</li>
+</ul>
+<h3 id="知识点记录">知识点记录</h3>
+<ol>
+<li class="lvl-3">
+<p>Taro + React 开发规范</p>
+ <img data-src="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/taro.png" class="" title="Taro + React 开发规范">
+</li>
+<li class="lvl-3">
+<p>新建页面 <code>Taro create --name [页面名称]</code></p>
+</li>
+<li class="lvl-3">
+<p>通信方式</p>
+<ul class="lvl-2">
+<li class="lvl-5">
+<p>url查询字符串和只支持小程序端的 <code>EventChannel</code></p>
+<ul class="lvl-4">
+<li class="lvl-7">通过查询字符串方式传递的参数获取方式,如: <code>/pages/index/index?id=1&amp;name=2</code></li>
+<li class="lvl-7">通过 <code>onLoad</code>,<code>useLoad</code> 生命周期获取路由参数</li>
+<li class="lvl-7">通过 <code>Taro.getCurrentInstance().router.params</code> 获取</li>
+<li class="lvl-7">EventChannel 和 uniapp 语法相似,把 uniapp 换为 Taro</li>
+</ul>
+</li>
+<li class="lvl-5">
+<p>使用全局事件总线 <code>Taro.eventCenter</code></p>
+<ul class="lvl-4">
+<li class="lvl-7"><code>Taro.eventCenter.on(eventName,function)</code>: 监听事件</li>
+<li class="lvl-7"><code>Taro.eventCenter.trigger(eventName,object)</code>: 触发全局的自定义事件</li>
+<li class="lvl-7"><code>Taro.eventCenter.trigger(eventName,object)</code>: 取消监听事件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>跨端兼容方案</p>
+<ul class="lvl-2">
+<li class="lvl-7">内置环境变量 <code>process.env.TARO_ENV</code>,通过 if 对其值进行判断</li>
+<li class="lvl-7">统一接口的多端文件</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>多端开发</category>
+      </categories>
+      <tags>
+        <tag>uniapp</tag>
+        <tag>taro</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>创建RN项目</title>
     <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
@@ -1239,6 +1197,130 @@
       </categories>
       <tags>
         <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vite 环境变量配置文件</title>
+    <url>/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>前提文档链接</p>
+<p>Vite 环境变量和模式文档：<a href="https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files">https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files</a></p>
+<hr>
+<span id="more"></span>
+<h2 id="开发环境与配置文件">开发环境与配置文件</h2>
+<p>在项目开发中，我们往往需要在不同环境下使用不同的配置，比如开发环境、测试环境、生产环境等。</p>
+<p>在项目开发中，常见的环境有</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dev</code> – 开发环境，外部用户无法访问，开发人员使用，版本变动大。</p>
+</li>
+<li class="lvl-2">
+<p><code>prod</code> – 生产环境，面向外部用户的环境，正式环境。</p>
+</li>
+<li class="lvl-2">
+<p><code>test</code> – 测试环境，外部用户无法访问，专门给测试人员使用的，版本相对稳定。</p>
+</li>
+<li class="lvl-2">
+<p><code>sit (System Integration Test)</code> – 集成环境，系统集成测试，开发人员自己测试流程是否走通。</p>
+</li>
+<li class="lvl-2">
+<p><code>uat (User Acceptance Test environment)</code> – 用户验收测试环境，主要面向要交付的人员进行验证测试。</p>
+</li>
+<li class="lvl-2">
+<p><code>pre</code> – 灰度环境，外部用户可以访问，但是服务器配置相对低，其它和生产一样。</p>
+</li>
+<li class="lvl-2">
+<p><code>fat (Feature Acceptance Test environment)</code> – 功能验收测试环境，用于软件测试者测试使用。在以 <a href="https://vitejs.cn/">Vite</a> 作为构建工具开发项目时，环境变量配置文件名为 <code>.env</code>，文件名后缀为 <code>.env.[mode]</code>，其中 <code>mode</code> 为环境名称，如 <code>dev</code>、<code>prod</code>、<code>test</code> 等。</p>
+</li>
+</ul>
+<p>根据 <code>mode</code> 的不同，可以配置不同的环境变量，例如</p>
+<blockquote>
+<p>.env.development<br>
+.env.production<br>
+.env.test</p>
+</blockquote>
+<p>默认情况下，Vite 会自动读取 <code>.env</code> 文件（通用配置），并根据 <code>NODE_ENV</code> 的值来确定当前环境。</p>
+<p>但对于一份指定模式的文件（例如 .env.production）会比通用形式的优先级更高（例如 .env）。且相同的配置项，指定模式的文件会覆盖通用配置。</p>
+<p>虽说环境有多种，但真正的开发模式只有两种</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>development</code>：开发模式下</p>
+</li>
+<li class="lvl-2">
+<p><code>production</code>：生产模式下</p>
+</li>
+</ul>
+<p>我们可以在不同的开发模式下配置多种环境，基于这种情况下，又习惯性的把 <code>开发环境</code> 和 <code>生产环境</code> 作为主环境，而在主环境下配置各种子环境，显示的把开发模式指定出来，便于开发人员理解，基于此，有些项目的环境目录会出现以下情况</p>
+<blockquote>
+<p>.env.development<br>
+.env.development.sit<br>
+.env.production<br>
+.env.production.uat</p>
+</blockquote>
+<h2 id="环境变量">环境变量</h2>
+<p>在 Vite 中，环境变量的命名规则默认为 <code>VITE_</code> 开头，例如 <code>VITE_API_URL</code>。</p>
+<p>官方解释</p>
+<blockquote>
+<p>为了防止意外地将一些环境变量泄漏到客户端，只有以 VITE_ 为前缀的变量才会暴露给经过 vite 处理的代码。例如下面这些环境变量：</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt; VITE_SOME_KEY=123</span><br><span class="line">&gt; DB_PASSWORD=foobar</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只有 VITE_SOME_KEY 会被暴露为 import.meta.env.VITE_SOME_KEY 提供给客户端源码，而 DB_PASSWORD 则不会。</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt; console.log(import.meta.env.VITE_SOME_KEY) // 123</span><br><span class="line">&gt; console.log(import.meta.env.DB_PASSWORD) // undefined</span><br></pre></td></tr></table></figure>
+<p>如果修改默认前缀，请参阅 <a href="https://vitejs.cn/vite3-cn/config/shared-options.html#envprefix">envprefix</a>。</p>
+<h3 id="环境变量的使用">环境变量的使用</h3>
+<p>在项目中，有些公共部分是需要我们抽离出来，作为环境变量进行配置，例如：<code>API_BASE_URL</code>，<code>ROUTE_BASE_URL</code>等等。</p>
+<p>我们可以在 <code>.env.[mode]</code> 配置文件中填写</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">VITE_APP_API_URL=http://x.x.x.x:xx</span><br><span class="line">VITE_ROUTE_BASE_URL=/xxx</span><br></pre></td></tr></table></figure>
+<p>在项目中，我们可以通过 <code>import.meta.env.[变量名]</code> 来获取这些环境变量。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">env</span>.<span class="property">VITE_APP_API_URL</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">env</span>.<span class="property">VITE_ROUTE_BASE_URL</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="指定开发环境">指定开发环境</h3>
+<p>我们可以通过获取这些环境变量以达到不同环境下使用不同变量的功能，但我们如何确定当前环境或者当前模式呢？</p>
+<h4 id="指定开发环境的模式">指定开发环境的模式</h4>
+<p>开发环境的模式需要在配置文件中配置 <code>NODE_ENV</code> 变量，Vite 会自动读取该变量，并根据该变量的值来确定当前开发模式，默认为 <code>development</code>。</p>
+<p><code>NODE_ENV</code> 有两个值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>development</code>：开发模式</p>
+</li>
+<li class="lvl-2">
+<p><code>production</code>：生产模式</p>
+</li>
+</ul>
+<p>在有些时候，我们不需要进行显示的配置，Vite 内部会自动根据当前环境来确定开发模式。例如：</p>
+<blockquote>
+<p>默认情况下，开发服务器 (dev 命令) 运行在 development (开发) 模式，而 build 命令（打包命令）则运行在 production (生产) 模式。</p>
+<p>这意味着当执行 vite build 时，它会自动加载 .env.production 中可能存在的环境变量。 ————<a href="https://vitejs.cn/vite3-cn/guide/env-and-mode.html#env-files">官方解释</a></p>
+</blockquote>
+<h4 id="指定环境类型">指定环境类型</h4>
+<p>在上文我们提到了 <code>.env.[mode]</code> ，我们只需要改写 <code>mode</code> 值便可实现环境的创建，在真实情况下，<code>mode</code> 可以是任意值，但为了避免混淆，我们可以遵循以上的软规定。</p>
+<p>通过改变 mode 的值便可创建一个环境，但除了 <code>.env.development</code> 和 .<code>env.production</code> 可以被 Vite 自动识别在 dev命令 和 build 命令情况下读取变量外，其他的 mode 配置只会根据 <code>NODE_ENV</code> 的值来识别其对应的配置文件。</p>
+<p>我们还需要在启动命令中进行模式指定，在项目根目录的 <code>package.json</code> 中的执行脚本 <code>script</code> 中添加一条命令，如</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;dev-test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vite --mode test&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<p>通过指定 <code>--mode</code> 参数，Vite 就会根据当前启动命令指定的模式来加载对应的 Vite 项目中 <code>.env.[mode]</code> mode 指定的配置文件。</p>
+<h4 id="示例">示例</h4>
+<p>在 <code>.env.development</code> 中配置</p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-2.png" class="" title="vite 环境变量配置文件">
+<p>我在封装的请求模块中引用 <code>VITE_APP_API_URL</code> 变量</p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-1.png" class="" title="vite 环境变量配置文件">
+<p>通过 <code>npm run dev</code> 启动项目，在网络请求中的 <code>baseURL</code> 显示为 <code>http://10.111.11.11:8080</code></p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-3.png" class="" title="vite 环境变量配置文件">
+<p>我们更换环境</p>
+<p>在 <code>.env.test</code> 中配置</p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-4.png" class="" title="vite 环境变量配置文件">
+<p>在 <code>package.json</code> 中添加一条命令</p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-5.png" class="" title="vite 环境变量配置文件">
+<p>运行 <code>npm run dev-test</code>，在网络请求中的 <code>baseURL</code> 显示为 <code>http://10.122.22.22:8001</code></p>
+<img data-src="/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-6.png" class="" title="vite 环境变量配置文件">
+<h4 id="注意事项">注意事项</h4>
+<p>当前 <code>Vite</code> 版本执行打包命令时，如果在 <code>.env,production</code> 中指定了 <code>NODE_ENV:production</code>，会报错，只需把该配置删除即可，打包时还是会读取 <code>.env,production</code> 的配置。</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>工程化</category>
+      </categories>
+      <tags>
+        <tag>vite</tag>
       </tags>
   </entry>
   <entry>
@@ -1448,88 +1530,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS闭包</title>
-    <url>/2025/02/22/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="闭包的定义">闭包的定义</h2>
-<details>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>MDN中对于JS闭包的解释：</p>
-<img data-src="/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png" class="" title="JS闭包">
-<p>词法环境即为函数定义时所在的作用域，也可以理解为VO。即一个函数，如果可以访问外部作用域的变量，那么该函数和周围环境的组合就是闭包。</p>
-<p>从该定义来看，JS中的函数都具有闭包的特性，都可以称之为闭包。但从严格意义来讲，JS中的一个函数，如果访问了外层作用域的变量，那它就是一个闭包。</p>
-</details>
-<h2 id="闭包导致的内存泄露">闭包导致的内存泄露</h2>
-<details>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>以如下代码为例：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
-<p>bar函数与变量a形成了闭包，且通过bar引用了foo函数返回bar函数，在GO中存在bar对foo函数返回bar函数对象的引用，bar函数对象的<code>[[Scopes]]</code>属性又存在对foo函数的AO的引用，根据垃圾回收机制中标记清除算法的处理，bar变量即使以后未被调用，bar函数和foo函数的AO所占据的内存也不会被回收，就造成了内存泄漏。</p>
-<p>所以，对于闭包的内存泄漏，其实就是引用链中的对象无法被释放。</p>
-<p>解决方法：</p>
-<p>手动进行<code>bar = null</code>，手动释放对对象的引用。</p>
-</details>
-<h2 id="常见的垃圾回收机制（GC）算法">常见的垃圾回收机制（GC）算法</h2>
-<details>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>垃圾回收机制（Garbage Collection）简称GC。</p>
-<p>对于那些不再使用的对象，我们称之为垃圾，它需要被回收以释放更多的内存空间。</p>
-<p>在JS中，内存管理是自动的、无形的，就是由于GC的存在帮我们自动管理内存。</p>
-<p>常见的GC算法有：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>引用计数法</p>
-<ul class="lvl-2">
-<li class="lvl-4">每当存在对象的引用时，相应对象引用计数加1，当引用计数为0时，该对象被回收。</li>
-<li class="lvl-4">但容易产生循环引用，即两个对象的属性进行相互引用，形成环形链表，导致内存泄漏（两个引用对象的变量赋值为null，但其属性仍然存在引用，导致对象中的引用计数不为0）。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>标记清除法</p>
-<ul class="lvl-2">
-<li class="lvl-4">核心思路为<mark>可达性</mark>。</li>
-<li class="lvl-4">需要设置一个根对象（root object），在浏览器中为window，垃圾回收器会定时从根对象出发，找所有从根对象开始有引用的对象，对于没有引用的对象，就认为是不可用的对象，就会被垃圾回收其处理。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>标记整理法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在标记清除法类似，不同的是，在回收的同时会将保留的对象搬运到连续的内存空间中，整合空闲空间，避免碎片化。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>分代收集法</p>
-</li>
-<li class="lvl-2">
-<p>增量收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">将回收分为几部处理，减少垃圾回收的延迟。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>闲时收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在CPU空闲的时候进行回收。</li>
-</ul>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>闭包</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端知识点记录(个人理解)</title>
     <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="1-字符实体">1. 字符实体</h2>
@@ -1602,6 +1602,207 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浏览器基本原理</title>
+    <url>/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="浏览器输入URL到页面展示过程">浏览器输入URL到页面展示过程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<ol>
+<li class="lvl-3">
+<p>输入URL并解析</p>
+<ul class="lvl-2">
+<li class="lvl-5">检查输入内容是否为关键字(自动补全或跳转搜索引擎或进入浏览器设置页面)</li>
+<li class="lvl-5">对URL进行合法性检查和格式化</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>域名解析: 域名解析器(DNS: domain name system)将域名解析为IP地址, 浏览器通过IP地址访问服务器。</p>
+</li>
+<li class="lvl-3">
+<p>建立TCP连接(三次握手), 确保客户端与服务端双向通信能力。</p>
+</li>
+<li class="lvl-3">
+<p>发起HTTP/HTTPS请求。</p>
+</li>
+<li class="lvl-3">
+<p>服务器处理请求并返回响应。</p>
+</li>
+<li class="lvl-3">
+<p>浏览器解析与渲染。</p>
+</li>
+<li class="lvl-3">
+<p>加载动态资源与交互。</p>
+</li>
+<li class="lvl-3">
+<p>连接终止: TCP四次挥手。</p>
+</li>
+</ol>
+</details>
+<h2 id="浏览器渲染页面的的流程">浏览器渲染页面的的流程</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<p>从服务器获取到资源后</p>
+<ol>
+<li class="lvl-3">
+<p>创建DOM树: 解析HTML标签, 创建DOM树。</p>
+</li>
+<li class="lvl-3">
+<p>创建CSSOM树: 解析CSS样式, 创建CSSOM树。</p>
+<ol>
+<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时, 浏览器会向服务器请求CSS文件。</li>
+<li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>生成渲染树: 将DOM树和CSSOM树合并, 生成渲染树(rander tree)。</p>
+<ol>
+<li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
+<li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
+</li>
+<li class="lvl-3">
+<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
+<ol>
+<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>渲染页面: 将渲染树渲染到页面上。</p>
+</li>
+</ol>
+</details>
+<h2 id="回流-reflow-和重绘-repaint">回流(reflow)和重绘(repaint)</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="回流-reflow">回流(reflow)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次确定节点的大小和位置, 称为布局。</p>
+</li>
+<li class="lvl-2">
+<p>之后对节点的大小和位置的修改, 称为回流(重排)。</p>
+</li>
+</ul>
+<h4 id="回流-reflow-的触发方式">回流(reflow)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>DOM结构发生改变(添加或移除的节点)。</p>
+</li>
+<li class="lvl-2">
+<p>改变布局(修改元素的宽度、高度、位置、边框、margin、padding、字体大小等)</p>
+</li>
+<li class="lvl-2">
+<p>修改了窗口尺寸(resize)</p>
+</li>
+<li class="lvl-2">
+<p>查询元素的尺寸和位置信息(offsetWidth、offsetHeight、offsetLeft、offsetTopget、getComputedStyle等)</p>
+</li>
+</ul>
+<h3 id="重绘-repaint">重绘(repaint)</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一次渲染称之为绘制(paint)。</p>
+</li>
+<li class="lvl-2">
+<p>之后重新渲染, 称为重绘。</p>
+</li>
+</ul>
+<h4 id="重绘-repaint-的触发方式">重绘(repaint)的触发方式</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改了元素的背景色、边框颜色、字体颜色等。</p>
+</li>
+</ul>
+<p><mark>回流一定会导致重绘</mark></p>
+<p>回流是一件很耗性能的事情, 所以尽量避免。</p>
+<p>建议:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>修改样式时尽量一次性修改。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过cssText或添加class修改。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免频繁的操作DOM。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如通过DocumentFragment批量操作DOM或在父元素中将要操作的DOM操作完成,再一次性的操作。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>尽量避免通过getComputedStyle获取尺寸位置等信息。</p>
+</li>
+<li class="lvl-2">
+<p>对某些元素使用position的absolute或fixed。</p>
+<ul class="lvl-2">
+<li class="lvl-4">其同样会造成回流, 但开销相对较小, 不会对其他元素产生影响。</li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="script标签的defer和async属性">script标签的defer和async属性</h2>
+<details>
+   <summary>
+      <span>查看</span>
+   </summary>
+<h3 id="defer">defer</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer属性会告诉浏览器不用等待脚本下载, 而是继续解析HTML, 构建DOM Tree。</p>
+<ul class="lvl-2">
+<li class="lvl-4">脚本由浏览器来进行下载, 但不会阻塞DOM Tree的构建过程。</li>
+<li class="lvl-4">如果脚本提前下载好, 他会等待DOM Tree的构建完成, 在DOMContentLoaded事件之前执行。</li>
+<li class="lvl-4">所以DOMContentLoaded总是会等待defer中的代码先执行完成。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>对于多个defer的脚本, 浏览器会按照脚本的先后顺序执行。</p>
+</li>
+<li class="lvl-2">
+<p>由于设置defer后, 并不会阻塞DOM树的构建, 并且会交与浏览器对其下载, 所以推荐将设置defer的脚本放在head中, 减少其因下载损耗的事件, 一定程度上可以提高页面的性能。</p>
+</li>
+</ul>
+<p><mark>注意: defer仅适用于外部脚本, 对于script默认内容会被忽略。</mark></p>
+<h3 id="async">async</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>async是一个让脚本完全独立的:</p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器不会因async脚本而阻塞。</li>
+<li class="lvl-4">async脚本不能保证顺序, 它是独立下载, 独立运行, 不会等待其他脚本。</li>
+<li class="lvl-4">async不能保证在DOMContentLoaded之前或之后执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="defer和async的使用场景">defer和async的使用场景</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>defer通常用于需要文档解析后操作DOM的JS代码, 并且对多个JS文件有顺序要求.</p>
+</li>
+<li class="lvl-2">
+<p>async通常用于独立的脚本, 对其他脚本, 甚至没有DOM依赖的。</p>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>浏览器</category>
+      </categories>
+      <tags>
+        <tag>原理</tag>
+        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -1902,207 +2103,6 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>面经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浏览器基本原理</title>
-    <url>/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="浏览器输入URL到页面展示过程">浏览器输入URL到页面展示过程</h2>
-<details>
-   <summary>
-      <span>查看</span>
-   </summary>
-<ol>
-<li class="lvl-3">
-<p>输入URL并解析</p>
-<ul class="lvl-2">
-<li class="lvl-5">检查输入内容是否为关键字(自动补全或跳转搜索引擎或进入浏览器设置页面)</li>
-<li class="lvl-5">对URL进行合法性检查和格式化</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>域名解析: 域名解析器(DNS: domain name system)将域名解析为IP地址, 浏览器通过IP地址访问服务器。</p>
-</li>
-<li class="lvl-3">
-<p>建立TCP连接(三次握手), 确保客户端与服务端双向通信能力。</p>
-</li>
-<li class="lvl-3">
-<p>发起HTTP/HTTPS请求。</p>
-</li>
-<li class="lvl-3">
-<p>服务器处理请求并返回响应。</p>
-</li>
-<li class="lvl-3">
-<p>浏览器解析与渲染。</p>
-</li>
-<li class="lvl-3">
-<p>加载动态资源与交互。</p>
-</li>
-<li class="lvl-3">
-<p>连接终止: TCP四次挥手。</p>
-</li>
-</ol>
-</details>
-<h2 id="浏览器渲染页面的的流程">浏览器渲染页面的的流程</h2>
-<details>
-   <summary>
-      <span>查看</span>
-   </summary>
-<p>从服务器获取到资源后</p>
-<ol>
-<li class="lvl-3">
-<p>创建DOM树: 解析HTML标签, 创建DOM树。</p>
-</li>
-<li class="lvl-3">
-<p>创建CSSOM树: 解析CSS样式, 创建CSSOM树。</p>
-<ol>
-<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时, 浏览器会向服务器请求CSS文件。</li>
-<li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>生成渲染树: 将DOM树和CSSOM树合并, 生成渲染树(rander tree)。</p>
-<ol>
-<li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
-<li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
-</li>
-<li class="lvl-3">
-<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
-<ol>
-<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>渲染页面: 将渲染树渲染到页面上。</p>
-</li>
-</ol>
-</details>
-<h2 id="回流-reflow-和重绘-repaint">回流(reflow)和重绘(repaint)</h2>
-<details>
-   <summary>
-      <span>查看</span>
-   </summary>
-<h3 id="回流-reflow">回流(reflow)</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>第一次确定节点的大小和位置, 称为布局。</p>
-</li>
-<li class="lvl-2">
-<p>之后对节点的大小和位置的修改, 称为回流(重排)。</p>
-</li>
-</ul>
-<h4 id="回流-reflow-的触发方式">回流(reflow)的触发方式</h4>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>DOM结构发生改变(添加或移除的节点)。</p>
-</li>
-<li class="lvl-2">
-<p>改变布局(修改元素的宽度、高度、位置、边框、margin、padding、字体大小等)</p>
-</li>
-<li class="lvl-2">
-<p>修改了窗口尺寸(resize)</p>
-</li>
-<li class="lvl-2">
-<p>查询元素的尺寸和位置信息(offsetWidth、offsetHeight、offsetLeft、offsetTopget、getComputedStyle等)</p>
-</li>
-</ul>
-<h3 id="重绘-repaint">重绘(repaint)</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>第一次渲染称之为绘制(paint)。</p>
-</li>
-<li class="lvl-2">
-<p>之后重新渲染, 称为重绘。</p>
-</li>
-</ul>
-<h4 id="重绘-repaint-的触发方式">重绘(repaint)的触发方式</h4>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>修改了元素的背景色、边框颜色、字体颜色等。</p>
-</li>
-</ul>
-<p><mark>回流一定会导致重绘</mark></p>
-<p>回流是一件很耗性能的事情, 所以尽量避免。</p>
-<p>建议:</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>修改样式时尽量一次性修改。</p>
-<ul class="lvl-2">
-<li class="lvl-4">比如通过cssText或添加class修改。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>尽量避免频繁的操作DOM。</p>
-<ul class="lvl-2">
-<li class="lvl-4">比如通过DocumentFragment批量操作DOM或在父元素中将要操作的DOM操作完成,再一次性的操作。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>尽量避免通过getComputedStyle获取尺寸位置等信息。</p>
-</li>
-<li class="lvl-2">
-<p>对某些元素使用position的absolute或fixed。</p>
-<ul class="lvl-2">
-<li class="lvl-4">其同样会造成回流, 但开销相对较小, 不会对其他元素产生影响。</li>
-</ul>
-</li>
-</ul>
-</details>
-<h2 id="script标签的defer和async属性">script标签的defer和async属性</h2>
-<details>
-   <summary>
-      <span>查看</span>
-   </summary>
-<h3 id="defer">defer</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>defer属性会告诉浏览器不用等待脚本下载, 而是继续解析HTML, 构建DOM Tree。</p>
-<ul class="lvl-2">
-<li class="lvl-4">脚本由浏览器来进行下载, 但不会阻塞DOM Tree的构建过程。</li>
-<li class="lvl-4">如果脚本提前下载好, 他会等待DOM Tree的构建完成, 在DOMContentLoaded事件之前执行。</li>
-<li class="lvl-4">所以DOMContentLoaded总是会等待defer中的代码先执行完成。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>对于多个defer的脚本, 浏览器会按照脚本的先后顺序执行。</p>
-</li>
-<li class="lvl-2">
-<p>由于设置defer后, 并不会阻塞DOM树的构建, 并且会交与浏览器对其下载, 所以推荐将设置defer的脚本放在head中, 减少其因下载损耗的事件, 一定程度上可以提高页面的性能。</p>
-</li>
-</ul>
-<p><mark>注意: defer仅适用于外部脚本, 对于script默认内容会被忽略。</mark></p>
-<h3 id="async">async</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>async是一个让脚本完全独立的:</p>
-<ul class="lvl-2">
-<li class="lvl-4">浏览器不会因async脚本而阻塞。</li>
-<li class="lvl-4">async脚本不能保证顺序, 它是独立下载, 独立运行, 不会等待其他脚本。</li>
-<li class="lvl-4">async不能保证在DOMContentLoaded之前或之后执行。</li>
-</ul>
-</li>
-</ul>
-<h3 id="defer和async的使用场景">defer和async的使用场景</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>defer通常用于需要文档解析后操作DOM的JS代码, 并且对多个JS文件有顺序要求.</p>
-</li>
-<li class="lvl-2">
-<p>async通常用于独立的脚本, 对其他脚本, 甚至没有DOM依赖的。</p>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>浏览器</category>
-      </categories>
-      <tags>
-        <tag>原理</tag>
-        <tag>浏览器</tag>
       </tags>
   </entry>
 </search>
