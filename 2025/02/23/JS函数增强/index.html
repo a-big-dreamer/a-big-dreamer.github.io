@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="arguments转为Array               查看      JS中函数也是个对象，它也有自己的属性和方法，常见的属性有name和length。   name: 函数名。   length: 函数未使用参数个数（定义时的形参）。  注意：rest参数不参与length的计算。    函数的EC（执行上下文）中关联的VO（variable object）其在堆内存中对应的AO（act">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数增强">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/index.html">
+<meta property="og:site_name" content="ABD&#39;s Blog">
+<meta property="og:description" content="arguments转为Array               查看      JS中函数也是个对象，它也有自己的属性和方法，常见的属性有name和length。   name: 函数名。   length: 函数未使用参数个数（定义时的形参）。  注意：rest参数不参与length的计算。    函数的EC（执行上下文）中关联的VO（variable object）其在堆内存中对应的AO（act">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-23T08:25:10.000Z">
+<meta property="article:modified_time" content="2025-02-23T13:13:36.128Z">
+<meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="函数增强">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/","path":"2025/02/23/JS函数增强/","title":"函数增强"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>函数增强 | ABD's Blog</title>
+    
+
+
+
+
+
+
+
+
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+  <style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+  <body
+    itemscope
+    itemtype="http://schema.org/WebPage"
+    
+    class="use-motion"
+    
+  >
+    <div class="headband"></div>
+
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ABD's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">梦想成为伟大的梦想家</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">16</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">14</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header> 
+  
+<aside class="sidebar">
+
+  <div
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
+  >
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-toc">文章目录</li>
+      <li class="sidebar-nav-overview">站点概览</li>
+    </ul>
+
+    <div class="sidebar-panel-container">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#arguments%E8%BD%AC%E4%B8%BAArray"><span class="nav-number">1.</span> <span class="nav-text">arguments转为Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9Afor-%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86"><span class="nav-number">1.1.</span> <span class="nav-text">方法一：for 循环遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E7%9A%84slice%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">方法二：使用数组的slice方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8Array-from"><span class="nav-number">1.3.</span> <span class="nav-text">方法三：使用Array.from()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">JS纯函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">什么纯函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">纯函数的案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">2.3.</span> <span class="nav-text">纯函数的好处</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">函数柯里化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">什么是函数柯里化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96%E4%BC%98%E5%8A%BF"><span class="nav-number">3.2.</span> <span class="nav-text">柯里化优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9F%AF%E9%87%8C%E5%8C%96%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">自动柯里化函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">组合函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%87%BD%E6%95%B0%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">组合函数的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%84%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">实现组合函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#with%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.</span> <span class="nav-text">with语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">eval函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">严格模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.1.</span> <span class="nav-text">开启严格模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">7.2.</span> <span class="nav-text">严格模式的限制</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A Big Dreamer"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">A Big Dreamer</p>
+  <div class="site-description" itemprop="description">A Big Dreamer's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a-big-dreamer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a-big-dreamer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+<!-- recent posts -->
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+        <div class="links-of-blogroll-title recent-posts-title">
+	    <i class="fa fa-history " aria-hidden="true"></i>
+            近期文章
+	</div>
+	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" title="函数增强" target="">
+		    函数增强
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/02/22/JS%E9%97%AD%E5%8C%85/" title="JS闭包" target="">
+		    JS闭包
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" title="JS执行原理" target="">
+		    JS执行原理
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="浏览器基本原理" target="">
+		    浏览器基本原理
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" title="前端知识点记录(个人理解)" target="">
+		    前端知识点记录(个人理解)
+		    </a>
+		</li>
+	</ul>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="pjax">
+  </div>
+</aside>
+
+
+      </div>
+
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="函数增强 | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          函数增强
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-23 16:25:10 / 修改时间：21:13:36" itemprop="dateCreated datePublished" datetime="2025-02-23T16:25:10+08:00">2025-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="arguments转为Array">arguments转为Array</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS中函数也是个对象，它也有自己的属性和方法，常见的属性有name和length。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>name: 函数名。</p>
+</li>
+<li class="lvl-2">
+<p>length: 函数未使用参数个数（定义时的形参）。</p>
+<ul class="lvl-2">
+<li class="lvl-4"><mark>注意：rest参数不参与length的计算。</mark></li>
+</ul>
+</li>
+</ul>
+<p>函数的EC（执行上下文）中关联的VO（<code>variable object</code>）其在堆内存中对应的AO（<code>activation object</code>）创建时会初始化arguments引用的类数组对象，但它只是个类数组对象，虽然可以迭代和通过索引访问参数值，但像数组中的filter等方法是不能使用的，所以，我们通常需要将其转化为数组。</p>
+<h3 id="方法一：for-循环遍历">方法一：for 循环遍历</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> <span class="variable language_">arguments</span>) &#123;</span><br><span class="line">        arr.<span class="title function_">push</span>(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：使用数组的slice方法">方法二：使用数组的slice方法</h3>
+<p><code>Array.prototype.slice(start, end)</code>用于截取数组，内部通过this进行截取，所以我们可以改变this的指向，从而实现arguments向Array的转换。</p>
+<figure class="highlight js"><figcaption><span>使用原型方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><figcaption><span>使用实例对象处理</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上两种方式归根结底都是获取数组原型方法进行处理<code>Array.prototype.slice(start, end)</code>。</p>
+<h3 id="方法三：使用Array-from">方法三：使用Array.from()</h3>
+<p>ES6中新增了<code>Array.from()</code>方法，该方法可以将类数组对象转化为数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="JS纯函数">JS纯函数</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>在函数式编程中有一个非常重要的概念叫<strong>纯函数</strong>，JS符合函数式编程的范式，所以JS存在纯函数的概念。</p>
+<h3 id="什么纯函数">什么纯函数</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>确定的输入，一定产生确定的输出。</p>
+<ul class="lvl-2">
+<li class="lvl-4">在函数调用中，加入输入的参数一致，返回的结果不是能改变的。</li>
+<li class="lvl-4">即不能调用并改变外部变量，如在全局作用域下使用闭包的特性。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>函数在执行过程中，不能产生副作用。</p>
+<ul class="lvl-2">
+<li class="lvl-4">不能在调用的同时影响外部变量，以影响后续的使用，导致结果的不一致。</li>
+</ul>
+</li>
+</ul>
+<p>副作用：在计算机科学中，副作用表示在执行一个函数的时候，除了返回函数值外，还对调用函数产生了附加的影响，比如修改了全局变量，修改参数或者改变外部的存储。</p>
+<p>如下，获取obj的name属性时，操作了obj，导致后续obj的使用出现了变化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    obj.<span class="property">age</span> = <span class="number">18</span></span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">name</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj)  <span class="comment">// &#123;name: &#x27;大梦想家&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+<p><mark>副作用往往是产生bug的温床。</mark></p>
+<h3 id="纯函数的案例">纯函数的案例</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如数组的slice方法就是个纯函数，因为slice方法不会改变原数组，而是返回一个新的数组。</p>
+</li>
+<li class="lvl-2">
+<p>而数组的splice方法则会改变原数组，所以splice方法不是纯函数。</p>
+</li>
+</ul>
+<h3 id="纯函数的好处">纯函数的好处</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>可以安心编写和使用，不必担心对外部的影响。</p>
+</li>
+<li class="lvl-2">
+<p>React中就要求我们无论是函数还是class声明一个组件，这个组件都必须像纯函数一样，保护它们的props不被修改。</p>
+</li>
+</ul>
+</details>
+<h2 id="函数柯里化">函数柯里化</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<h3 id="什么是函数柯里化">什么是函数柯里化</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只传递一部分参数，返回一个函数，用返回的函数去处理剩余的参数，此过程就称为柯里化（Currying）。</p>
+</li>
+<li class="lvl-2">
+<p>柯里化是一种对函数的转化，不会对函数进行调用。</p>
+</li>
+<li class="lvl-2">
+<p>柯里化将一个可调用的函数f(a, b, c)转化为可调用的f(a)(b)©。</p>
+</li>
+</ul>
+<h3 id="柯里化优势">柯里化优势</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数的职责单一</p>
+<ul class="lvl-2">
+<li class="lvl-4">在函数式编程中，我们其实往往希望一个函数处理的问题尽可能单一，而不是将一大堆的处理过程交给一个函数来处理。</li>
+<li class="lvl-4">那么我们是否可以将每次传入的参数在单一的函数中处理，处理完后在下一个函数中再使用处理后的结果。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    x += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">y</span>) &#123;</span><br><span class="line">        y *= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数的参数复用</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createAdder</span>(<span class="params">num</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">count</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> num + count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder5 = <span class="title function_">createAdder</span>(<span class="number">5</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder10 = <span class="title function_">createAdder</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="自动柯里化函数">自动柯里化函数</h3>
+<p>将普通函数转换为柯里化函数。</p>
+<p><mark>以下代码仅可在最后一次调用时改变this指向有效。</mark></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">args1, arg2, arg3</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> args1 + arg2 + arg3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">gCurrying</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">currying</span>(<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (args1.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args1)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args2</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> currying.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [...args1, ...args2])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currying</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> currying = <span class="title function_">gCurrying</span>(foo)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">currying</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="组合函数">组合函数</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<h3 id="组合函数的概念">组合函数的概念</h3>
+<p>我们需要对一个数据进行操作，需要执行两个以上的函数，而且这两个函数是依次执行的。如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">mul</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">square</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num ** <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">square</span>(<span class="title function_">mul</span>(<span class="number">4</span>))) <span class="comment">// 64</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现组合函数">实现组合函数</h3>
+<p>组合函数一般是最初的函数接受较多参数，然后将其返回值交予其他函数进行操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compose</span>(<span class="params">...fns</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> length = fns.<span class="property">length</span></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    fns.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">`The <span class="subst">$&#123;index&#125;</span> arguments is not a function`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = fns[<span class="number">0</span>].<span class="title function_">apply</span>(<span class="variable language_">this</span>, args)</span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (++index &lt; length) &#123;</span><br><span class="line">            result = fns[index].<span class="title function_">call</span>(<span class="variable language_">this</span>, result)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="with语句">with语句</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>with语句会扩展一个语句的作用域链。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name) <span class="comment">// 大梦想家</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(age) <span class="comment">// 18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源。</p>
+</details>
+<h2 id="eval函数">eval函数</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>内建函数 eval 允许执行一个代码字符串。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval是一个特殊的函数，它可以将传入的字符串当做JavaScript代码来运行。</p>
+</li>
+<li class="lvl-2">
+<p>eval会将最后一句执行语句的结果，作为返回值。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> res = <span class="built_in">eval</span>(<span class="string">&quot;var message = &#x27;hello world&#x27;; 1111&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// 1111</span></span><br></pre></td></tr></table></figure>
+<p>不建议在开发中使用eval：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval代码的可读性非常的差（代码的可读性是高质量代码的重要原则）；</p>
+</li>
+<li class="lvl-2">
+<p>eval是一个字符串，那么有可能在执行的过程中被刻意篡改，那么可能会造成被攻击的风险；</p>
+</li>
+<li class="lvl-2">
+<p>eval的执行必须经过JavaScript解释器，不能被JavaScript引擎优化；</p>
+</li>
+</ul>
+</details>
+<h2 id="严格模式">严格模式</h2>
+<details>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>由于JS一直保持着兼容旧代码的方向，但旧代码的问题也被继承下来了，在ECMA5标准中，JS提出了严格模式的概念，以更加严格的方式对代码进行检测和运行。</p>
+<p>严格模式对正常的JavaScript语义进行了一些限制：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>严格模式通过 抛出错误 来消除一些原有的 静默（silent）错误。（比如对对象属性设置仅可读权限，对其进行修改操作时会抛出错误）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式让JS引擎在执行代码时可以进行更多的优化（不需要对一些特殊的语法进行处理）。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式禁用了在ECMAScript未来版本中可能会定义的一些语法。</p>
+</li>
+</ul>
+<h3 id="开启严格模式">开启严格模式</h3>
+<p>严格模式通过在文件或者函数开头使用 use strict 来开启，可以实现对文件或单个函数的严格模式设置。</p>
+<h3 id="严格模式的限制">严格模式的限制</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无法意外的创建全局变量。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式会使引起静默失败(silently fail,注:不报错也没有任何效果)的赋值操作抛出异常。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不能使用 with 语句。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，试图删除不可删除的属性会抛出错误。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，函数参数不能存在相同名字。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不允许0的8进制语法。（如0221）。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，eval中的变量不能被外部使用。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，this绑定不会默认转为对象。</p>
+<ul class="lvl-2">
+<li class="lvl-4">null和undefiend默认绑定不会指向window，而是其本身。</li>
+<li class="lvl-4">除了null和undefiend的基本数据类型，不会指向其默认的包装对象，而是其字面量值。</li>
+</ul>
+</li>
+</ul>
+</details>
+
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" title="函数增强">https://a-big-dreamer.github.io/2025/02/23/JS函数增强/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+              <a href="/tags/%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" rel="tag"><i class="fa fa-tag"></i> 函数增强</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/22/JS%E9%97%AD%E5%8C%85/" rel="prev" title="JS闭包">
+                  <i class="fa fa-angle-left"></i> JS闭包
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+    </main><div id="tp-weather-widget"></div>
+<script>
+(function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+window.SeniverseWeatherWidget('show', {
+    flavor: "bubble",
+    location: "WW2CSZKC3PHE",
+    geolocation: true,
+    language: "zh-Hans",
+    unit: "c",
+    theme: "auto",
+    token: "67d8c8ef-0f03-4d08-b5ba-ac1a9f24ee70",
+    hover: "enabled",
+    container: "tp-weather-widget"
+})
+</script><!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS-->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+    server="netease"
+    id="12716149839"
+    type="playlist" 
+    mini="true"
+    fixed="true"
+    autoplay="true"
+    volume="0.4"
+    theme="#FADFA3"
+    order="random"
+    loop="all"
+    preload="auto"
+    mutex="true"
+    list-folded="true"
+    loop="all"
+    >
+</meting-js>
+<footer class="footer">
+      <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">A Big Dreamer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">18k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:05</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/10/2024 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+      </div>
+    </footer>
+
+    
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/a-big-dreamer" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+ 
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+ 
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '48vh',
+  right: 'unset',
+  left: '25px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"90b1f3375f4fefc1d993479790cb6ddb"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
+
+  <!-- 页面点击小红心 -->
+  <script
+    type="text/javascript"
+    src="/js/mouse-click-themes/clicklove.js"
+  ></script>
+</html>
