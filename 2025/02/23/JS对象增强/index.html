@@ -21,25 +21,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="A Big Dreamer&#39;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ABD&#39;s Blog">
-<meta property="og:url" content="https://a-big-dreamer.github.io/archives/2025/02/index.html">
+    <meta name="description" content="Object.defineProperty()、对象方法补充">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS对象增强">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="A Big Dreamer&#39;s Blog">
+<meta property="og:description" content="Object.defineProperty()、对象方法补充">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png">
+<meta property="article:published_time" content="2025-02-23T13:47:57.000Z">
+<meta property="article:modified_time" content="2025-02-24T15:16:57.394Z">
 <meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="对象增强">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png">
 
 
-<link rel="canonical" href="https://a-big-dreamer.github.io/archives/2025/02/">
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2025/02/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/","path":"2025/02/23/JS对象增强/","title":"JS对象增强"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | ABD's Blog</title>
+<title>JS对象增强 | ABD's Blog</title>
     
 
 
@@ -79,7 +85,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">ABD's Blog</h1>
+      <p class="site-title">ABD's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">梦想成为伟大的梦想家</p>
@@ -133,7 +139,7 @@
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -143,6 +149,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-defineProperty"><span class="nav-number">1.</span> <span class="nav-text">Object.defineProperty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95%E8%A1%A5%E5%85%85"><span class="nav-number">2.</span> <span class="nav-text">对象方法补充</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -224,150 +231,265 @@
 
       </div>
 
-      <div class="main-inner archive posts-collapse">
+      <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 17 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2025<span class="collection-year-count">6</span></span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JS对象增强 | ABD's Blog">
+      <meta itemprop="description" content="Object.defineProperty()、对象方法补充">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS对象增强
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-23 21:47:57" itemprop="dateCreated datePublished" datetime="2025-02-23T21:47:57+08:00">2025-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-24 23:16:57" itemprop="dateModified" datetime="2025-02-24T23:16:57+08:00">2025-02-24</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>813</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">Object.defineProperty()、对象方法补充</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Object-defineProperty">Object.defineProperty</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+<blockquote>
+<p>Object.defineProperty(obj, props, descriptor)<br>
+obj: 要定义一个属性的对象<br>
+props: 要定义或修改的属性的名称或Symbol<br>
+descriptor: 要定义或修改的属性描述符返回值： 被传递给此函数的对象</p>
+</blockquote>
+<p>属性描述符分为数据属性（Data Properties）描述符（Descriptor）和存取属性（Accessor访问器 Properties）描述符。</p>
+<img data-src="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png" class="" title="alt text">
+<p>数据属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Writable]]</code>：表示是否可以修改属性的值；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的[<code>[Writable]</code>]为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Writable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[value]]</code>：属性的value值，读取属性时会返回该值，修改属性时，会对其进行修改；</p>
+<ul class="lvl-2">
+<li class="lvl-4">默认情况下这个值是undefined；</li>
+</ul>
+</li>
+</ul>
+<p>存取属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[get]]</code>：获取属性时会执行的函数。默认为undefined</p>
+</li>
+<li class="lvl-2">
+<p><code>[[set]]</code>：设置属性时会执行的函数。默认为undefined</p>
+</li>
+</ul>
+<p>Object.defineProperties() 方法直接在一个对象上定义 多个 新的属性或修改现有属性，并且返回该对象。</p>
+</details>
+<h2 id="对象方法补充">对象方法补充</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>获取对象的属性描述符：</p>
+<ul class="lvl-2">
+<li class="lvl-4">getOwnPropertyDescriptor</li>
+<li class="lvl-4">getOwnPropertyDescriptors</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>禁止对象扩展新属性：preventExtensions</p>
+<ul class="lvl-2">
+<li class="lvl-4">给一个对象添加新的属性会失败（在严格模式下会报错）；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>密封对象，不允许配置和删除属性：seal</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际是调用preventExtensions</li>
+<li class="lvl-4">并且将现有属性的configurable: false</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>冻结对象，不允许修改现有属性：freeze</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际上是调用seal</li>
+<li class="lvl-4">并且将现有属性的writable: false</li>
+</ul>
+</li>
+</ul>
+</details>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-24T23:19:57+08:00"
-              content="2025-02-24">
-          02-24
-        </time>
+    
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" itemprop="url">
-            <span itemprop="name">JS实现继承</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-23T21:47:57+08:00"
-              content="2025-02-23">
-          02-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/" itemprop="url">
-            <span itemprop="name">JS对象增强</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-23T16:25:10+08:00"
-              content="2025-02-23">
-          02-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" itemprop="url">
-            <span itemprop="name">函数增强</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-22T21:30:47+08:00"
-              content="2025-02-22">
-          02-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/22/JS%E9%97%AD%E5%8C%85/" itemprop="url">
-            <span itemprop="name">JS闭包</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-21T22:04:01+08:00"
-              content="2025-02-21">
-          02-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" itemprop="url">
-            <span itemprop="name">JS执行原理</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2025-02-19T17:18:14+08:00"
-              content="2025-02-19">
-          02-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" itemprop="url">
-            <span itemprop="name">浏览器基本原理</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/" title="JS对象增强">https://a-big-dreamer.github.io/2025/02/23/JS对象增强/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+              <a href="/tags/%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/" rel="tag"><i class="fa fa-tag"></i> 对象增强</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" rel="prev" title="函数增强">
+                  <i class="fa fa-angle-left"></i> 函数增强
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" rel="next" title="JS实现继承">
+                  JS实现继承 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
     </main><div id="tp-weather-widget"></div>
 <script>
@@ -534,7 +656,7 @@ darkmode.showWidget();
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"c480aa1d2af5544c48f1208c6e60f2ed"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"492f486a7103b3b071cdfb8c27ad74b1"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
   <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
