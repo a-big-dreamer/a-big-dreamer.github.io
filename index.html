@@ -234,6 +234,330 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">JS实现继承</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-24 23:19:57" itemprop="dateCreated datePublished" datetime="2025-02-24T23:19:57+08:00">2025-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-26 23:32:14" itemprop="dateModified" datetime="2025-02-26T23:32:14+08:00">2025-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="对象的原型">对象的原型</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>每一个函数对象内都有一个prototype属性，其值是一个对象，这个对象就是原型对象。</p>
+<p>获取原型对象的方式有两种：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通过对象的<code>__proto__</code>属性可以获取到，但这个是浏览器早期自己添加的，存在兼容性问题。</p>
+</li>
+<li class="lvl-2">
+<p>通过<code>Object.getPrototypeOf()</code>方法可以获取到，但其也存在老版本浏览器的兼容性问题。</p>
+</li>
+</ul>
+<p>通过new操作符创建的对象，会执行如下几步操作：</p>
+<ol>
+<li class="lvl-3">
+<p>创建一个空的对象。</p>
+</li>
+<li class="lvl-3">
+<p>将this指向创建的空对象。</p>
+</li>
+<li class="lvl-3">
+<p>将构造函数的prototype属性赋值给被创建对象。</p>
+</li>
+<li class="lvl-3">
+<p>执行函数内的代码。</p>
+</li>
+<li class="lvl-3">
+<p>若返回值不是对象，则将创建的对象返回。</p>
+</li>
+</ol>
+<p>所以对象内存在与其对应的构造函数的prototype的相同引用，我们称之为在对象中为隐式原型对象，在函数中称之为显式原型对象。原型对象也是一个对象，如果在原型对象中找不到，会继续向原型对象的原型对象中寻找，直到找到或null为止，此链式查找也称为[隐式]原型链查找。</p>
+<p>JS中的对象都有一个特殊的内置属性<code>[[Prototype]]</code>，其指向父类的原型对象，但该属性是不可调用的，因为它仅仅是一个标准，通过此属性，可以查看对象的原型链关系。</p>
+</details>
+<h2 id="Constructor">Constructor</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>原型对象上存在属性<code>constructor</code>，其指向当前的函数对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Foo</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> === <span class="title class_">Foo</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>上面我们说可以通过原型链查找属性，那么方法也是可以的，通过在原型对象添加方法可以减少相同操作代码的编写，提高代码的复用性。</p>
+<p>语法：<code>Foo.prototype.变量名 = function()&#123;&#125;</code></p>
+<p>但当我们需要添加多个方式时，一直重复上述操作有些麻烦，所有，我们可以重写原型对象来简化操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Foo</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">property</span>: <span class="string">&#x27;value&#x27;</span>,</span><br><span class="line">    <span class="attr">method</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于原型对象的constructor属性是不可枚举的，所以我们需要通过属性描述符对其进行单独操作。</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(<span class="title class_">Foo</span>.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;constructor&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="title class_">Foo</span>,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="ES5实现继承">ES5实现继承</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>前提：定义一个Person对象和Student对象。目标：实现Student对象继承Person对象。</p>
+<h3 id="方法一：通过原型链实现继承">方法一：通过原型链实现继承</h3>
+<p>通过Person构造方法创建一个person实例对象，改变Student构造函数对象的prototype指向person实例对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;张三&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = [<span class="string">&#x27;看电影&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>()</span><br><span class="line"></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span> = p</span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">studying</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&#x27;正在学习&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="title class_">Student</span>()</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="title class_">Student</span>()</span><br><span class="line"></span><br><span class="line">s1.<span class="property">hobbies</span>.<span class="title function_">push</span>(<span class="string">&#x27;看小说&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">hobbies</span>, s2.<span class="property">hobbies</span>) <span class="comment">// (2) [&#x27;看电影&#x27;, &#x27;看小说&#x27;] (2) [&#x27;看电影&#x27;, &#x27;看小说&#x27;]</span></span><br></pre></td></tr></table></figure>
+<p>弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>有些属性是保存在实例对象p上的，通过直接打印实例对象s1，s2，看不到name、hobbies属性。</p>
+</li>
+<li class="lvl-2">
+<p>虽然我们可以通过原型链访问到属性，但原型对象对于通过同一个构造函数创建的对象是共享的，意味如果修改原型对象上的引用属性，对其他的实例对象都会受影响。</p>
+</li>
+<li class="lvl-2">
+<p>我们之所以要实现继承，是为了复用代码，但以上的情况，我们无法给Person传递参数，导致创建的s1，s2实例对象没有自己的属性，即无法进行定制化操作。</p>
+</li>
+</ul>
+<h3 id="方法二：借用构造函数实现继承">方法二：借用构造函数实现继承</h3>
+<p>constructor stealing：借用构造函数/经典继承/伪造对象</p>
+<p>在Student构造函数内调用Person的构造函数，并通过call/apply改变this指向，实现继承。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, hobbies</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = hobbies;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, hobbies, age</span>) &#123; </span><br><span class="line">    <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name, hobbies)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&#x27;张三&#x27;</span>, [<span class="string">&#x27;看电影&#x27;</span>, <span class="string">&#x27;看小说&#x27;</span>], <span class="number">18</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&#x27;李四&#x27;</span>, [<span class="string">&#x27;玩游戏&#x27;</span>], <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">s1.<span class="property">hobbies</span>.<span class="title function_">push</span>(<span class="string">&#x27;看小说&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">name</span>, s2.<span class="property">name</span>) <span class="comment">// 张三 李四</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">hobbies</span>, s2.<span class="property">hobbies</span>) <span class="comment">// (3) [&#x27;看电影&#x27;, &#x27;看小说&#x27;, &#x27;看小说&#x27;] [&#x27;玩游戏&#x27;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">age</span>, s2.<span class="property">age</span>) <span class="comment">// 18 20</span></span><br></pre></td></tr></table></figure>
+<p>弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>直接把Person的原型对象赋值给Student的原型对象，这样会导致通过Student对原型对象的修改会直接影响到Peroson的原型对象。</p>
+</li>
+</ul>
+<h3 id="方法三：组合借用继承">方法三：组合借用继承</h3>
+<p>即将方法一和方法二结合起来。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, hobbies</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = hobbies;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, hobbies, age</span>) &#123; </span><br><span class="line">    <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name, hobbies)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>()</span><br><span class="line"></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span> = p</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&#x27;张三&#x27;</span>, [<span class="string">&#x27;看电影&#x27;</span>, <span class="string">&#x27;看小说&#x27;</span>], <span class="number">18</span>)</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&#x27;李四&#x27;</span>, [<span class="string">&#x27;玩游戏&#x27;</span>], <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">s1.<span class="property">hobbies</span>.<span class="title function_">push</span>(<span class="string">&#x27;看小说&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">name</span>, s2.<span class="property">name</span>) <span class="comment">// 张三 李四</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">hobbies</span>, s2.<span class="property">hobbies</span>) <span class="comment">// (3) [&#x27;看电影&#x27;, &#x27;看小说&#x27;, &#x27;看小说&#x27;] [&#x27;玩游戏&#x27;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">age</span>, s2.<span class="property">age</span>) <span class="comment">// 18 20</span></span><br></pre></td></tr></table></figure>
+<p>通过这种方法来实现继承已经问题不到了，但仍有不完美的地方，比如：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Person构造函数会被调用两次。</p>
+<ul class="lvl-2">
+<li class="lvl-4">第一次是在赋值给Student.prototype的时候。</li>
+<li class="lvl-4">第二次是借用构造函数的时候。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Student实例对象上和其原型对象上会存在相同的属性，尽管值可能不同，但好在优先在对象本身上进行查找。</p>
+</li>
+</ul>
+<p>以上代码我们发现，实例化p仅仅是为了将其原型对象关联到Student.prototype上，那么是不是只要是个对象，然后将其隐式原型对象指向Person的显示原型对象即可？</p>
+<h3 id="方法四：原型式继承函数">方法四：原型式继承函数</h3>
+<p>原型式继承是由从道格拉斯·克罗克福德（Douglas Crockford，著名的前端大师，JSON的创立者）在2006年写的一篇文章说起: Prototypal Inheritance in JavaScript(在JavaScript中使用原型式继承)。</p>
+<p>其实就是上述提出的创建一个对象，作为继承连接的原型对象桥梁。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Func</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="title class_">Func</span>.<span class="property"><span class="keyword">prototype</span></span> = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Func</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码完全不必担心兼容性的问题，但我们也可以对其进行改造，原理是一样的，不过是调用了些API，可能会存在兼容性的问题。可以通过<code>Object.setPrototypeOf(obj, prototype)</code>和<code>Object.create(proto, propertiesObject)</code>来实现。</p>
+<blockquote>
+<p>Object.setPrototypeOf(obj, prototype)：将obj的原型指向prototype。参数：<br>
+obj: 需要修改原型的对象。<br>
+prototype: 需要指向的原型对象。</p>
+</blockquote>
+<p>通过该API可以将以上代码修改为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> newObj = &#123;&#125;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(newObj, obj)</span><br><span class="line">    <span class="keyword">return</span> newObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Object.create(proto, propertiesObject)：创建一个对象，并将此对象的原型指向proto，并通过propertiesObject对此对象进行属性描述符操作，然后返回此对象。参数：<br>
+proto: 需要指向的原型对象<br>
+propertiesObject（可选）: 需要添加的属性描述符对象。返回值：返回一个对象，返回对象的隐式原型对象指向传入的原型对象。</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(person, &#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">writable</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>通过该API可以将以上代码修改为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj)</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>综上所看，通过原型式继承函数的代码可以为（最具兼容性的方式）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, hobbies</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = hobbies;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, hobbies, age</span>) &#123; </span><br><span class="line">    <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name, hobbies)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Func</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="title class_">Func</span>.<span class="property"><span class="keyword">prototype</span></span> = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Func</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title function_">object</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>)</span><br></pre></td></tr></table></figure>
+<h3 id="方法五：寄生式继（Parasitic）承函数">方法五：寄生式继（Parasitic）承函数</h3>
+<p>什么是寄生式继承？</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>寄生式继承式是与原型式继承紧密相连的一种思想，同样由道格拉斯·克罗克福德提出和推广。</p>
+</li>
+<li class="lvl-2">
+<p>寄生式继承是<strong>结合原型式继承和工厂模式</strong>的一种方式</p>
+</li>
+<li class="lvl-2">
+<p>即创建一个封装继承过程的函数，该函数在内部以某种方式来增强对象，最后将这个对象返回。</p>
+</li>
+</ul>
+<p>核心步骤：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Func</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="title class_">Func</span>.<span class="property"><span class="keyword">prototype</span></span> = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Func</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createStudent</span>(<span class="params">person</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> newObj = <span class="title function_">object</span>(person)</span><br><span class="line">    newObj.<span class="property">studying</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="keyword">return</span> newObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整实现代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, hobbies</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = hobbies;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, hobbies, age</span>) &#123; </span><br><span class="line">    <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name, hobbies)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Func</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="title class_">Func</span>.<span class="property"><span class="keyword">prototype</span></span> = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Func</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createStudent</span>(<span class="params">person</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> newObj = <span class="title function_">object</span>(person)</span><br><span class="line">    newObj.<span class="property">studying</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    reuturn newObj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Student</span>.<span class="property">property</span> = <span class="title function_">createStudent</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>)</span><br></pre></td></tr></table></figure>
+<p>以上代码进一步的细分，实现一种函数实现特定功能，并在特定的函数中在原型对象上添加属性和方法。</p>
+<h3 id="最终方案：-寄生组合继承">最终方案： 寄生组合继承</h3>
+<p>结合前几种的思想，结合成最终继承方案。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, hobbies</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">hobbies</span> = hobbies;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, hobbies, age</span>) &#123; </span><br><span class="line">    <span class="comment">// 借用构造函数</span></span><br><span class="line">    <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name, hobbies)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原型式继承核心代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">object</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">Func</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">    <span class="title class_">Func</span>.<span class="property"><span class="keyword">prototype</span></span> = obj</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Func</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寄生式核心代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">inherit</span>(<span class="params">subType, superType</span>) &#123;</span><br><span class="line">    <span class="comment">// 通过原型链实现</span></span><br><span class="line">    subType.<span class="property"><span class="keyword">prototype</span></span> = <span class="title function_">object</span>(superType.<span class="property"><span class="keyword">prototype</span></span>)</span><br><span class="line">    subType.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = subType</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">inherit</span>(<span class="title class_">Student</span>, <span class="title class_">Person</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="总结">总结</h3>
+<p>通过以上多种实现继承的方案来看，在ES5时期，并没有一个统一的标准，可谓是百花齐放。</p>
+<p>总结一下，ES5实现继承的方法有：</p>
+<ol>
+<li class="lvl-3">
+<p>通过原型链实现继承：通过创建父类实例作为原型对象将子类与父类进行连接。</p>
+<p>缺陷：</p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>能访问到执行父类代码创建到原型对象的属性，但其在原型对象上，直接打印子类实例对象是看不到的。</p>
+</li>
+<li class="lvl-6">
+<p>由于实现继承的目的是为了复用父类中的属性和方法，在此种情况下，无法定制化子类实例对象的属性和方法。即多个子类对象访问的属性都是相同的，且一旦存在属性为引用对象，则修改其中一个子类对象属性，则其他子类对象属性也会被修改。</p>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>借用构造函数实现继承：通过apply/call调用父类构造函数，将父类中的属性和方法添加到子类实例对象上。</p>
+<p>缺陷：</p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>此种方法是直接将子类的原型对象指向父类的原型对象，一旦通过子类操作原型对象会直接对父类原型对象造成影响。</p>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>组合借用继承：将前两种方法结合起来使用（已基本能够作为继承的方案）。</p>
+<p>缺陷：</p>
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>会调用两次父类构造函数，导致实例对象本身和其原型对象上存在相同的属性。</p>
+</li>
+<li class="lvl-6">
+<p>且保露父类实例化在外部不太美观。</p>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>原型式继承：由道格拉斯·克洛克福德提出，将一个普通函数的原型对象指向父类原型对象，然后将此普通函数实例化返回作为子类原型对象。且可以通过新的API对其进行改造，如<code>Object.create(proto, propertiesObject)</code>和<code>Object.setPrototypeOf(obj, prototype)</code>，但有一定的兼容性问题。</p>
+</li>
+<li class="lvl-3">
+<p>寄生式继承：由道格拉斯·克洛克福德提出，在原型式继承的基础上，将为中间原型对象添加方法的操作封装到函数中，然后返回此原型对象作为子类原型对象。</p>
+</li>
+<li class="lvl-3">
+<p>寄生组合继承：总结以上方法的优点，借用构造函数实现子类的定制化，通过原型式继承函数，实现子类原型对象函数的创建，通过寄生式继承函数，在函数内通过原型继承实现子类原型对象的绑定，并将原型对象的constructor指向子类。</p>
+</li>
+</ol>
+</details>
+<h2 id="对象方法补充">对象方法补充</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>Object.prototype.hasOwnProperty()</code>：判断对象是否是自身属性，而不是原型对象上的属性。</p>
+</li>
+<li class="lvl-2">
+<p>in/for in 操作符：判断某个属性是否在某个对象或对象的原型上。</p>
+<ul class="lvl-2">
+<li class="lvl-4"><code>name in obj / for (var item in obj)</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>instanceof: 用于检测构造函数的prototype是否出现在某个实例对象的原型链上。</p>
+</li>
+<li class="lvl-2">
+<p>isPrototypeOf: 用于检测某个对象是否出现在某个实例对象的原型链上。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> info = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">isPrototypeOf</span>(info)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="title function_">isPortotypeO</span>(obj)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="手动实现instanceOf">手动实现instanceOf</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">instanceof</span>(<span class="params">o, c</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> op = o.<span class="property">__proto__</span></span><br><span class="line">    <span class="keyword">while</span> (op !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (op === c.<span class="property"><span class="keyword">prototype</span></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            op = op.<span class="property">__proto__</span>    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="原型继承关系图">原型继承关系图</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1083,110 +1407,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">JS实现继承</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-24 23:19:57 / 修改时间：23:20:36" itemprop="dateCreated datePublished" datetime="2025-02-24T23:19:57+08:00">2025-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1566,14 +1786,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">19k</span>
+    <span title="站点总字数">22k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:20</span>
   </span>
 </div>
 <div class="busuanzi-count">
