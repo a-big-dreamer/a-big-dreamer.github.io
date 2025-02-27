@@ -33,8 +33,13 @@
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/scope_chain.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/EC%E5%85%B3%E8%81%94%E7%9A%84%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/LexicalEnvironment.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/VariableEnvironment.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ER.png">
 <meta property="article:published_time" content="2025-02-21T14:04:01.000Z">
-<meta property="article:modified_time" content="2025-02-24T15:22:39.254Z">
+<meta property="article:modified_time" content="2025-02-27T15:29:54.628Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="原理">
@@ -143,7 +148,7 @@
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -153,6 +158,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMA5%E6%97%B6%E6%9C%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.</span> <span class="nav-text">ECMA5时期与执行原理相关的术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ECMA5%E4%B9%8B%E5%90%8E%E4%B8%8E%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E7%9A%84%E6%9C%AF%E8%AF%AD"><span class="nav-number">2.</span> <span class="nav-text">ECMA5之后与执行原理相关的术语</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -281,7 +287,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-24 23:22:39" itemprop="dateModified" datetime="2025-02-24T23:22:39+08:00">2025-02-24</time>
+      <time title="修改时间：2025-02-27 23:29:54" itemprop="dateModified" datetime="2025-02-27T23:29:54+08:00">2025-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,14 +317,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>538</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -329,14 +335,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><details open>
+    <div class="post-body" itemprop="articleBody"><h2 id="ECMA5时期与执行原理相关的术语">ECMA5时期与执行原理相关的术语</h2>
+<details open>
     <summary>
         <span>查看</span>
     </summary>
 <p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>，简称ECS)，它是用于执行代码的调用栈。</p>
 <p>其首先执行的为全局代码块，即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
 <img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png" class="" title="ECS">
-<p>在全局代码块执行前，或者说在parse转为AST过程中，会创建一个GO(Global Object)全局对象，将全局定义的变量、函数等加入到GO中，但此时仅仅为初始化，而不是赋值，即此时除了函数和内置对象(String、Data、parseInt等)，GO中的变量值为undefined。</p>
+<p>在全局代码块执行前，或者说在parse转为AST过程中，会创建一个GO(Global Object)全局对象，将全局定义的变量、函数等加入到GO中，但此时仅仅为创建，而不是赋值，即此时除了函数和内置对象(String、Data、parseInt等)，GO中的变量值为undefined。</p>
 <img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png" class="" title="GO">
 <p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象，其对应的this和作用域链(<code>scope chain</code>)。</p>
 <p>每当执行一个函数时，会创建一个函数执行上下文(<code>Function Execution Context</code>，简称FEC)加入到ECS中，并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象，该AO会使用arguments作为初始化，初始值为该函数传入的参数形成的伪数组对象，此时VO指向该AO，存储该执行上下文变量的初始化。</p>
@@ -347,6 +354,45 @@
 <p>每一个EC都会对应一个专属的AO，即使是同一个函数。</p>
 <p>当代码被解析时，函数会被创建，但不会被执行，此时函数对象中会存在<code>[[Scopes]]</code>属性，其值为一个列表对象，即为函数该的作用域链(scope chain)，即函数的作用域链在定义的时刻就被创建，与其调用位置无关，与定义位置有关，当函数被调用，其成为FEC加入ECS中时，会创建<code>scope chain</code>，并将函数对象中<code>[[Scopes]]</code>属性的值赋值给FES中的<code>scope chain</code>，当执行过程中遇到属性调用，会先在此FEC关联的VO中查找，查找不到，便会通过<code>scope chain</code>向上查找。</p>
 <img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/scope_chain.png" class="" title="scope_chain">
+</details>
+<h2 id="ECMA5之后与执行原理相关的术语">ECMA5之后与执行原理相关的术语</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>与ECMA5之前的思路基本相同，只是对于一些词汇的描述发生了改变。</p>
+<p>在新的ECMA代码执行描述中，引入了词法环境（Lexical Environments）的概念。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个词法环境是由环境记录（Environment Record，此后称ER）和一个外部词法环境（Outer Lexical Environment，此后称outer）组成。</p>
+</li>
+<li class="lvl-2">
+<p>一个词法环境经常用于关联函数声明、代码块语句、try-catch语句，当他们代码被执行时，词法环境被创建出来。</p>
+</li>
+</ul>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="词法环境">
+<p>也就是说，当一个执行上下文（EC）加入到ECS中时，会关联对应的词法环境，通常会关联<code>LexicalEnvironment</code>和<code>VariableEnvironment</code>这两个词法环境。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/EC%E5%85%B3%E8%81%94%E7%9A%84%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="EC关联的词法环境">
+<p>通常LexicalEnvironment和VariableEnvironment指向同一个对象，但此要看浏览器怎么实现了。</p>
+<p>LexicalEnvironment通常用于处理ES6新提出的let，const声明的标识符。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/LexicalEnvironment.png" class="" title="LexicalEnvironment">
+<p>而VariableEnvirable用于处理var和function声明的标识符，与作用域提升有关。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/VariableEnvironment.png" class="" title="VariableEnvironment">
+<p>对于ER来说，有两种主要的环境记录值：声明式环境记录和对象环境记录。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>声明式环境记录：声明性环境记录用于定义ECMAScript语言语法元素的效果，如函数声明、变量声明和直接将标识符绑定与<br>
+ECMAScript语言值关联起来的Catch子句。</p>
+</li>
+<li class="lvl-2">
+<p>对象式环境记录：对象环境记录用于定义ECMAScript元素的效果，例如WithStatement，它将标识符绑定与某些对象的属性关联起来。</p>
+</li>
+</ul>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ER.png" class="" title="ER">
+<p>而在新的代码执行描述符中，对于GEC来说，其词法环境中的环境记录指向的并不仅仅式window，而是GER（Global Environment Record）和DER（Decalared Environment Record）的组合，GER指向的便是window，而DER指向的便是存储let，const等的环境记录对象。</p>
+<p>且在ES6中，对于let，const所处的代码块同样存在作用域（块级作用域）。</p>
+<p>总结一下：</p>
+<p>在执行JS代码之前，会对其进行解析，在ECS中加入GEC，在GEC会关联一个词法环境（对照VO），g词法环境包含LexicalEnvironment和VariableEnvironment，这两个通常指向同一个对象，一个词法环境通常是由环境记录（ER）和外部词法环境组成（outer），在GEC中，环境记录是由GER和DER组成，GER中存放var声明的属性和函数的创建，DER中存放let，const声明的创建，但由于暂时性死区的存在，在属性被初始化前不能被调用，否则会报错，而outer其实就是作用域链，此时outer的值为null，代码继续向下执行，当遇见函数调用时，或创建一个EC加入到ECS中，在函数中的代码执行前，会对代码进行解析，在EC中关联一个词法环境，词法环境包含LexicalEnvironment和VariableEnvironment，一个</p>
 </details>
 
     </div>
@@ -474,14 +520,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">23k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:20</span>
+    <span title="站点阅读时长">1:25</span>
   </span>
 </div>
 <div class="busuanzi-count">
