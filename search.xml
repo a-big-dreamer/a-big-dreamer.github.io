@@ -1,47 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ES6知识点记录</title>
-    <url>/2025/02/28/ES6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="标签模板字符串">标签模板字符串</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>模板字符串的语法为<code>``</code>，其中用<code>$&#123;&#125;</code>符号可以传入变量，最终拼接为一个字符串，但<code>``</code>还可以用于函数的调用，此用法称为标签模板字符串（Tagged Template Literals）。</p>
-<p>通过标签模板字符串调用的函数，会将字符串放在一个数组中，位于函数参数的第一位，如果其中用到<code>$&#123;&#125;</code>符号，会将其作为分割符，分割的字符串每一部分作为数组的一项值，而<code>$&#123;&#125;</code>中的表达式结果会作为函数参数，从第二个参数依次传入。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">...args</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(args) <span class="comment">// [[ &#x27;this is &#x27;, &#x27; tagged &#x27;, &#x27; template &#x27;, &#x27; literals&#x27; ], 1, &#x27;bar&#x27;, &#x27;baz&#x27;]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line"><span class="keyword">const</span> baz = <span class="string">&#x27;baz&#x27;</span></span><br><span class="line"></span><br><span class="line">foo<span class="string">`this is <span class="subst">$&#123;<span class="number">1</span>&#125;</span> tagged <span class="subst">$&#123;bar&#125;</span> template <span class="subst">$&#123;baz&#125;</span> literals`</span></span><br></pre></td></tr></table></figure>
-<p>使用场景：React的styled-componetns库中就用到了标签模板字符串。</p>
-</details>
-<h2 id="函数的默认参数">函数的默认参数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>ES6之后函数的参数可以设置默认值，设置默认值的参数和剩余参数不会记录到Funciton.length中。</p>
-<p>推荐将设置默认值的参数放在普通参数后面，剩余参数前面。</p>
-<p>因为对于某些语言，设置默认值的参数放在普通参数前会报错。如python，C++等。</p>
-</details>
-<h2 id="函数箭头函数的补充">函数箭头函数的补充</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>由于箭头函数没有显式原型prototype，所以不能作为构造函数，使用new创建对象。</p>
-<p>箭头函数也不存在this，arguments，super参数。</p>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>函数增强</title>
     <url>/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="arguments转为Array">arguments转为Array</h2>
@@ -180,118 +139,95 @@
       </tags>
   </entry>
   <entry>
-    <title>JS对象增强</title>
-    <url>/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Object-defineProperty">Object.defineProperty</h2>
+    <title>ES6知识点记录</title>
+    <url>/2025/02/28/ES6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="标签模板字符串">标签模板字符串</h2>
 <details open>
     <summary>
         <span>查看</span>
     </summary>
-<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
-<blockquote>
-<p>Object.defineProperty(obj, props, descriptor)<br>
-obj: 要定义一个属性的对象<br>
-props: 要定义或修改的属性的名称或Symbol<br>
-descriptor: 要定义或修改的属性描述符返回值： 被传递给此函数的对象</p>
-</blockquote>
-<p>属性描述符分为数据属性（Data Properties）描述符（Descriptor）和存取属性（Accessor访问器 Properties）描述符。</p>
-<img data-src="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png" class="" title="属性描述符">
-<p>数据属性描述符的特性：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Writable]]</code>：表示是否可以修改属性的值；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的[<code>[Writable]</code>]为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Writable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[value]]</code>：属性的value值，读取属性时会返回该值，修改属性时，会对其进行修改；</p>
-<ul class="lvl-2">
-<li class="lvl-4">默认情况下这个值是undefined；</li>
-</ul>
-</li>
-</ul>
-<p>存取属性描述符的特性：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
-<ul class="lvl-2">
-<li class="lvl-4">和数据属性描述符是一致的；</li>
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
-<ul class="lvl-2">
-<li class="lvl-4">和数据属性描述符是一致的；</li>
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[get]]</code>：获取属性时会执行的函数。默认为undefined</p>
-</li>
-<li class="lvl-2">
-<p><code>[[set]]</code>：设置属性时会执行的函数。默认为undefined</p>
-</li>
-</ul>
-<p>Object.defineProperties() 方法直接在一个对象上定义 多个 新的属性或修改现有属性，并且返回该对象。</p>
+<p>模板字符串的语法为<code>``</code>，其中用<code>$&#123;&#125;</code>符号可以传入变量，最终拼接为一个字符串，但<code>``</code>还可以用于函数的调用，此用法称为标签模板字符串（Tagged Template Literals）。</p>
+<p>通过标签模板字符串调用的函数，会将字符串放在一个数组中，位于函数参数的第一位，如果其中用到<code>$&#123;&#125;</code>符号，会将其作为分割符，分割的字符串每一部分作为数组的一项值，而<code>$&#123;&#125;</code>中的表达式结果会作为函数参数，从第二个参数依次传入。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">...args</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(args) <span class="comment">// [[ &#x27;this is &#x27;, &#x27; tagged &#x27;, &#x27; template &#x27;, &#x27; literals&#x27; ], 1, &#x27;bar&#x27;, &#x27;baz&#x27;]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line"><span class="keyword">const</span> baz = <span class="string">&#x27;baz&#x27;</span></span><br><span class="line"></span><br><span class="line">foo<span class="string">`this is <span class="subst">$&#123;<span class="number">1</span>&#125;</span> tagged <span class="subst">$&#123;bar&#125;</span> template <span class="subst">$&#123;baz&#125;</span> literals`</span></span><br></pre></td></tr></table></figure>
+<p>使用场景：React的styled-componetns库中就用到了标签模板字符串。</p>
 </details>
-<h2 id="对象方法补充">对象方法补充</h2>
+<h2 id="函数的默认参数">函数的默认参数</h2>
 <details open>
     <summary>
         <span>查看</span>
     </summary>
+<p>ES6之后函数的参数可以设置默认值，设置默认值的参数和剩余参数不会记录到Funciton.length中。</p>
+<p>推荐将设置默认值的参数放在普通参数后面，剩余参数前面。</p>
+<p>因为对于某些语言，设置默认值的参数放在普通参数前会报错。如python，C++等。</p>
+</details>
+<h2 id="函数箭头函数的补充">函数箭头函数的补充</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>由于箭头函数没有显式原型prototype，所以不能作为构造函数，使用new创建对象。</p>
+<p>箭头函数也不存在this，arguments，super参数。</p>
+</details>
+<h2 id="Symbol的基本使用">Symbol的基本使用</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>我们需要先思考一下Symbol的出现解决了哪些问题？</p>
+<p>在ES6之前，对象的属性名都是字符串形式，很容易造成属性覆盖，尤其是在引入外部js文件是，我们很大可能不知道引入的对象存在的属性，一旦对其进行修改，可能会造成意想不到的bug。</p>
+<p>而Symbol的出现，解决了这个问题。Symbol可以用来生成一个独一无二的值，并且可以作为字符串的键值。</p>
+<p>Symbol的基本使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>(<span class="string">&#x27;s2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>对于对象中的Symbol键值是不能通过Object.keys()获取的，但是可以通过Object.getOwnPropertySymbols()获取（只能获取属性为Symbol的键值），且返回的是一个可迭代对象，需要通过迭代才能获取到对应的值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)) <span class="comment">// [&#x27;name&#x27;]</span></span><br><span class="line"><span class="keyword">const</span> symbolKeys = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> symbolKeys) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key, obj[key]) <span class="comment">// Symbol() 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前面通过<code>Symbol()</code>创建的都是独一无二的值，但我们可不可以创建一个重复的Symbol值？</p>
+<p>需要用到<code>Symbol.for()</code>方法，此方法可以传入一个描述参数，只有传入相同的描述参数，才会返回同一个值。且只有同样使用Symbol.for()创建的Symbol值，且描述参数相同，返回的值才相同。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>()</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>()</span><br><span class="line"><span class="keyword">const</span> s3 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> s4 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1 === s2) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1 === s3) <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s3 === s4) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>并且我们可以通过<code>Symbol.keyFor()</code>方法来获取Symbol的值对应的描述参数，且只有通过<code>Symbol.for()</code>方法创建的Symbol，才能用<code>Symbol.keyFor()</code>方法获取到对应的描述参数。</p>
+<p>如果是通过<code>Symbol()</code>创建的Symbol，则需要用创建的Symbol的description属性来获取对应的描述参数。此属性对用通过<code>Symbol.for()</code>方法创建的Symbol也可用。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> s1 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> s2 = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;222&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> s3 = <span class="title class_">Symbol</span>(<span class="string">&#x27;333&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s1), <span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s2), <span class="title class_">Symbol</span>.<span class="title function_">keyFor</span>(s3)) <span class="comment">// 111 222 undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">description</span>, s2.<span class="property">description</span>, s3.<span class="property">description</span>) <span class="comment">// 111 222 333</span></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="Set、WeakSet、Map、WeakMap">Set、WeakSet、Map、WeakMap</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>ES6新增了两种数据结构，分别是Set和Map，以及他们的另外形式WeakSet和WeakMap。</p>
+<h3 id="Set">Set</h3>
+<p>Set和数组类似，可以用于保存数据，但是其中的元素不能重复，所以Set可以用于数组去重。</p>
+<p>Set的属性和方法：</p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>获取对象的属性描述符：</p>
+<p>属性</p>
 <ul class="lvl-2">
-<li class="lvl-4">getOwnPropertyDescriptor</li>
-<li class="lvl-4">getOwnPropertyDescriptors</li>
+<li class="lvl-4">size：返回Set中元素的个数。</li>
 </ul>
 </li>
 <li class="lvl-2">
-<p>禁止对象扩展新属性：preventExtensions</p>
+<p>方法</p>
 <ul class="lvl-2">
-<li class="lvl-4">给一个对象添加新的属性会失败（在严格模式下会报错）；</li>
+<li class="lvl-4">add(value)：向Set中添加元素，返回Set本身。</li>
+<li class="lvl-4">delete(value)：从Set中删除于value值相等的元素，返回boolean类型。</li>
+<li class="lvl-4">has(value)：判断set中是否存在某个元素，返回boolean类型。</li>
+<li class="lvl-4">clear()：清空set中所有的元素，没有返回值。</li>
+<li class="lvl-4">forEach(callback, [, thisArg])：通过forEach遍历set。</li>
 </ul>
 </li>
 <li class="lvl-2">
-<p>密封对象，不允许配置和删除属性：seal</p>
-<ul class="lvl-2">
-<li class="lvl-4">实际是调用preventExtensions</li>
-<li class="lvl-4">并且将现有属性的configurable: false</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>冻结对象，不允许修改现有属性：freeze</p>
-<ul class="lvl-2">
-<li class="lvl-4">实际上是调用seal</li>
-<li class="lvl-4">并且将现有属性的writable: false</li>
-</ul>
+<p>Set支持使用for of的遍历。</p>
 </li>
 </ul>
+<h3 id="WeakSet">WeakSet</h3>
 </details>
 ]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
       <tags>
         <tag>JS</tag>
-        <tag>对象增强</tag>
+        <tag>前端</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -563,6 +499,121 @@ propertiesObject（可选）: 需要添加的属性描述符对象。返回值�
       </tags>
   </entry>
   <entry>
+    <title>JS对象增强</title>
+    <url>/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Object-defineProperty">Object.defineProperty</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+<blockquote>
+<p>Object.defineProperty(obj, props, descriptor)<br>
+obj: 要定义一个属性的对象<br>
+props: 要定义或修改的属性的名称或Symbol<br>
+descriptor: 要定义或修改的属性描述符返回值： 被传递给此函数的对象</p>
+</blockquote>
+<p>属性描述符分为数据属性（Data Properties）描述符（Descriptor）和存取属性（Accessor访问器 Properties）描述符。</p>
+<img data-src="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png" class="" title="属性描述符">
+<p>数据属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Writable]]</code>：表示是否可以修改属性的值；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的[<code>[Writable]</code>]为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Writable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[value]]</code>：属性的value值，读取属性时会返回该值，修改属性时，会对其进行修改；</p>
+<ul class="lvl-2">
+<li class="lvl-4">默认情况下这个值是undefined；</li>
+</ul>
+</li>
+</ul>
+<p>存取属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[get]]</code>：获取属性时会执行的函数。默认为undefined</p>
+</li>
+<li class="lvl-2">
+<p><code>[[set]]</code>：设置属性时会执行的函数。默认为undefined</p>
+</li>
+</ul>
+<p>Object.defineProperties() 方法直接在一个对象上定义 多个 新的属性或修改现有属性，并且返回该对象。</p>
+</details>
+<h2 id="对象方法补充">对象方法补充</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>获取对象的属性描述符：</p>
+<ul class="lvl-2">
+<li class="lvl-4">getOwnPropertyDescriptor</li>
+<li class="lvl-4">getOwnPropertyDescriptors</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>禁止对象扩展新属性：preventExtensions</p>
+<ul class="lvl-2">
+<li class="lvl-4">给一个对象添加新的属性会失败（在严格模式下会报错）；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>密封对象，不允许配置和删除属性：seal</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际是调用preventExtensions</li>
+<li class="lvl-4">并且将现有属性的configurable: false</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>冻结对象，不允许修改现有属性：freeze</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际上是调用seal</li>
+<li class="lvl-4">并且将现有属性的writable: false</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <tags>
+        <tag>JS</tag>
+        <tag>对象增强</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS执行原理</title>
     <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="ECMA5时期与执行原理相关的术语">ECMA5时期与执行原理相关的术语</h2>
@@ -632,6 +683,47 @@ ECMAScript语言值关联起来的Catch子句。</p>
       <tags>
         <tag>JS</tag>
         <tag>原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN优化</title>
+    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
+<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
+<span id="more"></span>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
+</li>
+<li class="lvl-2">
+<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
+</li>
+<li class="lvl-2">
+<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
+</li>
+<li class="lvl-2">
+<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
       </tags>
   </entry>
   <entry>
@@ -714,97 +806,6 @@ ECMAScript语言值关联起来的Catch子句。</p>
       <tags>
         <tag>JS</tag>
         <tag>闭包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RN优化</title>
-    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
-<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
-<span id="more"></span>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<!-- more -->
-<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
-</li>
-<li class="lvl-2">
-<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
-</li>
-<li class="lvl-2">
-<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
-</li>
-<li class="lvl-2">
-<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
-</li>
-<li class="lvl-2">
-<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
-</li>
-<li class="lvl-2">
-<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SASS星空</title>
-    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
-<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
-<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
-<strong>HTML结构</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>SASS代码</strong><br>
-提示：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
-</li>
-<li class="lvl-2">
-<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
-</li>
-<li class="lvl-2">
-<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
-</li>
-</ul>
-<blockquote>
-<p>npx sass index.scss index.css --no-source-map -w</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
-</li>
-<li class="lvl-2">
-<p>sass：安装 sass 自带的执行命令</p>
-</li>
-<li class="lvl-2">
-<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
-</li>
-<li class="lvl-2">
-<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
-</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>页面</category>
-      </categories>
-      <tags>
-        <tag>SASS</tag>
-        <tag>CSS</tag>
-        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1318,6 +1319,91 @@ ECMAScript语言值关联起来的Catch子句。</p>
       </tags>
   </entry>
   <entry>
+    <title>SASS星空</title>
+    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
+<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
+<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
+<strong>HTML结构</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>SASS代码</strong><br>
+提示：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
+</li>
+<li class="lvl-2">
+<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
+</li>
+<li class="lvl-2">
+<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
+</li>
+</ul>
+<blockquote>
+<p>npx sass index.scss index.css --no-source-map -w</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
+</li>
+<li class="lvl-2">
+<p>sass：安装 sass 自带的执行命令</p>
+</li>
+<li class="lvl-2">
+<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
+</li>
+<li class="lvl-2">
+<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>页面</category>
+      </categories>
+      <tags>
+        <tag>SASS</tag>
+        <tag>CSS</tag>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>let、const和var的区别</title>
+    <url>/2025/02/28/let%E3%80%81const%E5%92%8Cvar%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ol>
+<li class="lvl-3">
+<p>let、const声明的变量不能重复声明，const声明的变量不能被再次赋值，而var声明的变量可以重复声明。</p>
+</li>
+<li class="lvl-3">
+<p>let、const存在暂时性死区，而var定义的变量不存在暂时性死区。</p>
+<ul class="lvl-2">
+<li class="lvl-5">暂时性死区：即在let、const所处的当前作用域到变量声明的那一行，是不能使用变量的。</li>
+<li class="lvl-5">暂时性死区与声明的位置无关，而与代码的执行顺序有关。</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>let、const定义的变量不存在变量提升。</p>
+<ul class="lvl-2">
+<li class="lvl-5">let、const定义的变量虽然不存在变量提升，但是在解析阶段其实已经在其对应的词法环境中的环境记录中创建了该变量，只是不能使用。</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>let、const定义的变量所属的代码块存在块级作用域。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>前端</tag>
+        <tag>变量声明</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>uniapp和taro学习知识点记录</title>
     <url>/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="uniapp"><a href="https://uniapp.dcloud.net.cn/quickstart.html">uniapp</a></h2>
@@ -1542,74 +1628,6 @@ ECMAScript语言值关联起来的Catch子句。</p>
       </tags>
   </entry>
   <entry>
-    <title>let、const和var的区别</title>
-    <url>/2025/02/28/let%E3%80%81const%E5%92%8Cvar%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ol>
-<li class="lvl-3">
-<p>let、const声明的变量不能重复声明，const声明的变量不能被再次赋值，而var声明的变量可以重复声明。</p>
-</li>
-<li class="lvl-3">
-<p>let、const存在暂时性死区，而var定义的变量不存在暂时性死区。</p>
-<ul class="lvl-2">
-<li class="lvl-5">暂时性死区：即在let、const所处的当前作用域到变量声明的那一行，是不能使用变量的。</li>
-<li class="lvl-5">暂时性死区与声明的位置无关，而与代码的执行顺序有关。</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>let、const定义的变量不存在变量提升。</p>
-<ul class="lvl-2">
-<li class="lvl-5">let、const定义的变量虽然不存在变量提升，但是在解析阶段其实已经在其对应的词法环境中的环境记录中创建了该变量，只是不能使用。</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>let、const定义的变量所属的代码块存在块级作用域。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>变量声明</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建RN项目</title>
-    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
-<ul class="lvl-0">
-<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
-</ul>
-<span id="more"></span>
-<h2 id="创建新项目">创建新项目</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
-</li>
-<li class="lvl-2">
-<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
-</li>
-</ul>
-<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>vite 环境变量配置文件</title>
     <url>/2024/10/11/vite%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>前提文档链接</p>
@@ -1731,6 +1749,203 @@ ECMAScript语言值关联起来的Catch子句。</p>
       </categories>
       <tags>
         <tag>vite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建RN项目</title>
+    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
+<ul class="lvl-0">
+<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
+</ul>
+<span id="more"></span>
+<h2 id="创建新项目">创建新项目</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
+</li>
+<li class="lvl-2">
+<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
+</li>
+</ul>
+<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端知识点记录(个人理解)</title>
+    <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="字符实体">字符实体</h2>
+<p>字符实体即 html 中 <code>&amp;nbsp;</code> 这类的写法，以 <code>&amp;</code> 开始，以 <code>;</code> 结束。</p>
+<p>出现原因：</p>
+<blockquote>
+<p>由于浏览器的识别和解析等原因，对于 <code>&lt;</code> 和 空格，换行的解析是有问题或合并操作的，但我们想要把其展示出来，就需要用到字符实体来编写了</p>
+</blockquote>
+<p>常见字符实体</p>
+<img data-src="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" class="" title="常见字符实体">
+<h2 id="URL-和-URI">URL 和 URI</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>URL = Uniform Resource Locator 为统一资源定位符，通常用于网络资源</p>
+</li>
+<li class="lvl-2">
+<p>URI = Uniform Resource Identifier 为统一资源标识符，可以标识逻辑和物理设备</p>
+</li>
+<li class="lvl-2">
+<p>URL 是 URI 的子集，即 URL 一定是 URI，但 URI 不一定是URL</p>
+</li>
+<li class="lvl-2">
+<p>比如当后端服务写一个接口后，前端可以通过浏览器访问该接口并得到返回值，这是URL</p>
+</li>
+<li class="lvl-2">
+<p>但服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是URI</p>
+</li>
+</ul>
+<p>URL 的完整标准格式：</p>
+<blockquote>
+<p><code>[协议类型]://[服务器地址]:[端口号]/[文件路径][文件名]?[查询]#[片段ID]</code><br>
+scheme://userinfo@host:port/path?query#fragment</p>
+</blockquote>
+<p>如： <code>https://zrb@www.example.com:123/forum/questions/tag=networking&amp;order=newest#top</code></p>
+<h2 id="元素语义化的好处">元素语义化的好处</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>方便维护，方便阅读</p>
+</li>
+<li class="lvl-2">
+<p>减少开发人员沟通</p>
+</li>
+<li class="lvl-2">
+<p>无障碍阅读，如对于盲人来说，浏览器会根据语义化标签选择语言表达方式，对于strong标签会进行重读</p>
+</li>
+<li class="lvl-2">
+<p>有利于SEO</p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器搜索引擎有一定的规范，其利用爬虫技术对网页（文档）进行获取</li>
+<li class="lvl-4">浏览器会根据其规则判断是否收录该网站并对其进行索引排名，语义化标签符合其中的部分规范，其排名也会较为靠前</li>
+<li class="lvl-4">当用户搜索信息是，浏览器就会根据其排名展示（除去广告），我们得以免费获取流量</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符编码">字符编码</h2>
+<p>对于计算机来说只能识别 0 和 1，但我们所写的内容怎样编码交给计算机，计算机又怎样解码以展示给我们，所以我们需要一定的规范将其编码为二进制（01），并使计算机能根据此规范将二进制（01）解码展示我们所写的内容。</p>
+<p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
+<h2 id="DNS解析">DNS解析</h2>
+<p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
+<p>域名的解析这一过程也是需要时间的, 我们可以尝试预解析域名, 以提高获取资源时的访问速度</p>
+<p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Number-prototype-toString-base-和-Number-prototype-toFixed-digits">Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
+<p><code>toString(base)</code> 用于将数字转为字符串, 并且根据 base 值的不同可以将数字转为对应的进制, base 的范围为 2 到 36, 默认为 10<br>
+<code>toFixed(digits)</code> 用于将数字转为字符串, 并且保留 digits 位小数, digits 的值为 0 到 20, 默认为 0</p>
+<h2 id="with语句">with语句</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>with语句会扩展一个语句的作用域链。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name) <span class="comment">// 大梦想家</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(age) <span class="comment">// 18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源。</p>
+</details>
+<h2 id="eval函数">eval函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>内建函数 eval 允许执行一个代码字符串。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval是一个特殊的函数，它可以将传入的字符串当做JavaScript代码来运行。</p>
+</li>
+<li class="lvl-2">
+<p>eval会将最后一句执行语句的结果，作为返回值。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> res = <span class="built_in">eval</span>(<span class="string">&quot;var message = &#x27;hello world&#x27;; 1111&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// 1111</span></span><br></pre></td></tr></table></figure>
+<p>不建议在开发中使用eval：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval代码的可读性非常的差（代码的可读性是高质量代码的重要原则）；</p>
+</li>
+<li class="lvl-2">
+<p>eval是一个字符串，那么有可能在执行的过程中被刻意篡改，那么可能会造成被攻击的风险；</p>
+</li>
+<li class="lvl-2">
+<p>eval的执行必须经过JavaScript解释器，不能被JavaScript引擎优化；</p>
+</li>
+</ul>
+</details>
+<h2 id="严格模式">严格模式</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>由于JS一直保持着兼容旧代码的方向，但旧代码的问题也被继承下来了，在ECMA5标准中，JS提出了严格模式的概念，以更加严格的方式对代码进行检测和运行。</p>
+<p>严格模式对正常的JavaScript语义进行了一些限制：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>严格模式通过 抛出错误 来消除一些原有的 静默（silent）错误。（比如对对象属性设置仅可读权限，对其进行修改操作时会抛出错误）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式让JS引擎在执行代码时可以进行更多的优化（不需要对一些特殊的语法进行处理）。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式禁用了在ECMAScript未来版本中可能会定义的一些语法。</p>
+</li>
+</ul>
+<h3 id="开启严格模式">开启严格模式</h3>
+<p>严格模式通过在文件或者函数开头使用 use strict 来开启，可以实现对文件或单个函数的严格模式设置。</p>
+<h3 id="严格模式的限制">严格模式的限制</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无法意外的创建全局变量。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式会使引起静默失败(silently fail,注:不报错也没有任何效果)的赋值操作抛出异常。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不能使用 with 语句。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，试图删除不可删除的属性会抛出错误。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，函数参数不能存在相同名字。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不允许0的8进制语法。（如0221）。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，eval中的变量不能被外部使用。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，this绑定不会默认转为对象。</p>
+<ul class="lvl-2">
+<li class="lvl-4">null和undefiend默认绑定不会指向window，而是其本身。</li>
+<li class="lvl-4">除了null和undefiend的基本数据类型，不会指向其默认的包装对象，而是其字面量值。</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1940,170 +2155,6 @@ ECMAScript语言值关联起来的Catch子句。</p>
       </tags>
   </entry>
   <entry>
-    <title>前端知识点记录(个人理解)</title>
-    <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="字符实体">字符实体</h2>
-<p>字符实体即 html 中 <code>&amp;nbsp;</code> 这类的写法，以 <code>&amp;</code> 开始，以 <code>;</code> 结束。</p>
-<p>出现原因：</p>
-<blockquote>
-<p>由于浏览器的识别和解析等原因，对于 <code>&lt;</code> 和 空格，换行的解析是有问题或合并操作的，但我们想要把其展示出来，就需要用到字符实体来编写了</p>
-</blockquote>
-<p>常见字符实体</p>
-<img data-src="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" class="" title="常见字符实体">
-<h2 id="URL-和-URI">URL 和 URI</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>URL = Uniform Resource Locator 为统一资源定位符，通常用于网络资源</p>
-</li>
-<li class="lvl-2">
-<p>URI = Uniform Resource Identifier 为统一资源标识符，可以标识逻辑和物理设备</p>
-</li>
-<li class="lvl-2">
-<p>URL 是 URI 的子集，即 URL 一定是 URI，但 URI 不一定是URL</p>
-</li>
-<li class="lvl-2">
-<p>比如当后端服务写一个接口后，前端可以通过浏览器访问该接口并得到返回值，这是URL</p>
-</li>
-<li class="lvl-2">
-<p>但服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是URI</p>
-</li>
-</ul>
-<p>URL 的完整标准格式：</p>
-<blockquote>
-<p><code>[协议类型]://[服务器地址]:[端口号]/[文件路径][文件名]?[查询]#[片段ID]</code><br>
-scheme://userinfo@host:port/path?query#fragment</p>
-</blockquote>
-<p>如： <code>https://zrb@www.example.com:123/forum/questions/tag=networking&amp;order=newest#top</code></p>
-<h2 id="元素语义化的好处">元素语义化的好处</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>方便维护，方便阅读</p>
-</li>
-<li class="lvl-2">
-<p>减少开发人员沟通</p>
-</li>
-<li class="lvl-2">
-<p>无障碍阅读，如对于盲人来说，浏览器会根据语义化标签选择语言表达方式，对于strong标签会进行重读</p>
-</li>
-<li class="lvl-2">
-<p>有利于SEO</p>
-<ul class="lvl-2">
-<li class="lvl-4">浏览器搜索引擎有一定的规范，其利用爬虫技术对网页（文档）进行获取</li>
-<li class="lvl-4">浏览器会根据其规则判断是否收录该网站并对其进行索引排名，语义化标签符合其中的部分规范，其排名也会较为靠前</li>
-<li class="lvl-4">当用户搜索信息是，浏览器就会根据其排名展示（除去广告），我们得以免费获取流量</li>
-</ul>
-</li>
-</ul>
-<h2 id="字符编码">字符编码</h2>
-<p>对于计算机来说只能识别 0 和 1，但我们所写的内容怎样编码交给计算机，计算机又怎样解码以展示给我们，所以我们需要一定的规范将其编码为二进制（01），并使计算机能根据此规范将二进制（01）解码展示我们所写的内容。</p>
-<p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
-<h2 id="DNS解析">DNS解析</h2>
-<p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
-<p>域名的解析这一过程也是需要时间的, 我们可以尝试预解析域名, 以提高获取资源时的访问速度</p>
-<p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Number-prototype-toString-base-和-Number-prototype-toFixed-digits">Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
-<p><code>toString(base)</code> 用于将数字转为字符串, 并且根据 base 值的不同可以将数字转为对应的进制, base 的范围为 2 到 36, 默认为 10<br>
-<code>toFixed(digits)</code> 用于将数字转为字符串, 并且保留 digits 位小数, digits 的值为 0 到 20, 默认为 0</p>
-<h2 id="with语句">with语句</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>with语句会扩展一个语句的作用域链。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name) <span class="comment">// 大梦想家</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(age) <span class="comment">// 18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源。</p>
-</details>
-<h2 id="eval函数">eval函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>内建函数 eval 允许执行一个代码字符串。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>eval是一个特殊的函数，它可以将传入的字符串当做JavaScript代码来运行。</p>
-</li>
-<li class="lvl-2">
-<p>eval会将最后一句执行语句的结果，作为返回值。</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> res = <span class="built_in">eval</span>(<span class="string">&quot;var message = &#x27;hello world&#x27;; 1111&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// 1111</span></span><br></pre></td></tr></table></figure>
-<p>不建议在开发中使用eval：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>eval代码的可读性非常的差（代码的可读性是高质量代码的重要原则）；</p>
-</li>
-<li class="lvl-2">
-<p>eval是一个字符串，那么有可能在执行的过程中被刻意篡改，那么可能会造成被攻击的风险；</p>
-</li>
-<li class="lvl-2">
-<p>eval的执行必须经过JavaScript解释器，不能被JavaScript引擎优化；</p>
-</li>
-</ul>
-</details>
-<h2 id="严格模式">严格模式</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>由于JS一直保持着兼容旧代码的方向，但旧代码的问题也被继承下来了，在ECMA5标准中，JS提出了严格模式的概念，以更加严格的方式对代码进行检测和运行。</p>
-<p>严格模式对正常的JavaScript语义进行了一些限制：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>严格模式通过 抛出错误 来消除一些原有的 静默（silent）错误。（比如对对象属性设置仅可读权限，对其进行修改操作时会抛出错误）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式让JS引擎在执行代码时可以进行更多的优化（不需要对一些特殊的语法进行处理）。（如 <code>a = 1</code>，未用关键进行声明）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式禁用了在ECMAScript未来版本中可能会定义的一些语法。</p>
-</li>
-</ul>
-<h3 id="开启严格模式">开启严格模式</h3>
-<p>严格模式通过在文件或者函数开头使用 use strict 来开启，可以实现对文件或单个函数的严格模式设置。</p>
-<h3 id="严格模式的限制">严格模式的限制</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>无法意外的创建全局变量。（如 <code>a = 1</code>，未用关键进行声明）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式会使引起静默失败(silently fail,注:不报错也没有任何效果)的赋值操作抛出异常。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，不能使用 with 语句。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，试图删除不可删除的属性会抛出错误。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，函数参数不能存在相同名字。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，不允许0的8进制语法。（如0221）。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，eval中的变量不能被外部使用。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，this绑定不会默认转为对象。</p>
-<ul class="lvl-2">
-<li class="lvl-4">null和undefiend默认绑定不会指向window，而是其本身。</li>
-<li class="lvl-4">除了null和undefiend的基本数据类型，不会指向其默认的包装对象，而是其字面量值。</li>
-</ul>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>微信小程序-学习笔记</title>
     <url>/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="双线程模型">双线程模型</h2>
@@ -2306,122 +2357,45 @@ scheme://userinfo@host:port/path?query#fragment</p>
   <entry>
     <title>手写apply、call、bind函数</title>
     <url>/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="实现apply函数">实现apply函数</h2>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="实现apply、call函数">实现apply、call函数</h2>
 <details open>
     <summary>
         <span>查看</span>
     </summary>
-<p>w</p>
-</details>]]></content>
+<figure class="highlight js"><figcaption><span>实现apply</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><figcaption><span>实现call</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>以上代码存在相同之处，可以尝试对以上操作进行封装。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">execute</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> bar1 = &#123; <span class="attr">name1</span>: <span class="number">2</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar1, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>手写实现的弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>以上是通过隐式绑定this机制实现的，但需要向调用者传入参数，这样会对外部产生影响，且容易覆盖原有对象的属性，虽然最后会将添加的属性删除，但对于thisArg所引用的对象来说，影响可能是很大的。</p>
+</li>
+</ul>
+</details>
+<h2 id="实现bind函数">实现bind函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<figure class="highlight js"><figcaption><span>实现bind</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zBind</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line"></span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> thisArg.<span class="title function_">this</span>(...args, ...args1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.<span class="title function_">bind</span>(&#123; <span class="attr">name</span>: <span class="number">1</span> &#125;, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)(<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>和手写实现apply/call的思路基本相同，但为调用着添加了个属性，且不能对其删除，影响很大。</p>
+</li>
+</ul>
+</details>
+]]></content>
       <categories>
         <category>前端</category>
         <category>JS</category>
         <category>手写函数</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>JS</tag>
+        <tag>前端</tag>
         <tag>手写函数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>深拷贝与浅拷贝</title>
-    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
-<li class="lvl-2">
-<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
-</li>
-<li class="lvl-2">
-<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
-</li>
-<li class="lvl-2">
-<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
-</li>
-</ul>
-<span id="more"></span>
-<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
-<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
-<p>语法</p>
-<blockquote>
-<p>Object.assign(target, …sources)</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
-</li>
-<li class="lvl-2">
-<p>sources：一个或多个包含要应用的属性的源对象。</p>
-</li>
-</ul>
-<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
-<p>字符串和 Symbol 类型属性都会被复制。</p>
-<div class="tips">
-<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
-</div>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
-</li>
-<li class="lvl-2">
-<p>可以拷贝 Symbol 类型属性。</p>
-</li>
-<li class="lvl-2">
-<p>原型链上的属性和不可枚举的属性不能被复制。</p>
-</li>
-<li class="lvl-2">
-<p>基本类型会被封装为对象。</p>
-</li>
-<li class="lvl-2">
-<p>异常会中断后续的复制。</p>
-</li>
-</ul>
-<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
-<p>特点：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
-</li>
-<li class="lvl-2">
-<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
-</li>
-<li class="lvl-2">
-<p>不能替换或者模拟 Object.assign() 函数</p>
-</li>
-<li class="lvl-2">
-<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
-</li>
-</ul>
-<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
-<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对对象</p>
-</li>
-</ul>
-<h2 id="深拷贝的实现">深拷贝的实现</h2>
-<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
-<h3 id="2-函数库lodash">2. 函数库lodash</h3>
-<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>面经</category>
-        <category>深拷贝与浅拷贝</category>
-      </categories>
-      <tags>
-        <tag>面经</tag>
       </tags>
   </entry>
   <entry>
@@ -2623,6 +2597,106 @@ scheme://userinfo@host:port/path?query#fragment</p>
       <tags>
         <tag>原理</tag>
         <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深拷贝与浅拷贝</title>
+    <url>/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ul class="lvl-0">
+<li class="lvl-2">
+<p>拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。</p>
+</li>
+<li class="lvl-2">
+<p>对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。</p>
+</li>
+<li class="lvl-2">
+<p>深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本，修改其内部的对象属性，不会影响原对象。</p>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="浅拷贝的实现">浅拷贝的实现</h2>
+<h3 id="1-使用-Object-assign">1. 使用 <code>Object.assign()</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign()</a> 静态方法将一个或者多个源对象中所有<mark>可枚举的自有属性</mark>复制到目标对象，并返回修改后的目标对象。</p>
+<p>语法</p>
+<blockquote>
+<p>Object.assign(target, …sources)</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>target：需要应用源对象属性的目标对象，修改后将作为返回值。</p>
+</li>
+<li class="lvl-2">
+<p>sources：一个或多个包含要应用的属性的源对象。</p>
+</li>
+</ul>
+<p>如果目标对象与源对象具有相同的键（属性名），则目标对象中的属性将被源对象中的属性覆盖，后面的源对象的属性将类似地覆盖前面的源对象的同名属性。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;<span class="attr">name</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;,a)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copy); <span class="comment">// &#123;name: &#x27;1&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>字符串和 Symbol 类型属性都会被复制。</p>
+<div class="tips">
+<p><code>Object.assign()</code> 不会在源对象值为 null 或 undefined 时抛出错误。基本类型将被封装，只有字符串封装对象才拥有可枚举的自有属性。因此，除了字符串，其他基本类型都不会被处理。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// &#123;0: &#x27;c&#x27;, 1: &#x27;d&#x27;, 2: &#x27;e&#x27;, 3: &#x27;3&#x27;, 4: &#x27;4&#x27;, a: 1, b: 2&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">assign</span>(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;,</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    <span class="literal">undefined</span>,</span><br><span class="line">    &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;,</span><br><span class="line">    <span class="string">&quot;cde34&quot;</span>,</span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="number">11</span>,</span><br><span class="line">    <span class="title class_">Symbol</span>(<span class="string">&#x27;11&#x27;</span>),</span><br><span class="line">    <span class="number">11n</span>));</span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>合并具有相同属性的对象，属性会被后续参数中具有相同属性的其他对象覆盖。</p>
+</li>
+<li class="lvl-2">
+<p>可以拷贝 Symbol 类型属性。</p>
+</li>
+<li class="lvl-2">
+<p>原型链上的属性和不可枚举的属性不能被复制。</p>
+</li>
+<li class="lvl-2">
+<p>基本类型会被封装为对象。</p>
+</li>
+<li class="lvl-2">
+<p>异常会中断后续的复制。</p>
+</li>
+</ul>
+<h3 id="2-使用扩展运算符">2. 使用扩展运算符 <code>...</code></h3>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开语法 (Spread syntax)</a>, 可以在函数调用/数组构造时，将数组表达式或者 string 在语法层面展开；还可以在构造字面量对象时，将对象表达式按 key-value 的方式展开。(译者注: 字面量一般指 [1, 2, 3] 或者 {name: “mdn”} 这种简洁的构造方式)</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 数组拷贝</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [...arr];</span><br><span class="line">arr2.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// (4) [1, 2, 3, 4]</span></span><br><span class="line"><span class="comment">// 数组合并</span></span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">var</span> arr4 = [...arr2, ...arr3]; <span class="comment">// [0, 1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">x</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123; <span class="attr">foo</span>: <span class="string">&quot;baz&quot;</span>, <span class="attr">y</span>: <span class="number">13</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonedObj = &#123; ...obj1 &#125;;</span><br><span class="line"><span class="comment">// 克隆后的对象：&#123; foo: &quot;bar&quot;, x: 42 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mergedObj = &#123; ...obj1, ...obj2 &#125;;</span><br><span class="line"><span class="comment">// 合并后的对象：&#123; foo: &quot;baz&quot;, x: 42, y: 13 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只能用于可迭代对象，扩展运算符只能拷贝对象自身的并且可枚举的属性。</p>
+</li>
+<li class="lvl-2">
+<p>Object.assign() 函数会触发 setters，而展开语法则不会。</p>
+</li>
+<li class="lvl-2">
+<p>不能替换或者模拟 Object.assign() 函数</p>
+</li>
+<li class="lvl-2">
+<p>在函数调用时使用展开语法，请注意不能超过 JavaScript 引擎限制的最大参数个数（调用具有太多参数的函数（即超过数万个参数）的后果是未指定的，并且在不同的引擎中会有所不同。）</p>
+</li>
+</ul>
+<h3 id="3-手写实现浅拷贝">3. 手写实现浅拷贝</h3>
+<p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对对象</p>
+</li>
+</ul>
+<h2 id="深拷贝的实现">深拷贝的实现</h2>
+<h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
+<h3 id="2-函数库lodash">2. 函数库lodash</h3>
+<h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>面经</category>
+        <category>深拷贝与浅拷贝</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
       </tags>
   </entry>
 </search>
