@@ -234,7 +234,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -252,7 +252,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">浏览器基本原理</a>
+          <a href="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">微信小程序-学习笔记</a>
         </h2>
 
         <div class="post-meta-container">
@@ -263,14 +263,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-02-19 17:18:14" itemprop="dateCreated datePublished" datetime="2025-02-19T17:18:14+08:00">2025-02-19</time>
+      <time title="创建时间：2024-10-15 22:13:03" itemprop="dateCreated datePublished" datetime="2024-10-15T22:13:03+08:00">2024-10-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-24 23:21:25" itemprop="dateModified" datetime="2025-02-24T23:21:25+08:00">2025-02-24</time>
+      <time title="修改时间：2025-03-05 10:30:33" itemprop="dateModified" datetime="2025-03-05T10:30:33+08:00">2025-03-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -278,7 +278,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
+          <a href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index"><span itemprop="name">微信小程序</span></a>
         </span>
     </span>
 
@@ -289,14 +289,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -307,199 +307,348 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="浏览器输入URL到页面展示过程">浏览器输入URL到页面展示过程</h2>
-<details open>
-   <summary>
-      <span>查看</span>
-   </summary>
-<ol>
-<li class="lvl-3">
-<p>输入URL并解析</p>
-<ul class="lvl-2">
-<li class="lvl-5">检查输入内容是否为关键字(自动补全或跳转搜索引擎或进入浏览器设置页面)</li>
-<li class="lvl-5">对URL进行合法性检查和格式化</li>
-</ul>
-</li>
-<li class="lvl-3">
-<p>域名解析: 域名解析器(DNS: domain name system)将域名解析为IP地址, 浏览器通过IP地址访问服务器。</p>
-</li>
-<li class="lvl-3">
-<p>建立TCP连接(三次握手), 确保客户端与服务端双向通信能力。</p>
-</li>
-<li class="lvl-3">
-<p>发起HTTP/HTTPS请求。</p>
-</li>
-<li class="lvl-3">
-<p>服务器处理请求并返回响应。</p>
-</li>
-<li class="lvl-3">
-<p>浏览器解析与渲染。</p>
-</li>
-<li class="lvl-3">
-<p>加载动态资源与交互。</p>
-</li>
-<li class="lvl-3">
-<p>连接终止: TCP四次挥手。</p>
-</li>
-</ol>
-</details>
-<h2 id="浏览器渲染页面的的流程">浏览器渲染页面的的流程</h2>
-<details open>
-   <summary>
-      <span>查看</span>
-   </summary>
-<p>从服务器获取到资源后</p>
-<ol>
-<li class="lvl-3">
-<p>创建DOM树: 解析HTML标签, 创建DOM树。</p>
-</li>
-<li class="lvl-3">
-<p>创建CSSOM树: 解析CSS样式, 创建CSSOM树。</p>
-<ol>
-<li class="lvl-6">当解析过程中发现存在link标签引用CSS文件时, 浏览器会向服务器请求CSS文件。</li>
-<li class="lvl-6">对外部CSS资源的下载解析会交给其他进程处理, 并不会阻塞DOM树的解析。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>生成渲染树: 将DOM树和CSSOM树合并, 生成渲染树(rander tree)。</p>
-<ol>
-<li class="lvl-6">在此过程中, 渲染树的并不会存在每个节点的尺寸和位置信息。</li>
-<li class="lvl-6">对于渲染树, 可能存在等待CSSOM树解析完毕倒是渲染树生成的不及时的情况。针对这一点, 浏览器可能会对其进行一些优化操作。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
-</li>
-<li class="lvl-3">
-<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
-<ol>
-<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
-</ol>
-</li>
-<li class="lvl-3">
-<p>渲染页面: 将渲染树渲染到页面上。</p>
-</li>
-</ol>
-</details>
-<h2 id="回流-reflow-和重绘-repaint">回流(reflow)和重绘(repaint)</h2>
-<details open>
-   <summary>
-      <span>查看</span>
-   </summary>
-<h3 id="回流-reflow">回流(reflow)</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>第一次确定节点的大小和位置, 称为布局。</p>
-</li>
-<li class="lvl-2">
-<p>之后对节点的大小和位置的修改, 称为回流(重排)。</p>
-</li>
-</ul>
-<h4 id="回流-reflow-的触发方式">回流(reflow)的触发方式</h4>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>DOM结构发生改变(添加或移除的节点)。</p>
-</li>
-<li class="lvl-2">
-<p>改变布局(修改元素的宽度、高度、位置、边框、margin、padding、字体大小等)</p>
-</li>
-<li class="lvl-2">
-<p>修改了窗口尺寸(resize)</p>
-</li>
-<li class="lvl-2">
-<p>查询元素的尺寸和位置信息(offsetWidth、offsetHeight、offsetLeft、offsetTopget、getComputedStyle等)</p>
-</li>
-</ul>
-<h3 id="重绘-repaint">重绘(repaint)</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>第一次渲染称之为绘制(paint)。</p>
-</li>
-<li class="lvl-2">
-<p>之后重新渲染, 称为重绘。</p>
-</li>
-</ul>
-<h4 id="重绘-repaint-的触发方式">重绘(repaint)的触发方式</h4>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>修改了元素的背景色、边框颜色、字体颜色等。</p>
-</li>
-</ul>
-<p><mark>回流一定会导致重绘</mark></p>
-<p>回流是一件很耗性能的事情, 所以尽量避免。</p>
-<p>建议:</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>修改样式时尽量一次性修改。</p>
-<ul class="lvl-2">
-<li class="lvl-4">比如通过cssText或添加class修改。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>尽量避免频繁的操作DOM。</p>
-<ul class="lvl-2">
-<li class="lvl-4">比如通过DocumentFragment批量操作DOM或在父元素中将要操作的DOM操作完成,再一次性的操作。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>尽量避免通过getComputedStyle获取尺寸位置等信息。</p>
-</li>
-<li class="lvl-2">
-<p>对某些元素使用position的absolute或fixed。</p>
-<ul class="lvl-2">
-<li class="lvl-4">其同样会造成回流, 但开销相对较小, 不会对其他元素产生影响。</li>
-</ul>
-</li>
-</ul>
-</details>
-<h2 id="script标签的defer和async属性">script标签的defer和async属性</h2>
-<details open>
-   <summary>
-      <span>查看</span>
-   </summary>
-<h3 id="defer">defer</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>defer属性会告诉浏览器不用等待脚本下载, 而是继续解析HTML, 构建DOM Tree。</p>
-<ul class="lvl-2">
-<li class="lvl-4">脚本由浏览器来进行下载, 但不会阻塞DOM Tree的构建过程。</li>
-<li class="lvl-4">如果脚本提前下载好, 他会等待DOM Tree的构建完成, 在DOMContentLoaded事件之前执行。</li>
-<li class="lvl-4">所以DOMContentLoaded总是会等待defer中的代码先执行完成。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>对于多个defer的脚本, 浏览器会按照脚本的先后顺序执行。</p>
-</li>
-<li class="lvl-2">
-<p>由于设置defer后, 并不会阻塞DOM树的构建, 并且会交与浏览器对其下载, 所以推荐将设置defer的脚本放在head中, 减少其因下载损耗的事件, 一定程度上可以提高页面的性能。</p>
-</li>
-</ul>
-<p><mark>注意: defer仅适用于外部脚本, 对于script默认内容会被忽略。</mark></p>
-<h3 id="async">async</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>async是一个让脚本完全独立的:</p>
-<ul class="lvl-2">
-<li class="lvl-4">浏览器不会因async脚本而阻塞。</li>
-<li class="lvl-4">async脚本不能保证顺序, 它是独立下载, 独立运行, 不会等待其他脚本。</li>
-<li class="lvl-4">async不能保证在DOMContentLoaded之前或之后执行。</li>
-</ul>
-</li>
-</ul>
-<h3 id="defer和async的使用场景">defer和async的使用场景</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>defer通常用于需要文档解析后操作DOM的JS代码, 并且对多个JS文件有顺序要求.</p>
-</li>
-<li class="lvl-2">
-<p>async通常用于独立的脚本, 对其他脚本, 甚至没有DOM依赖的。</p>
-</li>
-</ul>
-</details>
-
+          <p>微信小程序-学习笔记。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/19/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/#more" rel="contents">
+              <a class="btn" href="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">手写apply、call、bind函数</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-28 23:38:32" itemprop="dateCreated datePublished" datetime="2025-02-28T23:38:32+08:00">2025-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-05 10:30:31" itemprop="dateModified" datetime="2025-03-05T10:30:31+08:00">2025-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/%E6%89%8B%E5%86%99%E5%87%BD%E6%95%B0/" itemprop="url" rel="index"><span itemprop="name">手写函数</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>380</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>手动实现apply、call、bind函数。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">前端知识点记录(个人理解)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-24 20:20:37" itemprop="dateCreated datePublished" datetime="2024-11-24T20:20:37+08:00">2024-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-05 10:30:29" itemprop="dateModified" datetime="2025-03-05T10:30:29+08:00">2025-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前端知识点记录(个人理解)。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | ABD's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" class="post-title-link" itemprop="url">前端面试题-类型判断</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-16 08:37:38" itemprop="dateCreated datePublished" datetime="2024-10-16T08:37:38+08:00">2024-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-05 10:30:27" itemprop="dateModified" datetime="2025-03-05T10:30:27+08:00">2025-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E7%BB%8F/%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" itemprop="url" rel="index"><span itemprop="name">类型判断</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前端面试题-类型判断。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1097,326 +1246,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">微信小程序-学习笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-15 22:13:03" itemprop="dateCreated datePublished" datetime="2024-10-15T22:13:03+08:00">2024-10-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-27 17:01:47" itemprop="dateModified" datetime="2025-01-27T17:01:47+08:00">2025-01-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index"><span itemprop="name">微信小程序</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>微信小程序-学习笔记</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">uniapp和taro学习知识点记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-11-13 18:41:00" itemprop="dateCreated datePublished" datetime="2024-11-13T18:41:00+08:00">2024-11-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-23 12:32:16" itemprop="dateModified" datetime="2024-11-23T12:32:16+08:00">2024-11-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/%E5%A4%9A%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">多端开发</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>uniapp和taro学习知识点记录</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="A Big Dreamer">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ABD's Blog">
-      <meta itemprop="description" content="A Big Dreamer's Blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | ABD's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-title-link" itemprop="url">React常用技术栈</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-11-08 18:03:17 / 修改时间：21:58:25" itemprop="dateCreated datePublished" datetime="2024-11-08T18:03:17+08:00">2024-11-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/React18/" itemprop="url" rel="index"><span itemprop="name">React18</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>React常用技术栈(问卷编辑器)</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/11/08/React%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E6%A0%88/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2024/10/24/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1599,7 +1428,7 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:33</span>
+    <span title="站点阅读时长">1:36</span>
   </span>
 </div>
 <div class="busuanzi-count">
