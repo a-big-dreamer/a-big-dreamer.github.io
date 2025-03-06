@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E5%9B%BE.png">
 <meta property="article:published_time" content="2025-02-24T15:19:57.000Z">
-<meta property="article:modified_time" content="2025-03-05T02:30:47.777Z">
+<meta property="article:modified_time" content="2025-03-06T08:24:00.429Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="继承">
@@ -101,7 +101,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -164,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,7 +175,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -192,6 +192,11 @@
             近期文章
 	</div>
 	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/" title="Proxy-Reflect使用" target="">
+		    Proxy-Reflect使用
+		    </a>
+		</li>
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/" title="手写apply、call、bind函数" target="">
 		    手写apply、call、bind函数
@@ -210,11 +215,6 @@
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" title="JS实现继承" target="">
 		    JS实现继承
-		    </a>
-		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/" title="JS对象增强" target="">
-		    JS对象增强
 		    </a>
 		</li>
 	</ul>
@@ -278,7 +278,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-05 10:30:47" itemprop="dateModified" datetime="2025-03-05T10:30:47+08:00">2025-03-05</time>
+      <time title="修改时间：2025-03-06 16:24:00" itemprop="dateModified" datetime="2025-03-06T16:24:00+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -536,7 +536,7 @@ propertiesObject（可选）: 需要添加的属性描述符对象。返回值�
 <p>isPrototypeOf: 用于检测某个对象是否出现在某个实例对象的原型链上。</p>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> info = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">isPrototypeOf</span>(info)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="title function_">isPortotypeO</span>(obj)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> info = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">isPrototypeOf</span>(info)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(info.<span class="title function_">isPortotypeOf</span>(obj)) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <h3 id="手动实现instanceOf">手动实现instanceOf</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">instanceof</span>(<span class="params">o, c</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> op = o.<span class="property">__proto__</span></span><br><span class="line">    <span class="keyword">while</span> (op !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (op === c.<span class="property"><span class="keyword">prototype</span></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            op = op.<span class="property">__proto__</span>    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </details>
@@ -707,14 +707,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">26k</span>
+    <span title="站点总字数">29k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:36</span>
+    <span title="站点阅读时长">1:44</span>
   </span>
 </div>
 <div class="busuanzi-count">

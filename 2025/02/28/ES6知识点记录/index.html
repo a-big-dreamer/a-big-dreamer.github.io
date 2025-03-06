@@ -29,10 +29,10 @@
 <meta property="og:description" content="由于ES2015是一个大版本，对于之后的版本记录起来太麻烦，如有必要进行版本表明，否则统一用ES6称呼ES6及其以后版本，此文章用于记录ES6中我不太清晰的知识点。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-28T15:13:08.000Z">
-<meta property="article:modified_time" content="2025-03-05T03:47:15.767Z">
+<meta property="article:modified_time" content="2025-03-06T09:28:01.273Z">
 <meta property="article:author" content="A Big Dreamer">
-<meta property="article:tag" content="前端">
 <meta property="article:tag" content="JS">
+<meta property="article:tag" content="前端">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
 
@@ -100,7 +100,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">22</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">23</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -148,7 +148,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">标签模板字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">函数的默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">函数箭头函数的补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Symbol的基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set%E3%80%81WeakSet%E3%80%81Map%E3%80%81WeakMap"><span class="nav-number">5.</span> <span class="nav-text">Set、WeakSet、Map、WeakMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">5.1.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakSet"><span class="nav-number">5.2.</span> <span class="nav-text">WeakSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">5.3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakMap"><span class="nav-number">5.4.</span> <span class="nav-text">WeakMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakSet%E4%B8%8EWeakMap%E7%9A%84%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-number">5.5.</span> <span class="nav-text">WeakSet与WeakMap的弱引用</span></a></li></ol></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">标签模板字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">函数的默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%9A%84%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">函数箭头函数的补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Symbol的基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set%E3%80%81WeakSet%E3%80%81Map%E3%80%81WeakMap"><span class="nav-number">5.</span> <span class="nav-text">Set、WeakSet、Map、WeakMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">5.1.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakSet"><span class="nav-number">5.2.</span> <span class="nav-text">WeakSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">5.3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakMap"><span class="nav-number">5.4.</span> <span class="nav-text">WeakMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakSet%E4%B8%8EWeakMap%E7%9A%84%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-number">5.5.</span> <span class="nav-text">WeakSet与WeakMap的弱引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FinalizationRegistry"><span class="nav-number">6.</span> <span class="nav-text">FinalizationRegistry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakRefs"><span class="nav-number">7.</span> <span class="nav-text">WeakRefs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method-at"><span class="nav-number">8.</span> <span class="nav-text">method.at()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-hasOwn-obj-propKey"><span class="nav-number">9.</span> <span class="nav-text">Object.hasOwn(obj, propKey)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -163,7 +163,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -174,7 +174,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,11 @@
             近期文章
 	</div>
 	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/" title="Proxy-Reflect使用" target="">
+		    Proxy-Reflect使用
+		    </a>
+		</li>
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/" title="手写apply、call、bind函数" target="">
 		    手写apply、call、bind函数
@@ -209,11 +214,6 @@
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/" title="JS实现继承" target="">
 		    JS实现继承
-		    </a>
-		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/" title="JS对象增强" target="">
-		    JS对象增强
 		    </a>
 		</li>
 	</ul>
@@ -277,7 +277,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-05 11:47:15" itemprop="dateModified" datetime="2025-03-05T11:47:15+08:00">2025-03-05</time>
+      <time title="修改时间：2025-03-06 17:28:01" itemprop="dateModified" datetime="2025-03-06T17:28:01+08:00">2025-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,14 +307,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
+      <span>2.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -458,9 +458,87 @@
 </li>
 </ul>
 <h3 id="WeakSet与WeakMap的弱引用">WeakSet与WeakMap的弱引用</h3>
-<p>关于WeakSet和WeakMap的弱引用，他们都是ES6推出的数据结构，其只能存储对象类型或键值只能为对象类型，但对对象的引用都是弱引用，即当其存储的对象不存在被强引用，就会被标记为可回收对象，随后被GC回收。</p>
-<p>至于这个不存在强引用可以分为两种情况：对其进行强引用的变量赋值为null和离开作用域，假设不存在闭包情况，即在代码块里创建对象并将对象加入到这两种数据结构中，当代码块中的代码执行完毕，EC弹出ECS，此时便不存在对代码块中对象的强引用，该对象就被标记为可清除状态，假设存在闭包，且被变量接受，此时也属于强引用，只能通过将变量赋值为null将对闭包中的强引用解除，其余就是普通情况了。</p>
-<p>应用场景：</p>
+<p>对于WeakSet和WeakMap，是ES6之后推出的数据结构，用于实现对对象的存储，但对对象的引用是弱引用。</p>
+<p>弱引用是即使存在对对象的引用，但当被引用对象不存在强引用时，会被标记为可回收状态，随后被GC（垃圾回收器）回收。</p>
+<p>至于对对象不存在强引用的状态，可以分为两种：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当对象离开作用域时</p>
+</li>
+<li class="lvl-2">
+<p>但对对象的引用赋值为null时</p>
+</li>
+</ul>
+<p>假设不存在闭包，当代码块中创建了对象，并用WeakSet或WeakMap存储，当代码块执行完毕，EC弹出ECS，且代码块中的对象没有被其他变量引用，此时便标记为为回收状态，存在闭包时，如果对函数返回的闭包状态进行了变量接受，此时对其时强引用，只能手动赋值为null，此时才可被回收。</p>
+<p>WeakSet和WeakMap的引用场景：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>跟踪对象状态</p>
+</li>
+<li class="lvl-2">
+<p>添加临时对象</p>
+</li>
+<li class="lvl-2">
+<p>减少内存泄漏</p>
+</li>
+</ul>
+<p>跟踪对象状态这一块，能做的操作很多，通过对其的get、set、has方法的组合使用，可以保证对象可用，类似的操作也可以用于避免DOM的事件重复绑定和缓存操作等。</p>
+</details>
+<h2 id="FinalizationRegistry">FinalizationRegistry</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>FinalizationRegistry对象可以让你在对象被来及回收时请求一个回调。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>FinalizationRegistry 提供了这样的一种方法：当一个在注册表中注册的对象被回收时，请求在某个时间点上调用一个清理回调。（清理回调有时被称为 finalizer ）。</p>
+</li>
+<li class="lvl-2">
+<p>你可以通过调用register方法，注册任何你想要清理回调的对象，传入该对象和所含的值。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> weakSet = <span class="keyword">new</span> <span class="title class_">WeakSet</span>([obj])</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> registry = <span class="keyword">new</span> <span class="title class_">FinalizationRegistry</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;value&#125;</span> is dead`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">registry.<span class="title function_">register</span>(obj, <span class="string">&#x27;obj&#x27;</span>)</span><br><span class="line"></span><br><span class="line">obj = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="WeakRefs">WeakRefs</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>如果我们默认将一个对象赋值给另一个引用，那么这个对象是一个强引用。如果我们希望是一个弱引用的话，可以使用WeakRef。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> info = <span class="keyword">new</span> <span class="title class_">WeakRef</span>(obj)</span><br><span class="line"><span class="keyword">const</span> registry = <span class="keyword">new</span> <span class="title class_">FinalizationRegistry</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;value&#125;</span> is dead`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">registry.<span class="title function_">register</span>(obj, <span class="string">&#x27;obj&#x27;</span>)</span><br><span class="line"></span><br><span class="line">obj = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="method-at"><a target="_blank" rel="noopener" href="http://method.at">method.at</a>()</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>ES13引入了at方法，用于获取数组和字符串中指定位置的元素或字符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>]</span><br><span class="line"><span class="keyword">const</span> str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">at</span>(<span class="number">0</span>), str.<span class="title function_">at</span>(<span class="number">0</span>)) <span class="comment">// 1 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">at</span>(-<span class="number">1</span>), str.<span class="title function_">at</span>(-<span class="number">1</span>)) <span class="comment">// 3 3</span></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="Object-hasOwn-obj-propKey">Object.hasOwn(obj, propKey)</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>ES13在Object中新增了hasOwn静态方法，用于判断一个对象中是否存在某个属性，不包括原型链。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">age</span> = <span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>, obj.<span class="property">age</span>) <span class="comment">// obj 18</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">hasOwn</span>(obj, <span class="string">&#x27;name&#x27;</span>), <span class="title class_">Object</span>.<span class="title function_">hasOwn</span>(obj, <span class="string">&#x27;age&#x27;</span>)) <span class="comment">// true false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name&#x27;</span>), obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;age&#x27;</span>)) <span class="comment">// true false</span></span><br></pre></td></tr></table></figure>
+<p>Object.hasOwn和Object.prototype.hasOwnProperty的区别：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个是在静态方法上，一个是在原型对象上。</p>
+</li>
+<li class="lvl-2">
+<p>hasOwnProperty在原型对象上，很容易被对象内部重写，因为可能有人不知道有这个方法，从而自定义了一个，对后续造成了影响。</p>
+</li>
+<li class="lvl-2">
+<p>对于隐式原型指向null的对象，hasOwnProperty无法进行判断。</p>
+<ul class="lvl-2">
+<li class="lvl-4">因为hasOwnProperty是通过原型链找到Object的原型对象调用的，一旦将对象的移除指向Objetc的原型对象时，那么hasOwnProperty就无法调用了。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span> &#125;</span><br><span class="line">obj.<span class="property">__proto__</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">hasOwn</span>(obj, <span class="string">&#x27;name&#x27;</span>)) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;name&#x27;</span>)) <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
 </details>
 
     </div>
@@ -505,8 +583,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
               <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
               <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           </div>
 
@@ -589,14 +667,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">26k</span>
+    <span title="站点总字数">29k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:36</span>
+    <span title="站点阅读时长">1:44</span>
   </span>
 </div>
 <div class="busuanzi-count">
