@@ -368,121 +368,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JS对象增强</title>
-    <url>/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Object-defineProperty">Object.defineProperty</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
-<blockquote>
-<p>Object.defineProperty(obj, props, descriptor)<br>
-obj: 要定义一个属性的对象<br>
-props: 要定义或修改的属性的名称或Symbol<br>
-descriptor: 要定义或修改的属性描述符返回值： 被传递给此函数的对象</p>
-</blockquote>
-<p>属性描述符分为数据属性（Data Properties）描述符（Descriptor）和存取属性（Accessor访问器 Properties）描述符。</p>
-<img data-src="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png" class="" title="属性描述符">
-<p>数据属性描述符的特性：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Writable]]</code>：表示是否可以修改属性的值；</p>
-<ul class="lvl-2">
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的[<code>[Writable]</code>]为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Writable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[value]]</code>：属性的value值，读取属性时会返回该值，修改属性时，会对其进行修改；</p>
-<ul class="lvl-2">
-<li class="lvl-4">默认情况下这个值是undefined；</li>
-</ul>
-</li>
-</ul>
-<p>存取属性描述符的特性：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
-<ul class="lvl-2">
-<li class="lvl-4">和数据属性描述符是一致的；</li>
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
-<ul class="lvl-2">
-<li class="lvl-4">和数据属性描述符是一致的；</li>
-<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
-<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p><code>[[get]]</code>：获取属性时会执行的函数。默认为undefined</p>
-</li>
-<li class="lvl-2">
-<p><code>[[set]]</code>：设置属性时会执行的函数。默认为undefined</p>
-</li>
-</ul>
-<p>Object.defineProperties() 方法直接在一个对象上定义 多个 新的属性或修改现有属性，并且返回该对象。</p>
-</details>
-<h2 id="对象方法补充">对象方法补充</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>获取对象的属性描述符：</p>
-<ul class="lvl-2">
-<li class="lvl-4">getOwnPropertyDescriptor</li>
-<li class="lvl-4">getOwnPropertyDescriptors</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>禁止对象扩展新属性：preventExtensions</p>
-<ul class="lvl-2">
-<li class="lvl-4">给一个对象添加新的属性会失败（在严格模式下会报错）；</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>密封对象，不允许配置和删除属性：seal</p>
-<ul class="lvl-2">
-<li class="lvl-4">实际是调用preventExtensions</li>
-<li class="lvl-4">并且将现有属性的configurable: false</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>冻结对象，不允许修改现有属性：freeze</p>
-<ul class="lvl-2">
-<li class="lvl-4">实际上是调用seal</li>
-<li class="lvl-4">并且将现有属性的writable: false</li>
-</ul>
-</li>
-</ul>
-</details>
-]]></content>
-      <tags>
-        <tag>JS</tag>
-        <tag>对象增强</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS实现继承</title>
     <url>/2025/02/24/JS%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="对象的原型">对象的原型</h2>
@@ -751,119 +636,6 @@ propertiesObject（可选）: 需要添加的属性描述符对象。返回值�
       </tags>
   </entry>
   <entry>
-    <title>JS执行原理</title>
-    <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="ECMA5时期与执行原理相关的术语">ECMA5时期与执行原理相关的术语</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>，简称ECS)，它是用于执行代码的调用栈。</p>
-<p>其首先执行的为全局代码块，即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png" class="" title="ECS">
-<p>在全局代码块执行前，或者说在parse转为AST过程中，会创建一个GO(Global Object)全局对象，将全局定义的变量、函数等加入到GO中，但此时仅仅为创建，而不是赋值，即此时除了函数和内置对象(String、Data、parseInt等)，GO中的变量值为undefined。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png" class="" title="GO">
-<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象，其对应的this和作用域链(<code>scope chain</code>)。</p>
-<p>每当执行一个函数时，会创建一个函数执行上下文(<code>Function Execution Context</code>，简称FEC)加入到ECS中，并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象，该AO会使用arguments作为初始化，初始值为该函数传入的参数形成的伪数组对象，此时VO指向该AO，存储该执行上下文变量的初始化。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png" class="" title="AO">
-<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png" class="" title="全局VO">
-<p>当一个EC执行完后，会从ECS中弹出，与其VO关联的AO也会通过垃圾回收器清除。</p>
-<p>每一个EC都会对应一个专属的AO，即使是同一个函数。</p>
-<p>当代码被解析时，函数会被创建，但不会被执行，此时函数对象中会存在<code>[[Scopes]]</code>属性，其值为一个列表对象，即为函数该的作用域链(scope chain)，即函数的作用域链在定义的时刻就被创建，与其调用位置无关，与定义位置有关，当函数被调用，其成为FEC加入ECS中时，会创建<code>scope chain</code>，并将函数对象中<code>[[Scopes]]</code>属性的值赋值给FES中的<code>scope chain</code>，当执行过程中遇到属性调用，会先在此FEC关联的VO中查找，查找不到，便会通过<code>scope chain</code>向上查找。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/scope_chain.png" class="" title="scope_chain">
-</details>
-<h2 id="ECMA5之后与执行原理相关的术语">ECMA5之后与执行原理相关的术语</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>与ECMA5之前的思路基本相同，只是对于一些词汇的描述发生了改变。</p>
-<p>在新的ECMA代码执行描述中，引入了词法环境（Lexical Environments）的概念。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>一个词法环境是由环境记录（Environment Record，此后称ER）和一个外部词法环境（Outer Lexical Environment，此后称outer）组成。</p>
-</li>
-<li class="lvl-2">
-<p>一个词法环境经常用于关联函数声明、代码块语句、try-catch语句，当他们代码被执行时，词法环境被创建出来。</p>
-</li>
-</ul>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="词法环境">
-<p>也就是说，当一个执行上下文（EC）加入到ECS中时，会关联对应的词法环境，通常会关联<code>LexicalEnvironment</code>和<code>VariableEnvironment</code>这两个词法环境。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/EC%E5%85%B3%E8%81%94%E7%9A%84%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="EC关联的词法环境">
-<p>通常LexicalEnvironment和VariableEnvironment指向同一个对象，但此要看浏览器怎么实现了。</p>
-<p>LexicalEnvironment通常用于处理ES6新提出的let，const声明的标识符。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/LexicalEnvironment.png" class="" title="LexicalEnvironment">
-<p>而VariableEnvirable用于处理var和function声明的标识符，与作用域提升有关。</p>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/VariableEnvironment.png" class="" title="VariableEnvironment">
-<p>对于ER来说，有两种主要的环境记录值：声明式环境记录和对象环境记录。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>声明式环境记录：声明性环境记录用于定义ECMAScript语言语法元素的效果，如函数声明、变量声明和直接将标识符绑定与<br>
-ECMAScript语言值关联起来的Catch子句。</p>
-</li>
-<li class="lvl-2">
-<p>对象式环境记录：对象环境记录用于定义ECMAScript元素的效果，例如WithStatement，它将标识符绑定与某些对象的属性关联起来。</p>
-</li>
-</ul>
-<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ER.png" class="" title="ER">
-<p>而在新的代码执行描述符中，对于GEC来说，其词法环境中的环境记录指向的并不仅仅式window，而是GER（Global Environment Record）和DER（Decalared Environment Record）的组合，GER指向的便是window，而DER指向的便是存储let，const等的环境记录对象。</p>
-<p>且在ES6中，对于let，const所处的代码块同样存在作用域（块级作用域）。</p>
-<p>总结一下：</p>
-<p>ECMAScript5之后由于引入了块级作用域导致js执行出现了一定的变更，其相关术语也进行了改变，以适应新增变化，以下我对其js执行过程进行阐述，js引擎内部存在ECS（Execute Context Stack执行上下文栈）用于处理js代码的执行过程，在执行之前，会对代码进行全局解析，为执行代码提供环境，ECS中首先入栈的为GEC（Global Execute Context全局执行上下文），这是js代码执行的开始，在代码解析阶段，GEC中会关联词法环境，词法环境包含LexicalEnvironmnet和VariableEnvironment，最初LexicalEnvironmnet和VariableEnvironment指向同一个环境，一个词法环境由环境记录（Environment Record）和外部词法环境（Outer LexicalEnvironment）组成，环境记录主要分为声明式环境记录（处理let，const，函数声明等）和对象式环境记录（用于全局对象和with函数的情形），外部词法环境理解为作用域即可，在解析全局代码时，如既有var、let、const声明和函数定义，会将var和函数放入到VariableEnvironment的环境中，将let、const声明的属性放入到LexicalEnvironment中，注意，LexicalEnvironmnet和VariableEnvironment指向同一个环境此时仍指向同一个环境，既它们都添加到同一个环境记录上，但是会进行逻辑隔离，在GEC中，var声明的变量和函数会挂载到window上，所以在GEC的词法环境的环境记录中包括声明式环境记录和对象式环境记录，对象式环境记录为全局对象，而声明式环境记录存放let、const生命的变量，此时两者不仅在在逻辑上是隔离的，在物理上也是隔离的，此时由于处于GEC中，所以outer的值便为null，继续执行代码，当遇到函数调用时，会创建一个EC加入到ECS中，此EC的词法环境同样包含LexicalEnvironmnet和VariableEnvironment，他们初始指向的环境仍然相同，解析函数内代码时，发现既存在var、let、const声明和函数定义，仍然会将var和函数放入到VariableEnvironment的环境中，将let、const声明的属性放入到LexicalEnvironment中，但此时LexicalEnvironmnet和VariableEnvironment仍指向同一个环境，且此时是FEC中，此时他们词法环境的环境记录便可能指向同一个对象（不同的浏览器可能也会进行物理隔离），但进行逻辑隔离，此时outer指向为GEC的词法环境，如果执行过程中发现代码块（并不会创建一个新的执行上下文，执行上下文核心包括LexicalEnvironmnet、VariableEnvironment和this绑定，块级作用域中既无VariableEnvironment也无this），代码块中仍存在var、let、const声明，由于var并不存在块级作用域，所以var声明的变量会放到VariableEnvironment中，但对于let、const，会将FEC的LexicalEnvironmnet指向一个新的环境，然后将其变量放到新的环境的环境记录中，此时LexicalEnvironmnet和VariableEnvironment指向不同的环境，而此时新的词法环境中的outer便指向之前的LexicalEnvironmnet，以便形成作用域链，当代码块中的代码执行完，便将FEC的LexicalEnvironmnet重新指向原来的环境，以此类推，直至代码执行完毕。</p>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RN优化</title>
-    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
-<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
-<span id="more"></span>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<!-- more -->
-<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
-</li>
-<li class="lvl-2">
-<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
-</li>
-<li class="lvl-2">
-<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
-</li>
-<li class="lvl-2">
-<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
-</li>
-<li class="lvl-2">
-<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
-</li>
-<li class="lvl-2">
-<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Iterator-Generator</title>
     <url>/2025/03/07/Iterator-Generator/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Iterator（迭代器）">Iterator（迭代器）</h2>
@@ -1010,6 +782,234 @@ ECMAScript语言值关联起来的Catch子句。</p>
       </tags>
   </entry>
   <entry>
+    <title>JS对象增强</title>
+    <url>/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Object-defineProperty">Object.defineProperty</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+<blockquote>
+<p>Object.defineProperty(obj, props, descriptor)<br>
+obj: 要定义一个属性的对象<br>
+props: 要定义或修改的属性的名称或Symbol<br>
+descriptor: 要定义或修改的属性描述符返回值： 被传递给此函数的对象</p>
+</blockquote>
+<p>属性描述符分为数据属性（Data Properties）描述符（Descriptor）和存取属性（Accessor访问器 Properties）描述符。</p>
+<img data-src="/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6.png" class="" title="属性描述符">
+<p>数据属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Writable]]</code>：表示是否可以修改属性的值；</p>
+<ul class="lvl-2">
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的[<code>[Writable]</code>]为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Writable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[value]]</code>：属性的value值，读取属性时会返回该值，修改属性时，会对其进行修改；</p>
+<ul class="lvl-2">
+<li class="lvl-4">默认情况下这个值是undefined；</li>
+</ul>
+</li>
+</ul>
+<p>存取属性描述符的特性：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>[[Configurable]]</code>：表示属性是否可以通过delete删除属性，是否可以修改它的特性，或者是否可以将它修改为存取属性描述符；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Configurable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Configurable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[Enumerable]]</code>：表示属性是否可以通过for-in或者Object.keys()返回该属性；</p>
+<ul class="lvl-2">
+<li class="lvl-4">和数据属性描述符是一致的；</li>
+<li class="lvl-4">当我们直接在一个对象上定义某个属性时，这个属性的<code>[[Enumerable]]</code>为true；</li>
+<li class="lvl-4">当我们通过属性描述符定义一个属性时，这个属性的<code>[[Enumerable]]</code>默认为false；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>[[get]]</code>：获取属性时会执行的函数。默认为undefined</p>
+</li>
+<li class="lvl-2">
+<p><code>[[set]]</code>：设置属性时会执行的函数。默认为undefined</p>
+</li>
+</ul>
+<p>Object.defineProperties() 方法直接在一个对象上定义 多个 新的属性或修改现有属性，并且返回该对象。</p>
+</details>
+<h2 id="对象方法补充">对象方法补充</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>获取对象的属性描述符：</p>
+<ul class="lvl-2">
+<li class="lvl-4">getOwnPropertyDescriptor</li>
+<li class="lvl-4">getOwnPropertyDescriptors</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>禁止对象扩展新属性：preventExtensions</p>
+<ul class="lvl-2">
+<li class="lvl-4">给一个对象添加新的属性会失败（在严格模式下会报错）；</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>密封对象，不允许配置和删除属性：seal</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际是调用preventExtensions</li>
+<li class="lvl-4">并且将现有属性的configurable: false</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>冻结对象，不允许修改现有属性：freeze</p>
+<ul class="lvl-2">
+<li class="lvl-4">实际上是调用seal</li>
+<li class="lvl-4">并且将现有属性的writable: false</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <tags>
+        <tag>JS</tag>
+        <tag>对象增强</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN优化</title>
+    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
+<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
+<span id="more"></span>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
+</li>
+<li class="lvl-2">
+<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
+</li>
+<li class="lvl-2">
+<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
+</li>
+<li class="lvl-2">
+<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS执行原理</title>
+    <url>/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="ECMA5时期与执行原理相关的术语">ECMA5时期与执行原理相关的术语</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS引擎内部有一个执行上下文栈(<code>Execution Context Stack</code>，简称ECS)，它是用于执行代码的调用栈。</p>
+<p>其首先执行的为全局代码块，即<code>Global Execution Context(GEC)</code>全局执行上下文。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ECS.png" class="" title="ECS">
+<p>在全局代码块执行前，或者说在parse转为AST过程中，会创建一个GO(Global Object)全局对象，将全局定义的变量、函数等加入到GO中，但此时仅仅为创建，而不是赋值，即此时除了函数和内置对象(String、Data、parseInt等)，GO中的变量值为undefined。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/GO.png" class="" title="GO">
+<p>每一个执行上下文都会关联一个VO(<code>Variable Object</code>)变量对象，其对应的this和作用域链(<code>scope chain</code>)。</p>
+<p>每当执行一个函数时，会创建一个函数执行上下文(<code>Function Execution Context</code>，简称FEC)加入到ECS中，并在堆内存中创建一个AO(<code>Activation Object</code>)活动对象，该AO会使用arguments作为初始化，初始值为该函数传入的参数形成的伪数组对象，此时VO指向该AO，存储该执行上下文变量的初始化。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/AO.png" class="" title="AO">
+<p>在全局执行上下文下(即全局代码被执行时)VO就是GO(<code>Global Object</code>)全局对象</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E5%85%A8%E5%B1%80VO.png" class="" title="全局VO">
+<p>当一个EC执行完后，会从ECS中弹出，与其VO关联的AO也会通过垃圾回收器清除。</p>
+<p>每一个EC都会对应一个专属的AO，即使是同一个函数。</p>
+<p>当代码被解析时，函数会被创建，但不会被执行，此时函数对象中会存在<code>[[Scopes]]</code>属性，其值为一个列表对象，即为函数该的作用域链(scope chain)，即函数的作用域链在定义的时刻就被创建，与其调用位置无关，与定义位置有关，当函数被调用，其成为FEC加入ECS中时，会创建<code>scope chain</code>，并将函数对象中<code>[[Scopes]]</code>属性的值赋值给FES中的<code>scope chain</code>，当执行过程中遇到属性调用，会先在此FEC关联的VO中查找，查找不到，便会通过<code>scope chain</code>向上查找。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/scope_chain.png" class="" title="scope_chain">
+</details>
+<h2 id="ECMA5之后与执行原理相关的术语">ECMA5之后与执行原理相关的术语</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>与ECMA5之前的思路基本相同，只是对于一些词汇的描述发生了改变。</p>
+<p>在新的ECMA代码执行描述中，引入了词法环境（Lexical Environments）的概念。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个词法环境是由环境记录（Environment Record，此后称ER）和一个外部词法环境（Outer Lexical Environment，此后称outer）组成。</p>
+</li>
+<li class="lvl-2">
+<p>一个词法环境经常用于关联函数声明、代码块语句、try-catch语句，当他们代码被执行时，词法环境被创建出来。</p>
+</li>
+</ul>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="词法环境">
+<p>也就是说，当一个执行上下文（EC）加入到ECS中时，会关联对应的词法环境，通常会关联<code>LexicalEnvironment</code>和<code>VariableEnvironment</code>这两个词法环境。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/EC%E5%85%B3%E8%81%94%E7%9A%84%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83.png" class="" title="EC关联的词法环境">
+<p>通常LexicalEnvironment和VariableEnvironment指向同一个对象，但此要看浏览器怎么实现了。</p>
+<p>LexicalEnvironment通常用于处理ES6新提出的let，const声明的标识符。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/LexicalEnvironment.png" class="" title="LexicalEnvironment">
+<p>而VariableEnvirable用于处理var和function声明的标识符，与作用域提升有关。</p>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/VariableEnvironment.png" class="" title="VariableEnvironment">
+<p>对于ER来说，有两种主要的环境记录值：声明式环境记录和对象环境记录。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>声明式环境记录：声明性环境记录用于定义ECMAScript语言语法元素的效果，如函数声明、变量声明和直接将标识符绑定与<br>
+ECMAScript语言值关联起来的Catch子句。</p>
+</li>
+<li class="lvl-2">
+<p>对象式环境记录：对象环境记录用于定义ECMAScript元素的效果，例如WithStatement，它将标识符绑定与某些对象的属性关联起来。</p>
+</li>
+</ul>
+<img data-src="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/ER.png" class="" title="ER">
+<p>而在新的代码执行描述符中，对于GEC来说，其词法环境中的环境记录指向的并不仅仅式window，而是GER（Global Environment Record）和DER（Decalared Environment Record）的组合，GER指向的便是window，而DER指向的便是存储let，const等的环境记录对象。</p>
+<p>且在ES6中，对于let，const所处的代码块同样存在作用域（块级作用域）。</p>
+<p>总结一下：</p>
+<p>ECMAScript5之后由于引入了块级作用域导致js执行出现了一定的变更，其相关术语也进行了改变，以适应新增变化，以下我对其js执行过程进行阐述，js引擎内部存在ECS（Execute Context Stack执行上下文栈）用于处理js代码的执行，在执行之前，会对代码进行全局解析，为执行代码提供环境，ECS中首先入栈的为GEC（Global Execute Context全局执行上下文），这是js代码执行的开始，在代码解析阶段，GEC中会关联词法环境，词法环境包含LexicalEnvironmnet和VariableEnvironment，最初LexicalEnvironmnet和VariableEnvironment指向同一个环境，一个词法环境由环境记录（Environment Record）和外部词法环境（Outer LexicalEnvironment）组成，环境记录主要分为声明式环境记录（处理let，const，函数声明等）和对象式环境记录（用于全局对象和with函数的情形），外部词法环境理解为作用域即可，在解析全局代码时，如既有var、let、const声明和函数定义，会将var和函数放入到VariableEnvironment的环境中，将let、const声明的属性放入到LexicalEnvironment中，注意，LexicalEnvironmnet和VariableEnvironment指向同一个环境此时仍指向同一个环境，既它们都添加到同一个环境记录上，但是会进行逻辑隔离，在GEC中，var声明的变量和函数会挂载到window上，所以在GEC的词法环境的环境记录中包括声明式环境记录和对象式环境记录，对象式环境记录为全局对象，而声明式环境记录存放let、const声明的变量，此时两者不仅在在逻辑上是隔离的，在物理上也是隔离的，此时由于处于GEC中，所以outer的值便为null，继续执行代码，当遇到函数调用时，会创建一个EC加入到ECS中，此EC的词法环境同样包含LexicalEnvironmnet和VariableEnvironment，他们初始指向的环境仍然相同，解析函数内代码时，发现既存在var、let、const声明和函数定义，仍然会将var和函数放入到VariableEnvironment的环境中，将let、const声明的属性放入到LexicalEnvironment中，但此时LexicalEnvironmnet和VariableEnvironment仍指向同一个环境，且此时是FEC中，此时他们词法环境的环境记录便指向同一个对象（不同的浏览器可能也会进行物理隔离），但进行逻辑隔离，此时outer指向为GEC的词法环境，如果执行过程中发现代码块（并不会创建一个新的执行上下文，执行上下文核心包括LexicalEnvironmnet、VariableEnvironment和this绑定，块级作用域中既无VariableEnvironment也无this），代码块中仍存在var、let、const声明，由于var并不存在块级作用域，所以var声明的变量会放到VariableEnvironment中，但对于let、const，会将FEC的LexicalEnvironmnet指向一个新的环境，然后将其变量放到新的环境的环境记录中，此时LexicalEnvironmnet和VariableEnvironment指向不同的环境，而此时新的词法环境中的outer便指向之前的LexicalEnvironmnet，以便形成作用域链，当代码块中的代码执行完，便将FEC的LexicalEnvironmnet重新指向原来的环境，以此类推，直至代码执行完毕。</p>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>原理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS闭包</title>
     <url>/2025/02/22/JS%E9%97%AD%E5%8C%85/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="闭包的定义">闭包的定义</h2>
@@ -1089,194 +1089,6 @@ ECMAScript语言值关联起来的Catch子句。</p>
       <tags>
         <tag>JS</tag>
         <tag>闭包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Proxy-Reflect使用</title>
-    <url>/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Proxy">Proxy</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>需要：如果存在一个对象，我们需要去监听这个对象中的属性被设置或获取的过程，应该如何操作？</p>
-<p>在ES6之前，我们可以通过<code>Object.defineProperty()</code>的存取属性描述符来对属性的操作进行监听。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> value = obj[key]</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123; </span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值为<span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值发生了改变：<span class="subst">$&#123;value&#125;</span> =&gt; <span class="subst">$&#123;newValue&#125;</span>`</span>)</span><br><span class="line">            value = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对属性进行赋值操作时，执行其对应set访问器</span></span><br><span class="line">obj.<span class="property">name</span> = <span class="string">&#x27;obj1&#x27;</span>  <span class="comment">// name的值发生了改变：obj =&gt; obj1</span></span><br><span class="line"><span class="comment">// 对属性进行调用，执行其对应get访问器</span></span><br><span class="line">obj.<span class="property">name</span>  <span class="comment">// name的值为obj1</span></span><br></pre></td></tr></table></figure>
-<p>但这样是存在缺点的：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>Object.defineProperty设计的初衷并不是去为了监听对象的所有属性的，我们在定义某些属性的时候，初衷只是为了定义普通的属性，只是因为其存在访问器这种特点，就强行用属性描述符去操作了。</p>
-</li>
-<li class="lvl-2">
-<p>Object.defineProperty只能监听属性的存取，但如果我们想监听更加丰富的操作，比如新增、删除属性等，那么Object.defineProperty是无能为力的。</p>
-</li>
-</ul>
-<p>ES6中，新增了Proxy类，用于帮助我们创建一个代理对象，从而对对象操作进行监听。</p>
-<p>Proxy语法</p>
-<blockquote>
-<p>const p = new Proxy(target, handler)<br>
-target：要创建代理的对象<br>
-handler: 是定义了代理的自定义行为的对象</p>
-</blockquote>
-<p>如果我们想要侦听某些具体的操作，那么可以在handler中添加对应的捕获器。</p>
-<p>对于上面的案例，通过Proxy实现为：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// target为目标对象，key为修改的属性名</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值为<span class="subst">$&#123;target[key]&#125;</span>`</span>)</span><br><span class="line">        <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// target为目标对象，key为修改的属性名，value为待修改的值</span></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值发生了改变：<span class="subst">$&#123;target[key]&#125;</span> =&gt; <span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">        target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 通过代理对象对属性进行赋值操作时，执行其set捕获器，并对源对象的进行对应修改，name的值发生了改变：obj =&gt; obj1</span></span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;obj1&#x27;</span> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>) <span class="comment">// obj1</span></span><br><span class="line"><span class="comment">// 通过代理对象获取其属性时，执行器get捕获器，name的值为obj1</span></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
-<p>Proxy所有捕获器</p>
-<img data-src="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/Proxy%E6%8D%95%E8%8E%B7%E5%99%A8.png" class="" title="Proxy捕获器">
-<p>这里说一下construct捕获器和apply捕获器，这两个捕获器是应用于函数对象的。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(foo, &#123;</span><br><span class="line">    <span class="title function_">construct</span>(<span class="params">target, argumentsList, newTarget</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(argumentsList, newTarget)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">target</span>(...argumentsList)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="title function_">apply</span>(<span class="params">target, thisArg, argumentsList</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(target, thisArg, argumentsList)</span><br><span class="line">        <span class="keyword">return</span> target.<span class="title function_">apply</span>(thisArg, argumentsList)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title function_">proxy</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">proxy.<span class="title function_">apply</span>(<span class="string">&#x27;111&#x27;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>handler.construct(target, argumentsList, newTarget)<br>
-参数：<br>
-target：被代理的函数<br>
-argumentsList：创建实例时传入的参数<br>
-newTarget：最初被调用的构造函数，上述为proxy对象</p>
-<p>apply(target, thisArg, argumentsList)<br>
-apply时调用函数的捕获器，包括普通调用，apply/call调用参数：<br>
-target：被代理的函数<br>
-thisArg：调用函数时传入的this<br>
-argumentsList：调用函数时传入的参数</p>
-</blockquote>
-</details>
-<h2 id="Reflect">Reflect</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>Reflet是ES6新增的一个API，它提供了许多操作对象的方法，Object的方法基本都可以通过Reflect实现，用法和Object相同，但是Reflect的方法更简洁，并且更符合语义。</p>
-<p>比如Reflect.getPrototypeOf(target)类似于 Object.getPrototypeOf()，Reflect.defineProperty(target, propertyKey, attributes)类似于Object.defineProperty()。</p>
-<p>那么我们可能会有一些疑惑，既然Reflect可以做的，Object都可以做，为什么还要有Reflect呢？</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>由于在早期的ECMA规范中没有考虑到这种对对象本身的操作如何设计更加规范，所以将相应API都放在了Object上面。</p>
-</li>
-<li class="lvl-2">
-<p>但是Object的API设计存在一些问题，一些是静态方法（如<code>Object.keys()、Object.defineProperty()</code>），一些又是实例方法<code>obj.hasOwnProperty</code>，这样调用方法不一致的问题，增大了学习者的心理负担。</p>
-</li>
-<li class="lvl-2">
-<p>Object的API的错误处理不统一，某些方法如<code>Object.defineProperty()</code>是通过抛出异常处理错误，而某些方法是给出返回值，如<code>Object.freeze()</code>当传入一个原始值时，如传入一个数字，并不会抛出错误，而是将其转换为对应的包装类，然后将其返回。</p>
-</li>
-<li class="lvl-2">
-<p>对this绑定存在隐患，Object的实例方法依赖this绑定，若方法被错误调用，如提取后单独使用，会导致意外行为。</p>
-</li>
-<li class="lvl-2">
-<p>对于Object的实例方法易被重写。</p>
-</li>
-<li class="lvl-2">
-<p>…</p>
-</li>
-</ul>
-<p>总的来说，对于Object的API并没有进行统一的规范，操作混乱，容易出错。</p>
-<p>Reflect的出现可以说是Object的操作增强。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>统一的操作函数，Reflect将所有对象的操作静态化，解决了Object的一会静态，一会实例方法的API设计规范问题。</p>
-</li>
-<li class="lvl-2">
-<p>合理返回值设计，对于不合法的调用，Reflect会返回true/false，解决了Object的返回值不统一的问题。</p>
-</li>
-<li class="lvl-2">
-<p>填补了空白功能，如Object要获取对象的键是，需要通过<code>obj.getOwnPropertyNames()</code>和<code>obj.getOwnPropertySymbols()</code>，但Reflect提供了<code>Reflect.ownKeys</code>是上述两种方法的组合。</p>
-</li>
-</ul>
-<p>Reflect的常用方法：</p>
-<img data-src="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/Reflect%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.png" class="" title="Reflect的常用方法">
-</details>
-<h2 id="Proxy和Reflect结合使用">Proxy和Reflect结合使用</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>上文我们说了Reflect和Object的区别，Reflect的出现标准化了对象的底层操作（提供一致的方法接口）和弥补了Object方法的不足（如错误处理和函数式风格）。</p>
-<p>但Reflect还有一个应用场景，就是与Proxy结合使用（支持Proxy的陷阱（捕获器）实现）。</p>
-<p>举个例子：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">name</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_name</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
-<p>以上代码get捕获器只触发了一次，即只触发了对name属性的获取，但按理来说，对此对象的所有属性的获取都应该触发get捕获器，但只触发获取name的访问器，这是由于this指向的问题，我们在get捕获器中通过操作源对象的方式获取属性值，导致this并没有指向代理对象，这破坏了代理的封装性。</p>
-<p>在看一个代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">name</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">_name</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;222&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>以上代码set捕获器只触发了一次，和上述的get捕获器一样，都是捕获器中直接操作源对象的结果，破坏了代理的封装性。</p>
-<p>其实Proxy的get/set捕获器中还有一个<code>receiver</code>参数，receiver指向当前代理对象，而Reflect的get/set方法也可以接受一个receiver参数，通过receiver可以保证proxy的陷阱实现的正确性。</p>
-<p>所以可以对以上代码进行修改，将Proxy和Reflect结合使用，如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">name</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_name</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">name</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">_name</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;222&#x27;</span></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
-<p>补充：</p>
-<blockquote>
-<p>在ES5我们实现继承时有借用构造函数思想，即改变this指向，实现对父类构造函数的调用。<br>
-Reflect提供了相同操作的方法：Reflect.construct(target, argumentsList, newTarget)<br>
-参数：<br>
-target： 借用构造函数的对象<br>
-argumentsList： 构造函数的参数<br>
-newTarget： 需要创建实例的构造方法/类</p>
-</blockquote>
-</details>
-<h2 id="关于Proxy和Reflect结合的思考">关于Proxy和Reflect结合的思考</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>上文我们已经了解到，Proxy的是对象的代理，通过对其自定义行为对象中添加相应的捕获器，可以监听到对象相应的的操作，Reflect实现了对对象操作的规范化，弥补了对象的不足，同时将Proxy和Reflect结合使用，可以保证Proxy的陷阱的实现正确性，保证了Proxy的代理封装性。</p>
-<p>Proxy与被代理对象的数据是同步的，因为Proxy最终读取始终是被代理对象的属性，即使不通过Proxy对源对象进行修改。</p>
-<p>Reflect操作源对象的get/set方法是对对象的内部方法<code>[[Get]]</code>/<code>[[Set]]</code>的显示封装，而通过<code>obj.[key]</code>则是对其的隐式封装，但对其的操作容易受this的影响而变为对其他对象的操作，而Reflect可以通过receiver保证this指向的正确性，放如Proxy中，既可以保证this永远指向receiver，从而实现对源对象的<code>[[Get]]</code>/<code>[[Set]]</code>操作都会走Proxy进而触发捕获器。</p>
-<p>即当不存在访问器属性时，this其实与<code>[[Get]]</code>/<code>[[Set]]</code>的操作并无关系，从<code>Reflect.get(target, key, receiver)</code>中可以看出，对属性值的获取其值只需target和key就行，通过target的内部方法<code>[[Get]]</code>即可获取到属性值，而不需要this，当存在访问器时，通过receiver只是提供正确的this指向代理对象，同时也可以看出Proxy的操作一直就是对target（被代理对象）的操作，而不是对Proxy本身的操作，所以默认情况下，Proxy保持与被代理对象的数据同步，但如果Proxy在捕获器中进行了自定义操作（未对对象进行相应操作），代理对象与被代理对象就不一定数据同步了。</p>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>监听对象</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SASS星空</title>
-    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
-<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
-<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
-<strong>HTML结构</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>SASS代码</strong><br>
-提示：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
-</li>
-<li class="lvl-2">
-<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
-</li>
-<li class="lvl-2">
-<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
-</li>
-</ul>
-<blockquote>
-<p>npx sass index.scss index.css --no-source-map -w</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
-</li>
-<li class="lvl-2">
-<p>sass：安装 sass 自带的执行命令</p>
-</li>
-<li class="lvl-2">
-<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
-</li>
-<li class="lvl-2">
-<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
-</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>页面</category>
-      </categories>
-      <tags>
-        <tag>SASS</tag>
-        <tag>CSS</tag>
-        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1790,6 +1602,205 @@ newTarget： 需要创建实例的构造方法/类</p>
       </tags>
   </entry>
   <entry>
+    <title>let、const和var的区别</title>
+    <url>/2025/02/28/let%E3%80%81const%E5%92%8Cvar%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ol>
+<li class="lvl-3">
+<p>let、const声明的变量不能重复声明，const声明的变量不能被再次赋值，而var声明的变量可以重复声明。</p>
+</li>
+<li class="lvl-3">
+<p>let、const存在暂时性死区，而var定义的变量不存在暂时性死区。</p>
+<ul class="lvl-2">
+<li class="lvl-5">暂时性死区：即在let、const所处的当前作用域到变量声明的那一行，是不能使用变量的。</li>
+<li class="lvl-5">暂时性死区与声明的位置无关，而与代码的执行顺序有关。</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>let、const定义的变量不存在变量提升。</p>
+<ul class="lvl-2">
+<li class="lvl-5">let、const定义的变量虽然不存在变量提升，但是在解析阶段其实已经在其对应的词法环境中的环境记录中创建了该变量，只是不能使用。</li>
+</ul>
+</li>
+<li class="lvl-3">
+<p>let、const定义的变量所属的代码块存在块级作用域。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+        <tag>变量声明</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Proxy-Reflect使用</title>
+    <url>/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Proxy">Proxy</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>需要：如果存在一个对象，我们需要去监听这个对象中的属性被设置或获取的过程，应该如何操作？</p>
+<p>在ES6之前，我们可以通过<code>Object.defineProperty()</code>的存取属性描述符来对属性的操作进行监听。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(obj).<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> value = obj[key]</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">        <span class="title function_">get</span>(<span class="params"></span>) &#123; </span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值为<span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="title function_">set</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值发生了改变：<span class="subst">$&#123;value&#125;</span> =&gt; <span class="subst">$&#123;newValue&#125;</span>`</span>)</span><br><span class="line">            value = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对属性进行赋值操作时，执行其对应set访问器</span></span><br><span class="line">obj.<span class="property">name</span> = <span class="string">&#x27;obj1&#x27;</span>  <span class="comment">// name的值发生了改变：obj =&gt; obj1</span></span><br><span class="line"><span class="comment">// 对属性进行调用，执行其对应get访问器</span></span><br><span class="line">obj.<span class="property">name</span>  <span class="comment">// name的值为obj1</span></span><br></pre></td></tr></table></figure>
+<p>但这样是存在缺点的：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Object.defineProperty设计的初衷并不是去为了监听对象的所有属性的，我们在定义某些属性的时候，初衷只是为了定义普通的属性，只是因为其存在访问器这种特点，就强行用属性描述符去操作了。</p>
+</li>
+<li class="lvl-2">
+<p>Object.defineProperty只能监听属性的存取，但如果我们想监听更加丰富的操作，比如新增、删除属性等，那么Object.defineProperty是无能为力的。</p>
+</li>
+</ul>
+<p>ES6中，新增了Proxy类，用于帮助我们创建一个代理对象，从而对对象操作进行监听。</p>
+<p>Proxy语法</p>
+<blockquote>
+<p>const p = new Proxy(target, handler)<br>
+target：要创建代理的对象<br>
+handler: 是定义了代理的自定义行为的对象</p>
+</blockquote>
+<p>如果我们想要侦听某些具体的操作，那么可以在handler中添加对应的捕获器。</p>
+<p>对于上面的案例，通过Proxy实现为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;obj&#x27;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// target为目标对象，key为修改的属性名</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值为<span class="subst">$&#123;target[key]&#125;</span>`</span>)</span><br><span class="line">        <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// target为目标对象，key为修改的属性名，value为待修改的值</span></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>的值发生了改变：<span class="subst">$&#123;target[key]&#125;</span> =&gt; <span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">        target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 通过代理对象对属性进行赋值操作时，执行其set捕获器，并对源对象的进行对应修改，name的值发生了改变：obj =&gt; obj1</span></span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;obj1&#x27;</span> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>) <span class="comment">// obj1</span></span><br><span class="line"><span class="comment">// 通过代理对象获取其属性时，执行器get捕获器，name的值为obj1</span></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
+<p>Proxy所有捕获器</p>
+<img data-src="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/Proxy%E6%8D%95%E8%8E%B7%E5%99%A8.png" class="" title="Proxy捕获器">
+<p>这里说一下construct捕获器和apply捕获器，这两个捕获器是应用于函数对象的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(foo, &#123;</span><br><span class="line">    <span class="title function_">construct</span>(<span class="params">target, argumentsList, newTarget</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(argumentsList, newTarget)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">target</span>(...argumentsList)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="title function_">apply</span>(<span class="params">target, thisArg, argumentsList</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(target, thisArg, argumentsList)</span><br><span class="line">        <span class="keyword">return</span> target.<span class="title function_">apply</span>(thisArg, argumentsList)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title function_">proxy</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">proxy.<span class="title function_">apply</span>(<span class="string">&#x27;111&#x27;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>handler.construct(target, argumentsList, newTarget)<br>
+参数：<br>
+target：被代理的函数<br>
+argumentsList：创建实例时传入的参数<br>
+newTarget：最初被调用的构造函数，上述为proxy对象</p>
+<p>apply(target, thisArg, argumentsList)<br>
+apply时调用函数的捕获器，包括普通调用，apply/call调用参数：<br>
+target：被代理的函数<br>
+thisArg：调用函数时传入的this<br>
+argumentsList：调用函数时传入的参数</p>
+</blockquote>
+</details>
+<h2 id="Reflect">Reflect</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>Reflet是ES6新增的一个API，它提供了许多操作对象的方法，Object的方法基本都可以通过Reflect实现，用法和Object相同，但是Reflect的方法更简洁，并且更符合语义。</p>
+<p>比如Reflect.getPrototypeOf(target)类似于 Object.getPrototypeOf()，Reflect.defineProperty(target, propertyKey, attributes)类似于Object.defineProperty()。</p>
+<p>那么我们可能会有一些疑惑，既然Reflect可以做的，Object都可以做，为什么还要有Reflect呢？</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于在早期的ECMA规范中没有考虑到这种对对象本身的操作如何设计更加规范，所以将相应API都放在了Object上面。</p>
+</li>
+<li class="lvl-2">
+<p>但是Object的API设计存在一些问题，一些是静态方法（如<code>Object.keys()、Object.defineProperty()</code>），一些又是实例方法<code>obj.hasOwnProperty</code>，这样调用方法不一致的问题，增大了学习者的心理负担。</p>
+</li>
+<li class="lvl-2">
+<p>Object的API的错误处理不统一，某些方法如<code>Object.defineProperty()</code>是通过抛出异常处理错误，而某些方法是给出返回值，如<code>Object.freeze()</code>当传入一个原始值时，如传入一个数字，并不会抛出错误，而是将其转换为对应的包装类，然后将其返回。</p>
+</li>
+<li class="lvl-2">
+<p>对this绑定存在隐患，Object的实例方法依赖this绑定，若方法被错误调用，如提取后单独使用，会导致意外行为。</p>
+</li>
+<li class="lvl-2">
+<p>对于Object的实例方法易被重写。</p>
+</li>
+<li class="lvl-2">
+<p>…</p>
+</li>
+</ul>
+<p>总的来说，对于Object的API并没有进行统一的规范，操作混乱，容易出错。</p>
+<p>Reflect的出现可以说是Object的操作增强。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>统一的操作函数，Reflect将所有对象的操作静态化，解决了Object的一会静态，一会实例方法的API设计规范问题。</p>
+</li>
+<li class="lvl-2">
+<p>合理返回值设计，对于不合法的调用，Reflect会返回true/false，解决了Object的返回值不统一的问题。</p>
+</li>
+<li class="lvl-2">
+<p>填补了空白功能，如Object要获取对象的键是，需要通过<code>obj.getOwnPropertyNames()</code>和<code>obj.getOwnPropertySymbols()</code>，但Reflect提供了<code>Reflect.ownKeys</code>是上述两种方法的组合。</p>
+</li>
+</ul>
+<p>Reflect的常用方法：</p>
+<img data-src="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/Reflect%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.png" class="" title="Reflect的常用方法">
+</details>
+<h2 id="Proxy和Reflect结合使用">Proxy和Reflect结合使用</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>上文我们说了Reflect和Object的区别，Reflect的出现标准化了对象的底层操作（提供一致的方法接口）和弥补了Object方法的不足（如错误处理和函数式风格）。</p>
+<p>但Reflect还有一个应用场景，就是与Proxy结合使用（支持Proxy的陷阱（捕获器）实现）。</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">name</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_name</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
+<p>以上代码get捕获器只触发了一次，即只触发了对name属性的获取，但按理来说，对此对象的所有属性的获取都应该触发get捕获器，但只触发获取name的访问器，这是由于this指向的问题，我们在get捕获器中通过操作源对象的方式获取属性值，导致this并没有指向代理对象，这破坏了代理的封装性。</p>
+<p>在看一个代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">name</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">_name</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        target[key] = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;222&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码set捕获器只触发了一次，和上述的get捕获器一样，都是捕获器中直接操作源对象的结果，破坏了代理的封装性。</p>
+<p>其实Proxy的get/set捕获器中还有一个<code>receiver</code>参数，receiver指向当前代理对象，而Reflect的get/set方法也可以接受一个receiver参数，通过receiver可以保证proxy的陷阱实现的正确性。</p>
+<p>所以可以对以上代码进行修改，将Proxy和Reflect结合使用，如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">_name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">name</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_name</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> <span class="title function_">name</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">_name</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, value, receiver</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">        <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, value, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.<span class="property">name</span> = <span class="string">&#x27;222&#x27;</span></span><br><span class="line">proxy.<span class="property">name</span></span><br></pre></td></tr></table></figure>
+<p>补充：</p>
+<blockquote>
+<p>在ES5我们实现继承时有借用构造函数思想，即改变this指向，实现对父类构造函数的调用。<br>
+Reflect提供了相同操作的方法：Reflect.construct(target, argumentsList, newTarget)<br>
+参数：<br>
+target： 借用构造函数的对象<br>
+argumentsList： 构造函数的参数<br>
+newTarget： 需要创建实例的构造方法/类</p>
+</blockquote>
+</details>
+<h2 id="关于Proxy和Reflect结合的思考">关于Proxy和Reflect结合的思考</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>上文我们已经了解到，Proxy的是对象的代理，通过对其自定义行为对象中添加相应的捕获器，可以监听到对象相应的的操作，Reflect实现了对对象操作的规范化，弥补了对象的不足，同时将Proxy和Reflect结合使用，可以保证Proxy的陷阱的实现正确性，保证了Proxy的代理封装性。</p>
+<p>Proxy与被代理对象的数据是同步的，因为Proxy最终读取始终是被代理对象的属性，即使不通过Proxy对源对象进行修改。</p>
+<p>Reflect操作源对象的get/set方法是对对象的内部方法<code>[[Get]]</code>/<code>[[Set]]</code>的显示封装，而通过<code>obj.[key]</code>则是对其的隐式封装，但对其的操作容易受this的影响而变为对其他对象的操作，而Reflect可以通过receiver保证this指向的正确性，放如Proxy中，既可以保证this永远指向receiver，从而实现对源对象的<code>[[Get]]</code>/<code>[[Set]]</code>操作都会走Proxy进而触发捕获器。</p>
+<p>即当不存在访问器属性时，this其实与<code>[[Get]]</code>/<code>[[Set]]</code>的操作并无关系，从<code>Reflect.get(target, key, receiver)</code>中可以看出，对属性值的获取其值只需target和key就行，通过target的内部方法<code>[[Get]]</code>即可获取到属性值，而不需要this，当存在访问器时，通过receiver只是提供正确的this指向代理对象，同时也可以看出Proxy的操作一直就是对target（被代理对象）的操作，而不是对Proxy本身的操作，所以默认情况下，Proxy保持与被代理对象的数据同步，但如果Proxy在捕获器中进行了自定义操作（未对对象进行相应操作），代理对象与被代理对象就不一定数据同步了。</p>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+        <tag>监听对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>事件循环</title>
+    <url>/2025/03/07/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>首先我们需要先了解进程和线程的概念：</p>
+<ul class="lvl-0">
+<li class="lvl-2">当我们启动一个程序时，系统会为该程序创建一个进程，并在内存中开辟一块空间用于处理该程序。</li>
+<li class="lvl-2">线程是操作系统能够运行运算调度的最小单位，通常情况下它被包含在进程中。</li>
+<li class="lvl-2">进程中通常会创建许多线程共同处理程序的运行。</li>
+</ul>
+<p>在浏览器中，每一个标签页就是一个进程，这样可以保证，一个页面的崩溃不会影响到其他页面的正常运作。</p>
+<p>其中处理JS的只有一个线程，成为渲染主线程，由于只有一个线程处理JS代码，所以当其中存在耗时操作时，会一直等待此操作完成才能继续向下执行，造成了阻塞，所以出现了事件循环用来解决这种情况。</p>
+<p>当我们进行耗时操作（如计时器，异步请求等，我们称之为任务）会交予其他线程进行处理，不会影响渲染主线程的继续执行，如果在JS代码执行过程中，存在任务完成了，会将其放在任务队列中，任务队列分为微队列和宏队列，（有些浏览器可能会对宏队列进行进一步的队列细分，它们同样存在不同的优先级）。</p>
+<p>事件循环的依次迭代为：宏任务 -&gt; 微任务 -&gt; 渲染 -&gt; 循环。</p>
+<p>最开始的JS执行是执行script中的代码，可以将其看为宏任务，其中可能会产生其他宏任务或微任务，当当前宏任务执行完毕，会将微任务队列中的任务清空，如有必要，会进行UI渲染操作，然后进入下一次循环，以此往复。</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+        <tag>原理</tag>
+        <tag>事件循环</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>uniapp和taro学习知识点记录</title>
     <url>/2024/11/13/uniapp%E5%92%8Ctaro%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="uniapp"><a href="https://uniapp.dcloud.net.cn/quickstart.html">uniapp</a></h2>
@@ -2014,38 +2025,53 @@ newTarget： 需要创建实例的构造方法/类</p>
       </tags>
   </entry>
   <entry>
-    <title>let、const和var的区别</title>
-    <url>/2025/02/28/let%E3%80%81const%E5%92%8Cvar%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><ol>
-<li class="lvl-3">
-<p>let、const声明的变量不能重复声明，const声明的变量不能被再次赋值，而var声明的变量可以重复声明。</p>
+    <title>SASS星空</title>
+    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
+<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
+<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
+<strong>HTML结构</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>SASS代码</strong><br>
+提示：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
 </li>
-<li class="lvl-3">
-<p>let、const存在暂时性死区，而var定义的变量不存在暂时性死区。</p>
-<ul class="lvl-2">
-<li class="lvl-5">暂时性死区：即在let、const所处的当前作用域到变量声明的那一行，是不能使用变量的。</li>
-<li class="lvl-5">暂时性死区与声明的位置无关，而与代码的执行顺序有关。</li>
+<li class="lvl-2">
+<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
+</li>
+<li class="lvl-2">
+<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
+</li>
 </ul>
+<blockquote>
+<p>npx sass index.scss index.css --no-source-map -w</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
 </li>
-<li class="lvl-3">
-<p>let、const定义的变量不存在变量提升。</p>
-<ul class="lvl-2">
-<li class="lvl-5">let、const定义的变量虽然不存在变量提升，但是在解析阶段其实已经在其对应的词法环境中的环境记录中创建了该变量，只是不能使用。</li>
+<li class="lvl-2">
+<p>sass：安装 sass 自带的执行命令</p>
+</li>
+<li class="lvl-2">
+<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
+</li>
+<li class="lvl-2">
+<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
+</li>
 </ul>
-</li>
-<li class="lvl-3">
-<p>let、const定义的变量所属的代码块存在块级作用域。</p>
-</li>
-</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>前端</category>
-        <category>JS</category>
+        <category>页面</category>
       </categories>
       <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>变量声明</tag>
+        <tag>SASS</tag>
+        <tag>CSS</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -2079,6 +2105,170 @@ newTarget： 需要创建实例的构造方法/类</p>
       </categories>
       <tags>
         <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端知识点记录(个人理解)</title>
+    <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="字符实体">字符实体</h2>
+<p>字符实体即 html 中 <code>&amp;nbsp;</code> 这类的写法，以 <code>&amp;</code> 开始，以 <code>;</code> 结束。</p>
+<p>出现原因：</p>
+<blockquote>
+<p>由于浏览器的识别和解析等原因，对于 <code>&lt;</code> 和 空格，换行的解析是有问题或合并操作的，但我们想要把其展示出来，就需要用到字符实体来编写了</p>
+</blockquote>
+<p>常见字符实体</p>
+<img data-src="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" class="" title="常见字符实体">
+<h2 id="URL-和-URI">URL 和 URI</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>URL = Uniform Resource Locator 为统一资源定位符，通常用于网络资源</p>
+</li>
+<li class="lvl-2">
+<p>URI = Uniform Resource Identifier 为统一资源标识符，可以标识逻辑和物理设备</p>
+</li>
+<li class="lvl-2">
+<p>URL 是 URI 的子集，即 URL 一定是 URI，但 URI 不一定是URL</p>
+</li>
+<li class="lvl-2">
+<p>比如当后端服务写一个接口后，前端可以通过浏览器访问该接口并得到返回值，这是URL</p>
+</li>
+<li class="lvl-2">
+<p>但服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是URI</p>
+</li>
+</ul>
+<p>URL 的完整标准格式：</p>
+<blockquote>
+<p><code>[协议类型]://[服务器地址]:[端口号]/[文件路径][文件名]?[查询]#[片段ID]</code><br>
+scheme://userinfo@host:port/path?query#fragment</p>
+</blockquote>
+<p>如： <code>https://zrb@www.example.com:123/forum/questions/tag=networking&amp;order=newest#top</code></p>
+<h2 id="元素语义化的好处">元素语义化的好处</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>方便维护，方便阅读</p>
+</li>
+<li class="lvl-2">
+<p>减少开发人员沟通</p>
+</li>
+<li class="lvl-2">
+<p>无障碍阅读，如对于盲人来说，浏览器会根据语义化标签选择语言表达方式，对于strong标签会进行重读</p>
+</li>
+<li class="lvl-2">
+<p>有利于SEO</p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器搜索引擎有一定的规范，其利用爬虫技术对网页（文档）进行获取</li>
+<li class="lvl-4">浏览器会根据其规则判断是否收录该网站并对其进行索引排名，语义化标签符合其中的部分规范，其排名也会较为靠前</li>
+<li class="lvl-4">当用户搜索信息是，浏览器就会根据其排名展示（除去广告），我们得以免费获取流量</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符编码">字符编码</h2>
+<p>对于计算机来说只能识别 0 和 1，但我们所写的内容怎样编码交给计算机，计算机又怎样解码以展示给我们，所以我们需要一定的规范将其编码为二进制（01），并使计算机能根据此规范将二进制（01）解码展示我们所写的内容。</p>
+<p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
+<h2 id="DNS解析">DNS解析</h2>
+<p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
+<p>域名的解析这一过程也是需要时间的, 我们可以尝试预解析域名, 以提高获取资源时的访问速度</p>
+<p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Number-prototype-toString-base-和-Number-prototype-toFixed-digits">Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
+<p><code>toString(base)</code> 用于将数字转为字符串, 并且根据 base 值的不同可以将数字转为对应的进制, base 的范围为 2 到 36, 默认为 10<br>
+<code>toFixed(digits)</code> 用于将数字转为字符串, 并且保留 digits 位小数, digits 的值为 0 到 20, 默认为 0</p>
+<h2 id="with语句">with语句</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>with语句会扩展一个语句的作用域链。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name) <span class="comment">// 大梦想家</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(age) <span class="comment">// 18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源。</p>
+</details>
+<h2 id="eval函数">eval函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>内建函数 eval 允许执行一个代码字符串。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval是一个特殊的函数，它可以将传入的字符串当做JavaScript代码来运行。</p>
+</li>
+<li class="lvl-2">
+<p>eval会将最后一句执行语句的结果，作为返回值。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> res = <span class="built_in">eval</span>(<span class="string">&quot;var message = &#x27;hello world&#x27;; 1111&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// 1111</span></span><br></pre></td></tr></table></figure>
+<p>不建议在开发中使用eval：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>eval代码的可读性非常的差（代码的可读性是高质量代码的重要原则）；</p>
+</li>
+<li class="lvl-2">
+<p>eval是一个字符串，那么有可能在执行的过程中被刻意篡改，那么可能会造成被攻击的风险；</p>
+</li>
+<li class="lvl-2">
+<p>eval的执行必须经过JavaScript解释器，不能被JavaScript引擎优化；</p>
+</li>
+</ul>
+</details>
+<h2 id="严格模式">严格模式</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>由于JS一直保持着兼容旧代码的方向，但旧代码的问题也被继承下来了，在ECMA5标准中，JS提出了严格模式的概念，以更加严格的方式对代码进行检测和运行。</p>
+<p>严格模式对正常的JavaScript语义进行了一些限制：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>严格模式通过 抛出错误 来消除一些原有的 静默（silent）错误。（比如对对象属性设置仅可读权限，对其进行修改操作时会抛出错误）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式让JS引擎在执行代码时可以进行更多的优化（不需要对一些特殊的语法进行处理）。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式禁用了在ECMAScript未来版本中可能会定义的一些语法。</p>
+</li>
+</ul>
+<h3 id="开启严格模式">开启严格模式</h3>
+<p>严格模式通过在文件或者函数开头使用 use strict 来开启，可以实现对文件或单个函数的严格模式设置。</p>
+<h3 id="严格模式的限制">严格模式的限制</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无法意外的创建全局变量。（如 <code>a = 1</code>，未用关键进行声明）</p>
+</li>
+<li class="lvl-2">
+<p>严格模式会使引起静默失败(silently fail,注:不报错也没有任何效果)的赋值操作抛出异常。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不能使用 with 语句。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，试图删除不可删除的属性会抛出错误。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，函数参数不能存在相同名字。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，不允许0的8进制语法。（如0221）。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，eval中的变量不能被外部使用。</p>
+</li>
+<li class="lvl-2">
+<p>严格模式下，this绑定不会默认转为对象。</p>
+<ul class="lvl-2">
+<li class="lvl-4">null和undefiend默认绑定不会指向window，而是其本身。</li>
+<li class="lvl-4">除了null和undefiend的基本数据类型，不会指向其默认的包装对象，而是其字面量值。</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -2403,170 +2593,6 @@ newTarget： 需要创建实例的构造方法/类</p>
       </categories>
       <tags>
         <tag>微信小程序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>前端知识点记录(个人理解)</title>
-    <url>/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="字符实体">字符实体</h2>
-<p>字符实体即 html 中 <code>&amp;nbsp;</code> 这类的写法，以 <code>&amp;</code> 开始，以 <code>;</code> 结束。</p>
-<p>出现原因：</p>
-<blockquote>
-<p>由于浏览器的识别和解析等原因，对于 <code>&lt;</code> 和 空格，换行的解析是有问题或合并操作的，但我们想要把其展示出来，就需要用到字符实体来编写了</p>
-</blockquote>
-<p>常见字符实体</p>
-<img data-src="/2024/11/24/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93.png" class="" title="常见字符实体">
-<h2 id="URL-和-URI">URL 和 URI</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>URL = Uniform Resource Locator 为统一资源定位符，通常用于网络资源</p>
-</li>
-<li class="lvl-2">
-<p>URI = Uniform Resource Identifier 为统一资源标识符，可以标识逻辑和物理设备</p>
-</li>
-<li class="lvl-2">
-<p>URL 是 URI 的子集，即 URL 一定是 URI，但 URI 不一定是URL</p>
-</li>
-<li class="lvl-2">
-<p>比如当后端服务写一个接口后，前端可以通过浏览器访问该接口并得到返回值，这是URL</p>
-</li>
-<li class="lvl-2">
-<p>但服务器内部，可以得到某一图片等资源，即图片等资源会有一个标识交给服务器，服务器可以通过该标识访问到该资源，甚至是物理设备，这期间不一定有 WEB 的参与，这是URI</p>
-</li>
-</ul>
-<p>URL 的完整标准格式：</p>
-<blockquote>
-<p><code>[协议类型]://[服务器地址]:[端口号]/[文件路径][文件名]?[查询]#[片段ID]</code><br>
-scheme://userinfo@host:port/path?query#fragment</p>
-</blockquote>
-<p>如： <code>https://zrb@www.example.com:123/forum/questions/tag=networking&amp;order=newest#top</code></p>
-<h2 id="元素语义化的好处">元素语义化的好处</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>方便维护，方便阅读</p>
-</li>
-<li class="lvl-2">
-<p>减少开发人员沟通</p>
-</li>
-<li class="lvl-2">
-<p>无障碍阅读，如对于盲人来说，浏览器会根据语义化标签选择语言表达方式，对于strong标签会进行重读</p>
-</li>
-<li class="lvl-2">
-<p>有利于SEO</p>
-<ul class="lvl-2">
-<li class="lvl-4">浏览器搜索引擎有一定的规范，其利用爬虫技术对网页（文档）进行获取</li>
-<li class="lvl-4">浏览器会根据其规则判断是否收录该网站并对其进行索引排名，语义化标签符合其中的部分规范，其排名也会较为靠前</li>
-<li class="lvl-4">当用户搜索信息是，浏览器就会根据其排名展示（除去广告），我们得以免费获取流量</li>
-</ul>
-</li>
-</ul>
-<h2 id="字符编码">字符编码</h2>
-<p>对于计算机来说只能识别 0 和 1，但我们所写的内容怎样编码交给计算机，计算机又怎样解码以展示给我们，所以我们需要一定的规范将其编码为二进制（01），并使计算机能根据此规范将二进制（01）解码展示我们所写的内容。</p>
-<p>目前基本上使用的是 UTF-8 ，依靠 unicode 字符集（万国码）。</p>
-<h2 id="DNS解析">DNS解析</h2>
-<p>浏览器通过域名获取资源时, 不会直接连接到服务器, 而是通过域名服务器（DNS）, DNS服务器会解析域名, 找到对应的IP地址, 并返回给浏览器, 浏览器再通过IP地址访问服务器。</p>
-<p>域名的解析这一过程也是需要时间的, 我们可以尝试预解析域名, 以提高获取资源时的访问速度</p>
-<p>可以通过对link标签设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Performance/dns-prefetch">dns-prefetch</a> 来进行优化, 如下:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://fonts.googleapis.com/&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Number-prototype-toString-base-和-Number-prototype-toFixed-digits">Number.prototype.toString(base) 和 Number.prototype.toFixed(digits)</h2>
-<p><code>toString(base)</code> 用于将数字转为字符串, 并且根据 base 值的不同可以将数字转为对应的进制, base 的范围为 2 到 36, 默认为 10<br>
-<code>toFixed(digits)</code> 用于将数字转为字符串, 并且保留 digits 位小数, digits 的值为 0 到 20, 默认为 0</p>
-<h2 id="with语句">with语句</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>with语句会扩展一个语句的作用域链。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">with</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name) <span class="comment">// 大梦想家</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(age) <span class="comment">// 18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不建议使用with语句，因为它可能是混淆错误和兼容性问题的根源。</p>
-</details>
-<h2 id="eval函数">eval函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>内建函数 eval 允许执行一个代码字符串。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>eval是一个特殊的函数，它可以将传入的字符串当做JavaScript代码来运行。</p>
-</li>
-<li class="lvl-2">
-<p>eval会将最后一句执行语句的结果，作为返回值。</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> res = <span class="built_in">eval</span>(<span class="string">&quot;var message = &#x27;hello world&#x27;; 1111&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(res) <span class="comment">// 1111</span></span><br></pre></td></tr></table></figure>
-<p>不建议在开发中使用eval：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>eval代码的可读性非常的差（代码的可读性是高质量代码的重要原则）；</p>
-</li>
-<li class="lvl-2">
-<p>eval是一个字符串，那么有可能在执行的过程中被刻意篡改，那么可能会造成被攻击的风险；</p>
-</li>
-<li class="lvl-2">
-<p>eval的执行必须经过JavaScript解释器，不能被JavaScript引擎优化；</p>
-</li>
-</ul>
-</details>
-<h2 id="严格模式">严格模式</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>由于JS一直保持着兼容旧代码的方向，但旧代码的问题也被继承下来了，在ECMA5标准中，JS提出了严格模式的概念，以更加严格的方式对代码进行检测和运行。</p>
-<p>严格模式对正常的JavaScript语义进行了一些限制：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>严格模式通过 抛出错误 来消除一些原有的 静默（silent）错误。（比如对对象属性设置仅可读权限，对其进行修改操作时会抛出错误）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式让JS引擎在执行代码时可以进行更多的优化（不需要对一些特殊的语法进行处理）。（如 <code>a = 1</code>，未用关键进行声明）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式禁用了在ECMAScript未来版本中可能会定义的一些语法。</p>
-</li>
-</ul>
-<h3 id="开启严格模式">开启严格模式</h3>
-<p>严格模式通过在文件或者函数开头使用 use strict 来开启，可以实现对文件或单个函数的严格模式设置。</p>
-<h3 id="严格模式的限制">严格模式的限制</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>无法意外的创建全局变量。（如 <code>a = 1</code>，未用关键进行声明）</p>
-</li>
-<li class="lvl-2">
-<p>严格模式会使引起静默失败(silently fail,注:不报错也没有任何效果)的赋值操作抛出异常。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，不能使用 with 语句。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，试图删除不可删除的属性会抛出错误。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，函数参数不能存在相同名字。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，不允许0的8进制语法。（如0221）。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，eval中的变量不能被外部使用。</p>
-</li>
-<li class="lvl-2">
-<p>严格模式下，this绑定不会默认转为对象。</p>
-<ul class="lvl-2">
-<li class="lvl-4">null和undefiend默认绑定不会指向window，而是其本身。</li>
-<li class="lvl-4">除了null和undefiend的基本数据类型，不会指向其默认的包装对象，而是其字面量值。</li>
-</ul>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
