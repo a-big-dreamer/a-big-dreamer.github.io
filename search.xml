@@ -1,152 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Iterator-Generator</title>
-    <url>/2025/03/07/Iterator-Generator/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Iterator（迭代器）">Iterator（迭代器）</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>迭代器：使用户在容器对象（如数组）上遍访的对象。即迭代器是帮助我们对某个数据结构进行遍历的对象。</p>
-<p>在JS中，迭代器是一个具体的对象，我们可以手动实现，但这个对象需要符合迭代器协议（iterator protocol）</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>迭代器协议定义了产生一系列值（无论是有限还是无限个）的标准方式。</p>
-</li>
-<li class="lvl-2">
-<p>在JS中这个标准就是一个特定的next方法。</p>
-</li>
-</ul>
-<p>next方法有如下要求：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>一个无参数或着一个参数的函数，返回一个应当拥有以下两个属性的对象：</p>
-<ul class="lvl-2">
-<li class="lvl-4">done(boolean)
-<ul class="lvl-4">
-<li class="lvl-6">如果迭代器可以产生序列中的下一个值，则为false。</li>
-<li class="lvl-6">如果迭代器已将序列迭代完毕，则为true。这种情况下，value是可选的，如果它依然存在，即为迭代结束后的默认返回值。</li>
-</ul>
-</li>
-<li class="lvl-4">value
-<ul class="lvl-4">
-<li class="lvl-6">迭代器返回的任何JavaScript值，done为true时可省略。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>实现迭代器，以获取对象的键（包含Symbol）为例：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createObjIterator</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj)</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (index &gt;= keys.<span class="property">length</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> objIterator = <span class="title function_">createObjIterator</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: &#x27;name&#x27;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: &#x27;age&#x27;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: Symbol()&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: true&#125;</span></span><br></pre></td></tr></table></figure>
-</details>
-<h2 id="可迭代对象">可迭代对象</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>可迭代对象和迭代器是两个不同的概念，前面我们可以通过迭代器对对象进行遍历操作，但需遍历对象和迭代器时分离开的，如果我们把迭代器和对象结合在一起，就叫做可迭代对象。</p>
-<p>但将迭代器和可迭代对象结合起来成为可迭代对象，可是有一定规范的：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>这个对象要实现迭代器协议（iterator protocol）。</p>
-</li>
-<li class="lvl-2">
-<p>这个对象必须实现<code>@@iterator</code>方法，在代码层面是对象要实现<code>[Symbol.iterator]</code>属性。</p>
-</li>
-</ul>
-<p>可迭代对象是可以通过for of 循环进行遍历操作。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (index &lt; keys.<span class="property">length</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// name</span></span><br><span class="line"><span class="comment">// age</span></span><br><span class="line"><span class="comment">// Symbol()</span></span><br><span class="line"><span class="comment">// Symbol(Symbol.iterator) 由于 Reflect.ownKeys()是Object.getOwnPropertyNames()和Object.getOwnPropertySymbols()的合集，所以Symbol()也会被遍历到</span></span><br></pre></td></tr></table></figure>
-<p>可迭代对象的使用场景：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>JavaScript中语法：for …of、展开语法（spread syntax）、yield*（后面讲）、解构赋值（Destructuring_assignment）。</p>
-</li>
-<li class="lvl-2">
-<p>创建一些对象时：<code>new Map([Iterable])、new WeakMap([iterable])、new Set([iterable])、new WeakSet([iterable])</code>。</p>
-</li>
-<li class="lvl-2">
-<p>一些方法的调用：Promise.all(iterable)、Promise.race(iterable)、Array.from(iterable)。</p>
-</li>
-</ul>
-<p>补充：</p>
-<p>迭代器中其实还可以做一个操作，就是监听容器对象的中断操作：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>比如遍历的过程中通过break、return、throw中断了循环操作。</p>
-</li>
-</ul>
-<p>如果我们想实现这个操作，就需要在迭代器对象中加入return方法。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (index &lt; keys.<span class="property">length</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="keyword">return</span>() &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>)</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (key === <span class="string">&#x27;age&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-<h2 id="Generator（生成器）">Generator（生成器）</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>生成器是ES6中新增的一种函数控制、使用的方案，它可以让我们更加灵活的控制函数什么时候继续执行、暂停执行等。</p>
-<p>平时我们写的函数终止条件要么是return，要么是发生了异常，生成器中又提供了yield关键字来控制函数的执行。</p>
-<p>生成器函数也是一个函数，但与普通的函数有一些区别：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>生成器函数需要在function后加上一个<code>*</code></p>
-</li>
-<li class="lvl-2">
-<p>生成器函数可以通过yield关键字控制函数的执行流程。</p>
-</li>
-<li class="lvl-2">
-<p>生成器函数的返回值是一个Generator对象。</p>
-<ul class="lvl-2">
-<li class="lvl-4">生成器事实上是一种特殊的迭代器。</li>
-<li class="lvl-4">Instead, they return a special type of iterator, called a Generator.</li>
-</ul>
-</li>
-</ul>
-<p>生成器实例代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2) <span class="comment">// 2 222</span></span><br><span class="line">    <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3) <span class="comment">// 3 333</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;222&#x27;</span>)) <span class="comment">// &#123;value: 2, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
-<p>生成器函数中的代码并不会默认执行，但可以通过其返回的生成器调用next的方法再根据yield关键字控制代码的执行，一次next的调用运行到一个yield关键字的位置，并返回一个对象，对象为{value: yield关键字后面的值，done: false}，当next的调用返回的done为true时，表示函数执行完毕，此时返回的对象为{value: undefined, done: true}。也可以通过next方法向构造器函数中传值，通过yield关键字获取到传进来的值，但第一次next的传值调用是无法被接收到的。</p>
-<p>对于生成器，我们可以直接调用其return和throw方法来控制函数的提前结束和抛出异常。</p>
-<figure class="highlight js"><figcaption><span>提前结束</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2)</span><br><span class="line">    <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="keyword">return</span>(<span class="string">&#x27;222&#x27;</span>)) <span class="comment">// &#123;value: &#x27;222&#x27;, done: true&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
-<p>以上代码可以看出，生成器函数的调用会在生成器的return方法调用时提前结束，即使后面还有代码没执行完。return方法还会返回一个对象，对象为{value: return方法传进来的值，done: true}，后面即使在调用next方法，结果也都是{value: undefined，done: true}了。</p>
-<figure class="highlight js"><figcaption><span>抛出异常</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2)</span><br><span class="line">        <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="keyword">throw</span>(<span class="string">&#x27;执行异常&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
-<p>以上代码可以看出，生成器函数的调用会在生成器的throw方法调用时提前结束，并抛出异常，即使后面还有代码没执行完。throw方法还会返回一个对象，对象为{value: undefined，done: true}，后面即使在调用next方法，结果也都是{value: undefined，done: true}了。</p>
-<p>既然生成器是一种特殊的迭代器，那么我们可以用生成器替代迭代器，那上文的代码为例，用生成器重写后为：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">createObjIterator</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">        <span class="keyword">yield</span> key</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> objIterator = <span class="title function_">createObjIterator</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: &#x27;name&#x27;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: &#x27;age&#x27;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: Symbol(), done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
-<p>用生成器实现可迭代对象的<code>@@iterator</code>方法，只需要在<code>[Symbol.iterator]()&#123;&#125;</code>开头加一个<code>*</code>，那么它就是一个生成器方法了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    *[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">            <span class="keyword">yield</span> key</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述我们实现迭代器或生成器内部获取元素的时候都是用的for of 循环，for of可以用于可迭代对象，如果内部循环的是一个可迭代对象的话，我们可以将操作简写以下。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    *[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">yield</span>* keys</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-<h2 id="Generator解决异步回调地狱问题">Generator解决异步回调地狱问题</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>场景：当我们发送一个异步请求，需要根据该请求结果发送另一个请求，另一个请求的结果时其他请求所必需的，依次类推，给出回调地狱的代码，尝试对其优化。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">requestData</span>(res1).<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">requestData</span>(res2).<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以通过返回Promise对其进行优化</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上代码看起来好多了，但阅读性其实还是比较差的，接下来我们用生成器进行优化。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述封装请求的生成器函数看起来挺清爽的，但是调用起来就麻烦了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> generator = <span class="title function_">getData</span>()</span><br><span class="line"></span><br><span class="line">generator.<span class="title function_">next</span>().<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">    generator.<span class="title function_">next</span>(res1).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">        generator.<span class="title function_">next</span>(res2).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>但是这样又变成了上述用Promise解决时的问题，但好在生成器的每次next调用都会返回一个对象，对象中有一个属性done可以判断生成器函数中的代码是否执行完毕，所以我们可以对其进行封装优化。</p>
-<p>封装自动执行generator函数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">execGenerator</span>(<span class="params">genFn</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> generator = <span class="title function_">genFn</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">exec</span>(<span class="params">res</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> result = generator.<span class="title function_">next</span>(res)</span><br><span class="line">        <span class="keyword">if</span> (result.<span class="property">done</span>) <span class="keyword">return</span> result.<span class="property">value</span></span><br><span class="line">        result.<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">exec</span>(res)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">exec</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>Iterator</tag>
-        <tag>Generator</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ES6知识点记录</title>
     <url>/2025/02/28/ES6%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="标签模板字符串">标签模板字符串</h2>
@@ -373,144 +227,6 @@
         <tag>前端</tag>
         <tag>JS</tag>
         <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>函数增强</title>
-    <url>/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="arguments转为Array">arguments转为Array</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>JS中函数也是个对象，它也有自己的属性和方法，常见的属性有name和length。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>name: 函数名。</p>
-</li>
-<li class="lvl-2">
-<p>length: 函数未使用参数个数（定义时的形参）。</p>
-<ul class="lvl-2">
-<li class="lvl-4"><mark>注意：rest参数不参与length的计算。</mark></li>
-</ul>
-</li>
-</ul>
-<p>函数的EC（执行上下文）中关联的VO（<code>variable object</code>）其在堆内存中对应的AO（<code>activation object</code>）创建时会初始化arguments引用的类数组对象，但它只是个类数组对象，虽然可以迭代和通过索引访问参数值，但像数组中的filter等方法是不能使用的，所以，我们通常需要将其转化为数组。</p>
-<h3 id="方法一：for-循环遍历">方法一：for 循环遍历</h3>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> <span class="variable language_">arguments</span>) &#123;</span><br><span class="line">        arr.<span class="title function_">push</span>(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方法二：使用数组的slice方法">方法二：使用数组的slice方法</h3>
-<p><code>Array.prototype.slice(start, end)</code>用于截取数组，内部通过this进行截取，所以我们可以改变this的指向，从而实现arguments向Array的转换。</p>
-<figure class="highlight js"><figcaption><span>使用原型方法</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><figcaption><span>使用实例对象处理</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上两种方式归根结底都是获取数组原型方法进行处理<code>Array.prototype.slice(start, end)</code>。</p>
-<h3 id="方法三：使用Array-from">方法三：使用Array.from()</h3>
-<p>ES6中新增了<code>Array.from()</code>方法，该方法可以将类数组对象转化为数组。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</details>
-<h2 id="JS纯函数">JS纯函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<p>在函数式编程中有一个非常重要的概念叫<strong>纯函数</strong>，JS符合函数式编程的范式，所以JS存在纯函数的概念。</p>
-<h3 id="什么纯函数">什么纯函数</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>确定的输入，一定产生确定的输出。</p>
-<ul class="lvl-2">
-<li class="lvl-4">在函数调用中，加入输入的参数一致，返回的结果不是能改变的。</li>
-<li class="lvl-4">即不能调用并改变外部变量，如在全局作用域下使用闭包的特性。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>函数在执行过程中，不能产生副作用。</p>
-<ul class="lvl-2">
-<li class="lvl-4">不能在调用的同时影响外部变量，以影响后续的使用，导致结果的不一致。</li>
-</ul>
-</li>
-</ul>
-<p>副作用：在计算机科学中，副作用表示在执行一个函数的时候，除了返回函数值外，还对调用函数产生了附加的影响，比如修改了全局变量，修改参数或者改变外部的存储。</p>
-<p>如下，获取obj的name属性时，操作了obj，导致后续obj的使用出现了变化。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    obj.<span class="property">age</span> = <span class="number">18</span></span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">name</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj)  <span class="comment">// &#123;name: &#x27;大梦想家&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
-<p><mark>副作用往往是产生bug的温床。</mark></p>
-<h3 id="纯函数的案例">纯函数的案例</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>如数组的slice方法就是个纯函数，因为slice方法不会改变原数组，而是返回一个新的数组。</p>
-</li>
-<li class="lvl-2">
-<p>而数组的splice方法则会改变原数组，所以splice方法不是纯函数。</p>
-</li>
-</ul>
-<h3 id="纯函数的好处">纯函数的好处</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>可以安心编写和使用，不必担心对外部的影响。</p>
-</li>
-<li class="lvl-2">
-<p>React中就要求我们无论是函数还是class声明一个组件，这个组件都必须像纯函数一样，保护它们的props不被修改。</p>
-</li>
-</ul>
-</details>
-<h2 id="函数柯里化">函数柯里化</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<h3 id="什么是函数柯里化">什么是函数柯里化</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>只传递一部分参数，返回一个函数，用返回的函数去处理剩余的参数，此过程就称为柯里化（Currying）。</p>
-</li>
-<li class="lvl-2">
-<p>柯里化是一种对函数的转化，不会对函数进行调用。</p>
-</li>
-<li class="lvl-2">
-<p>柯里化将一个可调用的函数f(a, b, c)转化为可调用的f(a)(b)©。</p>
-</li>
-</ul>
-<h3 id="柯里化优势">柯里化优势</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>函数的职责单一</p>
-<ul class="lvl-2">
-<li class="lvl-4">在函数式编程中，我们其实往往希望一个函数处理的问题尽可能单一，而不是将一大堆的处理过程交给一个函数来处理。</li>
-<li class="lvl-4">那么我们是否可以将每次传入的参数在单一的函数中处理，处理完后在下一个函数中再使用处理后的结果。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    x += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">y</span>) &#123;</span><br><span class="line">        y *= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>函数的参数复用</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createAdder</span>(<span class="params">num</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">count</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> num + count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder5 = <span class="title function_">createAdder</span>(<span class="number">5</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder10 = <span class="title function_">createAdder</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="自动柯里化函数">自动柯里化函数</h3>
-<p>将普通函数转换为柯里化函数。</p>
-<p><mark>以下代码仅可在最后一次调用时改变this指向有效。</mark></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">args1, arg2, arg3</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> args1 + arg2 + arg3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">gCurrying</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">currying</span>(<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (args1.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args1)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args2</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> currying.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [...args1, ...args2])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currying</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> currying = <span class="title function_">gCurrying</span>(foo)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">currying</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-</details>
-<h2 id="组合函数">组合函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<h3 id="组合函数的概念">组合函数的概念</h3>
-<p>我们需要对一个数据进行操作，需要执行两个以上的函数，而且这两个函数是依次执行的。如下代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">mul</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">square</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num ** <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">square</span>(<span class="title function_">mul</span>(<span class="number">4</span>))) <span class="comment">// 64</span></span><br></pre></td></tr></table></figure>
-<h3 id="实现组合函数">实现组合函数</h3>
-<p>组合函数一般是最初的函数接受较多参数，然后将其返回值交予其他函数进行操作。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compose</span>(<span class="params">...fns</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> length = fns.<span class="property">length</span></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    fns.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">`The <span class="subst">$&#123;index&#125;</span> arguments is not a function`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = fns[<span class="number">0</span>].<span class="title function_">apply</span>(<span class="variable language_">this</span>, args)</span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (++index &lt; length) &#123;</span><br><span class="line">            result = fns[index].<span class="title function_">call</span>(<span class="variable language_">this</span>, result)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>函数增强</tag>
       </tags>
   </entry>
   <entry>
@@ -782,6 +498,144 @@ propertiesObject（可选）: 需要添加的属性描述符对象。返回值�
       </tags>
   </entry>
   <entry>
+    <title>函数增强</title>
+    <url>/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="arguments转为Array">arguments转为Array</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>JS中函数也是个对象，它也有自己的属性和方法，常见的属性有name和length。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>name: 函数名。</p>
+</li>
+<li class="lvl-2">
+<p>length: 函数未使用参数个数（定义时的形参）。</p>
+<ul class="lvl-2">
+<li class="lvl-4"><mark>注意：rest参数不参与length的计算。</mark></li>
+</ul>
+</li>
+</ul>
+<p>函数的EC（执行上下文）中关联的VO（<code>variable object</code>）其在堆内存中对应的AO（<code>activation object</code>）创建时会初始化arguments引用的类数组对象，但它只是个类数组对象，虽然可以迭代和通过索引访问参数值，但像数组中的filter等方法是不能使用的，所以，我们通常需要将其转化为数组。</p>
+<h3 id="方法一：for-循环遍历">方法一：for 循环遍历</h3>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> <span class="variable language_">arguments</span>) &#123;</span><br><span class="line">        arr.<span class="title function_">push</span>(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：使用数组的slice方法">方法二：使用数组的slice方法</h3>
+<p><code>Array.prototype.slice(start, end)</code>用于截取数组，内部通过this进行截取，所以我们可以改变this的指向，从而实现arguments向Array的转换。</p>
+<figure class="highlight js"><figcaption><span>使用原型方法</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><figcaption><span>使用实例对象处理</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [].<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上两种方式归根结底都是获取数组原型方法进行处理<code>Array.prototype.slice(start, end)</code>。</p>
+<h3 id="方法三：使用Array-from">方法三：使用Array.from()</h3>
+<p>ES6中新增了<code>Array.from()</code>方法，该方法可以将类数组对象转化为数组。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="JS纯函数">JS纯函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>在函数式编程中有一个非常重要的概念叫<strong>纯函数</strong>，JS符合函数式编程的范式，所以JS存在纯函数的概念。</p>
+<h3 id="什么纯函数">什么纯函数</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>确定的输入，一定产生确定的输出。</p>
+<ul class="lvl-2">
+<li class="lvl-4">在函数调用中，加入输入的参数一致，返回的结果不是能改变的。</li>
+<li class="lvl-4">即不能调用并改变外部变量，如在全局作用域下使用闭包的特性。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>函数在执行过程中，不能产生副作用。</p>
+<ul class="lvl-2">
+<li class="lvl-4">不能在调用的同时影响外部变量，以影响后续的使用，导致结果的不一致。</li>
+</ul>
+</li>
+</ul>
+<p>副作用：在计算机科学中，副作用表示在执行一个函数的时候，除了返回函数值外，还对调用函数产生了附加的影响，比如修改了全局变量，修改参数或者改变外部的存储。</p>
+<p>如下，获取obj的name属性时，操作了obj，导致后续obj的使用出现了变化。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">name</span>: <span class="string">&#x27;大梦想家&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    obj.<span class="property">age</span> = <span class="number">18</span></span><br><span class="line">    <span class="keyword">return</span> obj.<span class="property">name</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(obj)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj)  <span class="comment">// &#123;name: &#x27;大梦想家&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+<p><mark>副作用往往是产生bug的温床。</mark></p>
+<h3 id="纯函数的案例">纯函数的案例</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如数组的slice方法就是个纯函数，因为slice方法不会改变原数组，而是返回一个新的数组。</p>
+</li>
+<li class="lvl-2">
+<p>而数组的splice方法则会改变原数组，所以splice方法不是纯函数。</p>
+</li>
+</ul>
+<h3 id="纯函数的好处">纯函数的好处</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>可以安心编写和使用，不必担心对外部的影响。</p>
+</li>
+<li class="lvl-2">
+<p>React中就要求我们无论是函数还是class声明一个组件，这个组件都必须像纯函数一样，保护它们的props不被修改。</p>
+</li>
+</ul>
+</details>
+<h2 id="函数柯里化">函数柯里化</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<h3 id="什么是函数柯里化">什么是函数柯里化</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只传递一部分参数，返回一个函数，用返回的函数去处理剩余的参数，此过程就称为柯里化（Currying）。</p>
+</li>
+<li class="lvl-2">
+<p>柯里化是一种对函数的转化，不会对函数进行调用。</p>
+</li>
+<li class="lvl-2">
+<p>柯里化将一个可调用的函数f(a, b, c)转化为可调用的f(a)(b)©。</p>
+</li>
+</ul>
+<h3 id="柯里化优势">柯里化优势</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数的职责单一</p>
+<ul class="lvl-2">
+<li class="lvl-4">在函数式编程中，我们其实往往希望一个函数处理的问题尽可能单一，而不是将一大堆的处理过程交给一个函数来处理。</li>
+<li class="lvl-4">那么我们是否可以将每次传入的参数在单一的函数中处理，处理完后在下一个函数中再使用处理后的结果。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x</span>) &#123;</span><br><span class="line">    x += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">y</span>) &#123;</span><br><span class="line">        y *= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>函数的参数复用</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createAdder</span>(<span class="params">num</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">count</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> num + count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder5 = <span class="title function_">createAdder</span>(<span class="number">5</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder5</span>(<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder10 = <span class="title function_">createAdder</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">10</span>)</span><br><span class="line"><span class="title function_">adder10</span>(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="自动柯里化函数">自动柯里化函数</h3>
+<p>将普通函数转换为柯里化函数。</p>
+<p><mark>以下代码仅可在最后一次调用时改变this指向有效。</mark></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">args1, arg2, arg3</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> args1 + arg2 + arg3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">gCurrying</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">currying</span>(<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (args1.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args1)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args2</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> currying.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [...args1, ...args2])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currying</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> currying = <span class="title function_">gCurrying</span>(foo)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">currying</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="组合函数">组合函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<h3 id="组合函数的概念">组合函数的概念</h3>
+<p>我们需要对一个数据进行操作，需要执行两个以上的函数，而且这两个函数是依次执行的。如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">mul</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">square</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> num ** <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">square</span>(<span class="title function_">mul</span>(<span class="number">4</span>))) <span class="comment">// 64</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现组合函数">实现组合函数</h3>
+<p>组合函数一般是最初的函数接受较多参数，然后将其返回值交予其他函数进行操作。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compose</span>(<span class="params">...fns</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> length = fns.<span class="property">length</span></span><br><span class="line">    <span class="keyword">if</span> (length === <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    fns.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item !== <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TypeError</span>(<span class="string">`The <span class="subst">$&#123;index&#125;</span> arguments is not a function`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = fns[<span class="number">0</span>].<span class="title function_">apply</span>(<span class="variable language_">this</span>, args)</span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (++index &lt; length) &#123;</span><br><span class="line">            result = fns[index].<span class="title function_">call</span>(<span class="variable language_">this</span>, result)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>函数增强</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS对象增强</title>
     <url>/2025/02/23/JS%E5%AF%B9%E8%B1%A1%E5%A2%9E%E5%BC%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Object-defineProperty">Object.defineProperty</h2>
@@ -894,129 +748,6 @@ descriptor: 要定义或修改的属性描述符返回值： 被传递给此函�
       <tags>
         <tag>JS</tag>
         <tag>对象增强</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JS闭包</title>
-    <url>/2025/02/22/JS%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="闭包的定义">闭包的定义</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>MDN中对于JS闭包的解释：</p>
-<img data-src="/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png" class="" title="JS闭包">
-<p>词法环境即为函数定义时所在的作用域，也可以理解为VO。即一个函数，如果可以访问外部作用域的变量，那么该函数和周围环境的组合就是闭包。</p>
-<p>从该定义来看，JS中的函数都具有闭包的特性，都可以称之为闭包。但从严格意义来讲，JS中的一个函数，如果访问了外层作用域的变量，那它就是一个闭包。</p>
-</details>
-<h2 id="闭包导致的内存泄露">闭包导致的内存泄露</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>以如下代码为例：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
-<p>bar函数与变量a形成了闭包，且通过bar引用了foo函数返回bar函数，在GO中存在bar对foo函数返回bar函数对象的引用，bar函数对象的<code>[[Scopes]]</code>属性又存在对foo函数的AO的引用，根据垃圾回收机制中标记清除算法的处理，bar变量即使以后未被调用，bar函数和foo函数的AO所占据的内存也不会被回收，就造成了内存泄漏。</p>
-<p>所以，对于闭包的内存泄漏，其实就是引用链中的对象无法被释放。</p>
-<p>解决方法：</p>
-<p>手动进行<code>bar = null</code>，手动释放对对象的引用。</p>
-</details>
-<h2 id="常见的垃圾回收机制（GC）算法">常见的垃圾回收机制（GC）算法</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>垃圾回收机制（Garbage Collection）简称GC。</p>
-<p>对于那些不再使用的对象，我们称之为垃圾，它需要被回收以释放更多的内存空间。</p>
-<p>在JS中，内存管理是自动的、无形的，就是由于GC的存在帮我们自动管理内存。</p>
-<p>常见的GC算法有：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>引用计数法</p>
-<ul class="lvl-2">
-<li class="lvl-4">每当存在对象的引用时，相应对象引用计数加1，当引用计数为0时，该对象被回收。</li>
-<li class="lvl-4">但容易产生循环引用，即两个对象的属性进行相互引用，形成环形链表，导致内存泄漏（两个引用对象的变量赋值为null，但其属性仍然存在引用，导致对象中的引用计数不为0）。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>标记清除法</p>
-<ul class="lvl-2">
-<li class="lvl-4">核心思路为<mark>可达性</mark>。</li>
-<li class="lvl-4">需要设置一个根对象（root object），在浏览器中为window，垃圾回收器会定时从根对象出发，找所有从根对象开始有引用的对象，对于没有引用的对象，就认为是不可用的对象，就会被垃圾回收其处理。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>标记整理法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在标记清除法类似，不同的是，在回收的同时会将保留的对象搬运到连续的内存空间中，整合空闲空间，避免碎片化。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>分代收集法</p>
-</li>
-<li class="lvl-2">
-<p>增量收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">将回收分为几部处理，减少垃圾回收的延迟。</li>
-</ul>
-</li>
-<li class="lvl-2">
-<p>闲时收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在CPU空闲的时候进行回收。</li>
-</ul>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-        <tag>闭包</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RN优化</title>
-    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
-<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
-<span id="more"></span>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<!-- more -->
-<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
-</li>
-<li class="lvl-2">
-<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
-</li>
-<li class="lvl-2">
-<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
-</li>
-<li class="lvl-2">
-<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
-</li>
-<li class="lvl-2">
-<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
-</li>
-<li class="lvl-2">
-<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
       </tags>
   </entry>
   <entry>
@@ -1230,6 +961,275 @@ newTarget： 需要创建实例的构造方法/类</p>
       </tags>
   </entry>
   <entry>
+    <title>RN优化</title>
+    <url>/2024/10/13/RN%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="移除不必要权限">移除不必要权限</h2>
+<p>例如，在<code>\[项目名]\android\app\src\main\</code>下<code>AndroidManifest.xml</code>中写入如下代码</p>
+<span id="more"></span>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除读取电话状态的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_PHONE_STATE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除写入外部存储的权限。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 移除读取外部存储的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">tools:node</span>=<span class="string">&quot;remove&quot;</span> <span class="attr">android:name</span>=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p>我们还需要在<code>AndroidManifest.xml</code>中声明了一个名为tools的XML命名空间<code>xmlns:tools=&quot;http://schemas.android.com/tools&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>移除不必要权限的好处（文心一言生成）</strong>：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>提升用户隐私保护</strong>：减少不必要的权限请求可以增强用户信任，因为用户越来越关注个人数据的安全与隐私。特别是读取电话状态、读写外部存储这样的敏感权限，移除后表明应用不会侵犯用户的通信记录或存储的数据。</p>
+</li>
+<li class="lvl-2">
+<p><strong>简化权限管理</strong>：对于用户而言，应用程序请求的权限越少，他们在安装和使用过程中遇到的权限提示就越少，从而提升用户体验。用户不再需要为不相关的功能授予权限。</p>
+</li>
+<li class="lvl-2">
+<p><strong>降低潜在的安全风险</strong>：每个权限都可能成为安全漏洞的入口。移除不必要的权限可以减少应用受到攻击的面，提高应用的整体安全性。</p>
+</li>
+<li class="lvl-2">
+<p><strong>合规性增强</strong>：遵循更严格的隐私法规要求，比如GDPR（欧盟通用数据保护条例）或中国的《个人信息保护法》，这些法律强调最小必要原则，即只收集和处理完成业务所必需的最少个人信息。移除多余权限有助于企业符合此类法规要求。</p>
+</li>
+<li class="lvl-2">
+<p><strong>优化应用审核过程</strong>：在Google Play Store或其他应用市场上架时，应用的权限使用是审核的一部分。减少非必要的权限可以简化审核流程，加快应用上架速度。</p>
+</li>
+<li class="lvl-2">
+<p><strong>可能提升性能</strong>：虽然直接关联不大，但理论上减少对存储或硬件资源的访问需求，可能轻微提升应用运行效率，尤其是对于资源紧张的设备。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Iterator-Generator</title>
+    <url>/2025/03/07/Iterator-Generator/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Iterator（迭代器）">Iterator（迭代器）</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>迭代器：使用户在容器对象（如数组）上遍访的对象。即迭代器是帮助我们对某个数据结构进行遍历的对象。</p>
+<p>在JS中，迭代器是一个具体的对象，我们可以手动实现，但这个对象需要符合迭代器协议（iterator protocol）</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>迭代器协议定义了产生一系列值（无论是有限还是无限个）的标准方式。</p>
+</li>
+<li class="lvl-2">
+<p>在JS中这个标准就是一个特定的next方法。</p>
+</li>
+</ul>
+<p>next方法有如下要求：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一个无参数或着一个参数的函数，返回一个应当拥有以下两个属性的对象：</p>
+<ul class="lvl-2">
+<li class="lvl-4">done(boolean)
+<ul class="lvl-4">
+<li class="lvl-6">如果迭代器可以产生序列中的下一个值，则为false。</li>
+<li class="lvl-6">如果迭代器已将序列迭代完毕，则为true。这种情况下，value是可选的，如果它依然存在，即为迭代结束后的默认返回值。</li>
+</ul>
+</li>
+<li class="lvl-4">value
+<ul class="lvl-4">
+<li class="lvl-6">迭代器返回的任何JavaScript值，done为true时可省略。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>实现迭代器，以获取对象的键（包含Symbol）为例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createObjIterator</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj)</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (index &gt;= keys.<span class="property">length</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> objIterator = <span class="title function_">createObjIterator</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: &#x27;name&#x27;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: &#x27;age&#x27;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: false, value: Symbol()&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;done: true&#125;</span></span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="可迭代对象">可迭代对象</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>可迭代对象和迭代器是两个不同的概念，前面我们可以通过迭代器对对象进行遍历操作，但需遍历对象和迭代器时分离开的，如果我们把迭代器和对象结合在一起，就叫做可迭代对象。</p>
+<p>但将迭代器和可迭代对象结合起来成为可迭代对象，可是有一定规范的：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>这个对象要实现迭代器协议（iterator protocol）。</p>
+</li>
+<li class="lvl-2">
+<p>这个对象必须实现<code>@@iterator</code>方法，在代码层面是对象要实现<code>[Symbol.iterator]</code>属性。</p>
+</li>
+</ul>
+<p>可迭代对象是可以通过for of 循环进行遍历操作。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (index &lt; keys.<span class="property">length</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// name</span></span><br><span class="line"><span class="comment">// age</span></span><br><span class="line"><span class="comment">// Symbol()</span></span><br><span class="line"><span class="comment">// Symbol(Symbol.iterator) 由于 Reflect.ownKeys()是Object.getOwnPropertyNames()和Object.getOwnPropertySymbols()的合集，所以Symbol()也会被遍历到</span></span><br></pre></td></tr></table></figure>
+<p>可迭代对象的使用场景：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>JavaScript中语法：for …of、展开语法（spread syntax）、yield*（后面讲）、解构赋值（Destructuring_assignment）。</p>
+</li>
+<li class="lvl-2">
+<p>创建一些对象时：<code>new Map([Iterable])、new WeakMap([iterable])、new Set([iterable])、new WeakSet([iterable])</code>。</p>
+</li>
+<li class="lvl-2">
+<p>一些方法的调用：Promise.all(iterable)、Promise.race(iterable)、Array.from(iterable)。</p>
+</li>
+</ul>
+<p>补充：</p>
+<p>迭代器中其实还可以做一个操作，就是监听容器对象的中断操作：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>比如遍历的过程中通过break、return、throw中断了循环操作。</p>
+</li>
+</ul>
+<p>如果我们想实现这个操作，就需要在迭代器对象中加入return方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">let</span> index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (index &lt; keys.<span class="property">length</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: keys[index++] &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="keyword">return</span>() &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>)</span><br><span class="line">                <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (key === <span class="string">&#x27;age&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="Generator（生成器）">Generator（生成器）</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>生成器是ES6中新增的一种函数控制、使用的方案，它可以让我们更加灵活的控制函数什么时候继续执行、暂停执行等。</p>
+<p>平时我们写的函数终止条件要么是return，要么是发生了异常，生成器中又提供了yield关键字来控制函数的执行。</p>
+<p>生成器函数也是一个函数，但与普通的函数有一些区别：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>生成器函数需要在function后加上一个<code>*</code></p>
+</li>
+<li class="lvl-2">
+<p>生成器函数可以通过yield关键字控制函数的执行流程。</p>
+</li>
+<li class="lvl-2">
+<p>生成器函数的返回值是一个Generator对象。</p>
+<ul class="lvl-2">
+<li class="lvl-4">生成器事实上是一种特殊的迭代器。</li>
+<li class="lvl-4">Instead, they return a special type of iterator, called a Generator.</li>
+</ul>
+</li>
+</ul>
+<p>生成器实例代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2) <span class="comment">// 2 222</span></span><br><span class="line">    <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3) <span class="comment">// 3 333</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;222&#x27;</span>)) <span class="comment">// &#123;value: 2, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>生成器函数中的代码并不会默认执行，但可以通过其返回的生成器调用next的方法再根据yield关键字控制代码的执行，一次next的调用运行到一个yield关键字的位置，并返回一个对象，对象为{value: yield关键字后面的值，done: false}，当next的调用返回的done为true时，表示函数执行完毕，此时返回的对象为{value: undefined, done: true}。也可以通过next方法向构造器函数中传值，通过yield关键字获取到传进来的值，但第一次next的传值调用是无法被接收到的。</p>
+<p>对于生成器，我们可以直接调用其return和throw方法来控制函数的提前结束和抛出异常。</p>
+<figure class="highlight js"><figcaption><span>提前结束</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2)</span><br><span class="line">    <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="keyword">return</span>(<span class="string">&#x27;222&#x27;</span>)) <span class="comment">// &#123;value: &#x27;222&#x27;, done: true&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码可以看出，生成器函数的调用会在生成器的return方法调用时提前结束，即使后面还有代码没执行完。return方法还会返回一个对象，对象为{value: return方法传进来的值，done: true}，后面即使在调用next方法，结果也都是{value: undefined，done: true}了。</p>
+<figure class="highlight js"><figcaption><span>抛出异常</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">foo</span>(<span class="params">y1</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>, y1) <span class="comment">// 1 111</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> y2 = <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>, y2)</span><br><span class="line">        <span class="keyword">const</span> y3 = <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>, y3)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> generator = <span class="title function_">foo</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: 1, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="keyword">throw</span>(<span class="string">&#x27;执行异常&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(generator.<span class="title function_">next</span>(<span class="string">&#x27;333&#x27;</span>)) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码可以看出，生成器函数的调用会在生成器的throw方法调用时提前结束，并抛出异常，即使后面还有代码没执行完。throw方法还会返回一个对象，对象为{value: undefined，done: true}，后面即使在调用next方法，结果也都是{value: undefined，done: true}了。</p>
+<p>既然生成器是一种特殊的迭代器，那么我们可以用生成器替代迭代器，那上文的代码为例，用生成器重写后为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">createObjIterator</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">        <span class="keyword">yield</span> key</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> objIterator = <span class="title function_">createObjIterator</span>(obj)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: &#x27;name&#x27;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: &#x27;age&#x27;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: Symbol(), done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objIterator.<span class="title function_">next</span>()) <span class="comment">// &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>用生成器实现可迭代对象的<code>@@iterator</code>方法，只需要在<code>[Symbol.iterator]()&#123;&#125;</code>开头加一个<code>*</code>，那么它就是一个生成器方法了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    *[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> keys) &#123;</span><br><span class="line">            <span class="keyword">yield</span> key</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述我们实现迭代器或生成器内部获取元素的时候都是用的for of 循环，for of可以用于可迭代对象，如果内部循环的是一个可迭代对象的话，我们可以将操作简写以下。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;111&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">12</span>,</span><br><span class="line">    [<span class="title class_">Symbol</span>()]: <span class="number">222</span>,</span><br><span class="line">    *[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="keyword">yield</span>* keys</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> obj) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+<h2 id="Generator解决异步回调地狱问题">Generator解决异步回调地狱问题</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<p>场景：当我们发送一个异步请求，需要根据该请求结果发送另一个请求，另一个请求的结果时其他请求所必需的，依次类推，给出回调地狱的代码，尝试对其优化。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">requestData</span>(res1).<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">requestData</span>(res2).<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以通过返回Promise对其进行优化</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码看起来好多了，但阅读性其实还是比较差的，接下来我们用生成器进行优化。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述封装请求的生成器函数看起来挺清爽的，但是调用起来就麻烦了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> generator = <span class="title function_">getData</span>()</span><br><span class="line"></span><br><span class="line">generator.<span class="title function_">next</span>().<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res1</span> =&gt;</span> &#123;</span><br><span class="line">    generator.<span class="title function_">next</span>(res1).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res2</span> =&gt;</span> &#123;</span><br><span class="line">        generator.<span class="title function_">next</span>(res2).<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res3</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>但是这样又变成了上述用Promise解决时的问题，但好在生成器的每次next调用都会返回一个对象，对象中有一个属性done可以判断生成器函数中的代码是否执行完毕，所以我们可以对其进行封装优化。</p>
+<p>封装自动执行generator函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> res1 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(<span class="string">&#x27;111&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> res2 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res1)</span><br><span class="line">    <span class="keyword">const</span> res3 = <span class="keyword">yield</span> <span class="title function_">requestData</span>(res2)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">execGenerator</span>(<span class="params">genFn</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> generator = <span class="title function_">genFn</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">exec</span>(<span class="params">res</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> result = generator.<span class="title function_">next</span>(res)</span><br><span class="line">        <span class="keyword">if</span> (result.<span class="property">done</span>) <span class="keyword">return</span> result.<span class="property">value</span></span><br><span class="line">        result.<span class="property">value</span>.<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">exec</span>(res)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">exec</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+        <tag>Iterator</tag>
+        <tag>Generator</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS闭包</title>
+    <url>/2025/02/22/JS%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="闭包的定义">闭包的定义</h2>
+<details open>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>MDN中对于JS闭包的解释：</p>
+<img data-src="/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png" class="" title="JS闭包">
+<p>词法环境即为函数定义时所在的作用域，也可以理解为VO。即一个函数，如果可以访问外部作用域的变量，那么该函数和周围环境的组合就是闭包。</p>
+<p>从该定义来看，JS中的函数都具有闭包的特性，都可以称之为闭包。但从严格意义来讲，JS中的一个函数，如果访问了外层作用域的变量，那它就是一个闭包。</p>
+</details>
+<h2 id="闭包导致的内存泄露">闭包导致的内存泄露</h2>
+<details open>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>以如下代码为例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
+<p>bar函数与变量a形成了闭包，且通过bar引用了foo函数返回bar函数，在GO中存在bar对foo函数返回bar函数对象的引用，bar函数对象的<code>[[Scopes]]</code>属性又存在对foo函数的AO的引用，根据垃圾回收机制中标记清除算法的处理，bar变量即使以后未被调用，bar函数和foo函数的AO所占据的内存也不会被回收，就造成了内存泄漏。</p>
+<p>所以，对于闭包的内存泄漏，其实就是引用链中的对象无法被释放。</p>
+<p>解决方法：</p>
+<p>手动进行<code>bar = null</code>，手动释放对对象的引用。</p>
+</details>
+<h2 id="常见的垃圾回收机制（GC）算法">常见的垃圾回收机制（GC）算法</h2>
+<details open>
+    <summary>
+        <span>展开</span>
+    </summary>
+<p>垃圾回收机制（Garbage Collection）简称GC。</p>
+<p>对于那些不再使用的对象，我们称之为垃圾，它需要被回收以释放更多的内存空间。</p>
+<p>在JS中，内存管理是自动的、无形的，就是由于GC的存在帮我们自动管理内存。</p>
+<p>常见的GC算法有：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>引用计数法</p>
+<ul class="lvl-2">
+<li class="lvl-4">每当存在对象的引用时，相应对象引用计数加1，当引用计数为0时，该对象被回收。</li>
+<li class="lvl-4">但容易产生循环引用，即两个对象的属性进行相互引用，形成环形链表，导致内存泄漏（两个引用对象的变量赋值为null，但其属性仍然存在引用，导致对象中的引用计数不为0）。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>标记清除法</p>
+<ul class="lvl-2">
+<li class="lvl-4">核心思路为<mark>可达性</mark>。</li>
+<li class="lvl-4">需要设置一个根对象（root object），在浏览器中为window，垃圾回收器会定时从根对象出发，找所有从根对象开始有引用的对象，对于没有引用的对象，就认为是不可用的对象，就会被垃圾回收其处理。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>标记整理法</p>
+<ul class="lvl-2">
+<li class="lvl-4">在标记清除法类似，不同的是，在回收的同时会将保留的对象搬运到连续的内存空间中，整合空闲空间，避免碎片化。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>分代收集法</p>
+</li>
+<li class="lvl-2">
+<p>增量收集法</p>
+<ul class="lvl-2">
+<li class="lvl-4">将回收分为几部处理，减少垃圾回收的延迟。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>闲时收集法</p>
+<ul class="lvl-2">
+<li class="lvl-4">在CPU空闲的时候进行回收。</li>
+</ul>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RN问题解决</title>
     <url>/2024/10/13/RN%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>2024.6.14时最新版本为 0.74.2，2024.8.1时最新版本为0.74.4，但其相关依赖不太稳定，尝试使用 0.74.2 版本操作</p>
@@ -1357,56 +1357,6 @@ newTarget： 需要创建实例的构造方法/类</p>
       </categories>
       <tags>
         <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SASS星空</title>
-    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
-<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
-<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
-<strong>HTML结构</strong></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>SASS代码</strong><br>
-提示：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
-</li>
-<li class="lvl-2">
-<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
-</li>
-<li class="lvl-2">
-<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
-</li>
-</ul>
-<blockquote>
-<p>npx sass index.scss index.css --no-source-map -w</p>
-</blockquote>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
-</li>
-<li class="lvl-2">
-<p>sass：安装 sass 自带的执行命令</p>
-</li>
-<li class="lvl-2">
-<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
-</li>
-<li class="lvl-2">
-<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
-</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>页面</category>
-      </categories>
-      <tags>
-        <tag>SASS</tag>
-        <tag>CSS</tag>
-        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -1787,6 +1737,56 @@ newTarget： 需要创建实例的构造方法/类</p>
       </categories>
       <tags>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SASS星空</title>
+    <url>/2024/10/15/SASS%E6%98%9F%E7%A9%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong>效果图</strong></p>
+<img data-src="/2024/10/15/SASS%E6%98%9F%E7%A9%BA/preview.gif" class="" title="SASS星空">
+<p>盒子的阴影可以设置多个，所以我们可以通过阴影实现星光的效果，但纯写 css 过于抽象，我们可以利用 sass 的循环语法、函数与变量编写<br>
+<strong>HTML结构</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./index.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 这里只设置三个层级,可以根据需要自己添加 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layer3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>Sass 星空<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>SASS代码</strong><br>
+提示：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对SASS的编译不要用 VScode 的插件：easy sass，可能会出现函数识别导致编译失败的问题</p>
+</li>
+<li class="lvl-2">
+<p>可以在 node 环境下，安装 sass：<code>npm i sass</code></p>
+</li>
+<li class="lvl-2">
+<p>后执行 <code>npx sass [sass文件路径] [编译转换后的css输出文件路径] --no-source-map -w</code></p>
+</li>
+</ul>
+<blockquote>
+<p>npx sass index.scss index.css --no-source-map -w</p>
+</blockquote>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>npx：暂时把 sass 加入环境变量中，仅在此命令行操作有效</p>
+</li>
+<li class="lvl-2">
+<p>sass：安装 sass 自带的执行命令</p>
+</li>
+<li class="lvl-2">
+<p>–no-source-map：取消源映射，source-map里面存放着sass与css的映射信息，通过此命令可以取消该文件的生成</p>
+</li>
+<li class="lvl-2">
+<p>-w：监听sass/scss的文件内容变化，自动更新生成的css</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 背景底色</span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    radial-gradient 是 CSS3 中用于创建径向渐变背景的属性。</span></span><br><span class="line"><span class="comment">    ellipse at bottom 指定了渐变形状为椭圆，并且椭圆的底部与元素的底部对齐。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse at bottom, <span class="number">#1b2735</span> <span class="number">0%</span>, <span class="number">#090a0f</span> <span class="number">100%</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;lato&quot;</span>, sans-serif;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">300</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: -<span class="number">60px</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">  // 渐变背景，将文本背景设置为透明，并设置背景颜色为 <span class="selector-id">#38495a</span></span><br><span class="line">  // 即将文字展示为背景颜色</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(white, <span class="number">#38495a</span>);</span><br><span class="line">  -webkit-<span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">background-clip</span>: text;</span><br><span class="line">  <span class="attribute">color</span>: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建星光（阴影）函数</span><br><span class="line"><span class="keyword">@function</span> createShadow($n) &#123;</span><br><span class="line">  // 定义阴影变量  </span><br><span class="line">  $shadow: <span class="string">&quot;#&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  <span class="keyword">@for</span> $i from <span class="number">2</span> through $n &#123;</span><br><span class="line">    // 每次循环向 $shadow 中添加新的阴影</span><br><span class="line">    $shadow: <span class="string">&quot;#&#123;$shadow&#125;, #&#123;random($limit: 100)&#125;vw #&#123;random($limit: 100)&#125;vh #fff&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  // unquote() 函数用于将字符串转换为 CSS 属性值，即去掉字符串</span><br><span class="line">  <span class="keyword">@return</span> unquote($shadow);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义星光（阴影）初始数量</span><br><span class="line">$count: <span class="number">1000</span>;</span><br><span class="line">// 定义动画初始时间</span><br><span class="line">$duration: <span class="number">400s</span>;</span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">3</span> &#123;</span><br><span class="line">  // 每次循环时将数量和动画时间减半，以达到不同层级的动画效果</span><br><span class="line">  $count: <span class="built_in">floor</span>(<span class="built_in">calc</span>($count / <span class="number">2</span>));</span><br><span class="line">  $duration: <span class="built_in">floor</span>(<span class="built_in">calc</span>($duration / <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  // 输出调试信息</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;count #&#123;$count&#125;&quot;</span>;</span><br><span class="line">  <span class="keyword">@debug</span> <span class="string">&quot;duration #&#123;$duration&#125;&quot;</span>;</span><br><span class="line">  // 创建层级的样式</span><br><span class="line">  <span class="selector-class">.layer</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">    $size: #&#123;$<span class="selector-tag">i</span>&#125;px;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: $size;</span><br><span class="line">    <span class="attribute">height</span>: $size;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f40</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">createShadow</span>($count);</span><br><span class="line">    <span class="attribute">animation</span>: moveUp $duration linear infinite;</span><br><span class="line">    // 为了动画的流畅和无缝衔接，在 &amp;<span class="selector-pseudo">::after</span> 中设置相同的参数</span><br><span class="line">    &amp;<span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">      <span class="attribute">position</span>: fixed;</span><br><span class="line">      <span class="attribute">top</span>: <span class="number">100vh</span>;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">width</span>: inherit;</span><br><span class="line">      <span class="attribute">height</span>: inherit;</span><br><span class="line">      <span class="attribute">box-shadow</span>: inherit;</span><br><span class="line">      <span class="attribute">background</span>: inherit;</span><br><span class="line">      <span class="attribute">border-radius</span>: inherit;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动动画</span><br><span class="line"><span class="keyword">@keyframes</span> moveUp &#123;</span><br><span class="line">  <span class="number">100%</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100vh</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>页面</category>
+      </categories>
+      <tags>
+        <tag>SASS</tag>
+        <tag>CSS</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -2363,6 +2363,39 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </tags>
   </entry>
   <entry>
+    <title>创建RN项目</title>
+    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
+<ul class="lvl-0">
+<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
+</ul>
+<span id="more"></span>
+<h2 id="创建新项目">创建新项目</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
+</li>
+<li class="lvl-2">
+<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
+</li>
+</ul>
+<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>APP</category>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端面试题-类型判断</title>
     <url>/2024/10/16/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="1-typeof-与-instanceof-类型判断">1. <code>typeof</code> 与 <code>instanceof</code> 类型判断</h2>
@@ -2569,83 +2602,6 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </tags>
   </entry>
   <entry>
-    <title>创建RN项目</title>
-    <url>/2024/10/13/%E5%88%9B%E5%BB%BARN%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Android-开发环境">Android 开发环境</h2>
-<ul class="lvl-0">
-<li class="lvl-2">配置 Android 环境，请跟着<a href="https://reactnative.cn/docs/0.74/getting-started">文档</a>(0.74版本)进行</li>
-</ul>
-<span id="more"></span>
-<h2 id="创建新项目">创建新项目</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>如果你之前全局安装过旧的react-native-cli命令行工具，请使用<code>npm uninstall -g react-native-cli</code>卸载掉它以避免一些冲突：<code>npm uninstall -g react-native-cli @react-native-community/cli</code></p>
-</li>
-<li class="lvl-2">
-<p>输入以下命令创建新项目<code>npx react-native@latest init [项目名]</code></p>
-</li>
-</ul>
-<h2 id="创建项目指定版本号：-可选参数-指定版本或项目模板">创建项目指定版本号：[可选参数] 指定版本或项目模板</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>你可以使用–version参数（注意是两个杠）创建指定版本的项目。注意版本号必须精确到两个小数点：<code>npx react-native@X.XX.X init AwesomeProject --version X.XX.X</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>APP</category>
-        <category>React Native</category>
-      </categories>
-      <tags>
-        <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手写apply、call、bind函数</title>
-    <url>/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="实现apply、call函数">实现apply、call函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<figure class="highlight js"><figcaption><span>实现apply</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><figcaption><span>实现call</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>以上代码存在相同之处，可以尝试对以上操作进行封装。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">execute</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> bar1 = &#123; <span class="attr">name1</span>: <span class="number">2</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar1, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>手写实现的弊端：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>以上是通过隐式绑定this机制实现的，但需要向调用者传入参数，这样会对外部产生影响，且容易覆盖原有对象的属性，虽然最后会将添加的属性删除，但对于thisArg所引用的对象来说，影响可能是很大的。</p>
-</li>
-</ul>
-</details>
-<h2 id="实现bind函数">实现bind函数</h2>
-<details open>
-    <summary>
-        <span>查看</span>
-    </summary>
-<figure class="highlight js"><figcaption><span>实现bind</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zBind</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line"></span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> thisArg.<span class="title function_">this</span>(...args, ...args1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.<span class="title function_">bind</span>(&#123; <span class="attr">name</span>: <span class="number">1</span> &#125;, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)(<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>弊端：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>和手写实现apply/call的思路基本相同，但为调用着添加了个属性，且不能对其删除，影响很大。</p>
-</li>
-</ul>
-</details>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>JS</category>
-        <category>手写函数</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>JS</tag>
-        <tag>手写函数</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>微信小程序-学习笔记</title>
     <url>/2024/10/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="双线程模型">双线程模型</h2>
@@ -2843,6 +2799,50 @@ scheme://userinfo@host:port/path?query#fragment</p>
       </categories>
       <tags>
         <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手写apply、call、bind函数</title>
+    <url>/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="实现apply、call函数">实现apply、call函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<figure class="highlight js"><figcaption><span>实现apply</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><figcaption><span>实现call</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>以上代码存在相同之处，可以尝试对以上操作进行封装。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">execute</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> result = thisArg.<span class="title function_">fn</span>(...args)</span><br><span class="line">    <span class="keyword">delete</span> thisArg.<span class="property">fn</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zCall</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zApply</span> = <span class="keyword">function</span> (<span class="params">thisArg, args = []</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">execute</span>(thisArg, ...args)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">arg1, arg2</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = &#123; <span class="attr">name</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> bar1 = &#123; <span class="attr">name1</span>: <span class="number">2</span> &#125;</span><br><span class="line">foo.<span class="title function_">zApply</span>(bar, [<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>])</span><br><span class="line">foo.<span class="title function_">zCall</span>(bar1, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>手写实现的弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>以上是通过隐式绑定this机制实现的，但需要向调用者传入参数，这样会对外部产生影响，且容易覆盖原有对象的属性，虽然最后会将添加的属性删除，但对于thisArg所引用的对象来说，影响可能是很大的。</p>
+</li>
+</ul>
+</details>
+<h2 id="实现bind函数">实现bind函数</h2>
+<details open>
+    <summary>
+        <span>查看</span>
+    </summary>
+<figure class="highlight js"><figcaption><span>实现bind</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">zBind</span> = <span class="keyword">function</span> (<span class="params">thisArg, ...args</span>) &#123;</span><br><span class="line"></span><br><span class="line">    thisArg = <span class="keyword">typeof</span> thisArg === <span class="string">&#x27;object&#x27;</span> ? thisArg : <span class="title class_">Object</span>(thisArg)</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(thisArg, <span class="string">&#x27;fn&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">value</span>: <span class="variable language_">this</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">...args1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> thisArg.<span class="title function_">this</span>(...args, ...args1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.<span class="title function_">bind</span>(&#123; <span class="attr">name</span>: <span class="number">1</span> &#125;, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)(<span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;4&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>弊端：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>和手写实现apply/call的思路基本相同，但为调用着添加了个属性，且不能对其删除，影响很大。</p>
+</li>
+</ul>
+</details>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+        <category>手写函数</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>JS</tag>
+        <tag>手写函数</tag>
       </tags>
   </entry>
   <entry>
