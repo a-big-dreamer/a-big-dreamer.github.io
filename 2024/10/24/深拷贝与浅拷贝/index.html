@@ -29,7 +29,7 @@
 <meta property="og:description" content="拷贝就是创建一个已有对象或数据结构的副本的过程，即拷贝是相对于引用类型而言的。   对于 JS 来说，浅拷贝仅复制对象的第一层属性，对于其对象属性，复制的是其存储的地址值。因此，通过浅拷贝得到的副本，修改其内部的对象属性，也会影响原对象。   深拷贝会复制对象的所有属性，包括第一层中的对象属性，即对象属性会在堆区开辟新的空间（新的地址值）,其存储值与被拷贝的内容相同，因此，通过深拷贝得到的副本">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-24T02:12:42.000Z">
-<meta property="article:modified_time" content="2024-10-29T09:28:56.565Z">
+<meta property="article:modified_time" content="2025-03-13T15:02:18.893Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary">
@@ -98,7 +98,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">28</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">30</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -190,6 +190,16 @@
 	</div>
 	<ul class="links-of-blogroll-list recent-posts-list">
 	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/14/HTTP%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/" title="HTTP相关知识点" target="">
+		    HTTP相关知识点
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/13/%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/" title="手写实现事件总线" target="">
+		    手写实现事件总线
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/03/11/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E3%80%81%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0/" title="手写防抖、节流函数" target="">
 		    手写防抖、节流函数
 		    </a>
@@ -202,16 +212,6 @@
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/03/07/Iterator-Generator/" title="Iterator-Generator" target="">
 		    Iterator-Generator
-		    </a>
-		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2025/03/06/Proxy-Reflect%E4%BD%BF%E7%94%A8/" title="Proxy-Reflect使用" target="">
-		    Proxy-Reflect使用
-		    </a>
-		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2025/02/28/%E6%89%8B%E5%86%99apply%E3%80%81call%E3%80%81bind%E5%87%BD%E6%95%B0/" title="手写apply、call、bind函数" target="">
-		    手写apply、call、bind函数
 		    </a>
 		</li>
 	</ul>
@@ -275,7 +275,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-29 17:28:56" itemprop="dateModified" datetime="2024-10-29T17:28:56+08:00">2024-10-29</time>
+      <time title="修改时间：2025-03-13 23:02:18" itemprop="dateModified" datetime="2025-03-13T23:02:18+08:00">2025-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,14 +309,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>961</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -400,19 +400,32 @@
 <p>在展开语法出来之前，我们想将已有数组或对象变成新数组或对象的一部分较为麻烦</p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法</p>
+<p>对数组，我们可以使用 Array.prototype.concat() 或 Array.prototype.slice() 方法，其实只要能够遍历该数组，然后创建一个空数组加入即可，没什么好说的。</p>
 </li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<ul class="lvl-0">
 <li class="lvl-2">
-<p>对对象</p>
+<p>对对象，即创建一个空对象，然后想办法遍历原对象加入即可。</p>
 </li>
 </ul>
 <h2 id="深拷贝的实现">深拷贝的实现</h2>
 <h3 id="1-JSON-stringify">1. <code>JSON.stringify()</code></h3>
+<p>通过<code>JSON.stringify()</code>确实可以进行深拷贝，但局限于JSON的语法，JSON不支持undefined、Symbol、BigInt数据类型，所以通过JSON进行深拷贝时会出现问题：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果时undefined和Symbol类型，会直接忽略掉，不会出现在新对象中。</p>
+</li>
+<li class="lvl-2">
+<p>如果时BinInt类型，会直接报错。</p>
+</li>
+<li class="lvl-2">
+<p>对于循环引用会报错。</p>
+</li>
+</ul>
 <h3 id="2-函数库lodash">2. 函数库lodash</h3>
+<p>lodash的cloneDeep()方法，详细的可以看官网。<br>
+<a target="_blank" rel="noopener" href="https://www.lodashjs.com/docs/lodash.cloneDeep/">https://www.lodashjs.com/docs/lodash.cloneDeep/</a></p>
 <h3 id="3-手写实现深拷贝">3. 手写实现深拷贝</h3>
+<p>如果有更多定制化要求可以自己添加。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;tom&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">isHigh</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">foo</span>: <span class="literal">undefined</span>,</span><br><span class="line">    <span class="attr">love</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">hobbies</span>: [<span class="string">&#x27;eat&#x27;</span>, <span class="string">&#x27;sleep&#x27;</span>, <span class="string">&#x27;code&#x27;</span>, &#123; <span class="attr">name</span>: <span class="number">111</span> &#125;],</span><br><span class="line">    <span class="attr">book</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;JS&#x27;</span>,</span><br><span class="line">        <span class="attr">time</span>: <span class="number">20</span>,</span><br><span class="line">        <span class="attr">bar</span>: <span class="literal">undefined</span>,</span><br><span class="line">        <span class="attr">baz</span>: <span class="literal">null</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    [<span class="title class_">Symbol</span>(<span class="number">222</span>)]: <span class="number">222</span>,</span><br><span class="line">    <span class="attr">bar</span>: <span class="title class_">Symbol</span>(<span class="number">11</span>),</span><br><span class="line">    <span class="attr">bar1</span>: <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]),</span><br><span class="line">    <span class="attr">fn</span>: <span class="function">() =&gt;</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="property">obj1</span> = obj</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isObject</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> valueType = <span class="keyword">typeof</span> value</span><br><span class="line">    <span class="keyword">return</span> (value !== <span class="literal">null</span>) &amp;&amp; (valueType === <span class="string">&#x27;object&#x27;</span> || valueType === <span class="string">&#x27;function&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepClone</span>(<span class="params">target, map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>()</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target === <span class="string">&#x27;symbol&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Symbol</span>(target.<span class="property">description</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_">isObject</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> target === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (target <span class="keyword">instanceof</span> <span class="title class_">Set</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> set = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> target) &#123;</span><br><span class="line">            set.<span class="title function_">add</span>(item)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> set</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (map.<span class="title function_">has</span>(target)) &#123;</span><br><span class="line">        <span class="keyword">return</span> map.<span class="title function_">get</span>(target)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(target) ? [] : &#123;&#125;</span><br><span class="line">    map.<span class="title function_">set</span>(target, obj)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> target) &#123;</span><br><span class="line">        obj[key] = <span class="title function_">deepClone</span>(target[key], map)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">getOwnPropertySymbols</span>(target)) &#123;</span><br><span class="line">        obj[<span class="title class_">Symbol</span>(key.<span class="property">description</span>)] = <span class="title function_">deepClone</span>(target[key], map)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">deepClone</span>(obj))</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    &#123;name: &#x27;tom&#x27;, age: 18, isHigh: false, foo: undefined, love: null, …&#125;age: 18bar: Symbol(11)bar1: Set(3) &#123;1, 2, 3&#125;book: &#123;name: &#x27;JS&#x27;, time: 20, bar: undefined, baz: null&#125;fn: () =&gt; &#123; &#125;foo: undefinedhobbies: (4) [&#x27;eat&#x27;, &#x27;sleep&#x27;, &#x27;code&#x27;, &#123;…&#125;]isHigh: falselove: nullname: &quot;tom&quot;obj1: &#123;name: &#x27;tom&#x27;, age: 18, isHigh: false, foo: undefined, love: null, …&#125;Symbol(222): 222&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -538,14 +551,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">33k</span>
+    <span title="站点总字数">35k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
