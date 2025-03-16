@@ -29,7 +29,7 @@
 <meta property="og:description" content="HTTP相关知识点。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-14T09:11:12.000Z">
-<meta property="article:modified_time" content="2025-03-14T09:41:36.057Z">
+<meta property="article:modified_time" content="2025-03-14T15:52:23.608Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="JS">
@@ -148,7 +148,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">HTTP的版本</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHTTP%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是HTTP？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">HTTP的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">HTTP的请求方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">4.</span> <span class="nav-text">HTTP常见的请求头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%9A%84%E5%B8%B8%E8%A7%81%E7%9A%84%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">HTTP的常见的响应状态码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -271,7 +271,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-14 17:11:12 / 修改时间：17:41:36" itemprop="dateCreated datePublished" datetime="2025-03-14T17:11:12+08:00">2025-03-14</time>
+      <time title="创建时间：2025-03-14 17:11:12 / 修改时间：23:52:23" itemprop="dateCreated datePublished" datetime="2025-03-14T17:11:12+08:00">2025-03-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,14 +301,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>441</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -319,7 +319,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>什么是HTTP？</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="什么是HTTP？">什么是HTTP？</h2>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>HTTP（超文本传输协议：HyperText Transfer Protocol），是一种用于分布式、协作式和超媒体信息系统的应用层协议。</p>
@@ -355,12 +355,137 @@
 <p>HTTP/1.0</p>
 <ul class="lvl-2">
 <li class="lvl-4">支持GET、POST、HEAD等请求，支持请求头、响应头等，支持更多的种信息传递的数据类型，不再仅仅局限于文本数据。</li>
-<li class="lvl-4">在1.0版本中每次请求都需要与服务器建立一个TCP链接，请求处理完后断开TCP链接，每次建立连接的开销较大。</li>
+<li class="lvl-4">在1.0版本中每次请求都需要与服务器建立一个TCP链接，请求处理完后断开TCP链接，每次建立连接的开销较大。如果想进行持久连接，需要在请求头和响应头中都添加Connection: keep-alive。</li>
 </ul>
 </li>
 <li class="lvl-2">
+<p>HTTP/1.1</p>
+<ul class="lvl-2">
+<li class="lvl-4">此版本是使用最广泛的。</li>
+<li class="lvl-4">增加了PUT、DELETE等请求方法</li>
+<li class="lvl-4">默认采用持久连接（Connection: keep-alive），即一次TCP连接中请求处理完后可以选择保持一定事件的状态，放便下一次请求也可以使用，即多个请求可以共用一个TCP连接，但不同的WEB服务器的保持时间是不同的。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>HTTP/2.0</p>
+<ul class="lvl-2">
+<li class="lvl-4">提升网络性能，依赖TCP优化，显著提升加载速度。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>HTTP/3.0</p>
+<ul class="lvl-2">
+<li class="lvl-4">提升安全性，传输协议变为依赖基于UDP的QUIC协议，较少丢包率。</li>
+<li class="lvl-4">但需要服务器和客户端同时支持。</li>
+</ul>
 </li>
 </ul>
+<h2 id="HTTP的请求方式">HTTP的请求方式</h2>
+<p>在RFC（Request For Comments）中定义了一组请求方式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>GET： GET方法请求一个指定资源的表现形式，一般用于获取数据。</p>
+</li>
+<li class="lvl-2">
+<p>HEAD：HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如在准备下载一个文件前，通过HEAD方法可以先获取文件的大小，再决定是否进行下载，在一定程度上可以优化下载。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>POST：POST方法用请求有效载荷（payload）替换目标资源的所有当前表示。</p>
+<ul class="lvl-2">
+<li class="lvl-4">一般用于添加数据。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>PUT：PUT方法用请求有效载荷替换目标资源的所有当前表示。</p>
+<ul class="lvl-2">
+<li class="lvl-4">一般用于修改数据整体。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>DELETE：DELETE方法一般用于删除指定的资源。</p>
+</li>
+<li class="lvl-2">
+<p>PATCH： PATCH方法一般用于与资源部分修改。</p>
+</li>
+<li class="lvl-2">
+<p>CONNECT：CONNECT方法建立一个到目标资源标识的服务器的隧道，通常用在代理服务器，网页开发很少用到。</p>
+</li>
+<li class="lvl-2">
+<p>TRACE：TRACE方法沿着到目标资源的路径执行一个消息的环回测试。</p>
+</li>
+</ul>
+<h2 id="HTTP常见的请求头">HTTP常见的请求头</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Content-type： type是这次请求携带的数据的类型，服务器可以根据其判断怎样解析数据。</p>
+<ul class="lvl-2">
+<li class="lvl-4">application/x-www-form-urlencoded：表示数据被编码成以’&amp;‘分割的键值队，同时以’='分割键和值。即通过form表单提交的数据。</li>
+<li class="lvl-4">application/json：表示传输的数据是一个JSON类型。</li>
+<li class="lvl-4">application/xml：表示传输的数据是一个XML类型。</li>
+<li class="lvl-4">text/plain：表示传输的数据是文本类型。</li>
+<li class="lvl-4">multipart/form-data：表示是上传文件。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Content-length：文件的大小长度。</p>
+<ul class="lvl-2">
+<li class="lvl-4">前面提到过HEAD请求是没有响应体的，他的一个使用场景就是可以先获取文件大小Content-length，再决定是否进行下载，从而优化下载。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Connection: keep-alive</p>
+<ul class="lvl-2">
+<li class="lvl-4">http是基于TCP协议的，但是在1.1之前每一次请求都需要经历TCP的连接和断开，这样频繁的连接和断开时非常耗性能的。</li>
+<li class="lvl-4">在1.0时期，可以手动进行持久连接，需要在请求头和响应头中都添加Connection: keep-live，当客户端再次发送请求时，就会使用同一个连接，直到一方断开连接。</li>
+<li class="lvl-4">在1.1版本中，所有连接默认是Connection: keep-alive的，不同的Web服务器的保持时间是不同的。但可以通过<code>Keep-Alive: timeout=xxx</code>进行单独设置。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>accept-encoding: 告知服务器，客户端支持的压缩格式。</p>
+</li>
+<li class="lvl-2">
+<p>accept: 告知服务器，客户端可接受文件的格式类型。</p>
+</li>
+<li class="lvl-2">
+<p>user-agent: 客户端相关的信息。</p>
+</li>
+</ul>
+<p>关于accept和accept-encoding，是客户端传递给服务器可以接收的文件格式和压缩格式，服务器会先根据Accept选择内容格式，再根据Accept-Encoding决定是否压缩，最终返回格式正确且经过压缩（若支持）的响应。</p>
+<h2 id="HTTP的常见的响应状态码">HTTP的常见的响应状态码</h2>
+<p>MDN：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Status">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Status</a></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>200（OK）：客户端请求成功。</p>
+</li>
+<li class="lvl-2">
+<p>201（Created）：POST请求，创建新的资源成功。</p>
+</li>
+<li class="lvl-2">
+<p>301（Moved Permanently）：请求资源的URL已经修改，响应中会给出新的URL，浏览器会根据给出的URL重定向到新的URL。</p>
+</li>
+<li class="lvl-2">
+<p>400（Bad Request）：客户端的错误，服务器无法处理或者不进行处理。</p>
+</li>
+<li class="lvl-2">
+<p>401（Unauthorized）：未授权的错误，必须携带请求的身份信息。</p>
+</li>
+<li class="lvl-2">
+<p>403（Forbidden）：客户端没有访问权限，被拒绝。</p>
+</li>
+<li class="lvl-2">
+<p>404（Not Found）：服务器找不到请求的资源。</p>
+</li>
+<li class="lvl-2">
+<p>500（Internal Server Error）：服务器遇到了不知道如何处理的问题。</p>
+</li>
+<li class="lvl-2">
+<p>503（Serive Unavailable）：服务器不可用，可能出于维护或重载状态，暂时无法访问。</p>
+</li>
+</ul>
+<p>在开发中，一般都会采用返回200状态码，但会自定义响应信息，统一客户端处理逻辑。</p>
 
     </div>
 
@@ -485,14 +610,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:06</span>
+    <span title="站点阅读时长">2:11</span>
   </span>
 </div>
 <div class="busuanzi-count">

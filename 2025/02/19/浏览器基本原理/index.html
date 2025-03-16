@@ -29,7 +29,7 @@
 <meta property="og:description" content="浏览器基本原理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-19T09:18:14.000Z">
-<meta property="article:modified_time" content="2025-03-05T02:31:22.805Z">
+<meta property="article:modified_time" content="2025-03-14T14:13:11.283Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="原理">
 <meta property="article:tag" content="浏览器">
@@ -276,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-05 10:31:22" itemprop="dateModified" datetime="2025-03-05T10:31:22+08:00">2025-03-05</time>
+      <time title="修改时间：2025-03-14 22:13:11" itemprop="dateModified" datetime="2025-03-14T22:13:11+08:00">2025-03-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,14 +302,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -384,13 +384,32 @@
 <p>布局(layout): 计算渲染树中每个节点的几何信息, 如宽高、位置等。</p>
 </li>
 <li class="lvl-3">
-<p>绘制(paint): 将每个节点绘制到屏幕上, 将进行布局操作后的渲染树的结果转为屏幕上实际的像素点</p>
+<p>绘制(paint): 生成绘制指令列表，描述元素的绘制顺序和方式。</p>
 <ol>
-<li class="lvl-6">绘制过程是将元素的可见部分进行绘制, 如背景色、边框、文本、图片等。</li>
+<li class="lvl-6">绘制是逻辑操作，不直接操作像素。</li>
 </ol>
 </li>
 <li class="lvl-3">
-<p>渲染页面: 将渲染树渲染到页面上。</p>
+<p>分块：既将页面或合成层划分成多个小块，进行独立光栅化和更新。</p>
+<ol>
+<li class="lvl-6">分块不是浏览器必须的，而是一种优化手段。</li>
+<li class="lvl-6">通过分块可以实现仅更新视口可见区域或既将进入视口的块。</li>
+<li class="lvl-6">由于可能存在多个合成层，所以可以将多个合成层划分的小块交予其他线程处理。</li>
+<li class="lvl-6">由于非可见区域的块可以延迟处理或降级质量，节省了内存。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>光栅化：将渲染树中的矢量图形转为屏幕上的像素矩阵。</p>
+<ol>
+<li class="lvl-6">光栅化这一块是浏览器必须的。</li>
+<li class="lvl-6">光栅化可以调用GPU加速页面的绘制。</li>
+</ol>
+</li>
+<li class="lvl-3">
+<p>合成：将光栅化期间的像素矩阵交由合成线程进行合并。</p>
+</li>
+<li class="lvl-3">
+<p>显示: 画到屏幕上。</p>
 </li>
 </ol>
 </details>
@@ -635,14 +654,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:06</span>
+    <span title="站点阅读时长">2:11</span>
   </span>
 </div>
 <div class="busuanzi-count">
