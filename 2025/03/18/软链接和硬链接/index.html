@@ -29,7 +29,7 @@
 <meta property="og:description" content="软链接和硬链接。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-18T14:13:21.000Z">
-<meta property="article:modified_time" content="2025-03-18T15:14:52.256Z">
+<meta property="article:modified_time" content="2025-03-19T14:42:24.996Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="软链接">
 <meta property="article:tag" content="硬链接">
@@ -147,7 +147,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">硬链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">软链接</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">硬链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E4%B8%AD%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.</span> <span class="nav-text">Linux中的硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E4%B8%AD%E7%9A%84%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">Windows中的硬链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">软链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">软链接和硬链接的区别</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -268,9 +268,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-18 22:13:21 / 修改时间：23:14:52" itemprop="dateCreated datePublished" datetime="2025-03-18T22:13:21+08:00">2025-03-18</time>
+      <time title="创建时间：2025-03-18 22:13:21" itemprop="dateCreated datePublished" datetime="2025-03-18T22:13:21+08:00">2025-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 22:42:24" itemprop="dateModified" datetime="2025-03-19T22:42:24+08:00">2025-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,14 +306,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>168</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -318,12 +324,48 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>软链接和硬链接是两种不同的文件链接方式，他们都用于创建文件的访问路径。</p>
-<p>软链接和硬链接最初是Linux中引入的</p>
+    <div class="post-body" itemprop="articleBody"><p>硬链接和软链接是文件系统中链接文件的两种方式。</p>
+<p>笼统来说，硬链接就是多个文件名对磁盘数据的共同引用，软链接就是存储一个文件路径，通过该路径可以获取磁盘数据，可以理解为快捷方式。</p>
+<p>如果只是想简单了解，上述描述已经够用了，下面的就可以不用看了。</p>
+<p>一下只是较为详细的说明下硬链接的引用和删除有关的内容，至于其他的跨文件系统/卷啥的，这里不会提及。</p>
+<p>硬链接和软链接最初是出现在Unix中的。后来又Linux对其进行继承和完善，Windows系统中最初是不存在任何形式的链接方式的，后来NTFS文件系统的出现，Windows系统出现了硬链接和符号链接（软链接），但Windows和Linux在硬链接和软链接的实现上还是有所区别的。</p>
 <h2 id="硬链接">硬链接</h2>
-<p>在liunx中</p>
+<p>硬链接只能链接文件，为了防止循环引用。</p>
+<h3 id="Linux中的硬链接">Linux中的硬链接</h3>
+<p>在Linux中的硬链接是多个文件共享一个inode（文件元数据标识符），指向相同的数据块，既通过该inode可以获取到磁盘数据。</p>
+<p>（文件名是用户可见的标识符，而inode是文件系统内部的数据结构，我们是看不到的，用于存储文件元数据和数据块位置。每一个inode都是独一无二的。文件元数据既文件的描述信息，包括文件权限、类型、大小等，数据块位置既文件内容在磁盘上的物理存储位置。）</p>
+<p>对于共享同一个inode的所以硬链接，它们的地位是平等的，删除任何一个，都不会影响到磁盘数据的消失，对于磁盘数据的删除，Linux的文件系统采用了链接计数的方式，既当有一个硬链接指向了磁盘数据对应的inode，其对应的链接计数就会+1，如果删除了一个硬链接，就删除了一个文件名对inode的引用，链接计数就会-1，当链接计数位0是，磁盘数据才会真正被删除。</p>
+<p>由于硬链接是多个文件共享同一个inode，而inode存储着数据块位置，所以通过任意一个硬链接的文件名修改磁盘数据，通过其他硬链接访问到的数据都是被修改过的。</p>
+<blockquote>
+<p>语法<br>
+ln &lt;源文件&gt; &lt;硬链接名称&gt;</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln file.txt hardlink.txt</span><br></pre></td></tr></table></figure>
+<h3 id="Windows中的硬链接">Windows中的硬链接</h3>
+<p>Windows中的硬链接是根据NTFS的特性，允许多个文件名可以指向同一个文件数据。和Linux的硬链接类似，只不过Windows中采用的MFT条目，而不是inode。</p>
+<p>所以一个硬链接的删除是不会导致文件数据的删除的，因为还存在其他硬链接的指向，同时通过一个硬链接的修改其他获取到的也是修改过的数据。</p>
+<blockquote>
+<p>语法<br>
+mklink /H &lt;硬链接名称&gt; &lt;源文件&gt;</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklink /H hardlink.txt file.txt</span><br></pre></td></tr></table></figure>
 <h2 id="软链接">软链接</h2>
-<p>软链接是一个独立的文件，它也有自己的文件数据块，既磁盘数据中存储着目标文件的路径，类似于快捷方式，当访问软链接时，会从磁盘数据中找到目标路径，再通过目标路径获得源文件，再访问真实数据，当目标路径的源文件被删除，软链接的指向不存在，系统就会报错。</p>
+<p>软链接允许链接目录，但仍会造成循环引用，需要手动处理。</p>
+<p>Linux和Windows中的软链接是一个独立的文件存储着目标文件的路径字符串。当存储的目标文件被删除，此软链接失效，成为悬空链接，再次通过软链接访问系统会报错。</p>
+<p>但Windows中的软链接需要管理员权限，而Linux中不需要。</p>
+<blockquote>
+<p>Linux创建软链接命令<br>
+ln -s &lt;源文件或目录&gt; &lt;软链接名称&gt;</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /path/to/file.txt symlink.txt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Windows创建软链接命令<br>
+mklink &lt;软链接名称&gt; &lt;源文件&gt;</p>
+</blockquote>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mklink symlink.txt file.txt</span><br></pre></td></tr></table></figure>
+<h2 id="软链接和硬链接的区别">软链接和硬链接的区别</h2>
+<p>Linux中，软链接不直接共享硬链接的inode，而是通过存储的目标文件路径间接访问，是路径的别名。而硬链接直接共享inode，是文件实体的多个别名。</p>
+<p>Windows中，把上述的inode概念改为MFT条目就行了。中存储着目标文件的路径，类似于快捷方式，当访问软链接时，会从磁盘数据中找到目标路径，再通过目标路径获得源文件，再访问真实数据，当目标路径的源文件被删除，软链接的指向不存在，系统就会报错。</p>
 
     </div>
 
@@ -447,14 +489,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">36k</span>
+    <span title="站点总字数">37k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:11</span>
+    <span title="站点阅读时长">2:15</span>
   </span>
 </div>
 <div class="busuanzi-count">
