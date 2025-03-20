@@ -21,14 +21,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="JS模块化。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="JS模块化">
 <meta property="og:url" content="https://a-big-dreamer.github.io/2025/03/17/JS%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
+<meta property="og:description" content="JS模块化。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-17T15:49:17.000Z">
-<meta property="article:modified_time" content="2025-03-17T15:49:17.493Z">
+<meta property="article:modified_time" content="2025-03-20T15:03:57.903Z">
 <meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="模块化">
 <meta name="twitter:card" content="summary">
 
 
@@ -95,7 +100,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">32</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">34</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -133,7 +138,7 @@
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -143,6 +148,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonJS"><span class="nav-number">2.</span> <span class="nav-text">CommonJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD%E3%80%81CMD%E3%80%81UMD"><span class="nav-number">3.</span> <span class="nav-text">AMD、CMD、UMD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESModule"><span class="nav-number">4.</span> <span class="nav-text">ESModule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ESModule%E7%9A%84%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">ESModule的解析流程</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -157,7 +163,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +174,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -185,6 +191,11 @@
             近期文章
 	</div>
 	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" title="ESModule解析流程" target="">
+		    ESModule解析流程
+		    </a>
+		</li>
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/03/18/%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/" title="软链接和硬链接" target="">
 		    软链接和硬链接
@@ -203,11 +214,6 @@
 	        <li class="my-links-of-blogroll-item">
 		    <a href="/2025/03/13/%E6%89%8B%E5%86%99%E5%AE%9E%E7%8E%B0%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF/" title="手写实现事件总线" target="">
 		    手写实现事件总线
-		    </a>
-		</li>
-	        <li class="my-links-of-blogroll-item">
-		    <a href="/2025/03/11/%E6%89%8B%E5%86%99%E9%98%B2%E6%8A%96%E3%80%81%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0/" title="手写防抖、节流函数" target="">
-		    手写防抖、节流函数
 		    </a>
 		</li>
 	</ul>
@@ -249,7 +255,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="JS模块化 | ABD's Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="JS模块化。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -266,6 +272,26 @@
 
       <time title="创建时间：2025-03-17 23:49:17" itemprop="dateCreated datePublished" datetime="2025-03-17T23:49:17+08:00">2025-03-17</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-20 23:03:57" itemprop="dateModified" datetime="2025-03-20T23:03:57+08:00">2025-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+    </span>
 
   
     <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
@@ -281,24 +307,86 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
+            <div class="post-description">JS模块化。</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h2 id="模块化">模块化</h2>
+<p>我们需要先知道为什么会出现模块化这个概念。</p>
+<p>模块化是软件开发中<strong>复杂度的指数级增长</strong>和<strong>工程化的必然需求</strong>，其核心目的就是为了实现代码的复用、解耦、提高可维护性，通过模块化，可以实现不同人员同时开发不同的模块，最后将其进行整合，从而提高开发效率。</p>
+<p>在最初的时候，JS是运行在浏览器中的，我们通过script标签引入外部js文件，或直接在script标签内部直接编写js代码，虽然它们在物理上是独立的，但它们在浏览器上运行时还是共享同一个全局作用域，这就导致了如果我们直接在外部js文件编写全局代码，再通过script引入，很可能会导致变量名覆盖，如果是let、const声明的变量，虽然不会覆盖，但通过报错来调整还是太过耗时和麻烦，对于外部JS文件，更多的还是引用别人编写好的工具文件，在没有文档的情况下，我们需要查看源码才知道暴露给我们的到底有哪些变量是我们可以使用的，同时，如果一个JS文件引用了其他的JS文件的变量，那么先把哪个JS文件引入也成为了一个问题，总结起来主要就是：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>可能会污染全局变量，或者变量名冲突。</p>
+</li>
+<li class="lvl-2">
+<p>使用起来麻烦，阅读性较差。</p>
+</li>
+<li class="lvl-2">
+<p>依赖管理容易失控。</p>
+</li>
+<li class="lvl-2">
+<p>引申起来还会有协同开发冲突等问题。</p>
+</li>
+</ul>
+<p>虽然可以通过在外部js文件中使用立即执行函数的作用域来解决变量名冲突的问题，但如果我们想获取IIFE的返回值呢？仍然会存在上述问题。</p>
+<p>随着Node.js这个JS运行时环境的出现，实现了通过JS开发服务端的应用，而服务端通常需要处理文件操作、数据库交互、网络通信的等复杂任务，这时候必须要分模块管理，而在这之前，ECMA并没有对JS的模块化有过明确的规定，Node.js引入了社区的CommonJS规范，并基于此规范实现了自己的模块系统。（CommonJS是一套由开发者社区提出的旨在解决JS在非浏览器环境（如服务端）中的模块化问题，强调同步加载模块，由于在服务端，资源一般都是本地文件，对于本地文件的读取速度还是很快的，所以同步就合适了）。</p>
+<h2 id="CommonJS">CommonJS</h2>
+<p>CommonJS中关于导入和导出的规范为<code>require</code>和<code>exports</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">name</span> = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">const</span> test = <span class="built_in">require</span>(<span class="string">&#x27;./test&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(test.<span class="property">name</span>) <span class="comment">// test</span></span><br></pre></td></tr></table></figure>
+<p>由于通过<code>exports.属性名</code>一个一个导出太过麻烦，CommonJS又提供了<code>module.exports</code>统一导出的方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">    <span class="attr">test</span>: <span class="string">&#x27;test&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Node.js关于导出的内部原理其实就是导出一个对象，exports和通过require引入的自定义名称指向的就是一个对象，Node.js实现导出的时候，内部实现了一个操作<code>module.exports = exports</code>，所以在模块初始化的时候，module.exports和exports其实是等价的，但其实通过require引入的其实是moudle.exports指向的对象，所以如果使用<code>module.exports=&#123;&#125;</code>的方式导出，exports和module.exports指向的就不是同一个对象了，这是再对exports操作就没有意义了，因为导入和导出的是同一个对象，所以通过对对导入的变量操作和在导出处进行操作，数据修改是双向的。</p>
+<p>经过上文描述，也就可以解释CommonJS的导出规范为<code>exports</code>，并不包括<code>module.exports</code>，但可以使用moudle.exports操作，因为它们在初始化时指向的是同一个对象，也简介是符合CommonJS规范的。</p>
+<h2 id="AMD、CMD、UMD">AMD、CMD、UMD</h2>
+<p>AMD、CMD、UMD都是在ESModule标准化之前使用的社区模块化规范，现在已经很少有人用了，但UMD目前还是一种兼容性的流行方案，这里对它们就不过多了解了，只介绍一下它们的特点吧。</p>
+<p>关于AMD和CMD，它们都是应用于浏览器环境下的模块化方案，由于CommonJS强调同步加载模块，这对于浏览器来说是非常致命的，因为浏览器JS解析单线程会因为JS代码而发生阻塞，所以出现了AMD和CMD方案，它们可以实现异步加载模块，代表的库分别为<code>RequireJS</code>和<code>SeaJS</code>。</p>
+<p>而UMD可以根据条件判断适配多种环境（AMD，CommonJS，全局变量），实现了跨环境支持，既同一套代码可运行在浏览器、Node.js和AMD中，适合开发兼容多种环境的JS库，也是保证兼容旧环境的最佳方案。代表库有<code>JQuery</code>和<code>Lodash早期版本</code>。</p>
+<h2 id="ESModule">ESModule</h2>
+<p>ESModule是ECMA发布的标准模块化规范，使用<code>import</code>和<code>export</code>关键字实现模块化。</p>
+<p>ESModule实现导出：</p>
+<p>方式一：具名导出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或是进行统一导出</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;test&#x27;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">params</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过这种方式可以在导出时其别名</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">    name <span class="keyword">as</span> name1,</span><br><span class="line">    foo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方式二：默认导出，一个模块文件只能有一个默认导出<code>export default</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">params</span>) &#123;&#125;</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;test&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> name</span><br></pre></td></tr></table></figure>
+<p>ESModule实现导入：</p>
+<p>如果只是在普通浏览器环境下，对于导入的文件名路径是要写全的，否则找不到，我们可能在工程化开始时见过不用写后缀名什么的，那是由于webpack或vite等打包工具进行了一些处理。</p>
+<p>方式一：具名导入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;name&#125; <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 具名导入的可以为导入的变量起别名</span></span><br><span class="line"><span class="keyword">import</span> &#123;name <span class="keyword">as</span> name1&#125; <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>方式二：默认导入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> name <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>方式三：导入整个模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> test <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>特殊情况</p>
+<p>情况一：默认导入可以和具名导入一起使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> name, &#123;foo&#125; <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>情况二：导入和导出结合使用。</p>
+<p>场景：将各个模块的内容交由一个文件统一处理，仅适用于具名导入导出，如Pinia的模块化处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br><span class="line"><span class="keyword">export</span> &#123;name&#125; <span class="keyword">from</span> <span class="string">&#x27;./test.js&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>注意点：</p>
+<p>注意一：关于ESModule的具名导入和导出，操作的<code>&#123;&#125;</code>并不是个对象，里面的变量并不是对象增强和结构，只是一种静态语法，并不能在里面写对象的字面量那种写法。</p>
+<p>注意二：ESMdoule中的变量不能进行赋值操作的，不能进行双向更改，是一种单项数据流的模式。</p>
+<p>上述的ESModule通过import的导入方式都是静态导入，是不可以放到逻辑代码中的，这与ESModule的解析流程有关，后面再说，如果想实现动态导入，可以使用<code>import()</code>函数，该函数返回的是一个Promise对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">&#x27;./test.js&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>在工程化开发中，尤其是Vite中，我们还经常用到<code>import meta</code>，import.meta是一个给JS模块保禄特定上下文的对象。它包含了这个模块的信息，比如说这个模块的URL。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">import</span>.<span class="property">meta</span>) <span class="comment">// &#123;url: &#x27;http://127.0.0.1:5500/1.js&#x27;, resolve: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="ESModule的解析流程">ESModule的解析流程</h3>
+<p><a href="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/">ESModule解析流程</a></p>
+
     </div>
 
     
@@ -340,6 +428,11 @@
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+              <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 模块化</a>
+          </div>
 
         
 
@@ -420,14 +513,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">39k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:15</span>
+    <span title="站点阅读时长">2:22</span>
   </span>
 </div>
 <div class="busuanzi-count">
