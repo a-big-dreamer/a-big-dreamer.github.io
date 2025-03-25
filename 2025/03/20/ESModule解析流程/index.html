@@ -30,11 +30,13 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%9B%BE.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E%E7%AC%A6.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E8%AE%B0%E5%BD%95.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95.png">
 <meta property="article:published_time" content="2025-03-20T15:02:17.000Z">
-<meta property="article:modified_time" content="2025-03-24T15:30:47.350Z">
+<meta property="article:modified_time" content="2025-03-25T14:37:58.103Z">
 <meta property="article:author" content="A Big Dreamer">
-<meta property="article:tag" content="JS">
 <meta property="article:tag" content="前端">
+<meta property="article:tag" content="JS">
 <meta property="article:tag" content="ESModule">
 <meta property="article:tag" content="模块化">
 <meta name="twitter:card" content="summary">
@@ -152,7 +154,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ESModule%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">ESModule的工作原理</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">ESModule解析流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construction%EF%BC%88%E6%9E%84%E9%80%A0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Construction（构造）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation%EF%BC%88%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Instantiation（实例化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation%EF%BC%88%E6%B1%82%E5%80%BC%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Evaluation（求值）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -281,7 +283,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-24 23:30:47" itemprop="dateModified" datetime="2025-03-24T23:30:47+08:00">2025-03-24</time>
+      <time title="修改时间：2025-03-25 22:37:58" itemprop="dateModified" datetime="2025-03-25T22:37:58+08:00">2025-03-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,14 +313,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>609</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -340,7 +342,20 @@
 <p>避免了污染全局变量，如恶意更改代码和不小心覆盖了变量。</p>
 </li>
 </ul>
-<h2 id="ESModule的工作原理">ESModule的工作原理</h2>
+<h2 id="ESModule解析流程">ESModule解析流程</h2>
+<p>对于ES模块，可以分三个步骤进行：</p>
+<ol>
+<li class="lvl-3">
+<p>Construction（构造）：查找、下载和解析所有文件到模块记录中。</p>
+</li>
+<li class="lvl-3">
+<p>Instantiation（实例化）：在内存中的查找区域（区域内有一块一块的结构）内放置所有导出的值（但不要用值填充他们）。然后是exports和imports都指向内存中的查找区域块，这称为链接。</p>
+</li>
+<li class="lvl-3">
+<p>Evaluation（求值）：运行代码以使用变量的实际值填充内存中的查找区域块。</p>
+</li>
+</ol>
+<h2 id="Construction（构造）">Construction（构造）</h2>
 <p>当使用模块化开发时，我们需要给JS运行时环境（如浏览器、NodeJS）指定一个入口文件，通过该入口文件，JS运行时环境将沿着入口文件的import语句向内查找可形成一个依赖关系图，不同的依赖项由各个模块的import语句连接。</p>
 <img data-src="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%9B%BE.png" class="" title="依赖关系图">
 <p>而对于每个依赖项的寻找是通过模块说明符（module specifier）来寻找的。</p>
@@ -356,20 +371,40 @@
 </ul>
 <p>如果模块说明符直接是一个模块名的话，会通过<code>Import Maps</code>映射为实际的URL，在浏览器端通过在script标签的<code>type=importmap</code>中编写json格式的数据实现。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;importmap&quot;</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;imports&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;react&quot;</span>: <span class="string">&quot;https://cdn.skypack.dev/react@17.0.1&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>但由于一个个模块其实就是一个个文件，文件并不是浏览器可以使用的东西，浏览器如果想解析这些文件，就需要将其解析为一个个模块记录</p>
-<p>接下来了解一下ESModule的解析流程。</p>
-<p>对于ES模块，可以分三个步骤进行：</p>
-<ol>
-<li class="lvl-3">
-<p>Construction（构造）：查找、下载和解析所有文件到模块记录中。</p>
+<p>但由于一个个模块其实就是一个个文件，文件并不是浏览器可以使用的东西，浏览器如果想解析这些文件，就需要将其解析为一个个模块记录。</p>
+<p>模块记录其实就是一个对象，包含导入导出声明，以及其依赖关系。</p>
+<p><strong>注意</strong>：模块记录并不包含完整代码的AST，在构造这一阶段，会将代码解析为AST，但仅保留AST中的关键信息，就是上述的导入导出声明以及依赖关系。当构造阶段结束，AST就会被销毁，但运行时环境（浏览器/NodeJS）通常会保留原始代码或编译后的可执行代码（如字节码），用于求值阶段的执行。</p>
+<img data-src="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E8%AE%B0%E5%BD%95.png" class="" title="模块记录">
+<p>每个模块记录中的依赖关系不仅可以形成一个模块的依赖关系图，同时也决定了模块的执行顺序。</p>
+<p>当模块解析完后，就会对其进行模块缓存，其缓存会存储在全局<code>Moudle Map</code>中，以模块解析后的URL为键，以模块记录为值。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>目的就是为了避免重复下载：如果模块已加载或正在加载，直接复用缓存。</p>
 </li>
-<li class="lvl-3">
-<p>Instantiation（实例化）：在内存中的查找区域（区域内有一块一块的结构）内放置所有导出的值（但不要用值填充他们）。然后是exports和imports都指向内存中的查找区域块，这称为链接。</p>
+<li class="lvl-2">
+<p>模块的状态：</p>
+<ul class="lvl-2">
+<li class="lvl-4">Fetching（加载中）</li>
+<li class="lvl-4">Fetched（已加载）</li>
+<li class="lvl-4">Instantiation（实例化）</li>
+<li class="lvl-4">Evaluated（已求值）</li>
+</ul>
 </li>
-<li class="lvl-3">
-<p>Evaluation（求值）：运行代码以使用变量的实际值填充内存中的查找区域块。</p>
-</li>
-</ol>
+</ul>
+<h2 id="Instantiation（实例化）">Instantiation（实例化）</h2>
+<p>在构造阶段，我们已经获得了一个个模块记录，每一个模块记录中都包含其相应的导入导出声明和依赖关系，这一阶段的目的就是将每一个模块记录中的依赖关系转换为内存的查找区域块，并完成导入和导出的指向。</p>
+<p>在实例化开始阶段，JS引擎会创建一个模块环境记录（module environment record），模块环境记录管理着模块记录中的导入导出变量，并由JS引擎在内存中为它们分配空间，由模块环境记录对这些变量进行关联，但此时的变量并没有实际值，如果是普通变量的话，值为undefined，如果是函数的话，会对函数进行创建，这有利于求值阶段的执行。</p>
+<img data-src="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95.png" class="" title="模块环境记录">
+<p>对于模块环境记录中的导入导出变量，可以称之为状态，对于这些状态，JS引擎会通过类似于哈希表的结构进行存储，键为变量名，值为内存地址。</p>
+<p>如果模块记录转换为模块环境记录成功后，就会将这个模块环境记录追加到<code>Module Map</code>中对应的模块记录的后面。</p>
+<p>总而言之，实例化这一阶段，就是将构造阶段的模块记录中的导入导出声明在内存中开辟一块区域进行存储，并与构造阶段的模块记录中的代码解析遗留下来的可执行代码（如字节码）进行结合形成模块环境记录，用于管理变量的内存地址，并未求值阶段的填充值做准备。</p>
+<h2 id="Evaluation（求值）">Evaluation（求值）</h2>
+<p>上文提到，在构造阶段，虽然解析代码后的AST销毁了，但保留了可执行代码（如字节码），在此阶段其实就是进行可执行代码的执行，并未实例化阶段的模块环境记录中跟踪的状态的值填充。</p>
+<p>在代码执行完毕，并对值进行填充完毕后，同样会在对应模块环境记录对应的<code>Module Map</code>的后面追加此模块求值的状态。</p>
+<p>在此阶段，会进行顶层代码的执行，顶层代码指的就是直接就在最外层的代码，即不在任何函数，代码块或异步上下文内的代码，只有从顶层代码开始执行，才能执行其他代码嘛。</p>
+<p>在此阶段，模块的顶层代码只会执行一次，就是在第一次被导入的时候执行，后续再导入就会直接复用结果了，因为对其进行缓存了嘛。</p>
+<p>同时，会开启严格模式对代码进行执行，并不需要显式的指定<code>&quot;use strict&quot;</code>，默认就会开启。所以，通过ESModule的模块化都是在严格模式下进行的。</p>
+<p>在后端</p>
 
     </div>
 
@@ -413,8 +448,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
               <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
               <a href="/tags/ESModule/" rel="tag"><i class="fa fa-tag"></i> ESModule</a>
               <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 模块化</a>
           </div>
@@ -495,14 +530,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">41k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:24</span>
+    <span title="站点阅读时长">2:28</span>
   </span>
 </div>
 <div class="busuanzi-count">
