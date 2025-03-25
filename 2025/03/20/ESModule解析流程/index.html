@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E8%AE%B0%E5%BD%95.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95.png">
 <meta property="article:published_time" content="2025-03-20T15:02:17.000Z">
-<meta property="article:modified_time" content="2025-03-25T14:37:58.103Z">
+<meta property="article:modified_time" content="2025-03-25T15:59:58.932Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="JS">
@@ -283,7 +283,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-25 22:37:58" itemprop="dateModified" datetime="2025-03-25T22:37:58+08:00">2025-03-25</time>
+      <time title="修改时间：2025-03-25 23:59:58" itemprop="dateModified" datetime="2025-03-25T23:59:58+08:00">2025-03-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,14 +313,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.6k</span>
+      <span>1.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -404,7 +404,8 @@
 <p>在此阶段，会进行顶层代码的执行，顶层代码指的就是直接就在最外层的代码，即不在任何函数，代码块或异步上下文内的代码，只有从顶层代码开始执行，才能执行其他代码嘛。</p>
 <p>在此阶段，模块的顶层代码只会执行一次，就是在第一次被导入的时候执行，后续再导入就会直接复用结果了，因为对其进行缓存了嘛。</p>
 <p>同时，会开启严格模式对代码进行执行，并不需要显式的指定<code>&quot;use strict&quot;</code>，默认就会开启。所以，通过ESModule的模块化都是在严格模式下进行的。</p>
-<p>在后端</p>
+<p>同时我们在构造阶段可以得到一个依赖关系图，在求值阶段就会根据该依赖关系进行后序深度优先遍历的顺序执行模块的顶层代码。这样可以确保父模块执行时，使用子模块时已经执行完毕了。</p>
+<p>但模块之间的关系可能会存在循环依赖的问题，对于循环依赖，在构造和实例化阶段是不会有影响的，因为它们并不牵扯到代码的执行，仅仅是依赖关系的解析和变量的实时绑定，但在求值阶段可能会导致变量未初始化（TDZ错误）或副作用顺序异常。</p>
 
     </div>
 
