@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E8%AE%B0%E5%BD%95.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95.png">
 <meta property="article:published_time" content="2025-03-20T15:02:17.000Z">
-<meta property="article:modified_time" content="2025-03-25T15:59:58.932Z">
+<meta property="article:modified_time" content="2025-03-26T02:42:10.100Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="JS">
@@ -154,7 +154,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">ESModule解析流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construction%EF%BC%88%E6%9E%84%E9%80%A0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Construction（构造）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation%EF%BC%88%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Instantiation（实例化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation%EF%BC%88%E6%B1%82%E5%80%BC%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Evaluation（求值）</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">ESModule解析流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Construction%EF%BC%88%E6%9E%84%E9%80%A0%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Construction（构造）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation%EF%BC%88%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Instantiation（实例化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation%EF%BC%88%E6%B1%82%E5%80%BC%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Evaluation（求值）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EESModule%E5%92%8CCommonJS"><span class="nav-number">5.</span> <span class="nav-text">关于ESModule和CommonJS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%96%B9%E9%9D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">缓存方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%96%B9%E9%9D%A2"><span class="nav-number">5.2.</span> <span class="nav-text">执行方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA%E6%96%B9%E9%9D%A2"><span class="nav-number">5.3.</span> <span class="nav-text">导入和导出方面</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -283,7 +283,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-25 23:59:58" itemprop="dateModified" datetime="2025-03-25T23:59:58+08:00">2025-03-25</time>
+      <time title="修改时间：2025-03-26 10:42:10" itemprop="dateModified" datetime="2025-03-26T10:42:10+08:00">2025-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,14 +313,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -336,7 +336,7 @@
 <p>我们回顾一下模块化的出现解决了什么问题？</p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>解决了文件之间的依赖问题，不必过于纠结模块的依赖关系引发的顺序问题和删除文件导致的依赖错误。</p>
+<p>解决了文件之间的依赖管理问题，不必过于纠结模块的依赖关系引发的顺序问题和删除文件导致的依赖错误。</p>
 </li>
 <li class="lvl-2">
 <p>避免了污染全局变量，如恶意更改代码和不小心覆盖了变量。</p>
@@ -397,7 +397,7 @@
 <img data-src="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/%E6%A8%A1%E5%9D%97%E7%8E%AF%E5%A2%83%E8%AE%B0%E5%BD%95.png" class="" title="模块环境记录">
 <p>对于模块环境记录中的导入导出变量，可以称之为状态，对于这些状态，JS引擎会通过类似于哈希表的结构进行存储，键为变量名，值为内存地址。</p>
 <p>如果模块记录转换为模块环境记录成功后，就会将这个模块环境记录追加到<code>Module Map</code>中对应的模块记录的后面。</p>
-<p>总而言之，实例化这一阶段，就是将构造阶段的模块记录中的导入导出声明在内存中开辟一块区域进行存储，并与构造阶段的模块记录中的代码解析遗留下来的可执行代码（如字节码）进行结合形成模块环境记录，用于管理变量的内存地址，并未求值阶段的填充值做准备。</p>
+<p>总而言之，实例化这一阶段，就是将构造阶段的模块记录中的导入导出声明在内存中开辟一块区域进行存储，并与构造阶段的模块记录中的代码解析遗留下来的可执行代码（如字节码）进行结合形成模块环境记录，用于管理变量的内存地址，并为求值阶段的填充值做准备。</p>
 <h2 id="Evaluation（求值）">Evaluation（求值）</h2>
 <p>上文提到，在构造阶段，虽然解析代码后的AST销毁了，但保留了可执行代码（如字节码），在此阶段其实就是进行可执行代码的执行，并未实例化阶段的模块环境记录中跟踪的状态的值填充。</p>
 <p>在代码执行完毕，并对值进行填充完毕后，同样会在对应模块环境记录对应的<code>Module Map</code>的后面追加此模块求值的状态。</p>
@@ -406,6 +406,45 @@
 <p>同时，会开启严格模式对代码进行执行，并不需要显式的指定<code>&quot;use strict&quot;</code>，默认就会开启。所以，通过ESModule的模块化都是在严格模式下进行的。</p>
 <p>同时我们在构造阶段可以得到一个依赖关系图，在求值阶段就会根据该依赖关系进行后序深度优先遍历的顺序执行模块的顶层代码。这样可以确保父模块执行时，使用子模块时已经执行完毕了。</p>
 <p>但模块之间的关系可能会存在循环依赖的问题，对于循环依赖，在构造和实例化阶段是不会有影响的，因为它们并不牵扯到代码的执行，仅仅是依赖关系的解析和变量的实时绑定，但在求值阶段可能会导致变量未初始化（TDZ错误）或副作用顺序异常。</p>
+<p>对于这个循环依赖问题，js引擎对它有一定的处理步骤</p>
+<p>假如a.js和b.ja相互依赖</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">&#x27;a.js&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> b = <span class="string">&#x27;b&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">import</span> b <span class="keyword">from</span> <span class="string">&#x27;b.js&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> a = <span class="string">&#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li class="lvl-3">
+<p>执行a.js顶层代码，遇到了b.js导入。</p>
+</li>
+<li class="lvl-3">
+<p>执行b.js代码，但发现a.js导入，但a.js处于正在处理状态。</p>
+</li>
+<li class="lvl-3">
+<p>强制执行b.js代码，需要处理a.js导出的变量，如果a.js导出的变量是let,const声明的，而a.js中对于b.js的导出在a.js中导出的前面，就会按照浏览器抛出暂时性死区TDZ错误，如果是var声明的，则是undefined。</p>
+</li>
+<li class="lvl-3">
+<p>返回继续执行a.js代码。</p>
+</li>
+</ol>
+<p>解决循环依赖的方案：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>重构代码，提取公共部分到带三方模块。</p>
+</li>
+<li class="lvl-2">
+<p>延迟访问。</p>
+</li>
+<li class="lvl-2">
+<p>使用动态导入。</p>
+</li>
+</ul>
+<p>注意：ESModule在求值阶段可能会产生副作用，如TDZ和执行顺序问题，因为顶层代码指的是最外层的代码，即不在代码块内部的代码，所有如果存在打印语句，也是会执行，因为它们并不是导出和导入相关的，在求值阶段的执行可行性代码就可能会产生上述问题，但也就只会执行一次，因为会对模块的状态和导入导出变量进行缓存，再次引入模块只会获得导入导出的变量在内存中的值罢了。</p>
+<h2 id="关于ESModule和CommonJS">关于ESModule和CommonJS</h2>
+<h3 id="缓存方面">缓存方面</h3>
+<p>CommonJS和ESModule的缓存都是一次执行期间缓存，在内存进行缓存，但它们之间缓存方式还是有所区别的，CommonJS缓存的是导出的对象，并且可以通过api进行缓存删除，而ESModule缓存的是模块记录，实例化环境和求值结果，且没有api能对缓存结果删除。</p>
+<h3 id="执行方面">执行方面</h3>
+<p>而由于ESModule可以在浏览器环境下使用，为了防止线程阻塞，构造、实例化和求值三个阶段可以是异步的并且是并行的，如一个模块引入了多个模块，多个模块之间可以并行解析，但每个阶段内部可以是同步执行的。</p>
+<p>而CommonJS是在用于Node服务端的，并不需要考虑渲染等层面的问题，而且读取文件也是本地读取的方式，所以采用同步执行不是影响整个流程的。</p>
+<h3 id="导入和导出方面">导入和导出方面</h3>
+<p>CommonJS导出的变量是一个拷贝，如果是基本数据类型的话，导入和导出一方改变，另一方是看不到的。</p>
+<p>ESModule导出和导入的变量指向的是同一块内存地址，由模块环境记录阶段处理，所以它们的修改是同步的可见的，而且对于导入的变量是不能进行修改的，如果是对象的话，还是能能修改内部属性值的。</p>
 
     </div>
 
@@ -531,14 +570,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">42k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:28</span>
+    <span title="站点阅读时长">2:31</span>
   </span>
 </div>
 <div class="busuanzi-count">
