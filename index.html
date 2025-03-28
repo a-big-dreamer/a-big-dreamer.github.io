@@ -262,9 +262,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-27 23:11:55 / 修改时间：23:15:49" itemprop="dateCreated datePublished" datetime="2025-03-27T23:11:55+08:00">2025-03-27</time>
+      <time title="创建时间：2025-03-27 23:11:55" itemprop="dateCreated datePublished" datetime="2025-03-27T23:11:55+08:00">2025-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-28 23:50:58" itemprop="dateModified" datetime="2025-03-28T23:50:58+08:00">2025-03-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,14 +293,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>49</span>
+      <span>606</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -305,7 +311,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。</p>
+          <p>其实包管理工具就是一种代码共享方案，目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。</p>
+<p>可能有人这个时候就有疑问了，为什么前端开发的库都是以node包的形式进行管理的？</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于以前的ECMA并没有明确的模块化方案，随着NodeJS采用了CommonJS模块化系统，使得代码能够被组织为可复用的模块，但可复用就是可以被多人使用，可以是一个团队，往大点说就是世界范围内。</p>
+</li>
+<li class="lvl-2">
+<p>如果模块文件少的话，通过git服务器就可以操作，但随着模块的越来越多，版本也越来越多，各个模块之间还有依赖关系，这个时候需要一个模块管理工具来管理模块的下载、版本更新和依赖关系。（注意这个下载操作，浏览器是个沙盒环境，在不考虑网络通信的开销，单从文件层面考虑就可以pass了，浏览器是不能直接对文件进行操作的，因为考虑安全性问题。）</p>
+</li>
+<li class="lvl-2">
+<p>由于浏览器没有模块化规范，最初的包管理工具仅仅指的是对服务端的模块进行管理，从npm（Node Package Manager）这个名字就可以看出。</p>
+</li>
+<li class="lvl-2">
+<p>从2013年开始，工程化爆发了，工程化包含代码检测、转换等能力，这同样需要操作文件系统。工程化最终目的是为了获得能兼容各种浏览器运行的代码，node又集成了各种各样的库，前端社区顺势服用其生态，形成了“前端库发布到npm”的惯例。</p>
+</li>
+</ul>
+<blockquote>
+<p>工程化：工程化是指将系统化、标准化的方法应用天项目或产品的设计、开发、测试、部署、维护各个环节，强调通过科学的方法和工具来提高效率、保证质量、降低风险。简单来说：工程化就是运用模块化和组件化开发，有代码规范和质量检测功能，具有自动化流程能力，不必过多考虑配置如何实现，只需要专注于业务逻辑等我一种开发方式。</p>
+</blockquote>
 
           <!--noindex-->
             <div class="post-button">
@@ -1395,7 +1419,7 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:31</span>
+    <span title="站点阅读时长">2:33</span>
   </span>
 </div>
 <div class="busuanzi-count">
