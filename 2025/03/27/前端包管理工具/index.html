@@ -29,7 +29,7 @@
 <meta property="og:description" content="其实包管理工具就是一种代码共享方案，目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。 可能有人这个时候就有疑问了，为什么前端开发的库都是以node包的形式进行管理的？   由于以前的ECMA并没有明确的模块化方案，随着NodeJS采用了CommonJS模块化系统，使得代码能够被组织为可复用的模块，但可复用就是可以被多人使用，可以是一个团队">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-27T15:11:55.000Z">
-<meta property="article:modified_time" content="2025-03-28T15:50:58.086Z">
+<meta property="article:modified_time" content="2025-03-30T15:15:17.771Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
@@ -138,7 +138,7 @@
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -148,6 +148,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7npm"><span class="nav-number">1.</span> <span class="nav-text">包管理工具npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">npm的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">package.json的配置项</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -276,7 +277,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-28 23:50:58" itemprop="dateModified" datetime="2025-03-28T23:50:58+08:00">2025-03-28</time>
+      <time title="修改时间：2025-03-30 23:15:17" itemprop="dateModified" datetime="2025-03-30T23:15:17+08:00">2025-03-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -306,14 +307,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>606</span>
+      <span>988</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -340,8 +341,19 @@
 </li>
 </ul>
 <blockquote>
-<p>工程化：工程化是指将系统化、标准化的方法应用天项目或产品的设计、开发、测试、部署、维护各个环节，强调通过科学的方法和工具来提高效率、保证质量、降低风险。简单来说：工程化就是运用模块化和组件化开发，有代码规范和质量检测功能，具有自动化流程能力，不必过多考虑配置如何实现，只需要专注于业务逻辑等我一种开发方式。</p>
+<p>工程化：工程化是指将系统化、标准化的方法应用于项目或产品的设计、开发、测试、部署、维护各个环节，强调通过科学的方法和工具来提高效率、保证质量、降低风险。简单来说：工程化就是运用模块化和组件化开发，有代码规范和质量检测功能，具有自动化流程能力，不必过多考虑配置如何实现，只需要专注于业务逻辑的一种开发方式。</p>
 </blockquote>
+<h2 id="包管理工具npm">包管理工具npm</h2>
+<p>npm（Node Package Manage）：Node包管理器，是NodeJS官方推出的包管理工具，我们在安装node的时候已经会默认安装npm。</p>
+<p>前面我们提到了，随着前端的发展，前端社区形成了“前端库发布到npm”的惯例，也就是说，npm已经管理大量的前端库，那么如果我们想查看有哪些库，我们就需要查看npm官网：<a target="_blank" rel="noopener" href="https://www.npmjs.org/">https://www.npmjs.org/</a>。我们也可以通过官网注册自己的npm账号，可以上传自己编写的前端库，为开源社区做一份贡献。</p>
+<h3 id="npm的配置文件">npm的配置文件</h3>
+<p>当我们进行工程化开发时，我们需要用到各种各样的工具，如webpack、babel、eslint等，而我们都是通过node包的形式来使用它们，那么我们该如何管理这些包呢？</p>
+<p>node采用配置文件的形式对这些包进行管理，这个文件就是<code>package.json</code>，但这个文件并不仅仅对标npm，目前，虽已经出现了多种包管理工具，如yarn、cnpm、pnpm，但配置文件都是<code>package.json</code>。</p>
+<p><code>package.json</code>记录着项目的名称、版本号、项目描述等，也记录着项目依赖的库的信息和版本号。</p>
+<p>我们可以通过<code>npm init [-y]</code>命令来创建<code>package.json</code>文件，当然，也可以手动创建。</p>
+<h4 id="package-json的配置项">package.json的配置项</h4>
+<p>给出一个简单的<code>package.json</code>配置内容。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;test&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ISC&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -466,14 +478,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">42k</span>
+    <span title="站点总字数">43k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:33</span>
+    <span title="站点阅读时长">2:35</span>
   </span>
 </div>
 <div class="busuanzi-count">
