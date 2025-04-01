@@ -28,13 +28,15 @@
 <meta property="og:site_name" content="ABD&#39;s Blog">
 <meta property="og:description" content="其实包管理工具就是一种代码共享方案，目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。 可能有人这个时候就有疑问了，为什么前端开发的库都是以node包的形式进行管理的？   由于以前的ECMA并没有明确的模块化方案，随着NodeJS采用了CommonJS模块化系统，使得代码能够被组织为可复用的模块，但可复用就是可以被多人使用，可以是一个团队">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn%E5%91%BD%E4%BB%A4.png">
 <meta property="article:published_time" content="2025-03-27T15:11:55.000Z">
-<meta property="article:modified_time" content="2025-03-31T14:32:37.557Z">
+<meta property="article:modified_time" content="2025-04-01T14:58:49.394Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
 <meta property="article:tag" content="包管理工具">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn%E5%91%BD%E4%BB%A4.png">
 
 
 <link rel="canonical" href="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
@@ -148,7 +150,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7npm"><span class="nav-number">1.</span> <span class="nav-text">包管理工具npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">npm的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">package.json的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">依赖的版本管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-insall"><span class="nav-number">1.2.</span> <span class="nav-text">npm insall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-lock-json"><span class="nav-number">1.3.</span> <span class="nav-text">package-lock.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-install%E5%8E%9F%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">npm install原理</span></a></li></ol></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7npm"><span class="nav-number">1.</span> <span class="nav-text">包管理工具npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">npm的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">package.json的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">依赖的版本管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm-insall"><span class="nav-number">1.1.3.</span> <span class="nav-text">npm insall</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-lock-json"><span class="nav-number">1.1.4.</span> <span class="nav-text">package-lock.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-install%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">npm install原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">npm其他常见命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn"><span class="nav-number">2.</span> <span class="nav-text">包管理工具yarn</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -277,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-31 22:32:37" itemprop="dateModified" datetime="2025-03-31T22:32:37+08:00">2025-03-31</time>
+      <time title="修改时间：2025-04-01 22:58:49" itemprop="dateModified" datetime="2025-04-01T22:58:49+08:00">2025-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,14 +309,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -410,7 +412,7 @@
 <p>X：主版本号（major），当你做了不可兼容的API修改（可能不兼容之前的版本）。</p>
 </li>
 <li class="lvl-2">
-<p>Y：子版本号（minor），当你做了向下兼容的功能性新增（新功能增加，但是兼容之前的版本，比如添加了新的语法）。</p>
+<p>Y：次版本号（minor），当你做了向下兼容的功能性新增（新功能增加，但是兼容之前的版本，比如添加了新的语法）。</p>
 </li>
 <li class="lvl-2">
 <p>Z：修订号（patch），当你做了向下兼容的问题修正（比如说功能出现了bug，修复了bug，Z进行更新）。</p>
@@ -428,7 +430,7 @@
 <p>如果版本号时<code>~x.y.z</code>的形式，代表x和y不变，z永远安装最新的版本。</p>
 </li>
 </ul>
-<h3 id="npm-insall">npm insall</h3>
+<h4 id="npm-insall">npm insall</h4>
 <p><code>npm install</code>也可以简写为<code>npm i</code>。</p>
 <p>我们可以通过<code>npm install [包名]</code>安装包，安装的包会自动添加到node_modules中，同时会在package.json的dependencies和devDependencies中记录该包和其版本号。</p>
 <p>通过<code>npm install</code>命令，我们可以进行全局和局部安装。</p>
@@ -445,7 +447,7 @@
 </li>
 </ul>
 <p>当我们克隆别人项目时，我们会发现并没有node_modules文件夹，但存在package.json文件，这时，我们可以通过<code>npm install</code>来安装项目所需要的包，它会根据package.json的配置的包名和它们的版本号进行安装。</p>
-<h3 id="package-lock-json">package-lock.json</h3>
+<h4 id="package-lock-json">package-lock.json</h4>
 <p>我们发现，我们通过<code>npm install</code>安装包后，会在项目中产生一个<code>package-lock.json</code>文件，我们看一个简单的文件。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span>  </span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;test&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;lockfileVersion&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;requires&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;node_modules/axios&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.8.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;resolved&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://registry.npmmirror.com/axios/-/axios-1.8.4.tgz&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;integrity&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;follow-redirects&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.15.6&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;form-data&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;proxy-from-env&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.1.0&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <ul class="lvl-0">
@@ -485,7 +487,64 @@
 <li class="lvl-4">将压缩包解压到项目的node_modules中。</li>
 </ul>
 </li>
+<li class="lvl-2">
+<p>如果有package-lock.json文件</p>
+<ul class="lvl-2">
+<li class="lvl-4">检查lock文件中包的版本和package.json文件中是否一致，按semver版本规范检测。
+<ul class="lvl-4">
+<li class="lvl-6">不一致，那么会重新构建依赖关系，重构流程按上面没有package-lock.json文件的流程进行。</li>
+<li class="lvl-6">一致，会从缓存中进行查找。
+<ul class="lvl-6">
+<li class="lvl-8">没有找到，按上面没有package-lock.json文件的流程进行。</li>
+<li class="lvl-8">查找到，会获取缓存中的压缩文件，解压到当前项目的node_modules中。</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="npm其他常见命令">npm其他常见命令</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>npm uninstall/uni</code>：删除包。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm rebuild</code>：重新构建包。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm cache clean</code>： 清除缓存。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm list</code>： 列出当前项目依赖的包。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm list -g</code>： 列出全局安装的包。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm config list</code>： 列出npm配置信息。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm view/info [包名]</code>： 查看包的信息。</p>
+</li>
+<li class="lvl-2">
+<p><code>npm infoinfo [包名] version</code>： 查看包的版本信息。</p>
+</li>
+</ul>
+<p>npm命令文档：<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v11/commands">https://docs.npmjs.com/cli/v11/commands</a></p>
+<h2 id="包管理工具yarn">包管理工具yarn</h2>
+<p>yarn的出现是为了解决早期npm的一系列问题。</p>
+<p>早期的npm存在：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>依赖版本的不确定性</p>
+<ul class="lvl-2">
+<li class="lvl-4">比如当前项目依赖的包的版本为<code>^3.1.2</code>，当时下载的实际版本可能是<code>3.1.2</code>，但后来别人拿到项目后依赖的包进行了更新，通过<code>npm i</code>下在的包是最新的版本，二者版本不一致，容易造成在本地能跑但在别人环境报错了。</li>
+<li class="lvl-4">yarn引入了<code>yarn.lock</code>锁文件，精确记录每个依赖及其子依赖的版本，确保所有环境安装的依赖树一致。（后来npm5不是也引入了<code>package-lock.json</code>锁文件嘛）</li>
+</ul>
+</li>
+</ul>
+<img data-src="/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn%E5%91%BD%E4%BB%A4.png" class="" title="yarn命令">
 
     </div>
 
@@ -617,7 +676,7 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:40</span>
+    <span title="站点阅读时长">2:41</span>
   </span>
 </div>
 <div class="busuanzi-count">
