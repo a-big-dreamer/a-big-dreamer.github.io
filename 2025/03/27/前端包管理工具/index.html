@@ -21,16 +21,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="其实包管理工具就是一种代码共享方案，目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。 可能有人这个时候就有疑问了，为什么前端开发的库都是以node包的形式进行管理的？   由于以前的ECMA并没有明确的模块化方案，随着NodeJS采用了CommonJS模块化系统，使得代码能够被组织为可复用的模块，但可复用就是可以被多人使用，可以是一个团队">
+    <meta name="description" content="前端包管理工具。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端包管理工具">
 <meta property="og:url" content="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="其实包管理工具就是一种代码共享方案，目前前端开发的库都是以node包的形式进行管理的，而通过包管理工具我们就可以在项目中下载引入某个库进行使用。 可能有人这个时候就有疑问了，为什么前端开发的库都是以node包的形式进行管理的？   由于以前的ECMA并没有明确的模块化方案，随着NodeJS采用了CommonJS模块化系统，使得代码能够被组织为可复用的模块，但可复用就是可以被多人使用，可以是一个团队">
+<meta property="og:description" content="前端包管理工具。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn%E5%91%BD%E4%BB%A4.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/pnpm%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5.png">
 <meta property="article:published_time" content="2025-03-27T15:11:55.000Z">
-<meta property="article:modified_time" content="2025-04-01T15:30:01.709Z">
+<meta property="article:modified_time" content="2025-04-03T15:09:05.775Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
@@ -150,7 +151,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7npm"><span class="nav-number">1.</span> <span class="nav-text">包管理工具npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">npm的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">package.json的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">依赖的版本管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm-insall"><span class="nav-number">1.1.3.</span> <span class="nav-text">npm insall</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-lock-json"><span class="nav-number">1.1.4.</span> <span class="nav-text">package-lock.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-install%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">npm install原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">npm其他常见命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn"><span class="nav-number">2.</span> <span class="nav-text">包管理工具yarn</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7npm"><span class="nav-number">1.</span> <span class="nav-text">包管理工具npm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">npm的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">package.json的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%9A%84%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">依赖的版本管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm-insall"><span class="nav-number">1.1.3.</span> <span class="nav-text">npm insall</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-lock-json"><span class="nav-number">1.1.4.</span> <span class="nav-text">package-lock.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-install%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">npm install原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">npm其他常见命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E7%9A%84npm%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">早期的npm存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E7%9A%84%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F"><span class="nav-number">2.1.</span> <span class="nav-text">包的声明周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7yarn"><span class="nav-number">3.</span> <span class="nav-text">包管理工具yarn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npx%E5%B7%A5%E5%85%B7"><span class="nav-number">3.1.</span> <span class="nav-text">npx工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm%E5%8F%91%E5%B8%83"><span class="nav-number">3.2.</span> <span class="nav-text">npm发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7pnpm"><span class="nav-number">3.3.</span> <span class="nav-text">包管理工具pnpm</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -257,7 +258,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="前端包管理工具 | ABD's Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="前端包管理工具。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -279,7 +280,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-01 23:30:01" itemprop="dateModified" datetime="2025-04-01T23:30:01+08:00">2025-04-01</time>
+      <time title="修改时间：2025-04-03 23:09:05" itemprop="dateModified" datetime="2025-04-03T23:09:05+08:00">2025-04-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,17 +310,18 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>4.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>16 分钟</span>
     </span>
 </div>
 
+            <div class="post-description">前端包管理工具。</div>
         </div>
       </header>
 
@@ -532,19 +534,173 @@
 </li>
 </ul>
 <p>npm命令文档：<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v11/commands">https://docs.npmjs.com/cli/v11/commands</a></p>
-<h2 id="包管理工具yarn">包管理工具yarn</h2>
-<p>yarn的出现是为了解决早期npm的一系列问题。</p>
-<p>早期的npm存在：</p>
+<h2 id="早期的npm存在的问题">早期的npm存在的问题</h2>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>依赖版本的不确定性</p>
 <ul class="lvl-2">
 <li class="lvl-4">比如当前项目依赖的包的版本为<code>^3.1.2</code>，当时下载的实际版本可能是<code>3.1.2</code>，但后来别人拿到项目后依赖的包进行了更新，通过<code>npm i</code>下在的包是最新的版本，二者版本不一致，容易造成在本地能跑但在别人环境报错了。</li>
-<li class="lvl-4">yarn引入了<code>yarn.lock</code>锁文件，精确记录每个依赖及其子依赖的版本，确保所有环境安装的依赖树一致。（后来npm5也引入了<code>package-lock.json</code>锁文件）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>安装速度慢</p>
+<ul class="lvl-2">
+<li class="lvl-4">npm早期串行安装依赖，逐个下载包，效率太低。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>网络鲁棒性差</p>
+<ul class="lvl-2">
+<li class="lvl-4">npm严重依赖官网registry（<code>https://registry.npmjs.org/</code>），若网络不稳定或registry出现故障，则安装失败。</li>
+<li class="lvl-4">鲁棒性（robustness ）：一个系统在面临着内部结构或外部环境的改变时也能够维持其功能稳定运行的能力。可以理解为一个系统的一些组成部分失效或故障了，但该系统仍能维持基本功能。</li>
+<li class="lvl-4">网络鲁棒性：指的是网络在遭遇攻击、故障或异常输入时，仍能保持其功能和性能稳定的能力。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>缺乏离线模式</p>
+<ul class="lvl-2">
+<li class="lvl-4">早期的npm没有离线安装能力，断网时无法工作。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>依赖扁平化与重复问题</p>
+<ul class="lvl-2">
+<li class="lvl-4">npm v3之前采用嵌套依赖结构，可能导致<strong>重复依赖</strong>，比如两个不同的包依赖同一个包，那么会在两个包的目录下都安装这个所以来的包，做不到相同包的复用，同时嵌套依赖的结构容易导致<strong>依赖层级过深</strong>，可能会操作系统路径长度限制。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>安全性问题</p>
+<ul class="lvl-2">
+<li class="lvl-4">npm 安装依赖时允许包执行脚本（如 postinstall），存在恶意脚本注入风险。</li>
+</ul>
+</li>
+</ul>
+<p>关于上述的postinstall，其实就是包的声明周期，可以在package.json的script中声明生命周期，以便进行特定时期的操作。。由此可以看出，这样容易造成恶意脚本注入风险。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;postinstall&quot;</span>: <span class="string">&quot;node build.js&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="包的声明周期">包的声明周期</h3>
+<table>
+<thead>
+<tr>
+<th>脚本名称</th>
+<th>声明周期</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>preinstall</td>
+<td>在包安装前执行</td>
+<td>检查环境和权限</td>
+</tr>
+<tr>
+<td>install</td>
+<td>包安装的过程中执行</td>
+<td></td>
+</tr>
+<tr>
+<td>postinstall</td>
+<td>包安装完成后执行</td>
+<td>编译代码和生成资源</td>
+</tr>
+<tr>
+<td>preuninstall</td>
+<td>包卸载前执行</td>
+<td>清理临时文件</td>
+</tr>
+<tr>
+<td>postuninstall</td>
+<td>包卸载后执行</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="包管理工具yarn">包管理工具yarn</h2>
+<p>yarn的出现是为了解决早期npm的一系列问题。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>解决依赖版本的不确定性</p>
+<ul class="lvl-2">
+<li class="lvl-4">yarn引入了<code>yarn.lock</code>锁文件，精确记录每个依赖及其子依赖的版本，确保所有环境安装的依赖树一致。（后来npm5也引入了<code>package-lock.json</code>锁文件）。。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>解决安装速度慢</p>
+<ul class="lvl-2">
+<li class="lvl-4">yarn采用并行安装依赖，同时采用缓存策略，大大加快下载速度。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>增强网络鲁棒性</p>
+<ul class="lvl-2">
+<li class="lvl-4">采用请求队列重试机制：自动重试失败的请求，提高网络容错率。</li>
+<li class="lvl-4">可配置镜像源或自由仓库，降低单点故障风险。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>解决了离线下载问题。</p>
+<ul class="lvl-2">
+<li class="lvl-4">其实就是利用缓存进行离线下载，安装的时候指定<code>yarn add --offline</code>。</li>
+<li class="lvl-4">注意：<code>--offline</code>是必备的。npm的离线安装倒是不需要特别说明。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>扁平化依赖树</p>
+<ul class="lvl-2">
+<li class="lvl-4">将依赖尽可能提升到顶层<code>node_modules</code>，减少嵌套深度和重复。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>禁止安装期间的自动执行脚本，提高安全性。</p>
+<ul class="lvl-2">
+<li class="lvl-4">需显示启用<code>yarn add --ignore-scripts</code>。</li>
 </ul>
 </li>
 </ul>
 <img data-src="/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn%E5%91%BD%E4%BB%A4.png" class="" title="yarn命令">
+<h3 id="npx工具">npx工具</h3>
+<p>举个例子，有一个scss文件，我们需要通过sass命令将其转化为css文件，我们可以将sass进行全局安装，因为全局安装的包是配置在环境变量的，这意味着在任何地方都可以使用sass命令。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sass test.scss test.css</span><br></pre></td></tr></table></figure>
+<p>但我不想进行全局安装，因为我的项目里安装过sass，我想用自己安装的sass来实现，那我们该怎么实现呢？</p>
+<p>在node_modules中有一个<code>.bin</code>文件夹，这里面存放着我们安装包的可执行命令，我们可以直接利用可执行命令来达到编译的效果。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/sass test.scss test.css</span><br></pre></td></tr></table></figure>
+<p>但我们还要跳到node_modules下，这样太麻烦了，有没有更好的办法？</p>
+<p>这个时候，npx就登场了，npx本质上就是到当前目录的<code>node_modules/.bin</code>目录下寻找可执行命令，那么上述操作就可以写为</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx sass test.scss test.css</span><br></pre></td></tr></table></figure>
+<p>但npx与直接通过目录访问不同的是，当在当前项目的node_modules下找不到可执行命令文件时，就会往全局里面找。</p>
+<h3 id="npm发布">npm发布</h3>
+<p>首先，我们需要去<a target="_blank" rel="noopener" href="https://www.npmjs.com/">官网</a>注册一个账号。</p>
+<p>然后在命令输入<code>npm login</code>进行登录，期间会跳转浏览器进行一个信息校验操作。</p>
+<p>然后通过<code>npm publish</code>进行包的发布。</p>
+<p>其他操作：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>删除发的包：<code>npm unpublish</code></p>
+</li>
+<li class="lvl-2">
+<p>让发布的包过期：<code>npm deprecate</code></p>
+</li>
+<li class="lvl-2">
+<p>退出登录：<code>npm logout</code></p>
+</li>
+</ul>
+<h3 id="包管理工具pnpm">包管理工具pnpm</h3>
+<p>虽然当前的npm和yarn相比之前都好了很多，但它们还存在一些令人头疼的问题</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>由于它们采用扁平化处理的方式，我们可以在项目里引用我们没有安装过但是是安装的包所依赖的包，这也成为<code>幻影依赖（非法依赖）</code>，一旦某个包由于升级而不依赖我们非法依赖的包时，项目就会出错。</p>
+</li>
+<li class="lvl-2">
+<p>虽然它们都实现了缓存，但每一个项目都中都需要重新下载包，或者是通过网络下载，也或许是从缓存中解压到当前目录，这样会导致占用磁盘空间的比重变大，也是一种<strong>磁盘空间浪费</strong>，同时，从缓存中复制、解压也是一个<strong>耗时</strong>操作。</p>
+</li>
+</ul>
+<p>pnpm是怎么解决这些问题的呢？</p>
+<p>pnpm采用硬链接和软链接的方式来处理包的依赖，通过pnpm管理的包会全局存储在<code>.pnpm-store</code>中，在windows系统中默认为当前项目的根目录，我们通过pnpm下载的包都会存储<code>.pnpm-store</code>中，然后在当前项目中的node_modules中，通过软链接指向<code>.pnpm-store</code>中的包，这样就能保证不论我们有多少个项目，通过pnpm管理的包都会指向同一个位置，这样，就节省了磁盘空间，同时，我们项目的使用不必再像以前一样复制解压，只需要建立软链接指向存储位置即可。这样，也加快了下载速度。</p>
+<p>同时，在当前项目的node_modules中，顶级只会存在我们所下载的包，而我们所下载的包的依赖包则存在当前项目的<code>.pnpm</code>文件夹中，这样就避免了我们直接引用我们没有安装过的包所依赖的包，从而避免了幻影依赖。</p>
+<p>关于硬链接和软链接，可以看这篇文章<a href="/2025/03/18/%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/">软链接和硬链接</a>。</p>
+<p>关于pnpm管理的node_modules中包与包之间的关系，我画了个图。</p>
+<img data-src="/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/pnpm%E7%A1%AC%E9%93%BE%E6%8E%A5%E5%92%8C%E8%BD%AF%E9%93%BE%E6%8E%A5.png" class="" title="pnpm硬链接和软链接">
+<p>我们还可以通过pnpm命令对<code>.pnpm-store</code>进行管理。</p>
+<p><code>pnpm store prune</code>： 删除<code>.pnpm-store</code>中未被引用的包。<code>pnpm store path</code>：获取当前活跃的store目录。</p>
 
     </div>
 
@@ -669,14 +825,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">44k</span>
+    <span title="站点总字数">46k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:41</span>
+    <span title="站点阅读时长">2:47</span>
   </span>
 </div>
 <div class="busuanzi-count">
