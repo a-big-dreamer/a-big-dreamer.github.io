@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>git版本控制工具</title>
+      <link href="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/"/>
+      <url>/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>所谓的版本控制工具其实就是帮助程序员进行代码状态的跟踪工具，方便程序员对代码的控制、维护等操作。</p><p>版本控制工具的好处：</p><ul class="lvl-0"><li class="lvl-2"><p>记录项目的修改历史，如若出现重大错误，方便回滚和维护。</p></li><li class="lvl-2"><p>减少多人开发时的冲突，如若出现冲突，方便解决。</p></li></ul><p>目前最流行的版本控制工具时git，git是一个分布式版本控制工具。</p><h2 id="分布式版本控制">分布式版本控制</h2><p>什么是分布式版本控制？</p><ul class="lvl-0"><li class="lvl-2"><p>客户端并不只获取最新的版本快照（即最新提交），而是将代码仓库完整的下载下来，包含完整的提交历史。</p></li><li class="lvl-2"><p>这样，即使git服务器出现问题，但由于本地仓库的完整，仍然可以正常工作，只需要等待git服务器恢复正常，再次提交上去即可。</p></li></ul><p>说起分布式，可能有些人会联想到集中式版本控制工具。</p><p>集中式版本控制工具确实存在，比如CVS（Concurrent Version System）和SVN（Subversion），但目前已经很少有人用了，这里就不赘述了。</p><p>集中式版本控制工具的优缺点</p><ul class="lvl-0"><li class="lvl-2"><p>优点：相较于最初的本地管理，集中式版本控制确实是一个令人非常好的方法，每个人一定程度上都能看到当前项目的状态，比如是否正在被人使用等。</p></li><li class="lvl-2"><p>缺点：一旦中央服务器故障，只能等待服务器恢复才能继续提交，一旦故障时发生在磁盘，那么代码数据可能就会丢失。</p></li></ul><h2 id="Git使用">Git使用</h2><p>Git是一个分布式版本控制工具，既然是个工具，我们就需要先<a href="https://git-scm.com/downloads">下载Git</a>。</p><p>Git配置文件所在位置一般是<code>C:\Users\[用户名]\.gitconfig</code>。</p><p>Git安装时一般会安装<code>Git Bash</code>和<code>Git CMD</code>，它们其实都是命令行工具。</p><ul class="lvl-0"><li class="lvl-2"><p><code>Git Bash</code>：类似于Linux的命令行工具，可以执行Linux命令。同时基于CMD，又添加了一些新的命令和功能。</p></li><li class="lvl-2"><p><code>Git CMD</code>：可以通过CMD命令行执行Git命令。</p></li></ul><p>我们可以通过这项目命令行工具执行一些操作和修改git配置文件，我一般习惯用<code>Git Bash</code>，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置用户名</span></span><br><span class="line">git config --global user.name <span class="string">&quot;your name&quot;</span></span><br><span class="line"><span class="comment"># 获取用户名</span></span><br><span class="line">git config [get] user.name</span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">git config --global user.password <span class="string">&quot;your password&quot;</span></span><br><span class="line"><span class="comment"># 获取密码</span></span><br><span class="line">git config [get] user.password</span><br><span class="line"><span class="comment"># 设置邮箱</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your email&quot;</span></span><br><span class="line"><span class="comment"># 获取邮箱</span></span><br><span class="line">git config [get] user.email</span><br></pre></td></tr></table></figure><p>设置Git命令的别名</p><p>比如我们想查看文件的跟踪状态，需要执行<code>git status</code>，但我不想用status，那么我们可以给它设置一个别名，比如sta：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.sta status</span><br></pre></td></tr></table></figure><p>这样就可以通过<code>git sta</code>命令查看文件的跟踪状态了。</p><p>取消sta别名：<code>git config --global --unset alias.sta</code>。</p><p>如果我们想对当前的项目用git进行管理，那么我们将该项目与一个git仓库进行联系，我们首先需要获取一个git仓库。</p><p>获取git仓库有两种方式：</p><ol><li class="lvl-3"><p>初始化一个git仓库，在命令行使用<code>git init</code>命令，这个命令会在当前项目中创建一个<code>.git</code>隐式文件夹，</p></li><li class="lvl-3"><p>从远程仓库中克隆一个git仓库，在命令行使用<code>git clone [url]</code>命令，这个命令会从远程仓库中克隆一个git仓库到本地，并把克隆的git仓库与远程仓库进行联系。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack打包工具</title>
       <link href="/2025/04/04/webpack%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/"/>
       <url>/2025/04/04/webpack%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/</url>
@@ -249,11 +274,11 @@
             
             <tag> JS </tag>
             
-            <tag> 手写函数 </tag>
-            
             <tag> 防抖 </tag>
             
             <tag> 节流 </tag>
+            
+            <tag> 手写函数 </tag>
             
         </tags>
       
