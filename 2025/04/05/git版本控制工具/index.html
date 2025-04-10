@@ -29,7 +29,7 @@
 <meta property="og:description" content="git版本控制工具。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-05T13:44:52.000Z">
-<meta property="article:modified_time" content="2025-04-06T14:58:16.407Z">
+<meta property="article:modified_time" content="2025-04-10T15:46:26.340Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
@@ -275,7 +275,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-06 22:58:16" itemprop="dateModified" datetime="2025-04-06T22:58:16+08:00">2025-04-06</time>
+      <time title="修改时间：2025-04-10 23:46:26" itemprop="dateModified" datetime="2025-04-10T23:46:26+08:00">2025-04-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,14 +301,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>891</span>
+      <span>965</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -370,16 +370,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.sta status</span><br></pre></td></tr></table></figure>
 <p>这样就可以通过<code>git sta</code>命令查看文件的跟踪状态了。</p>
 <p>取消sta别名：<code>git config --global --unset alias.sta</code>。</p>
-<p>如果我们想对当前的项目用git进行管理，那么我们将该项目与一个git仓库进行联系，我们首先需要获取一个git仓库。</p>
-<p>获取git仓库有两种方式：</p>
+<p>如果我们用git管理项目，有两种方式：</p>
 <ol>
 <li class="lvl-3">
-<p>初始化一个git仓库，在命令行使用<code>git init</code>命令，这个命令会在当前项目中创建一个<code>.git</code>隐式文件夹，</p>
+<p>初始化一个git仓库，在命令行使用<code>git init</code>命令，这个命令会在当前项目中创建一个<code>.git</code>隐式文件夹，而当前目录中除了<code>.git</code>文件夹外的文件会被标识为<strong>未被跟踪的状态</strong>，<strong><code>.git</code>文件夹与其他未被跟踪的文件共同构成了“git仓库”</strong>。</p>
 </li>
 <li class="lvl-3">
 <p>从远程仓库中克隆一个git仓库，在命令行使用<code>git clone [url]</code>命令，这个命令会从远程仓库中克隆一个git仓库到本地，并把克隆的git仓库与远程仓库进行联系。</p>
 </li>
 </ol>
+<p>:::tip<br>
+注意：git仓库的存在性是由<code>.git</code>文件夹决定的，无所谓当前目录中的其他文件是否被追踪。即只要存在<code>.git</code>文件夹，当前目录就是一个git仓库，即使所有文件未被跟踪。<br>
+:::</p>
 
     </div>
 
