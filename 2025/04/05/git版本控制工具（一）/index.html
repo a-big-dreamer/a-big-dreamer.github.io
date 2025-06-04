@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="git版本控制工具（一）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git版本控制工具（一）">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="ABD&#39;s Blog">
+<meta property="og:description" content="git版本控制工具（一）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%9C%AA%E8%B7%9F%E8%B8%AA%E7%8A%B6%E6%80%81.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E7%94%9F%E6%88%90gitignore%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/comitizen%E5%91%BD%E4%BB%A4%E4%BA%A4%E4%BA%92%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BF%AE%E6%94%B9cz-conventional-changelog%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BD%BF%E7%94%A8%E6%8D%A2%E8%A1%8C%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%A1%8C%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/commitlint%E6%B7%BB%E5%8A%A0%E9%92%A9%E5%AD%90%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/commitlint%E6%8F%90%E4%BA%A4%E6%A0%A1%E9%AA%8C.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/lint-staged%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E6%A0%A1%E9%AA%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E7%AE%80%E5%8D%95%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BB%A5%E5%9B%BE%E5%BD%A2%E5%BC%8F%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png">
+<meta property="article:published_time" content="2025-04-05T13:44:52.000Z">
+<meta property="article:modified_time" content="2025-06-04T09:55:45.241Z">
+<meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="工程化">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="commitizen">
+<meta property="article:tag" content="commitlint">
+<meta property="article:tag" content="lint-staged">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE.png">
+
+
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/","path":"2025/04/05/git版本控制工具（一）/","title":"git版本控制工具（一）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>git版本控制工具（一） | ABD's Blog</title>
+    
+
+
+
+
+
+
+
+
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+  <style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+  <body
+    itemscope
+    itemtype="http://schema.org/WebPage"
+    
+    class="use-motion"
+    
+  >
+    <div class="headband"></div>
+
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ABD's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">梦想成为伟大的梦想家</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">41</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">33</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header> 
+  
+<aside class="sidebar">
+
+  <div
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
+  >
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-toc">文章目录</li>
+      <li class="sidebar-nav-overview">站点概览</li>
+    </ul>
+
+    <div class="sidebar-panel-container">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">分布式版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Git使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Git%E4%BB%93%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">获取Git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A2%ABGit%E7%AE%A1%E7%90%86%E7%9A%84%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">被Git管理的文件状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">查看文件的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-add%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">6.</span> <span class="nav-text">git add添加文件到暂存区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-gitignore"><span class="nav-number">7.</span> <span class="nav-text">git配置文件.gitignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-commit%E6%96%87%E4%BB%B6%E6%9B%B4%E6%96%B0%E6%8F%90%E4%BA%A4"><span class="nav-number">8.</span> <span class="nav-text">git commit文件更新提交</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conventional-Commits%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83"><span class="nav-number">8.1.</span> <span class="nav-text">Conventional Commits提交规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conventional-Commits%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94Header%E9%83%A8%E5%88%86%EF%BC%88%E5%BF%85%E9%9C%80%EF%BC%89"><span class="nav-number">8.1.1.</span> <span class="nav-text">Conventional Commits提交规范——Header部分（必需）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conventional-Commits%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94Body%E9%83%A8%E5%88%86%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">8.1.2.</span> <span class="nav-text">Conventional Commits提交规范——Body部分（可选）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conventional-Commits%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83%E2%80%94%E2%80%94Footer%E9%83%A8%E5%88%86%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">8.1.3.</span> <span class="nav-text">Conventional Commits提交规范——Footer部分（可选）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Conventional-Commits%E8%A7%84%E8%8C%83%E6%A0%BC%E5%BC%8F%E6%8F%90%E4%BA%A4"><span class="nav-number">8.2.</span> <span class="nav-text">使用Conventional Commits规范格式提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9B%E8%A1%8C%E6%8F%90%E4%BA%A4"><span class="nav-number">8.2.1.</span> <span class="nav-text">通过命令行进行提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%EF%BC%88Commitizen%EF%BC%89%E8%BF%9B%E8%A1%8C%E6%8F%90%E4%BA%A4"><span class="nav-number">8.2.2.</span> <span class="nav-text">使用工具（Commitizen）进行提交</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E6%A0%A1%E9%AA%8C%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83"><span class="nav-number">8.3.</span> <span class="nav-text">强制校验提交规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lint-staged%EF%BC%9Agit%E6%8F%90%E4%BA%A4%E5%89%8D%E5%AF%B9%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E8%BF%9B%E8%A1%8C%E6%A3%80%E6%9F%A5"><span class="nav-number">8.4.</span> <span class="nav-text">lint-staged：git提交前对代码质量进行检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E6%A0%A1%E9%AA%8C%EF%BC%88Husky%E3%80%81ESLint%E3%80%81Prettier%E3%80%81Commitlint%E3%80%81lint-staged%E3%80%81Commitlizen%EF%BC%89%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%9B%BE%E7%A4%BA"><span class="nav-number">8.5.</span> <span class="nav-text">前端代码提交校验（Husky、ESLint、Prettier、Commitlint、lint-staged、Commitlizen）工作流图示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="nav-number">9.</span> <span class="nav-text">git查看提交的历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">10.</span> <span class="nav-text">git版本回退</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A Big Dreamer"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">A Big Dreamer</p>
+  <div class="site-description" itemprop="description">A Big Dreamer's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a-big-dreamer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a-big-dreamer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+<!-- recent posts -->
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+        <div class="links-of-blogroll-title recent-posts-title">
+	    <i class="fa fa-history " aria-hidden="true"></i>
+            近期文章
+	</div>
+	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/" title="git版本控制工具（二）" target="">
+		    git版本控制工具（二）
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/" title="git版本控制工具（一）" target="">
+		    git版本控制工具（一）
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/04/04/webpack%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" title="webpack打包工具" target="">
+		    webpack打包工具
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" title="前端包管理工具" target="">
+		    前端包管理工具
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" title="ESModule解析流程" target="">
+		    ESModule解析流程
+		    </a>
+		</li>
+	</ul>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="pjax">
+  </div>
+</aside>
+
+
+      </div>
+
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="git版本控制工具（一） | ABD's Blog">
+      <meta itemprop="description" content="git版本控制工具（一）。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git版本控制工具（一）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-05 21:44:52" itemprop="dateCreated datePublished" datetime="2025-04-05T21:44:52+08:00">2025-04-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-04 17:55:45" itemprop="dateModified" datetime="2025-06-04T17:55:45+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>18 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">git版本控制工具（一）。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>所谓的版本控制工具其实就是帮助程序员进行代码状态的跟踪工具，方便程序员对代码的控制、维护等操作。</p>
+<p>版本控制工具的好处：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>记录项目的修改历史，如若出现重大错误，方便回滚和维护。</p>
+</li>
+<li class="lvl-2">
+<p>减少多人开发时的冲突，如若出现冲突，方便解决。</p>
+</li>
+</ul>
+<p>目前最流行的版本控制工具时git，git是一个分布式版本控制工具。</p>
+<h2 id="分布式版本控制">分布式版本控制</h2>
+<p>什么是分布式版本控制？</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>客户端并不只获取最新的版本快照（即最新提交），而是将代码仓库完整的下载下来，包含完整的提交历史。</p>
+</li>
+<li class="lvl-2">
+<p>这样，即使git服务器出现问题，但由于本地仓库的完整，仍然可以正常工作，只需要等待git服务器恢复正常，再次提交上去即可。</p>
+</li>
+</ul>
+<p>说起分布式，可能有些人会联想到集中式版本控制工具。</p>
+<p>集中式版本控制工具确实存在，比如CVS（Concurrent Version System）和SVN（Subversion），但目前已经很少有人用了，这里就不赘述了。</p>
+<p>集中式版本控制工具的优缺点</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>优点：相较于最初的本地管理，集中式版本控制确实是一个令人非常好的方法，每个人一定程度上都能看到当前项目的状态，比如是否正在被人使用等。</p>
+</li>
+<li class="lvl-2">
+<p>缺点：一旦中央服务器故障，只能等待服务器恢复才能继续提交，一旦故障时发生在磁盘，那么代码数据可能就会丢失。</p>
+</li>
+</ul>
+<h2 id="Git使用">Git使用</h2>
+<p>Git是一个分布式版本控制工具，既然是个工具，我们就需要先<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">下载Git</a>。</p>
+<p>Git配置文件所在位置一般是<code>C:\Users\[用户名]\.gitconfig</code>。</p>
+<p>Git安装时一般会安装<code>Git Bash</code>和<code>Git CMD</code>，它们其实都是命令行工具。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>Git Bash</code>：类似于Linux的命令行工具，可以执行Linux命令。同时基于CMD，又添加了一些新的命令和功能。</p>
+</li>
+<li class="lvl-2">
+<p><code>Git CMD</code>：可以通过CMD命令行执行Git命令。</p>
+</li>
+</ul>
+<p>我们可以通过这项目命令行工具执行一些操作和修改git配置文件，我一般习惯用<code>Git Bash</code>，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置用户名</span></span><br><span class="line">git config --global user.name <span class="string">&quot;your name&quot;</span></span><br><span class="line"><span class="comment"># 获取用户名</span></span><br><span class="line">git config [get] user.name</span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">git config --global user.password <span class="string">&quot;your password&quot;</span></span><br><span class="line"><span class="comment"># 获取密码</span></span><br><span class="line">git config [get] user.password</span><br><span class="line"><span class="comment"># 设置邮箱</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your email&quot;</span></span><br><span class="line"><span class="comment"># 获取邮箱</span></span><br><span class="line">git config [get] user.email</span><br></pre></td></tr></table></figure>
+<p>设置Git命令的别名</p>
+<p>比如我们想查看文件的跟踪状态，需要执行<code>git status</code>，但我不想用status，那么我们可以给它设置一个别名，比如sta：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.sta status</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过<code>git sta</code>命令查看文件的跟踪状态了。</p>
+<p>取消git配置文件中的某一项：<code>git config --global --unset [配置项键名]</code>。</p>
+<h2 id="获取Git仓库">获取Git仓库</h2>
+<p>如果我们用git管理项目，有两种方式：</p>
+<ol>
+<li class="lvl-3">
+<p>初始化一个git仓库，在命令行使用<code>git init</code>命令，这个命令会在当前项目中创建一个<code>.git</code>隐式文件夹，而当前目录中除了<code>.git</code>文件夹外的文件会被标识为<strong>未被跟踪的状态</strong>，<strong><code>.git</code>文件夹与其他未被跟踪的文件共同构成了“git仓库”</strong>。</p>
+</li>
+<li class="lvl-3">
+<p>从远程仓库中克隆一个git仓库，在命令行使用<code>git clone [url]</code>命令，这个命令会从远程仓库中克隆一个git仓库到本地，并把克隆的git仓库与远程仓库进行联系。</p>
+</li>
+</ol>
+<blockquote>
+<p>注意：git仓库的存在性是由<code>.git</code>文件夹决定的，无所谓当前目录中的其他文件是否被追踪。</p>
+<p>即只要存在<code>.git</code>文件夹，当前目录就是一个git仓库，即使所有文件未被跟踪。</p>
+</blockquote>
+<h2 id="被Git管理的文件状态">被Git管理的文件状态</h2>
+<p>我们可以通过判断文件的状态来识别文件是被被Git仓库管理：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>未跟踪（Untracked）：未被Git仓库管理。</p>
+</li>
+<li class="lvl-2">
+<p>已跟踪：被Git仓库管理。</p>
+</li>
+</ul>
+<p>上文提到，我们通过<code>git init</code>初始化一个git仓库时，仓库中的文件会被标识为<strong>未被跟踪的状态</strong>，如果我们创建了一个新的文件，新的文件也会被标识为未被跟踪的状态，这时我们可以通过<code>git add</code>将文件的状态转化为<strong>已跟踪状态</strong>，此时，Git系统可以对<strong>已跟踪状态</strong>状态下的文件进行各种状态管理。</p>
+<p>已跟踪状态的文件又可以进一步进行状态划分：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Staged：暂缓区中的文件状态。</p>
+</li>
+<li class="lvl-2">
+<p>Unmodified：通过commit命令，将staged状态的文件提交到仓库后的文件状态。</p>
+</li>
+<li class="lvl-2">
+<p>Modified：修改了某个文件后，此文件会处于Modified状态。</p>
+</li>
+</ul>
+<p>文件的状态转换关系可以用下图概括：</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE.png" class="" title="文件状态转换关系图">
+<h2 id="查看文件的状态">查看文件的状态</h2>
+<p>前面我们提到了Git管理的文件有不同的状态，我们可以通过<code>git status</code>查看文件状态的转化，也就是所谓的跟踪文件状态。</p>
+<p>对于新建的文件，Git不会对其进行跟踪，通过<code>git status</code>命令可以看出，它会直接进行未跟踪提示，如下图。</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%9C%AA%E8%B7%9F%E8%B8%AA%E7%8A%B6%E6%80%81.png" class="" title="未跟踪状态">
+<p>我们对使用<code>git status -s</code>简化查看内容，如下图：</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B.png" class="" title="文件状态查看">
+<p>我们可以看出：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>??：未跟踪状态。</p>
+</li>
+<li class="lvl-2">
+<p>M：已跟踪文件的修改状态。</p>
+</li>
+<li class="lvl-2">
+<p>A：文件已被跟踪的状态。</p>
+</li>
+</ul>
+<blockquote>
+<p>tip: 对于已加入暂存区但未提交的文件状态查看的标识（<code>M</code> 、<code>A</code>）是绿色的。</p>
+</blockquote>
+<h2 id="git-add添加文件到暂存区"><code>git add</code>添加文件到暂存区</h2>
+<p>通过<code>git add</code>命令我们可以跟踪文件，实际上就是将文件提交本地Git仓库系统中的暂存区中。</p>
+<p><code>git add</code>命令的使用：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git add [文件名]</code>：添加单个文件到暂存区，如：<code>git add aaa.txt</code>。</p>
+</li>
+<li class="lvl-2">
+<p><code>git add [*.*]</code>：通配符模式，如：<code>git add *.txt</code>。</p>
+</li>
+<li class="lvl-2">
+<p><code>git add .</code>：添加当前目录下的所有变更（包含新文件）。</p>
+</li>
+<li class="lvl-2">
+<p><code>git add -u/--upadte</code>：将整个仓库下的变更进行提交（不包含新文件）</p>
+</li>
+</ul>
+<p>注意：对git仓库的操作，要在根目录进行，否者会出现部分没有被提交的情况。</p>
+<h2 id="git配置文件-gitignore">git配置文件<code>.gitignore</code></h2>
+<p>在项目开发中，我们总有一些文件是不希望被git管理的，比如<code>node_modules</code>、<code>.idea</code>、<code>.vscode</code>、日志文件等这些文件夹中的文件，这个时候我们就可以通过配置<code>.gitignore</code>文件来对它们进行忽略处理。</p>
+<p>这个文件我们可以自己创建添加忽略项，如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 整个文件夹</span><br><span class="line">node_modules</span><br><span class="line">.vscode</span><br><span class="line"></span><br><span class="line"># 单个文件</span><br><span class="line">bbb.txt</span><br><span class="line"></span><br><span class="line"># 通配符模式</span><br><span class="line">*.log</span><br></pre></td></tr></table></figure>
+<p>在GitHub中，有一个专门的<code>[gitignore](https://github.com/github/gitignore)</code>仓库，其中整理了一系列有用的<code>.gitignore</code>文件模板，我们可以根据自己开发的项目自行选择来使用。</p>
+<p>我们也可以通过<a target="_blank" rel="noopener" href="https://www.toptal.com/developers/gitignore">https://www.toptal.com/developers/gitignore</a>这个网站填写关键词自动生成，比在上文模板中一个个找拼接方便多了。</p>
+<p>比如我们想生成<code>Vue</code>和<code>Node</code>相关的<code>.gitignore</code>文件，如下图：</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E7%94%9F%E6%88%90gitignore%E6%96%87%E4%BB%B6.png" class="" title="生成gitignore文件">
+<p>点击创建即可生成。</p>
+<p><mark>注意：<code>.gitignore</code>文件主要用于拦截未被跟踪（Untracked）的文件，对于已经提交到暂存的文件，在<code>.gitignore</code>中配置后还是会对其进行跟踪的。</mark></p>
+<p>要解决这个问题，我们只需要将文件变为未被跟踪的状态即可，本质上就是<strong>将文件从暂存区移除</strong>。</p>
+<p>实现的git操作为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached &lt;file-path&gt; <span class="comment"># 单个文件</span></span><br><span class="line">git <span class="built_in">rm</span> -r --cached &lt;directory&gt; <span class="comment"># 整个目录</span></span><br></pre></td></tr></table></figure>
+<p>这里就要提到<code>git restore --staged</code>操作了，此命令适于文件夹操作，用于将文件移出暂存区，就是撤销<code>git add</code>操作的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将单个文件夹移出暂存区</span></span><br><span class="line">git restore --staged path/to/folder/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将所有暂存文件移出暂存区</span></span><br><span class="line">git restore --staged .</span><br></pre></td></tr></table></figure>
+<h2 id="git-commit文件更新提交"><code>git commit</code>文件更新提交</h2>
+<p>我们可以通过<code>git commit</code>命令将暂存区中的文件新增和修改进行提交，我们可以通过<code>-m</code>配置为本次提交添加备注。</p>
+<p>如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>我们在进行提交操作前，都需要通过<code>git add</code>将当前git仓库中的文件的状态进行更新，才能将当前版本的代码进行提交。</p>
+<p>我们可以使用<code>git commit -a -m '提交信息'</code>简化上述操作，这个命令其实就是<code>git add -u</code>和<code>git commit -m '提交信息'</code>的结合。</p>
+<p>上文我们提到了<code>git add -u</code>的作用，所以我们知道：<code>git commit -a -m '提交信息'</code>此命令只适用与<mark>已存在文件的提交</mark>。</p>
+<h3 id="Conventional-Commits提交规范">Conventional Commits提交规范</h3>
+<p>对于以前的git提交信息，有些只是一行字符串，在多人项目开发中，一旦有人的提交注释含糊不清，就会导致阅读性很差。</p>
+<p>目前有一套主流提交规范来解决这个问题：<a target="_blank" rel="noopener" href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits（约定式提交）</a>。</p>
+<p>在此规范中，提交信息由Header、Body和Footer三部分组成，格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">// 空行</span><br><span class="line">&lt;body&gt;</span><br><span class="line">// 空行</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+<p>这里给出几个优秀的提交示例：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fix(login): 修复密码验证逻辑错误</span><br><span class="line"></span><br><span class="line">当密码包含特殊字符时正则匹配失败，</span><br><span class="line">添加对 @#$% 符号的支持</span><br><span class="line"></span><br><span class="line">Closes #112</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">feat(payment): 集成支付宝支付</span><br><span class="line"></span><br><span class="line">- 添加 Alipay SDK 依赖</span><br><span class="line">- 实现支付结果回调接口</span><br><span class="line">- 更新订单状态机逻辑</span><br><span class="line"></span><br><span class="line">BREAKING CHANGE: 移除旧的支付接口 /api/v1/pay</span><br></pre></td></tr></table></figure>
+<h4 id="Conventional-Commits提交规范——Header部分（必需）">Conventional Commits提交规范——Header部分（必需）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>type（提交类型）</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feat</td>
+<td>新增功能</td>
+<td>feat：添加登录功能</td>
+</tr>
+<tr>
+<td>fix</td>
+<td>修复bug</td>
+<td>fix: 解决空指针异常</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>文档更新</td>
+<td>docs: 更新 API 文档</td>
+</tr>
+<tr>
+<td>style</td>
+<td>代码格式调整（不影响运行）</td>
+<td>style: 格式化代码</td>
+</tr>
+<tr>
+<td>refactor</td>
+<td>重构代码（非功能修改）</td>
+<td>refactor: 优化缓存逻辑</td>
+</tr>
+<tr>
+<td>perf</td>
+<td>性能相关</td>
+<td>perf: 减少渲染耗时</td>
+</tr>
+<tr>
+<td>test</td>
+<td>测试相关</td>
+<td>test: 增加单元测试</td>
+</tr>
+<tr>
+<td>chore</td>
+<td>构建/依赖更新</td>
+<td>chore: 升级 webpack</td>
+</tr>
+<tr>
+<td>revert</td>
+<td>回滚提交</td>
+<td>revert: 撤销某次提交</td>
+</tr>
+</tbody>
+</table>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&lt;scope&gt;</code>（可选）：说明影响范围。</p>
+<ul class="lvl-2">
+<li class="lvl-6">feat(ui): 添加按钮组件</li>
+<li class="lvl-6">fix(auth): 修复登录失效问题</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>&lt;subject&gt;</code>（描述）：简洁的祈使句（现在时）。</p>
+<ul class="lvl-2">
+<li class="lvl-6">✅正确：<mark>add</mark> feature X</li>
+<li class="lvl-6">❌错误：<mark>added</mark> feature X 或 <mark>adding</mark> feature X</li>
+</ul>
+</li>
+</ul>
+<h4 id="Conventional-Commits提交规范——Body部分（可选）">Conventional Commits提交规范——Body部分（可选）</h4>
+<p>Body格式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>解释提交目的和实现逻辑</p>
+</li>
+<li class="lvl-2">
+<p>每行不超过72个字符</p>
+</li>
+<li class="lvl-2">
+<p>使用祈使句</p>
+</li>
+</ul>
+<p>如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">为什么需要此修改：</span><br><span class="line">- 旧逻辑无法处理并发请求</span><br><span class="line">- 导致用户数据丢失</span><br><span class="line"></span><br><span class="line">如何解决：</span><br><span class="line">- 引入分布式锁机制</span><br><span class="line">- 增加重试机制</span><br></pre></td></tr></table></figure>
+<h4 id="Conventional-Commits提交规范——Footer部分（可选）">Conventional Commits提交规范——Footer部分（可选）</h4>
+<p>Footer格式：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>关联Issue：关闭问题过任务，如<code>Closes #123</code>、<code>Fixes ABCD-123</code>。</p>
+</li>
+<li class="lvl-2">
+<p>破坏性更改（BREAKING CHANGE），如<code>BREAKING CHANGE: 移除旧版 API</code></p>
+</li>
+</ul>
+<h3 id="使用Conventional-Commits规范格式提交">使用Conventional Commits规范格式提交</h3>
+<h4 id="通过命令行进行提交">通过命令行进行提交</h4>
+<ol>
+<li class="lvl-3">
+<p>通过<code>git add .</code>将文件加入暂存区。</p>
+</li>
+<li class="lvl-3">
+<p>在命令行输入<code>git commit</code>（等价于<code>git commit -e</code>），回车后进行编辑器（通常是Vim），在空白处按规范格式填写即可。</p>
+</li>
+</ol>
+<h4 id="使用工具（Commitizen）进行提交">使用工具（Commitizen）进行提交</h4>
+<p>上文提到，我们可以通过Vim编辑器进行自己编写，但手写的情况下过于麻烦，也容易写错单词，这时我们就可以使用Commitizen工具快速的生成一个标准提交信息进行提交。</p>
+<ol>
+<li class="lvl-3">
+<p>安装Commitizen（交互式提交工具）</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g commitizen</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>初始化适配器</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">commitizen init cz-conventional-changelog --save-dev --save-exact</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>使用commitizen命令提交（代替<code>git commit</code>）</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">npx cz/git-cz <span class="comment"># commitizen全局安装后直接使用 cz/git-cz即可</span></span><br></pre></td></tr></table></figure>
+<p>回车后就会出现一个交互页面，按需操作即可：</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/comitizen%E5%91%BD%E4%BB%A4%E4%BA%A4%E4%BA%92%E6%93%8D%E4%BD%9C.png" class="" title="comitizen命令交互操作">
+<p><mark>注意：在输入body内容，即<code>Provide a longer description of the change: (press enter to skip)</code>这一步，可能会出现只能输入一行内容，回车后直接进入footer输入阶段。</mark></p>
+<p>解决方法：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>方法一：使用<code>[npx] cz/git-cz -e</code>命令，加入<code>-e</code>配置后，会在生成符合约定格式的信息后，再打开编辑器让我们编辑，这个时候我们就可以对body进行多行设置了。</p>
+</li>
+<li class="lvl-2">
+<p>方法二：修改<code>cz-conventional-changelog</code>库的源文件内容</p>
+  <img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BF%AE%E6%94%B9cz-conventional-changelog%E9%85%8D%E7%BD%AE.png" class="" title="修改cz-conventional-changelog配置">
+<ul class="lvl-2">
+<li class="lvl-6">
+<p>修改过后在输入body时会弹出一个编辑器页面进行单独填写。</p>
+</li>
+<li class="lvl-6">
+<p>但这样有一个弊端，我们修改的内容是本地修改的，而在git远程同步时，是不会同步node_modules中的内容的，如果别人想要使用是需要再次单独修改的。</p>
+</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>方法三：通过<code>\n</code>操作符实现换行操作</p>
+  <img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BD%BF%E7%94%A8%E6%8D%A2%E8%A1%8C%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%A1%8C%E6%93%8D%E4%BD%9C.png" class="" title="使用换行操作符实现多行操作">
+</li>
+</ul>
+<h3 id="强制校验提交规范">强制校验提交规范</h3>
+<p>上文我们提到了git提交时的约定式提交规范，但在多人项目中，每个人是否遵守这个规范都是不确定的，如果我们想规定项目成员都遵守这套规范，我们就可以使用<a target="_blank" rel="noopener" href="https://commitlint.js.org/"><code>commitlint</code></a>工具。</p>
+<ol>
+<li class="lvl-3">
+<p>安装校验工具</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D @commitlint/cli @commitlint/config-conventional</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p>创建<code>commitlint.config.js</code>配置文件，并继承预设规则</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;module.exports = &#123; extends: [&#x27;@commitlint/config-conventional&#x27;] &#125;;&quot;</span> &gt; commitlint.config.js</span><br></pre></td></tr></table></figure>
+<p>也可自行创建<code>commitlint.config.js</code>文件，<a target="_blank" rel="noopener" href="https://commitlint.js.org/reference/rules.html">自定义配置</a>文件内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// 继承预设规则 (推荐使用 @commitlint/config-conventional)</span></span><br><span class="line">    <span class="attr">extends</span>: [<span class="string">&#x27;@commitlint/config-conventional&#x27;</span>],</span><br><span class="line">    <span class="comment">// 可选：自定义规则 (覆盖或扩展预设规则)</span></span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="comment">// 例如：允许 &#x27;chore&#x27; 类型</span></span><br><span class="line">        <span class="string">&#x27;type-enum&#x27;</span>: [</span><br><span class="line">            <span class="number">2</span>,</span><br><span class="line">            <span class="string">&#x27;always&#x27;</span>,</span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;build&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;chore&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;ci&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;docs&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;feat&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;fix&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;perf&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;refactor&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;revert&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;style&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">// 例如：主题行首字母可以大写</span></span><br><span class="line">        <span class="string">&#x27;subject-case&#x27;</span>: [</span><br><span class="line">            <span class="number">2</span>,</span><br><span class="line">            <span class="string">&#x27;always&#x27;</span>,</span><br><span class="line">            [<span class="string">&#x27;sentence-case&#x27;</span>, <span class="string">&#x27;start-case&#x27;</span>, <span class="string">&#x27;pascal-case&#x27;</span>, <span class="string">&#x27;upper-case&#x27;</span>],</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">// ... 其他自定义规则</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>添加钩子</p>
+</li>
+</ol>
+<p>我们可以使用<a target="_blank" rel="noopener" href="https://typicode.github.io/husky/zh/">Husky</a>这个git hooks管理器。</p>
+<p>Husky 是一个用于管理 Git 钩子的工具，它允许开发者在 Git 操作的特定阶段（如提交前、提交后、推送前等）执行自定义脚本。这些脚本通常用于自动化任务，比如代码格式化、测试运行、提交消息验证等。</p>
+<p>常见Git钩子及Husky应用场景：</p>
+<table>
+<thead>
+<tr>
+<th>钩子类型</th>
+<th>触发时机</th>
+<th>典型应用场景</th>
+<th>Husky 脚本位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pre-commit</td>
+<td>提交消息输入前</td>
+<td>代码格式化 (Prettier)、Lint 检查</td>
+<td><code>.husky/pre-commit</code></td>
+</tr>
+<tr>
+<td>commit-msg</td>
+<td>用户输入提交消息后</td>
+<td>提交消息验证 (commitlint)</td>
+<td><code>.husky/commit-msg</code></td>
+</tr>
+<tr>
+<td>pre-push</td>
+<td>推送到远程仓库前</td>
+<td>运行完整测试套件</td>
+<td><code>.husky/pre-push</code></td>
+</tr>
+<tr>
+<td>post-merge</td>
+<td>合并操作完成后</td>
+<td>自动安装新依赖 (npm install)</td>
+<td><code>.husky/post-merge</code></td>
+</tr>
+<tr>
+<td>pre-rebase</td>
+<td>变基操作开始前</td>
+<td>检查分支状态</td>
+<td><code>.husky/pre-rebase</code></td>
+</tr>
+<tr>
+<td>post-checkout</td>
+<td>切换分支后</td>
+<td>环境配置更新</td>
+<td><code>.husky/post-checkout</code></td>
+</tr>
+</tbody>
+</table>
+<p><mark>注意：commitlint目前不支持<code>pre-commit</code>钩子</mark></p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/commitlint%E6%B7%BB%E5%8A%A0%E9%92%A9%E5%AD%90%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9.png" class="" title="commitlint添加钩子注意事项">
+<p>安装husky</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev husky</span><br></pre></td></tr></table></figure>
+<p>初始化husky配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx husky init</span><br></pre></td></tr></table></figure>
+<p>上述初始化操作会创建一个<code>.husky</code>文件夹并初始化一些配置，同时会自动帮我们创建<code>pre-commit</code>脚本，并更新<code>package.json</code>中的<code>prepare</code>脚本，但前面我们已经提到过：commitlint目前不支持<code>pre-commit</code>钩子，所以这个<code>pre-commit</code>脚本我们需要删除。</p>
+<p>然后我们需要创建<code>commit-msg</code>脚本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add commit message linting to commit-msg hook</span></span><br><span class="line"><span class="comment"># 在 commit-msg 钩子中添加提交消息 linting</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;npx --no -- commitlint --edit \$1&quot;</span> &gt; .husky/commit-msg</span><br><span class="line"><span class="comment"># Windows users should use ` to escape dollar signs</span></span><br><span class="line"><span class="comment"># Windows 用户应使用 ` 转义美元符号</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;npx --no commitlint --edit `<span class="variable">$1</span>&quot;</span> &gt; .husky/commit-msg</span><br></pre></td></tr></table></figure>
+<p>我们也可以自己在<code>.husky</code>文件夹下创建<code>commit-msg</code>脚本，并填写以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx --no -- commitlint --edit <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
+<p>然后对我们的提交就会进行校验操作了。</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/commitlint%E6%8F%90%E4%BA%A4%E6%A0%A1%E9%AA%8C.png" class="" title="commitlint提交校验">
+<h3 id="lint-staged：git提交前对代码质量进行检查">lint-staged：git提交前对代码质量进行检查</h3>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/lint-staged">lint-staged</a>是一个针对 Git 暂存区（staged files）运行代码检查工具（linters）的 Node.js 工具。它的核心功能是仅对即将提交的文件运行指定的代码检查和格式化操作，而不是对整个项目进行检查。</p>
+<p>为什么要使用lint-staged？</p>
+<p>在传统项目开发中，是对整个项目进行Lint操作，如果项目内容少的情况下，还是可以的，但内容多起来，仅仅是Lint操作，就是一个非常耗时的操作，非常影响开发，而lint-staged的解决方案是处理Git暂存区的文件，检查时间大大降低，并且它是在git提交前进行操作的，与<code>Husky、ESLint、Prettier、Commitlint</code>工具结合既能进行代码自动修复，又有质量保证，还能使团队开发统一，强制所有开发者使用相同的代码标准。</p>
+<p>安装<code>lint-staged</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev lint-staged</span><br></pre></td></tr></table></figure>
+<p>前面我们提到了<code>lint-staged</code>能与<code>Husky、ESLint、Prettier、Commitlint</code>结合，前面已经安装过了Husky和commitlint，我们把剩下的也安装一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装代码质量工具</span></span><br><span class="line"><span class="comment"># 安装 eslint</span></span><br><span class="line">npm init @eslint/config@latest</span><br><span class="line"><span class="comment"># 安装 prettier</span></span><br><span class="line">npm install --save-dev --save-exact prettier</span><br></pre></td></tr></table></figure>
+<p>上述eslint在安装时可以自己选择配置，并且会生成对应的配置文件，我们就不用单独创建了。</p>
+<p>创建husky的<code>pre-commit</code>脚本，并填写以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;npx lint-staged&quot;</span> &gt; .husky/pre-commit</span><br></pre></td></tr></table></figure>
+<p>创建perttier配置文件<code>.prettierrc.mjs</code>，并填写以下内容，也可以<a target="_blank" rel="noopener" href="https://prettier.io/docs/options">自定义配置</a>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="attr">trailingComma</span>: <span class="string">&#x27;es5&#x27;</span>,</span><br><span class="line">    <span class="attr">tabWidth</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="attr">semi</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">singleQuote</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> config;</span><br></pre></td></tr></table></figure>
+<p>最后填写lint-staged配置，有两种配置方式，如下图</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/lint-staged%E9%85%8D%E7%BD%AE.png" class="" title="lint-staged配置">
+<p>我们简单填写一下即可</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;*.&#123;js,jsx,ts,tsx&#125;&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;prettier --write&quot;</span><span class="punctuation">,</span> <span class="string">&quot;eslint --fix --max-warnings=0&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;*.&#123;json,md,yml,css,scss&#125;&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;prettier --write&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这一套下来就可以测试看看是否生效了。</p>
+<h3 id="前端代码提交校验（Husky、ESLint、Prettier、Commitlint、lint-staged、Commitlizen）工作流图示">前端代码提交校验（Husky、ESLint、Prettier、Commitlint、lint-staged、Commitlizen）工作流图示</h3>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E6%A0%A1%E9%AA%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%9B%BE%E7%A4%BA.png" class="" title="前端代码提交校验工作流图示">
+<h2 id="git查看提交的历史">git查看提交的历史</h2>
+<p>我们想要查看一下我们的提交历史，可以使用<code>git log</code>命令，默认会按时间顺序列出提交信息，包含每个提交的<code>SHA-1校验和</code>、作者名、电子邮件、提交时间和提交说明。</p>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" class="" title="查看提交历史">
+<p>我们也可以通过配置简单查看提交记录</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>通过<code>--oneline/--pretty=oneline</code>一行查看，前者会展示校验和的前几位。</p>
+</li>
+</ul>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E7%AE%80%E5%8D%95%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" class="" title="简单查看提交历史">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>再输入<code>--graph</code>配置可以以图的形式查看</p>
+</li>
+</ul>
+<img data-src="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/%E4%BB%A5%E5%9B%BE%E5%BD%A2%E5%BC%8F%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" class="" title="以图形式查看提交历史">
+<h2 id="git版本回退">git版本回退</h2>
+<p>我们如果想回退到之前提交的某个版本，可以使用<code>git reset</code>命令，其实就是改变HEAD的指向（Git通过HEAD指针记录当前版本，HEAD指针总是指向当前分支的最后一次提交）。</p>
+<p>所以，我们只需改变HEAD指向就能进行版本回退</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>我们可以通过<code>^</code>进行版本回退，如<code>git reset --hard HEAD^</code>，一个<code>^</code>表示回退上一个版本，如果是<code>^^</code>表示回退上上个版本。</p>
+</li>
+<li class="lvl-2">
+<p>使用<code>~</code>，比如我们想回退到上50个版本，可以使用<code>git reset --hard HEAD~50</code>。</p>
+</li>
+<li class="lvl-2">
+<p>我们可以通过某个版本的校验和实现特定版本回退，如<code>git reset --hard 5b521</code>。</p>
+</li>
+</ul>
+<blockquote>
+<p>对于指定校验和回退，其实没必要输入完整的校验和，只需输入前几位，git会自动帮我们寻找。上述操作都需要加上<code>--hard</code>配置项，否者会造成提交记录回退，但仓库内容还是当前版本，只不过回退版本之后的更改都变为<code>Untracked</code>未跟踪状态。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/" title="git版本控制工具（一）">https://a-big-dreamer.github.io/2025/04/05/git版本控制工具（一）/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 工程化</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+              <a href="/tags/commitizen/" rel="tag"><i class="fa fa-tag"></i> commitizen</a>
+              <a href="/tags/commitlint/" rel="tag"><i class="fa fa-tag"></i> commitlint</a>
+              <a href="/tags/lint-staged/" rel="tag"><i class="fa fa-tag"></i> lint-staged</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/04/webpack%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" rel="prev" title="webpack打包工具">
+                  <i class="fa fa-angle-left"></i> webpack打包工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="git版本控制工具（二）">
+                  git版本控制工具（二） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+    </main><div id="tp-weather-widget"></div>
+<script>
+(function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+window.SeniverseWeatherWidget('show', {
+    flavor: "bubble",
+    location: "WW2CSZKC3PHE",
+    geolocation: true,
+    language: "zh-Hans",
+    unit: "c",
+    theme: "auto",
+    token: "67d8c8ef-0f03-4d08-b5ba-ac1a9f24ee70",
+    hover: "enabled",
+    container: "tp-weather-widget"
+})
+</script><!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS-->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+    server="netease"
+    id="12716149839"
+    type="playlist" 
+    mini="true"
+    fixed="true"
+    autoplay="false"
+    volume="0.4"
+    theme="#FADFA3"
+    order="random"
+    loop="all"
+    preload="auto"
+    mutex="true"
+    list-folded="true"
+    loop="all"
+    >
+</meting-js>
+<footer class="footer">
+      <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">A Big Dreamer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">58k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:32</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/10/2024 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+      </div>
+    </footer>
+
+    
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/a-big-dreamer" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+ 
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+ 
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '48vh',
+  right: 'unset',
+  left: '25px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f7a62d184b96dc4a7fa332f720c61652"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
+
+  <!-- 页面点击小红心 -->
+  <script
+    type="text/javascript"
+    src="/js/mouse-click-themes/clicklove.js"
+  ></script>
+</html>

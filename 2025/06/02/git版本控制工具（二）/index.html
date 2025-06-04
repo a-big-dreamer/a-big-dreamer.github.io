@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/%E6%A2%A6%E6%83%B3%E5%AE%B6.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="git版本控制工具（二）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git版本控制工具（二）">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="ABD&#39;s Blog">
+<meta property="og:description" content="git版本控制工具（二）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%82%A8%E5%85%AC%E9%92%A5.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%9C%AA%E8%BF%9B%E8%A1%8C%E8%B7%9F%E8%B8%AA%E5%88%86%E6%94%AF.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%B7%B2%E6%8B%89%E5%8F%96%E4%BD%86%E6%97%A0%E6%B3%95%E5%90%88%E5%B9%B6.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%B7%B2%E6%8B%89%E5%8F%96%E4%BD%86%E6%97%A0%E6%B3%95%E5%90%88%E5%B9%B6%E6%83%85%E5%86%B52.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%8B%92%E7%BB%9D%E5%90%88%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%B9%B2%E7%9A%84%E5%8E%86%E5%8F%B2.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%8B%92%E7%BB%9D%E5%90%88%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%B9%B2%E7%9A%84%E5%8E%86%E5%8F%B2%E7%9A%84%E5%8E%9F%E5%9B%A0.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E4%B8%8A%E6%B8%B8%E5%88%86%E6%94%AF%E5%92%8C%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%90%8D%E7%A7%B0%E4%B8%8D%E4%B8%80%E8%87%B4%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E5%B7%A5%E4%BD%9C%E6%B5%81.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2%EF%BC%88%E5%81%87%E8%AE%BE%EF%BC%89.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E5%9B%BE.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%8F%98%E5%9F%BA%E6%93%8D%E4%BD%9C%E5%9B%BE.png">
+<meta property="article:published_time" content="2025-06-02T13:19:30.000Z">
+<meta property="article:modified_time" content="2025-06-04T15:57:40.563Z">
+<meta property="article:author" content="A Big Dreamer">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%82%A8%E5%85%AC%E9%92%A5.png">
+
+
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/","path":"2025/06/02/git版本控制工具（二）/","title":"git版本控制工具（二）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>git版本控制工具（二） | ABD's Blog</title>
+    
+
+
+
+
+
+
+
+
+    <noscript>
+      <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+
+  <style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+  <body
+    itemscope
+    itemtype="http://schema.org/WebPage"
+    
+    class="use-motion"
+    
+  >
+    <div class="headband"></div>
+
+    <main class="main">
+      <div class="column">
+        <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ABD's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">梦想成为伟大的梦想家</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">41</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">33</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header> 
+  
+<aside class="sidebar">
+
+  <div
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
+  >
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-toc">文章目录</li>
+      <li class="sidebar-nav-overview">站点概览</li>
+    </ul>
+
+    <div class="sidebar-panel-container">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">远程仓库的验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EHTTP%E7%9A%84%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.</span> <span class="nav-text">基于HTTP的凭证存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ESSH%E7%9A%84%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.</span> <span class="nav-text">基于SSH的远程仓库验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">管理远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E7%9A%84%E4%B8%8A%E6%B8%B8%E5%88%86%E6%94%AF%EF%BC%88%E8%B7%9F%E8%B8%AA%E5%88%86%E6%94%AF%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">本地分支的上游分支（跟踪分支）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%92%E7%BB%9D%E5%90%88%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%B9%B2%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="nav-number">4.</span> <span class="nav-text">拒绝合并不相干的历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E5%AF%B9%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">Git对远程仓库的常见操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E6%A0%87%E7%AD%BE"><span class="nav-number">6.</span> <span class="nav-text">Git标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAGit%E6%A0%87%E7%AD%BE"><span class="nav-number">6.1.</span> <span class="nav-text">创建Git标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%92%8C%E6%A3%80%E5%87%BA%E6%A0%87%E7%AD%BE"><span class="nav-number">6.2.</span> <span class="nav-text">删除和检出标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#detached-HEAD%EF%BC%88%E5%88%86%E7%A6%BB%E5%A4%B4%E6%8C%87%E9%92%88%EF%BC%89"><span class="nav-number">6.2.1.</span> <span class="nav-text">detached HEAD（分离头指针）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E6%8F%90%E4%BA%A4%E5%AF%B9%E8%B1%A1%EF%BC%88Commit-Object%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">Git提交对象（Commit Object）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E5%88%86%E6%94%AF"><span class="nav-number">8.</span> <span class="nav-text">Git分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%AF%B9%E5%88%86%E6%94%AF%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">8.1.</span> <span class="nav-text">Git对分支的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">8.2.</span> <span class="nav-text">Git工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">8.3.</span> <span class="nav-text">Git分支合并操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%8F%98%E5%9F%BA%E6%93%8D%E4%BD%9C"><span class="nav-number">8.4.</span> <span class="nav-text">Git变基操作</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="A Big Dreamer"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">A Big Dreamer</p>
+  <div class="site-description" itemprop="description">A Big Dreamer's Blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a-big-dreamer" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a-big-dreamer" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+<!-- recent posts -->
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+        <div class="links-of-blogroll-title recent-posts-title">
+	    <i class="fa fa-history " aria-hidden="true"></i>
+            近期文章
+	</div>
+	<ul class="links-of-blogroll-list recent-posts-list">
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/" title="git版本控制工具（二）" target="">
+		    git版本控制工具（二）
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/" title="git版本控制工具（一）" target="">
+		    git版本控制工具（一）
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/04/04/webpack%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" title="webpack打包工具" target="">
+		    webpack打包工具
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/27/%E5%89%8D%E7%AB%AF%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" title="前端包管理工具" target="">
+		    前端包管理工具
+		    </a>
+		</li>
+	        <li class="my-links-of-blogroll-item">
+		    <a href="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/" title="ESModule解析流程" target="">
+		    ESModule解析流程
+		    </a>
+		</li>
+	</ul>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="pjax">
+  </div>
+</aside>
+
+
+      </div>
+
+      <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="A Big Dreamer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ABD's Blog">
+      <meta itemprop="description" content="A Big Dreamer's Blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="git版本控制工具（二） | ABD's Blog">
+      <meta itemprop="description" content="git版本控制工具（二）。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git版本控制工具（二）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-06-02 21:19:30" itemprop="dateCreated datePublished" datetime="2025-06-02T21:19:30+08:00">2025-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-04 23:57:40" itemprop="dateModified" datetime="2025-06-04T23:57:40+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">git版本控制工具（二）。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>远程仓库：</p>
+<ul class="lvl-0">
+<li class="lvl-2">目前我们的开发都是在本地进行的，代码也是保存在本地仓库的，我们只能对本地代码进行操作。</li>
+<li class="lvl-2">但在真实开发中，一个项目通常是由多人同时进行的，所以我们需要将代码共享到远程仓库中。</li>
+<li class="lvl-2">而远程仓库也很好实现，只需要在Git服务器上搭建一个仓库即可，在Git服务器上的仓库我们称之为Git远程仓库。</li>
+</ul>
+<p>我们可以通过如下方式使用Git服务器：</p>
+<ol>
+<li class="lvl-3">
+<p>使用第三方的Git服务器：<a target="_blank" rel="noopener" href="https://github.com/">GitHub</a>、<a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a>、<a target="_blank" rel="noopener" href="https://gitlab.com/">Gitlab</a>。</p>
+</li>
+<li class="lvl-3">
+<p>在自己的服务器上搭建一个Git服务（通过Gitlab开源软件进行自行部署）。</p>
+</li>
+</ol>
+<h2 id="远程仓库的验证">远程仓库的验证</h2>
+<p>如果我们想要操作Git服务器中的私有仓库时，远程仓库会对我们进行身份验证。</p>
+<p>目前Git服务器验证手段有两种：</p>
+<ol>
+<li class="lvl-3">
+<p>基于HTTP的凭证存储（Credential Storage）。</p>
+</li>
+<li class="lvl-3">
+<p>基于SSH的密钥。</p>
+</li>
+</ol>
+<h3 id="基于HTTP的凭证存储">基于HTTP的凭证存储</h3>
+<p>由于HTTP协议是<strong>无状态</strong>的连接，这意味着每次连接都需要携带用户名和密码。</p>
+<p>基于这种操作非常麻烦，Git提供了一个凭证系统来处理这个事情。</p>
+<p>Git凭证系统有一些模式可以供我们选择：</p>
+<ol>
+<li class="lvl-3">
+<p>临时输入模式</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>不缓存凭证，每次操作（<code>git clone</code>、<code>git push</code>）时都需要输入用户名和密码。</p>
+</li>
+<li class="lvl-2">
+<p>安全性高，但频繁操作时过于麻烦。</p>
+</li>
+<li class="lvl-2">
+<p>触发条件：未配置任何凭证助手（credential hepler）。</p>
+</li>
+</ul>
+<p>凭证助手：当我们安装git时，</p>
+<ol start="2">
+<li class="lvl-3">
+<p>明文存储模式</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>将凭证铭文保存在磁盘文件中，通过<code>git config --global credential.helper store</code>进行配置。</p>
+</li>
+<li class="lvl-2">
+<p>凭证长期有效，无需重复输入。</p>
+</li>
+<li class="lvl-2">
+<p>安全性低（明文存储，需严格保护文件权限）。</p>
+</li>
+</ul>
+<ol start="3">
+<li class="lvl-3">
+<p>内存缓存模式</p>
+<ul class="lvl-2">
+<li class="lvl-6">将凭证临时保存在内存中（默认缓存15分钟）。</li>
+<li class="lvl-6">配置方式:</li>
+<li class="lvl-6">短期缓存，适合临时使用。</li>
+<li class="lvl-6">重启后凭证失效。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper cache</span><br><span class="line"><span class="comment"># 自定义缓存时间（单位：秒）</span></span><br><span class="line">git config --global credential.helper <span class="string">&#x27;cache --timeout=3600&#x27;</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li class="lvl-3">
+<p>系统密钥管理器集成</p>
+<ul class="lvl-2">
+<li class="lvl-6">将凭证存储在操作系统的密钥管理器中（如 Windows 凭据管理器、macOS Keychain）。</li>
+<li class="lvl-6">我们在安装git时默认会为我们安装一个<a target="_blank" rel="noopener" href="https://github.com/git-ecosystem/git-credential-manager">Git Credential Manager</a>凭证管理工具。</li>
+<li class="lvl-6">我们可以在<code>控制面板-&gt;用户账户-&gt;凭证管理器-&gt;Windows凭证</code>中看到我们的git凭证信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="基于SSH的远程仓库验证">基于SSH的远程仓库验证</h3>
+<p>Secure Shell（安全外壳协议，简称SSH）是一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。</p>
+<p>我们需要先生成一个SSH密钥</p>
+<ol>
+<li class="lvl-3">
+<p>打开Git黑窗口</p>
+</li>
+<li class="lvl-3">
+<p>生成ssh key</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的邮箱&quot;</span></span><br><span class="line"><span class="comment"># 执行后一直回车即可</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li class="lvl-3">
+<p>获取ssh key公钥内容</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line"><span class="built_in">cat</span> id_rsa.pub</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li class="lvl-3">
+<p>复制获取的公钥，然后存储到git服务器上，以Gitee为例：</p>
+</li>
+</ol>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AD%98%E5%82%A8%E5%85%AC%E9%92%A5.png" class="" title="git服务器存储公钥">
+<h2 id="管理远程仓库">管理远程仓库</h2>
+<p>我们可以通过<code>git remote</code>进行有关远程操作的操作。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git remote -v/--verbose</code>：查看当前项目关联的远程仓库地址。</p>
+</li>
+<li class="lvl-2">
+<p><code>git remote add &lt;shortname&gt; &lt;url&gt;</code>：添加远程仓库。</p>
+<ul class="lvl-2">
+<li class="lvl-6">如<code>git remote add origin http://xxx//xxx.git</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>git reomte rename origin main</code>：重命名远程地址。</p>
+</li>
+<li class="lvl-2">
+<p><code>git remote remove origin</code>：移除远程地址。</p>
+</li>
+</ul>
+<h2 id="本地分支的上游分支（跟踪分支）">本地分支的上游分支（跟踪分支）</h2>
+<p>当我们与成功添加远程仓库后，如果远程仓库的部分内容与本地不同的话，我们需要先通过<code>git pull</code>命令将远程仓库的内容拉取到本地才能进行提交，但当我们进行<code>git pull</code>操作时，可能会出现以下情况：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%9C%AA%E8%BF%9B%E8%A1%8C%E8%B7%9F%E8%B8%AA%E5%88%86%E6%94%AF.png" class="" title="未进行跟踪分支">
+<p>出现这个问题的原因是因为当前分支没有和远程的分支进行跟踪。</p>
+<p><code>git pull</code>其实是<code>git fetch</code>和<code>git merge</code>的合并操作，在没有进行跟踪的情况下，是不允许<code>git fetch</code>直接拉取到本地的，但我们可以指定远程仓库的分支进行获取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git pull &lt;本地设置的远程仓库的shortname&gt; &lt;远程仓库的分支&gt;</span></span><br><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+<p>但又会出现以下问题：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%B7%B2%E6%8B%89%E5%8F%96%E4%BD%86%E6%97%A0%E6%B3%95%E5%90%88%E5%B9%B6.png" class="" title="已拉取但无法合并">
+<p>我们可以看出，已经拉取到本地了，但无法进行合并，这个问题后面再说。</p>
+<p>我们不能每次都进行指定远程仓库的分支进行操作，为了解决这个问题，我们需要给当前分支设置一个跟踪分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git branch --set-upstream-to=&lt;本地设置的远程仓库的shortname&gt;/&lt;远程仓库的分支&gt;</span></span><br><span class="line">git branch --set-upstream-to=origin/main</span><br></pre></td></tr></table></figure>
+<p>进行上述操作后我们就可以直接进行<code>git pull</code>操作了：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%B7%B2%E6%8B%89%E5%8F%96%E4%BD%86%E6%97%A0%E6%B3%95%E5%90%88%E5%B9%B6%E6%83%85%E5%86%B52.png" class="" title="已拉取但无法合并">
+<p>可以看出，<code>git fetch</code>这一步已经没有问题了，接下来，我们需要解决的是<mark>fatal: refusing to merge unrelated histories</mark>这个问题了。</p>
+<h2 id="拒绝合并不相干的历史">拒绝合并不相干的历史</h2>
+<p>上文提到，当我们进行合并远程分支操作时，会出现拒绝合并不相干历史的情况：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%8B%92%E7%BB%9D%E5%90%88%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%B9%B2%E7%9A%84%E5%8E%86%E5%8F%B2.png" class="" title="拒绝合并不相干的历史">
+<p>出现上述的原因如下</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%8B%92%E7%BB%9D%E5%90%88%E5%B9%B6%E4%B8%8D%E7%9B%B8%E5%B9%B2%E7%9A%84%E5%8E%86%E5%8F%B2%E7%9A%84%E5%8E%9F%E5%9B%A0.png" class="" title="拒绝合并不相干的历史的原因">
+<p>要解决这个问题，我们可以通过下面操作来处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+<p>进行上述操作以后，我们就可以正常使用<code>git pull</code>操作了。</p>
+<h2 id="Git对远程仓库的常见操作">Git对远程仓库的常见操作</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git clone &lt;远程仓库地址&gt;</code>：克隆远程仓库到本地。</p>
+</li>
+<li class="lvl-2">
+<p><code>git push &lt;本地设置的远程仓库的shortname&gt; &lt;当前分支&gt;</code>：将代码推送到远程仓库，只输入<code>git push</code>的情况默认是将当前分支推送到远程仓库中。</p>
+</li>
+</ul>
+<p><mark>注意：对于<code>git push</code>的提交操作，会将当前分支的代码提交到远程仓库的相同名称的分支中，否者就会报以下错误：</mark></p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E4%B8%8A%E6%B8%B8%E5%88%86%E6%94%AF%E5%92%8C%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E5%90%8D%E7%A7%B0%E4%B8%8D%E4%B8%80%E8%87%B4%E6%83%85%E5%86%B5.png" class="" title="上游分支和当前分支名称不一致情况">
+<p>上图已经给出了解决方案：<code>git push origin HEAD[:本地分支名]</code>。</p>
+<p>进行上面操作后会在远程创建一个与本地分支名一致的新分支，但这样每次提交都需要指定远程仓库名和本地分支。</p>
+<p>为了解决这个问题，我们只需要将当前分支名改为与远程分支一样即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git branch -m old-name new-name  如果改变当前的分支名，old-name可以省略</span></span><br><span class="line">git branch -m master</span><br></pre></td></tr></table></figure>
+<p>造成上述问题的原因其实与<code>push.default</code>配置项有关，我们看一下<code>push.default</code>可配置选项：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nothing</td>
+<td>不推送任何内容</td>
+</tr>
+<tr>
+<td>matching</td>
+<td>（Git 2.0 之前的默认值）推送所有匹配的分支</td>
+</tr>
+<tr>
+<td>upstream</td>
+<td>将当前分支推送到其上游分支（tracking 是 upstream 的已弃用的同义词）</td>
+</tr>
+<tr>
+<td>current</td>
+<td>将 Current 分支推送到同名分支</td>
+</tr>
+<tr>
+<td>simple</td>
+<td>（Git 1.7.11 中的新功能，Git 2.0 后默认）与 upstream 类似，但如果上游分支的名称与本地分支的名称不同，则拒绝推送</td>
+</tr>
+</tbody>
+</table>
+<p>根据上文内容，我们可以知道，如果我们不想改变当前分支的名称，直接想推送到上游分支中，只需要将<code>push.default</code>的值改为<code>upstream</code>即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config push.default upstream</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git fetch</code>：拉取远程仓库的代码。</p>
+</li>
+<li class="lvl-2">
+<p><code>git merge</code>：合并拉取的远程代码到本地。</p>
+</li>
+<li class="lvl-2">
+<p><code>git pull</code>：<code>git fetch</code>+<code>git merge</code>。</p>
+</li>
+</ul>
+<h2 id="Git标签">Git标签</h2>
+<p>当我们进行项目开发时，当完成一项重大开发后，通常会在当前版本打上一个标签，起到标识作用，是一项里程碑进度，表示当前版本的重要性。</p>
+<h3 id="创建Git标签">创建Git标签</h3>
+<p>通过Git命令创建标签：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>创建轻量标签（lightweight）：<code>git tag v1.0</code>。</p>
+</li>
+<li class="lvl-2">
+<p>创建附注标签（annotated）：<code>git tag -a v1.0 -m '附注信息'</code>。</p>
+</li>
+</ul>
+<p>在默认情况下，<code>git push</code>操作并不会传送标签到远程服务器上，我们需要显示的推送标签到服务器上，这样别人在获取时也能获得标签。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git push &lt;远程仓库shortname&gt; &lt;标签&gt;</span></span><br><span class="line">git push origin v1.0</span><br><span class="line"><span class="comment"># 将所有标签提交</span></span><br><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<h3 id="删除和检出标签">删除和检出标签</h3>
+<p>删除标签的操作我们对本地和远程分别操作：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>删除本地分支：<code>git tag -d &lt;标签名&gt;</code></p>
+<ul class="lvl-2">
+<li class="lvl-6"><code>git tag -d v1.2</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>删除远程标签：<code>git push &lt;远程仓库shortname&gt; --delete &lt;标签名&gt;</code></p>
+<ul class="lvl-2">
+<li class="lvl-6"><code>git push origin --delete v1.2</code></li>
+</ul>
+</li>
+</ul>
+<p>检出标签：用于查看某个标签所指向的版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git checkout &lt;标签名&gt;</span></span><br><span class="line">git checkout v1.1</span><br></pre></td></tr></table></figure>
+<p>但这个操作会创建一个游离分支，新分支处于<code>detached HEAD（分离头指针）</code>状态。</p>
+<h4 id="detached-HEAD（分离头指针）">detached HEAD（分离头指针）</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>HEAD 在 Git 中通常指向当前分支（例如 main, develop），而分支本身是一个指向某个特定提交的指针。</p>
+</li>
+<li class="lvl-2">
+<p>在分离头指针状态下，HEAD 直接指向一个具体的提交，而不是指向一个分支指针。</p>
+</li>
+<li class="lvl-2">
+<p>简单说：你不是站在某个命名的<strong>分支道路</strong>上，而是直接站在历史长河中的某个具体<strong>快照</strong>（提交）点上。</p>
+</li>
+</ul>
+<p>好处：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>安全地探索历史（Look Around）：我们可以安全的查看某个版本是什么样子的。</p>
+</li>
+<li class="lvl-2">
+<p>进行实验性修改（Make Experimental Changes）： 尝试一些想法、修复一个 bug、写个新功能，但还不确定是否要保留这些改动，或者不想干扰当前的工作分支。</p>
+</li>
+<li class="lvl-2">
+<p>快速修复基于特定版本的 Bug：比如用户报告了线上版本 (v1.0) 的一个严重 bug，但你的 main 分支已经开发 v2.0 了，代码变化很大。</p>
+</li>
+</ul>
+<p><mark>注意：不能直接将分离头指针（detached HEAD）状态下的提交推送到远程仓库的常规分支（如 origin/main）</mark></p>
+<p>但如果我们真想提交的话，可以使用这个命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin HEAD:&lt;name-of-remote-branch&gt;</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&lt;name-of-remote-branch</code>&gt;： 指定你想要在远程仓库创建或更新的目标分支名称（例如 my-experiment, temp-fix, 甚至 main - 强烈不推荐覆盖重要分支！）。</p>
+</li>
+</ul>
+<h2 id="Git提交对象（Commit-Object）">Git提交对象（Commit Object）</h2>
+<p>Git版本控制系统以<code>Commit Object（提交对象）</code>的形式支持分支。</p>
+<p>在每次提交时，都会创建一个提交对象：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>该提交对象会包含一个指向暂存内容快照的指针。</p>
+</li>
+<li class="lvl-2">
+<p>该提交对象还包含了作者的姓名和邮箱、提交时输入的信息以及指向它的父对象的指针。</p>
+<ul class="lvl-2">
+<li class="lvl-6">首次提交产生的提交对象没有父对象，普通提交操作产生的提交对象有一个父对象</li>
+<li class="lvl-6">而由多个分支合并产生的提交对象有多个父对象。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Git分支">Git分支</h2>
+<p>Git分支，本质上是指向提交对象的可变指针。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">          main</span><br><span class="line">            ↓</span><br><span class="line">A ← B ← C ← D ← E</span><br><span class="line">                ↑</span><br><span class="line">              feature ← HEAD</span><br></pre></td></tr></table></figure>
+<p>在上面的结构中，A、B、C、D、E都是一个提交对象，main和feature是不同的分支，我们对于分支的切换其实就是将HEAD这个头指针指向不同分支的可变指针（即分支引用），从而间接指向该分支所指向的提交对象。</p>
+<h3 id="Git对分支的操作">Git对分支的操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git branch &lt;分支名&gt;</code>：创建分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git checkout &lt;分支名&gt;</code>：切换分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git checkout -b &lt;分支名&gt;</code>：创建并切换到新分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch</code>：查看当前所有的分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch -v</code>：查看当前所有的分支，同时查看最后一次提交。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch --merged</code>：查看所有合并到当前分支的分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch --no-merged</code>：查看所有没有合并到当前分支的分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch –d &lt;分支名&gt;</code>：删除当前分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git branch –D &lt;分支名&gt;</code>：强制删除某一个分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git push origin &lt;branch&gt;</code>：推送分支到远程。</p>
+</li>
+<li class="lvl-2">
+<p><code>git checkout --track &lt;remote&gt;/&lt;branch&gt;</code>：跟踪远程分支，如果远程分支存在，本地不存在，会创建一个与远程分支相同名的分支。</p>
+</li>
+<li class="lvl-2">
+<p><code>git push origin --delete &lt;branch&gt;</code>：删除远程分支。</p>
+</li>
+</ul>
+<h3 id="Git工作流">Git工作流</h3>
+<p>Git工作流的出现源于<strong>软件开发的协作需求</strong>与<strong>Git分布式架构的特性</strong>的深度结合。</p>
+<p>我们在大型项目开发时，可能会出现以下问题：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>协作冲突：多人并行修改同一文件。</p>
+</li>
+<li class="lvl-2">
+<p>版本管理：稳定版 vs 开发版 vs 紧急修复。</p>
+</li>
+<li class="lvl-2">
+<p>质量控制：代码审查与自动化测试。</p>
+</li>
+<li class="lvl-2">
+<p>责任追溯：故障定位与代码溯源。</p>
+</li>
+</ul>
+<p>通过Git工作流可以解决以上问题，其实本质上就是为特定协作场景设计的分支管理策略框架，通过规范分支的创建、合并规则及生命周期，解决团队协作中的关键问题。</p>
+<p>简单来说，就是创建不同的分支，不同的分支有不同的职责，可以同步开发或测试，最后合并到主分支成为一个完整的项目。</p>
+<p>目前比较常见的工作流如下图：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E5%B7%A5%E4%BD%9C%E6%B5%81.png" class="" title="git工作流">
+<h3 id="Git分支合并操作">Git分支合并操作</h3>
+<p>场景：我们有一个<code>hotfix</code>分支是用于修复系统bug的，我们修复完后，但当前<code>master</code>分支是没有修复后的代码的，我们就可以将<code>master</code>分支和<code>hotfix</code>分支进行合并：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line"><span class="comment"># 合并hotfix分支内容</span></span><br><span class="line">git merge hotfix</span><br></pre></td></tr></table></figure>
+<h3 id="Git变基操作">Git变基操作</h3>
+<p>在Git中整合来自不同分支的修改有merge和rebase两种方法。</p>
+<p><code>merge</code>操作会保留分支拓扑（查看图结构时可以看到有分叉），<code>rebase</code>是生成线性结构，<code>rebase</code>找到当前分支和目标分支的最近共同祖先，然后提取当前分支在共同祖先之后的所有提交，将这些提交重新应用到目标分支的最新提交之后，如果是相同文件的操作，可能会需要处理合并冲突，然后将当前分支的可变指针指向变基后的最新提交对象上。</p>
+<p>我们用图的形式来更直观的看一下：</p>
+<p>假设我们有一个提交历史，如下图：</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/git%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2%EF%BC%88%E5%81%87%E8%AE%BE%EF%BC%89.png" class="" title="git提交历史（假设）">
+<p>目标：目标分支合并<code>current-branch</code>分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout target-branch</span><br><span class="line">git merge current-branch</span><br></pre></td></tr></table></figure>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E5%9B%BE.png" class="" title="合并操作图">
+<p>目标：<code>current-branch</code>分支变基到目标分支。</p>
+<img data-src="/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/%E5%8F%98%E5%9F%BA%E6%93%8D%E4%BD%9C%E5%9B%BE.png" class="" title="变基操作图">
+<blockquote>
+<p>注意:</p>
+<ul class="lvl-1">
+<li class="lvl-2">不要对已推送到远程的公共分支执行rebase 。</li>
+<li class="lvl-2">不要对多人协作的分支执行rebase。</li>
+</ul>
+<p>原因：重写历史会破坏其他开发者环境</p>
+</blockquote>
+<p>对于<code>merge</code>和<code>rebase</code>的使用场景：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>私有分支（仅自己使用）→ 大胆使用<code>rebase</code>。</p>
+</li>
+<li class="lvl-2">
+<p>公共分支（多人协作）→ 始终使用<code>merge</code>。</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="A Big Dreamer 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="A Big Dreamer 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>A Big Dreamer
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://a-big-dreamer.github.io/2025/06/02/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/" title="git版本控制工具（二）">https://a-big-dreamer.github.io/2025/06/02/git版本控制工具（二）/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/05/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="git版本控制工具（一）">
+                  <i class="fa fa-angle-left"></i> git版本控制工具（一）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+    </main><div id="tp-weather-widget"></div>
+<script>
+(function(a,h,g,f,e,d,c,b){b=function(){d=h.createElement(g);c=h.getElementsByTagName(g)[0];d.src=e;d.charset="utf-8";d.async=1;c.parentNode.insertBefore(d,c)};a["SeniverseWeatherWidgetObject"]=f;a[f]||(a[f]=function(){(a[f].q=a[f].q||[]).push(arguments)});a[f].l=+new Date();if(a.attachEvent){a.attachEvent("onload",b)}else{a.addEventListener("load",b,false)}}(window,document,"script","SeniverseWeatherWidget","//cdn.sencdn.com/widget2/static/js/bundle.js?t="+parseInt((new Date().getTime() / 100000000).toString(),10)));
+window.SeniverseWeatherWidget('show', {
+    flavor: "bubble",
+    location: "WW2CSZKC3PHE",
+    geolocation: true,
+    language: "zh-Hans",
+    unit: "c",
+    theme: "auto",
+    token: "67d8c8ef-0f03-4d08-b5ba-ac1a9f24ee70",
+    hover: "enabled",
+    container: "tp-weather-widget"
+})
+</script><!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS-->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+<!--网易云-->   
+<meting-js
+    server="netease"
+    id="12716149839"
+    type="playlist" 
+    mini="true"
+    fixed="true"
+    autoplay="false"
+    volume="0.4"
+    theme="#FADFA3"
+    order="random"
+    loop="all"
+    preload="auto"
+    mutex="true"
+    list-folded="true"
+    loop="all"
+    >
+</meting-js>
+<footer class="footer">
+      <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">A Big Dreamer</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">58k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:32</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/10/2024 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+      </div>
+    </footer>
+
+    
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/a-big-dreamer" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+ 
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+ 
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '48vh',
+  right: 'unset',
+  left: '25px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"cfeadaaad253d484ec0e42ba16d8dea0"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
+
+  <!-- 页面点击小红心 -->
+  <script
+    type="text/javascript"
+    src="/js/mouse-click-themes/clicklove.js"
+  ></script>
+</html>
