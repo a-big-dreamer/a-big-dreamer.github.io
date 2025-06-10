@@ -28,13 +28,16 @@
 <meta property="og:site_name" content="ABD&#39;s Blog">
 <meta property="og:description" content="webpack搭建本地服务器。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/proxy%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86.png">
 <meta property="article:published_time" content="2025-06-08T10:11:37.000Z">
-<meta property="article:modified_time" content="2025-06-08T10:14:17.037Z">
+<meta property="article:modified_time" content="2025-06-10T10:18:57.348Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
 <meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/proxy%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F.png">
 
 
 <link rel="canonical" href="https://a-big-dreamer.github.io/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
@@ -138,7 +141,7 @@
 <aside class="sidebar">
 
   <div
-    class="sidebar-inner sidebar-overview-active"
+    class="sidebar-inner sidebar-nav-active sidebar-toc-active"
   >
     <ul class="sidebar-nav">
       <li class="sidebar-nav-toc">文章目录</li>
@@ -148,6 +151,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Watch-Mode"><span class="nav-number">1.</span> <span class="nav-text">Using Watch Mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-webpack-dev-server"><span class="nav-number">2.</span> <span class="nav-text">Using webpack-dev-server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proxy"><span class="nav-number">2.1.</span> <span class="nav-text">proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#historyApiFallback"><span class="nav-number">2.2.</span> <span class="nav-text">historyApiFallback</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-webpack-dev-middleware"><span class="nav-number">3.</span> <span class="nav-text">Using webpack-dev-middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9Awebpack-dev-middleware%E4%B8%8Eexpress%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">示例：webpack-dev-middleware与express结合使用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -268,9 +272,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-06-08 18:11:37 / 修改时间：18:14:17" itemprop="dateCreated datePublished" datetime="2025-06-08T18:11:37+08:00">2025-06-08</time>
+      <time title="创建时间：2025-06-08 18:11:37" itemprop="dateCreated datePublished" datetime="2025-06-08T18:11:37+08:00">2025-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-10 18:18:57" itemprop="dateModified" datetime="2025-06-10T18:18:57+08:00">2025-06-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,14 +310,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -318,7 +328,140 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><p>对于webapck来说，搭建本地服务器的目的是为了能自动对打包后的文件进行展示，并且当文件改变时，能自动的重新打包并展示。</p>
+<p>webpack 中提供了几个不同的选项，可以帮助你在代码发生变化时自动编译代码：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>webpack's Watch Mode</code>。</p>
+</li>
+<li class="lvl-2">
+<p><code>webpack-dev-server</code>（常用）。</p>
+</li>
+<li class="lvl-2">
+<p><code>webpack-dev-middleware</code>。</p>
+</li>
+</ul>
+<h2 id="Using-Watch-Mode">Using Watch Mode</h2>
+<p>就是在webpack打包命令后加入<code>--watch</code>配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack --watch</span><br></pre></td></tr></table></figure>
+<p>输入命令后我们发现，我们会发现他不会退出命令行，这是由于它正在监听文件的变化进行打包更新。</p>
+<p>但它的缺点是，对于展示，每次都需要手动刷新浏览器才能看到更改。</p>
+<h2 id="Using-webpack-dev-server">Using webpack-dev-server</h2>
+<p><code>webpack-dev-server</code>是一个基于<code>webpack</code>的静态文件服务器，它可以监听文件的变化，并自动刷新浏览器。</p>
+<p>安装<code>webpack-dev-server</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack-dev-server -D</span><br></pre></td></tr></table></figure>
+<p>然后对<code>devServer</code>进行配置，对于其中的配置项，后面再说，先这样用着：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">port</span>: <span class="number">8080</span>,</span><br><span class="line">    <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;0.0.0.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>webpack-dev-server</code>启动命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npx webpack serve</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">npx webpack-dev-server</span><br></pre></td></tr></table></figure>
+<p>接下里来我来介绍一些<code>webpack-dev-server</code>的常用配置项：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明</th>
+<th>默认值</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compress</td>
+<td>是否启用gzip压缩，即由webpack开启的服务返回的资源会通过gzip压缩，由浏览器进行解压，可以提高传输效率，但只适用于开发环境，生产环境推荐使用<code>nginx</code></td>
+<td>false</td>
+<td></td>
+</tr>
+<tr>
+<td>headers</td>
+<td>为所有响应添加响应头，可以解决跨域问题，但只是用于开发环境</td>
+<td></td>
+<td><code>headers: &#123;'Access-Control-Allow-Origin': '*'&#125;</code></td>
+</tr>
+<tr>
+<td>host</td>
+<td>指定要使用的主机。即允许外部可以访问我们的主机，在此目的是外部可以查看我们的项目。</td>
+<td></td>
+<td><code>host: '0.0.0.0'</code>（进行此设置我们的主机可以被任意外部访问）</td>
+</tr>
+<tr>
+<td>hot</td>
+<td>启用 webpack 的热模块替换功能</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>open</td>
+<td>告诉 dev-server 在服务器启动后打开浏览器。将其设置为 true 以打开默认浏览器</td>
+<td>false</td>
+<td><code>open: true</code></td>
+</tr>
+<tr>
+<td>port</td>
+<td>指定要侦听以下请求的端口号</td>
+<td>8080</td>
+<td><code>port: 8000</code></td>
+</tr>
+</tbody>
+</table>
+<p>接下来单独介绍一些配置项，不适合再用上述表格了。</p>
+<h3 id="proxy">proxy</h3>
+<p>看一下官方的描述：</p>
+<blockquote>
+<p>Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.</p>
+<p>当您拥有单独的 API 后端开发服务器并且希望在同一域上发送 API 请求时，代理某些 URL 可能很有用。</p>
+</blockquote>
+<p>proxy主要是用于解决跨域问题的，在项目开发中，前端开发和后端开发可能处于两个服务器，甚至于部署时也可能部署在不同的服务器上，而由于浏览器的同源策略，仅允许同源的请求访问，因此当我们访问后端的数据时，可能是获取不到的，这个时候，就可以通过配置<code>proxy</code>代理解决这个问题，<mark>但要注意，这个配置仅仅适于开发环境</mark>。</p>
+<p>proxy的配置内部其实是基于<a target="_blank" rel="noopener" href="https://github.com/chimurai/http-proxy-middleware?tab=readme-ov-file#http-proxy-options"><code>http-proxy-middleware</code></a>库实现的，详细配置点击上述链接即可，我这里只介绍几个常用的配置。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>context：可以填写字符串或数组，这意味着它可以匹配多种路径规则。</p>
+<ul class="lvl-2">
+<li class="lvl-4"><mark>注意：一定要是要有devServer启动的服务携带的路径请求才能被代理。</mark></li>
+<li class="lvl-4">比如当前服务为：<code>http://localhost:8080</code>，路径规则为<code>/api</code>，那么只有发送的请求一定要是<code>http://localhost:8080/api</code>才能被代理。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>target：代理目标地址。</p>
+</li>
+<li class="lvl-2">
+<p>pathRewrite：重写路径，可以是一个对象也可以是一个函数。</p>
+</li>
+<li class="lvl-2">
+<p>changeOrigin：默认情况下，代理时会保留主机标头的来源，您可以将 changeOrigin 设置为 true 以覆盖此行为。其实就是修改中间代理服务器发送到后端服务器时请求头中的host标头，host默认是本机的ip和端口，设置<code>changeOrigin: true</code>，host就变为目标服务器的ip和端口。</p>
+<ul class="lvl-2">
+<li class="lvl-4">host标头：host标头的出现是因为HTTP/1.1版本中由于虚拟技术的出现导致的单IP地址托管多个网站的问题。服务器可以根据host的值选择对应的网站配置。</li>
+</ul>
+</li>
+</ul>
+<p>给出一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">context</span>: [<span class="string">&#x27;/api1&#x27;</span>, <span class="string">&#x27;/api&#x27;</span>],</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;http://127.0.0.1:3000&#x27;</span>,</span><br><span class="line">    <span class="comment">// pathRewrite:&#123;</span></span><br><span class="line">    <span class="comment">//   &#x27;^/api1&#x27;: &#x27;&#x27;,</span></span><br><span class="line">    <span class="comment">//   &#x27;^/api&#x27;: &#x27;&#x27;</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="attr">pathRewrite</span>: <span class="function">(<span class="params">path</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (path.<span class="title function_">startsWith</span>(<span class="string">&#x27;/api1&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> path.<span class="title function_">replace</span>(<span class="string">&#x27;/api1&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (path.<span class="title function_">startsWith</span>(<span class="string">&#x27;/api&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> path.<span class="title function_">replace</span>(<span class="string">&#x27;/api&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>上述代码中，我定义了两个代理，一个代理<code>/api1</code>，一个代理<code>/api</code>，我想要都将他们通过<code>pathRewrite</code>替换<code>/api</code>和<code>/api1</code>为空，这个时候，一定要将<code>/api1</code>匹配规则写在前面，这是由于<code>^/api</code>匹配规则包含<code>^/api1</code>，会对其他操作造成影响。</p>
+<p>对于proxy解决跨域的问题，其实就是利用了服务器之前不存在同源策略的问题，webpack通过<code>webpack-dev-server</code>开启一个同源中间服务器，浏览器发送请求到该同源服务器，由此服务器再将请求发送给后端服务器，最后再通过中间服务器返回给前端。</p>
+<p>画个图表示：</p>
+<img data-src="/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/proxy%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F.png" class="" title="proxy解决跨域">
+<h3 id="historyApiFallback">historyApiFallback</h3>
+<p>historyApiFallback是为了解决单页面项目刷新后资源找不到（404）的情况，资源找不到的根本原因在于浏览器与服务器对路由处理的根本性差异。</p>
+<p>举个例子：比如我们进行页面导航时，URL会发生对应的变化，这个时候我们进行刷新，会根据URL的文件路径去资源服务器的文件系统下查找对应的文件，如果找不到，就会返回404。而在页面中的URL改变，是由前端路由接管的，并不会去请求服务器，直白来讲，其实就是通过js监听URL改变，导入对应的从资源服务器下载的js文件，但本质上，在不刷新的情况下，无论URL怎么改变，当前页面始终都是在WEB服务器配置的默认返回的html文件，如<code>index.html</code>。</p>
+<p><mark>注意：此配置仅适用于开发阶段，对于生产阶段，要单独在WEB服务器（nginx）中进行配置。</mark></p>
+<p>这里给出一幅图便于理解上述内容：</p>
+<img data-src="/2025/06/08/webpack%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E8%B7%AF%E7%94%B1%E5%A4%84%E7%90%86.png" class="" title="浏览器与服务器对路由处理">
+<p>前面我们提到了，在单页面应用里，无论路由怎么变化，始终展示的都是在WEB服务器配置的默认返回页面，一般默认是index.html页面，当我们进行<code>historyApiFallback: true</code>时，所有404请求都会被重定向到<code>index.html</code>，无论请求路径是什么，对于重定向的操作，URL并不会改变，所以<code>index.html</code>中的js脚本会根据当前路由进行逻辑处理并渲染对应的组件。</p>
+<p>一般进行如下配置即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">  <span class="attr">historyApiFallback</span>: <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有时候我们可能希望部分路径重定向到其他页面，我们需要进行如下配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">  <span class="attr">rewrites</span>: [</span><br><span class="line">    &#123; <span class="attr">from</span>: <span class="regexp">/\/api\//</span>, <span class="attr">to</span>: <span class="literal">null</span> &#125;, <span class="comment">// 不重定向API请求</span></span><br><span class="line">    &#123; <span class="attr">from</span>: <span class="regexp">/./</span>, <span class="attr">to</span>: <span class="string">&#x27;/index.html&#x27;</span> &#125;, <span class="comment">// 其他重定向</span></span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Using-webpack-dev-middleware">Using webpack-dev-middleware</h2>
+<p><code>webpack-dev-middleware</code>是一个包装器，它将webpack处理的文件发送到服务器。</p>
+<p>这意味着我们需要手动实现一个服务器，与<code>webpack-dev-middleware</code>一起使用。<code>webpack-dev-server</code>内部就使用了<code>webpack-dev-middleware</code>，它同时帮助我们开启了一个服务器，所以对于<code>webpack-dev-server</code>来说，我们只需填写一个服务器相关的配置即可。</p>
+<h3 id="示例：webpack-dev-middleware与express结合使用">示例：<code>webpack-dev-middleware</code>与<code>express</code>结合使用</h3>
+<p>安装<code>webpack-dev-middleware</code>与<code>express</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D express webpack-dev-middleware</span><br></pre></td></tr></table></figure>
+<p>我们同时需要在webpack配置文件中配置<code>output.publicPath</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">  <span class="comment">// 这个配置会在express中被获取，作为静态资源的路径使用</span></span><br><span class="line">  <span class="attr">publicPath</span>: <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个<code>server.js</code>文件，并写入以下内容：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> webpackDevMiddleware = <span class="built_in">require</span>(<span class="string">&#x27;webpack-dev-middleware&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"><span class="comment">// 注意：如果配置文件是一个函数的话，需要调用一下，我们需要获取的是配置文件对象</span></span><br><span class="line"><span class="comment">// const config = require(&#x27;./webpack.config.js&#x27;)();</span></span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.config.js&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> compiler = <span class="title function_">webpack</span>(config);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 告诉 Express 使用 webpack-dev-middleware并 使用 webpack.config.js 配置文件作为基础。</span></span><br><span class="line">app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">webpackDevMiddleware</span>(compiler, &#123;</span><br><span class="line">    <span class="attr">publicPath</span>: config.<span class="property">output</span>.<span class="property">publicPath</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Serve the files on port 3000.</span></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example app listening on port 3000!\n&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>接下来只需要通过<code>node server.js</code>进行即可，通过这个操作，也是可以做到当文件改变时，能自动的重新打包并展示。</p>
+
     </div>
 
     
@@ -442,14 +585,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">63k</span>
+    <span title="站点总字数">65k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:47</span>
+    <span title="站点阅读时长">3:56</span>
   </span>
 </div>
 <div class="busuanzi-count">
