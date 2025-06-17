@@ -21,31 +21,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"a-big-dreamer.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="JS闭包、常见的垃圾回收机制（GC）算法。">
+    <meta name="description" content="webpack性能优化方案。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS闭包">
-<meta property="og:url" content="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:title" content="webpack性能优化方案">
+<meta property="og:url" content="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="ABD&#39;s Blog">
-<meta property="og:description" content="JS闭包、常见的垃圾回收机制（GC）算法。">
+<meta property="og:description" content="webpack性能优化方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png">
-<meta property="article:published_time" content="2025-02-22T13:30:47.000Z">
-<meta property="article:modified_time" content="2025-03-05T02:30:39.016Z">
+<meta property="article:published_time" content="2025-06-17T01:00:47.000Z">
+<meta property="article:modified_time" content="2025-06-17T14:23:06.127Z">
 <meta property="article:author" content="A Big Dreamer">
-<meta property="article:tag" content="JS">
-<meta property="article:tag" content="闭包">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="工程化">
+<meta property="article:tag" content="webpack">
+<meta property="article:tag" content="性能优化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png">
 
 
-<link rel="canonical" href="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/">
+<link rel="canonical" href="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/","path":"2025/02/22/JS闭包/","title":"JS闭包"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/","path":"2025/06/17/webpack性能优化方案/","title":"webpack性能优化方案"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>JS闭包 | ABD's Blog</title>
+<title>webpack性能优化方案 | ABD's Blog</title>
     
 
 
@@ -149,7 +149,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">闭包的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E5%AF%BC%E8%87%B4%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">2.</span> <span class="nav-text">闭包导致的内存泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%EF%BC%88GC%EF%BC%89%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">常见的垃圾回收机制（GC）算法</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -242,7 +242,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/">
+    <link itemprop="mainEntityOfPage" href="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -255,12 +255,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="JS闭包 | ABD's Blog">
-      <meta itemprop="description" content="JS闭包、常见的垃圾回收机制（GC）算法。">
+      <meta itemprop="name" content="webpack性能优化方案 | ABD's Blog">
+      <meta itemprop="description" content="webpack性能优化方案。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JS闭包
+          webpack性能优化方案
         </h1>
 
         <div class="post-meta-container">
@@ -270,15 +270,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-02-22 21:30:47" itemprop="dateCreated datePublished" datetime="2025-02-22T21:30:47+08:00">2025-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-05 10:30:39" itemprop="dateModified" datetime="2025-03-05T10:30:39+08:00">2025-03-05</time>
+      <time title="创建时间：2025-06-17 09:00:47 / 修改时间：22:23:06" itemprop="dateCreated datePublished" datetime="2025-06-17T09:00:47+08:00">2025-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,7 +284,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+          <a href="/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">工程化</span></a>
         </span>
     </span>
 
@@ -308,93 +302,124 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>762</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">JS闭包、常见的垃圾回收机制（GC）算法。</div>
+            <div class="post-description">webpack性能优化方案。</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="闭包的定义">闭包的定义</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>MDN中对于JS闭包的解释：</p>
-<img data-src="/2025/02/22/JS%E9%97%AD%E5%8C%85/JS%E9%97%AD%E5%8C%85.png" class="" title="JS闭包">
-<p>词法环境即为函数定义时所在的作用域，也可以理解为VO。即一个函数，如果可以访问外部作用域的变量，那么该函数和周围环境的组合就是闭包。</p>
-<p>从该定义来看，JS中的函数都具有闭包的特性，都可以称之为闭包。但从严格意义来讲，JS中的一个函数，如果访问了外层作用域的变量，那它就是一个闭包。</p>
-</details>
-<h2 id="闭包导致的内存泄露">闭包导致的内存泄露</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>以如下代码为例：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
-<p>bar函数与变量a形成了闭包，且通过bar引用了foo函数返回bar函数，在GO中存在bar对foo函数返回bar函数对象的引用，bar函数对象的<code>[[Scopes]]</code>属性又存在对foo函数的AO的引用，根据垃圾回收机制中标记清除算法的处理，bar变量即使以后未被调用，bar函数和foo函数的AO所占据的内存也不会被回收，就造成了内存泄漏。</p>
-<p>所以，对于闭包的内存泄漏，其实就是引用链中的对象无法被释放。</p>
-<p>解决方法：</p>
-<p>手动进行<code>bar = null</code>，手动释放对对象的引用。</p>
-</details>
-<h2 id="常见的垃圾回收机制（GC）算法">常见的垃圾回收机制（GC）算法</h2>
-<details open>
-    <summary>
-        <span>展开</span>
-    </summary>
-<p>垃圾回收机制（Garbage Collection）简称GC。</p>
-<p>对于那些不再使用的对象，我们称之为垃圾，它需要被回收以释放更多的内存空间。</p>
-<p>在JS中，内存管理是自动的、无形的，就是由于GC的存在帮我们自动管理内存。</p>
-<p>常见的GC算法有：</p>
+    <div class="post-body" itemprop="articleBody"><p>webpack是一个打包工具，所以对于它的性能优化，主要是与打包有关的，我们对其的优化可以分为两类：</p>
+<ul class="lvl-0">
+<li class="lvl-2">打包产物体积的优化。</li>
+<li class="lvl-2">打包速度的优化。</li>
+</ul>
+<p>一般来说，我们更侧重于打包产物体积的优化，它对于准备上线的产品有很大影响。</p>
+<p>我们可以通过配置webpack的mode属性来控制打包的优化级别，有development和production两种，分别对应不同的优化级别。它们会默认帮我们配置一些东西，但有些定制化的操作是需要我们自己进行处理的。</p>
+<h2 id="代码分离">代码分离</h2>
+<p>webpack打包的资源默认是打包到一个文件中的，这样导致在启动的时候要一下子加载所有的资源，这样会大大降低首页的加载速度，我们希望一些不必在首页加载的资源可以按需引入，当需要的时候才去加载，提高性能。</p>
+<p>在webpack中，代码分离的主要目的是将代码分离到不同的bundle中，我们可以按需加载，或者并行加载这些bundle。</p>
+<p>webpack中常用的代码分离有三种：</p>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>引用计数法</p>
-<ul class="lvl-2">
-<li class="lvl-4">每当存在对象的引用时，相应对象引用计数加1，当引用计数为0时，该对象被回收。</li>
-<li class="lvl-4">但容易产生循环引用，即两个对象的属性进行相互引用，形成环形链表，导致内存泄漏（两个引用对象的变量赋值为null，但其属性仍然存在引用，导致对象中的引用计数不为0）。</li>
-</ul>
+<p>多入口起点（entry）：使用entry配置手动分离代码。</p>
 </li>
 <li class="lvl-2">
-<p>标记清除法</p>
-<ul class="lvl-2">
-<li class="lvl-4">核心思路为<mark>可达性</mark>。</li>
-<li class="lvl-4">需要设置一个根对象（root object），在浏览器中为window，垃圾回收器会定时从根对象出发，找所有从根对象开始有引用的对象，对于没有引用的对象，就认为是不可用的对象，就会被垃圾回收其处理。</li>
-</ul>
+<p>防止重复：使用<code>Entry Dependencies</code>或<code>SplitChunksPlugin</code>去重和分离代码。</p>
 </li>
 <li class="lvl-2">
-<p>标记整理法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在标记清除法类似，不同的是，在回收的同时会将保留的对象搬运到连续的内存空间中，整合空闲空间，避免碎片化。</li>
+<p>动态导入：通过模块的内联函数调用来分离代码。</p>
+</li>
 </ul>
+<h3 id="多入口起点">多入口起点</h3>
+<p>此方案就是在 entry 中配置多个入口文件，在 output 输入的文件名等信息用占位符表示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">main</span>: <span class="string">&#x27;./src/main.js&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>打包生成的dist目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ index.bundle.js</span><br><span class="line">└─ main.bundle.js</span><br></pre></td></tr></table></figure>
+<h3 id="Entry-Dependencies（入口依赖）">Entry Dependencies（入口依赖）</h3>
+<p>此方案是基于多入口文件的，假设我们有两个入口文件<code>index.js</code>和<code>main.js</code>，它们都依赖相同的工具库，但如果我们单纯的进行入口分离，打包的两个bundle文件中都会包含工具库的代码，这样会重复引入工具库，导致bundle文件体积变大。</p>
+<p>此方案就是指定相同引用工具单独打包成一个文件，然后两个入口文件分别引用这个工具文件，这样两个入口文件之间不会重复引入工具库，从而减少bundle文件体积。</p>
+<p>配置实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: &#123; <span class="attr">import</span>: <span class="string">&#x27;./src/index.js&#x27;</span>, <span class="attr">dependOn</span>: <span class="string">&#x27;shared&#x27;</span> &#125;,</span><br><span class="line">    <span class="attr">main</span>: &#123; <span class="attr">import</span>: <span class="string">&#x27;./src/main.js&#x27;</span>, <span class="attr">dependOn</span>: <span class="string">&#x27;shared&#x27;</span> &#125;,</span><br><span class="line">    <span class="comment">// shared 为自定义键名，只是与入口文件的dependOn属性对应即可</span></span><br><span class="line">    <span class="comment">// 值为数组，填写需要抽离的工具库</span></span><br><span class="line">    <span class="attr">shared</span>: [<span class="string">&#x27;axios&#x27;</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>经过上述配置打包后的dist目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ index.bundle.js</span><br><span class="line">├─ main.bundle.js</span><br><span class="line">└─ shared.bundle.js</span><br></pre></td></tr></table></figure>
+<p>然后在html中引入这三个文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./dist/shared.bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./dist/index.bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./dist/main.bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><mark>注意：一定要将<code>shared.bundle.js</code>写在<code>index.bundle.js</code>和<code>main.bundle.js</code>之前，因为<code>shared.bundle.js</code>存放着 index 和 main 中所需的公共代码，但如果，我们不引入<code>shared.bundle.js</code>，浏览器也不会报错，这是由于webpack内部做了静默错误处理！而且我们在 index 和 main 中编写的普通代码也不会执行，因为负责加载、缓存和执行模块的<code>__webpack_require__</code>函数和负责处理动态加载的代码块(chunk)，将其集成到模块系统中<code>webpackJsonpCallback</code>函数都在<code>shared.bundle.js</code>中。</mark></p>
+<h3 id="SplitChunks">SplitChunks</h3>
+<p>SplitChunks 是基于 SplitChunksPlugin 实现的，此插件已经被webpack默认安装和集成，所以我们可以直接填写配置信息来使用它。</p>
+<p>我们可以通过<code>optimization.splitChunks</code>来配置它。</p>
+<p>这里给出一些<code>optimization.splitChunks</code>常见的配置项：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>配置值</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chunks</td>
+<td><code>async/initial/all</code></td>
+<td>async表示对异步代码进行处理/initial表示对同步代码进行处理/all表示对所有代码进行处理</td>
+<td>async</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td><code>number</code></td>
+<td>拆分包的大小, 至少为minSize，如果一个包拆分出来达不到minSize,那么这个包就不会拆分</td>
+<td>20000(bytes)</td>
+</tr>
+<tr>
+<td>maxSize</td>
+<td><code>number</code></td>
+<td>将大于maxSize的包，拆分为不小于minSize的包</td>
+<td></td>
+</tr>
+<tr>
+<td>cacheGroups</td>
+<td><code>object</code></td>
+<td>用于对拆分的包就行分组，比如一个lodash在拆分之后，并不会立即打包，而是会等到有没有其他符合规则的包一起来打包</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>常见的cacheGroups的配置项：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>test：匹配符合规则的包。</p>
 </li>
 <li class="lvl-2">
-<p>分代收集法</p>
+<p>name：拆分包的name属性。</p>
 </li>
 <li class="lvl-2">
-<p>增量收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">将回收分为几部处理，减少垃圾回收的延迟。</li>
-</ul>
+<p>filename：拆分包的名称，可以使用placeholder（占位符）属性。</p>
 </li>
 <li class="lvl-2">
-<p>闲时收集法</p>
-<ul class="lvl-2">
-<li class="lvl-4">在CPU空闲的时候进行回收。</li>
-</ul>
+<p>priority：优先级，数字越大优先级越高。</p>
 </li>
 </ul>
-</details>
+<p>测试一下，默认情况下的打包操作：</p>
+<p>我们通过import函数动态导入一个模块：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="keyword">import</span>(<span class="string">&#x27;./utils/asyn_test&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>运行webpack打包命令，查看打包结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ 967.bundle.js</span><br><span class="line">├─ bundle.js</span><br><span class="line">└─ index.html</span><br></pre></td></tr></table></figure>
+<p>异步操作被分离出一个单独的文件，文件名中的bundle是配置文件定义的静态输出文件名。</p>
+<p>加入chunks，minSize，maxSize，cacheGroups属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">        <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        <span class="attr">minSize</span>: <span class="number">20000</span>,</span><br><span class="line">        <span class="attr">maxSize</span>: <span class="number">50000</span>,</span><br><span class="line">        <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">            <span class="attr">venders</span>: &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">test</span>: &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/utils/</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -429,7 +454,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://a-big-dreamer.github.io/2025/02/22/JS%E9%97%AD%E5%8C%85/" title="JS闭包">https://a-big-dreamer.github.io/2025/02/22/JS闭包/</a>
+      <a href="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/" title="webpack性能优化方案">https://a-big-dreamer.github.io/2025/06/17/webpack性能优化方案/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -438,22 +463,21 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
-              <a href="/tags/%E9%97%AD%E5%8C%85/" rel="tag"><i class="fa fa-tag"></i> 闭包</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 工程化</a>
+              <a href="/tags/webpack/" rel="tag"><i class="fa fa-tag"></i> webpack</a>
+              <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/02/21/JS%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" rel="prev" title="JS执行原理">
-                  <i class="fa fa-angle-left"></i> JS执行原理
+                <a href="/2025/06/16/%E4%BD%BF%E7%94%A8pnpm%E6%90%AD%E5%BB%BAmonorepo%E9%A1%B9%E7%9B%AE/" rel="prev" title="使用pnpm搭建monorepo项目">
+                  <i class="fa fa-angle-left"></i> 使用pnpm搭建monorepo项目
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/02/23/JS%E5%87%BD%E6%95%B0%E5%A2%9E%E5%BC%BA/" rel="next" title="函数增强">
-                  函数增强 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -632,7 +656,7 @@ darkmode.showWidget();
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"dfb5d02ed1f62088cfb1dd3c4003af85"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"a-big-dreamer","repo":"a-big-dreamer.github.io","client_id":"Ov23liK31JPQeoo7RowF","client_secret":"1b6ca11cecf9665e1ea7e7f6e7e4a0377f3241b5","admin_user":"a-big-dreamer","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"ec800e1ccdb903b6ffd81e15d825c231"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
   <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":null});</script></body>
