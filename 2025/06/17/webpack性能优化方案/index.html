@@ -29,7 +29,7 @@
 <meta property="og:description" content="webpack性能优化方案。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-17T01:00:47.000Z">
-<meta property="article:modified_time" content="2025-06-17T14:23:06.127Z">
+<meta property="article:modified_time" content="2025-06-18T10:27:15.826Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
@@ -149,7 +149,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a></li></ol></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-chunkIds"><span class="nav-number">1.3.1.</span> <span class="nav-text">optimization.chunkIds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-runtimeChunk"><span class="nav-number">1.3.2.</span> <span class="nav-text">optimization.runtimeChunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%EF%BC%88dynamic-import%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">动态导入（dynamic import）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefetch%E5%92%8CPreload"><span class="nav-number">1.4.1.</span> <span class="nav-text">Prefetch和Preload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -270,9 +270,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-06-17 09:00:47 / 修改时间：22:23:06" itemprop="dateCreated datePublished" datetime="2025-06-17T09:00:47+08:00">2025-06-17</time>
+      <time title="创建时间：2025-06-17 09:00:47" itemprop="dateCreated datePublished" datetime="2025-06-17T09:00:47+08:00">2025-06-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-06-18 18:27:15" itemprop="dateModified" datetime="2025-06-18T18:27:15+08:00">2025-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,14 +308,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -419,7 +425,137 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ 967.bundle.js</span><br><span class="line">├─ bundle.js</span><br><span class="line">└─ index.html</span><br></pre></td></tr></table></figure>
 <p>异步操作被分离出一个单独的文件，文件名中的bundle是配置文件定义的静态输出文件名。</p>
 <p>加入chunks，minSize，maxSize，cacheGroups属性：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">        <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        <span class="attr">minSize</span>: <span class="number">20000</span>,</span><br><span class="line">        <span class="attr">maxSize</span>: <span class="number">50000</span>,</span><br><span class="line">        <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">            <span class="attr">venders</span>: &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">test</span>: &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/utils/</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name].bundle.js&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">        <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">        <span class="attr">minSize</span>: <span class="number">20000</span>,</span><br><span class="line">        <span class="attr">maxSize</span>: <span class="number">100000</span>,</span><br><span class="line">        <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">            <span class="attr">venders</span>: &#123;</span><br><span class="line">              <span class="comment">// 由于在windows和linux系统路径分隔符不同，这里的正则表达式需要可以匹配两种路径分隔符</span></span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                <span class="attr">name</span>: <span class="string">&#x27;venders&#x27;</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name]-[id].bundle.js&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">test</span>: &#123;</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/utils/</span>,</span><br><span class="line">                <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;[name]-[id].bundle.js&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进行上述配置，打包后的目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ bundle.js</span><br><span class="line">├─ index.html</span><br><span class="line">├─ test-255.bundle.js</span><br><span class="line">└─ venders-210.bundle.js</span><br></pre></td></tr></table></figure>
+<p>我们可以看出，name属性是为<code>[name]</code>占位符设置的，如果不设置的话，默认<code>[id]</code>占位符的值作为<code>[name]</code>的值。</p>
+<p><mark>注意：这里的chunks如果设置值为initial，并不意味着动态导入的异步请求不会被分离，webpack会默认对动态导入进行分离，设置这个的作用除了是能够对同步代码进行分离，还是为了能分离同步和异步代码的共同部分。</mark></p>
+<h4 id="optimization-chunkIds">optimization.chunkIds</h4>
+<p>告知 webpack 当选择模块 id 时需要使用哪种算法。将 optimization.chunkIds 设置为 false 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。optimization.chunkIds 的默认值是 false：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果环境是开发环境，那么 optimization.chunkIds 会被设置成 ‘named’，但当在生产环境中时，它会被设置成 ‘deterministic’。</p>
+</li>
+<li class="lvl-2">
+<p>如果上述的条件都不符合, optimization.chunkIds 会被默认设置为 ‘natural’。</p>
+</li>
+</ul>
+<p><code>optimization.chunkIds的</code>的值：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>natural</td>
+<td>按使用顺序的数字 id</td>
+</tr>
+<tr>
+<td>named</td>
+<td>对调试更友好的可读的 id</td>
+</tr>
+<tr>
+<td>deterministic</td>
+<td>在不同的编译中不变的短数字 id。有益于长期缓存。在生产模式中会默认开启</td>
+</tr>
+<tr>
+<td>size</td>
+<td>专注于让初始下载包大小更小的数字 id</td>
+</tr>
+<tr>
+<td>total-size</td>
+<td>专注于让总下载包大小更小的数字 id</td>
+</tr>
+</tbody>
+</table>
+<p>当 chunkIds 的值为 named的时候，默认在 cacheGroups 中配置的模块打包路径中的<code>[name]和[id]</code>占位符值为：<code>cacheGroups中配置的键名+引入模块所在的路径名</code>，但如果我们在<code>cacheGroups</code>中的分包配置中添加了name属性，<code>[name]和[id]</code>占位符值就为name属性的值。</p>
+<p>natural 和 deterministic 的区别：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用<code>'natural'</code>时，Webpack会按照chunk在代码中出现的自然顺序（即创建顺序）来分配ID。这种方式可能会导致ID分配不稳定，因为当你在代码中新增或删除一个chunk时，后续chunk的ID可能会发生变化。因此，它不利于长期缓存，因为模块ID的变化会导致浏览器缓存失效。</p>
+</li>
+<li class="lvl-2">
+<p>在<code>'deterministic'</code>模式下，Webpack会生成确定的chunk ID。它通过使用模块路径的哈希值来分配ID，这样只要模块内容不变，其chunk ID也不会变。这种方式有利于持久化缓存，因为即使添加或删除其他chunk，某个特定chunk的ID也能保持不变。在Webpack 5中，这是生产模式下的默认值。</p>
+</li>
+</ul>
+<h4 id="optimization-runtimeChunk">optimization.runtimeChunk</h4>
+<p>配置runtime相关的代码是否抽取到一个单独的chunk中：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>runtime相关的代码指的是在运行环境中，对模块进行解析、加载、模块信息相关的代码。</p>
+</li>
+</ul>
+<p>其实就是我们前面提到和<code>__webpack_require__</code>和<code>webpackJsonpCallback</code>有关的代码。</p>
+<p>前提，配置了runtimeChunk后，<code>output.filename</code>配置就需要动态生成了，否则会报错：<code>[webpack-cli] Error: Conflict: Multiple chunks emit assets to the same filename bundle.js </code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name]-bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name]-[id].js&#x27;</span>,</span><br><span class="line">    <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>runtimeChunk的值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>true/multiple</code>：针对每个入口打包一个runtime文件。</p>
+</li>
+</ul>
+<p>配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">runtimeChunk</span>: <span class="string">&#x27;multiple&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ index.html</span><br><span class="line">├─ main-bundle.js</span><br><span class="line">└─ runtime~main-bundle.js</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>single</code>：打包一个runtime文件。</p>
+</li>
+</ul>
+<p>配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">runtimeChunk</span>: <span class="string">&#x27;single&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ index.html</span><br><span class="line">├─ main-bundle.js</span><br><span class="line">└─ runtime-bundle.js</span><br></pre></td></tr></table></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>对象：name属性决定runtimeChunk的名称。</p>
+</li>
+</ul>
+<p>配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">runtimeChunk</span>: &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;rb&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ index.html</span><br><span class="line">├─ main-bundle.js</span><br><span class="line">└─ rb-bundle.js</span><br></pre></td></tr></table></figure>
+<h3 id="动态导入（dynamic-import）">动态导入（dynamic import）</h3>
+<p>前面的的两种代码分离，在首页加载的时候，其实还是需要全部加载的，只不过抽离出来使各个JS文件的体积变小，加载更快，能够更快的进行页面渲染操作，而这个动态导入操作可以实现<strong>懒加载</strong>，即在需要的时候才去加载，从而达到按需加载的目的。</p>
+<p>动态导入的实现前面已经提到过了，就是ES6的<code>import()</code>语法。</p>
+<p>前面说过了，对于动态导入的模块是会被打包成独立的文件的，所以我们不用在cacheGroup中配置，但这样的话，我们如果想修改它打包出来的文件名，需要在<code>output.chunkFilename</code>中配置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name]-[id].js&#x27;</span>,</span><br><span class="line">    <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打包后的目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ 310-310.js</span><br><span class="line">├─ bundle.js</span><br><span class="line">└─ index.html</span><br></pre></td></tr></table></figure>
+<p>我们发现默认情况下，<code>[name]</code>和<code>[id]</code>的值是相同的，我们如果想要修改<code>[name]</code>的值，需要通过魔法注释（magic comment）方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;test&quot; */</span> <span class="string">&#x27;./utils/asyn_test&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>再次打包，目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├─ bundle.js</span><br><span class="line">├─ index.html</span><br><span class="line">└─ test-255.js</span><br></pre></td></tr></table></figure>
+<h4 id="Prefetch和Preload">Prefetch和Preload</h4>
+<p>webpack v4.6.0+ 增加了对预获取和预加载的支持。</p>
+<p>在声明 import 时，使用下面这些内置指令（魔法注释），来告知浏览器：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>prefetch(预获取)：将来某些导航下可能需要的资源。</p>
+</li>
+<li class="lvl-2">
+<p>preload(预加载)：当前导航下可能需要资源。</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(</span><br><span class="line">  <span class="comment">/* webpackChunkName: &quot;test&quot; */</span> <span class="comment">/* webpackPrefetch: true */</span></span><br><span class="line">  <span class="comment">/* webpackPreload: true */</span> <span class="string">&#x27;./utils/asyn_test&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>与 prefetch 指令相比，preload 指令有许多不同之处：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开始加载。</p>
+</li>
+<li class="lvl-2">
+<p>preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。</p>
+</li>
+<li class="lvl-2">
+<p>preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。</p>
+</li>
+</ul>
+<h2 id="CDN">CDN</h2>
+<p>我们可以将我们的静态资源上传到 CDN，然后通过 CDN 的 URL 访问静态资源，减轻源服务器的压力，或者将一些资源的请求通过第三方服务器获取，我们自己编写的资源通过源服务器获取，这样都可以减轻我们自己的服务器的压力，使源服务器可以专注于处理动态请求（如API、数据库操作），提升整体性能。</p>
 
     </div>
 
@@ -545,14 +681,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">72k</span>
+    <span title="站点总字数">74k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:22</span>
+    <span title="站点阅读时长">4:28</span>
   </span>
 </div>
 <div class="busuanzi-count">
