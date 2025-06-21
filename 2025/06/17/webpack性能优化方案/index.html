@@ -29,8 +29,9 @@
 <meta property="og:description" content="webpack性能优化方案。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/webpack%E8%BF%9B%E8%A1%8Cexternals%E9%85%8D%E7%BD%AE%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E5%9B%BE.png">
+<meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/usedExports%E7%9A%84%E5%BC%8A%E7%AB%AF.png">
 <meta property="article:published_time" content="2025-06-17T01:00:47.000Z">
-<meta property="article:modified_time" content="2025-06-20T15:19:44.989Z">
+<meta property="article:modified_time" content="2025-06-21T15:02:25.397Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
@@ -151,7 +152,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-chunkIds"><span class="nav-number">1.3.1.</span> <span class="nav-text">optimization.chunkIds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-runtimeChunk"><span class="nav-number">1.3.2.</span> <span class="nav-text">optimization.runtimeChunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%EF%BC%88dynamic-import%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">动态导入（dynamic import）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefetch%E5%92%8CPreload"><span class="nav-number">1.4.1.</span> <span class="nav-text">Prefetch和Preload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniCssExtractPlugin"><span class="nav-number">3.</span> <span class="nav-text">MiniCssExtractPlugin</span></a></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-chunkIds"><span class="nav-number">1.3.1.</span> <span class="nav-text">optimization.chunkIds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-runtimeChunk"><span class="nav-number">1.3.2.</span> <span class="nav-text">optimization.runtimeChunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%EF%BC%88dynamic-import%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">动态导入（dynamic import）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefetch%E5%92%8CPreload"><span class="nav-number">1.4.1.</span> <span class="nav-text">Prefetch和Preload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniCssExtractPlugin"><span class="nav-number">3.</span> <span class="nav-text">MiniCssExtractPlugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.</span> <span class="nav-text">JS压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Terser"><span class="nav-number">4.1.</span> <span class="nav-text">Terser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#terser-webpack-plugin"><span class="nav-number">4.2.</span> <span class="nav-text">terser-webpack-plugin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%8E%8B%E7%BC%A9"><span class="nav-number">5.</span> <span class="nav-text">CSS压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-Shaking"><span class="nav-number">6.</span> <span class="nav-text">Tree Shaking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#usedExports"><span class="nav-number">6.1.</span> <span class="nav-text">usedExports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sideEffects"><span class="nav-number">6.2.</span> <span class="nav-text">sideEffects</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -280,7 +281,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-20 23:19:44" itemprop="dateModified" datetime="2025-06-20T23:19:44+08:00">2025-06-20</time>
+      <time title="修改时间：2025-06-21 23:02:25" itemprop="dateModified" datetime="2025-06-21T23:02:25+08:00">2025-06-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,14 +311,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
+      <span>4.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>16 分钟</span>
     </span>
 </div>
 
@@ -572,6 +573,76 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D mini-css-extract-plugin</span><br></pre></td></tr></table></figure>
 <p>然后我们还需要配置loader和plugin：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const MiniCssExtractPlugin = require(&#x27;mini-css-extract-plugin&#x27;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.css/</span>,</span><br><span class="line">            <span class="attr">use</span>: [</span><br><span class="line">                <span class="title class_">MiniCssExtractPlugin</span>.<span class="property">loader</span>,</span><br><span class="line">                <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">MiniCssExtractPlugin</span>(&#123;</span><br><span class="line">        <span class="comment">// filename：入口文件直接引用的 CSS，随主 JS 同步加载</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;css/[contenthash:6].css&#x27;</span>,</span><br><span class="line">        <span class="comment">// chunkFilename：动态导入/代码分割产生的 CSS，按需异步加载（减少首屏负担）</span></span><br><span class="line">        <span class="attr">chunkFilename</span>: <span class="string">&#x27;css/[id].[contenthash:6].css&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+<h2 id="JS压缩">JS压缩</h2>
+<p>为了进一步减小打包产物的体积，我们可以对其进行代码压缩并进行丑化（去除没必要的空格空行，对一些常量直接进行替换或将变量名进行简（丑）化表示）。</p>
+<p>我们可以通过Terser工具对代码进行压缩操作。</p>
+<h3 id="Terser">Terser</h3>
+<p>Terser是一个JavaScript的解释（Parser）、Mangler（绞肉机）/Compressor（压缩机）的工具集。</p>
+<p>早期我们可以使用UglifyJS对代码进行压缩操作，但由于目前它已不再维护，并且不支持ES6的语法，而Terser继承了UglifyJS大部分的功能，并且支持ES6的语法，目前推荐使用Terser作为代码压缩工具。</p>
+<p>Terser和Babel、Postcss一样，都是一个单独的工具，我们可以单独使用Terser进行一系列操作。</p>
+<p>首先就是要对其进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g terser</span><br></pre></td></tr></table></figure>
+<p>Terser的使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># terser [input files] [options]</span></span><br><span class="line">terser js/file1.js -o foo.min.js -c -m</span><br></pre></td></tr></table></figure>
+<p>命令行操作可以文档：<a target="_blank" rel="noopener" href="https://terser.org/docs/cli-usage/">https://terser.org/docs/cli-usage/</a></p>
+<p>但上述操作仅仅只是去除了空行来压缩了代码，但并没有达到上文我们所说的效果，我们还需要进行其他的配置：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/terser/terser#compress-options">https://github.com/terser/terser#compress-options</a>：如何优化和精简代码逻辑本身的配置选项<br>
+<a target="_blank" rel="noopener" href="https://github.com/terser/terser#mangle-options">https://github.com/terser/terser#mangle-options</a>：如何缩短变量和属性名称来减小文件大小的配置选项</p>
+</blockquote>
+<p>这里简单列出几个常见的Compress和Mangle的options：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>Compress option</code>:</p>
+<ul class="lvl-2">
+<li class="lvl-4">arrows：class或者object中的函数，转换成箭头函数。</li>
+<li class="lvl-4">arguments：将函数中使用 arguments[index]转成对应的形参名称。</li>
+<li class="lvl-4">dead_code：移除不可达的代码（tree shaking）。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Mangle option</code>:</p>
+<ul class="lvl-2">
+<li class="lvl-4">toplevel：默认值是false，顶层作用域中的变量名称，进行丑化（转换）。</li>
+<li class="lvl-4">keep_classnames：默认值是false，是否保持依赖的类名称。</li>
+<li class="lvl-4">keep_fnames：默认值是false，是否保持原来的函数名称。</li>
+</ul>
+</li>
+</ul>
+<p>命令行示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx terser ./utils/asyn_test.js -o foo.min.js -c arrows,arguments=<span class="literal">true</span>,dead_code -m toplevel=<span class="literal">true</span>,keep_classnames=<span class="literal">false</span>,keep_fnames=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="terser-webpack-plugin">terser-webpack-plugin</h3>
+<p>在Webpack中，我们可以通过 <a target="_blank" rel="noopener" href="https://webpack.docschina.org/plugins/terser-webpack-plugin/">TerserPlugin</a> 插件来对代码进行压缩。</p>
+<p>在Webpack5中，已经默认集成了这个插件，我们只需要配置<code>optimization.minimize</code>为true即可启用该插件，在生产环境下默认启用该配置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">minimize</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，我们也可以通过<code>optimization.minimizer</code>属性来定制化配置TerserPlugin，前提一定要设置<code>minimize: true</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">minimize</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">minimizer</span>: [</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">          <span class="attr">extractComments</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">terserOptions</span>: &#123;</span><br><span class="line">              <span class="comment">// 配置 Compress Option</span></span><br><span class="line">              <span class="attr">compress</span>: &#123;</span><br><span class="line">                  <span class="attr">drop_console</span>: <span class="literal">true</span>,</span><br><span class="line">                  <span class="attr">drop_debugger</span>: <span class="literal">true</span></span><br><span class="line">                  <span class="comment">// pure_funcs: [&#x27;console.log&#x27;]</span></span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="comment">// 启用 Mangle Option</span></span><br><span class="line">              <span class="attr">mangle</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">toplevel</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">keep_classnames</span>: <span class="literal">false</span>,</span><br><span class="line">              <span class="attr">keep_fnames</span>: <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;),</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="CSS压缩">CSS压缩</h2>
+<p>对于CSS的压缩，通常是去除无用的空格、空行等。</p>
+<p>在Webpack中，我们通常通过<a target="_blank" rel="noopener" href="https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/"><code>css-minimizer-webpack-plugin</code></a>插件处理CSS的压缩。</p>
+<p>此插件的内部使用的则是<a target="_blank" rel="noopener" href="https://www.cssnano.cn/docs/introduction/">cssnano</a>工具。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">  <span class="attr">minimize</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">minimizer</span>: [</span><br><span class="line">      <span class="keyword">new</span> <span class="title class_">TerserPlugin</span>(&#123;</span><br><span class="line">          <span class="attr">extractComments</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">terserOptions</span>: &#123;</span><br><span class="line">              <span class="comment">// 配置 Compress Option</span></span><br><span class="line">              <span class="attr">compress</span>: &#123;</span><br><span class="line">                  <span class="attr">drop_console</span>: <span class="literal">true</span>,</span><br><span class="line">                  <span class="attr">drop_debugger</span>: <span class="literal">true</span></span><br><span class="line">                  <span class="comment">// pure_funcs: [&#x27;console.log&#x27;]</span></span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="comment">// 启用 Mangle Option</span></span><br><span class="line">              <span class="attr">mangle</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">toplevel</span>: <span class="literal">true</span>,</span><br><span class="line">              <span class="attr">keep_classnames</span>: <span class="literal">false</span>,</span><br><span class="line">              <span class="attr">keep_fnames</span>: <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">CssMinimizerPlugin</span>(&#123;&#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此插件也可以进行一些定制化配置，具体可以自行查阅上方文档。</p>
+<h2 id="Tree-Shaking">Tree Shaking</h2>
+<p><code>Tree Shaking</code> 是一个 JavaScript 特性，源于 rollup 打包工具，用于去除 JavaScript 中未使用的代码。</p>
+<p><code>Tree Shaking</code> 主要依赖于 ESModule 的静态语法分析，与解析 ESModule 时的构造阶段有关，相关内容可以看这篇文章：<a href="/2025/03/20/ESModule%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/">ESModule解析流程</a>。</p>
+<p>在Webpack中，有两种方式可以实现<code>Tree Shaking</code>：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>usedExports：通过标记某些函数是否被使用，之后通过Terser来进行优化的。</p>
+</li>
+<li class="lvl-2">
+<p>sideEffects：跳过整个模块/文件，直接查看该文件是否有副作用。</p>
+</li>
+</ul>
+<p>文档链接：<a target="_blank" rel="noopener" href="https://webpack.docschina.org/guides/tree-shaking/#clarifying-tree-shaking-and-sideeffects">https://webpack.docschina.org/guides/tree-shaking/#clarifying-tree-shaking-and-sideeffects</a>。</p>
+<h3 id="usedExports">usedExports</h3>
+<p>usedExports 需要与 Terser 结合使用，直接在配置文件中进行<code>optimization.usedExports</code>配置。</p>
+<p>使用前，一定要将<code>minimize</code>设置为<code>true</code>，前面说过了，usedExports依赖Terser。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">usedExports</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">minimize</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但usedExports的使用是有弊端的，具体可以看上方文档：</p>
+<img data-src="/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/usedExports%E7%9A%84%E5%BC%8A%E7%AB%AF.png" class="" title="usedExports的弊端">
+<h3 id="sideEffects">sideEffects</h3>
 
     </div>
 
@@ -697,14 +768,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">74k</span>
+    <span title="站点总字数">75k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:31</span>
+    <span title="站点阅读时长">4:34</span>
   </span>
 </div>
 <div class="busuanzi-count">
