@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/webpack%E8%BF%9B%E8%A1%8Cexternals%E9%85%8D%E7%BD%AE%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E5%9B%BE.png">
 <meta property="og:image" content="https://a-big-dreamer.github.io/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/usedExports%E7%9A%84%E5%BC%8A%E7%AB%AF.png">
 <meta property="article:published_time" content="2025-06-17T01:00:47.000Z">
-<meta property="article:modified_time" content="2025-06-21T15:02:25.397Z">
+<meta property="article:modified_time" content="2025-06-22T15:52:18.237Z">
 <meta property="article:author" content="A Big Dreamer">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="工程化">
@@ -152,7 +152,7 @@
     <div class="sidebar-panel-container">
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-chunkIds"><span class="nav-number">1.3.1.</span> <span class="nav-text">optimization.chunkIds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-runtimeChunk"><span class="nav-number">1.3.2.</span> <span class="nav-text">optimization.runtimeChunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%EF%BC%88dynamic-import%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">动态导入（dynamic import）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefetch%E5%92%8CPreload"><span class="nav-number">1.4.1.</span> <span class="nav-text">Prefetch和Preload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniCssExtractPlugin"><span class="nav-number">3.</span> <span class="nav-text">MiniCssExtractPlugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.</span> <span class="nav-text">JS压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Terser"><span class="nav-number">4.1.</span> <span class="nav-text">Terser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#terser-webpack-plugin"><span class="nav-number">4.2.</span> <span class="nav-text">terser-webpack-plugin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%8E%8B%E7%BC%A9"><span class="nav-number">5.</span> <span class="nav-text">CSS压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-Shaking"><span class="nav-number">6.</span> <span class="nav-text">Tree Shaking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#usedExports"><span class="nav-number">6.1.</span> <span class="nav-text">usedExports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sideEffects"><span class="nav-number">6.2.</span> <span class="nav-text">sideEffects</span></a></li></ol></li></ol></div>
+        <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entry-Dependencies%EF%BC%88%E5%85%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">Entry Dependencies（入口依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunks"><span class="nav-number">1.3.</span> <span class="nav-text">SplitChunks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-chunkIds"><span class="nav-number">1.3.1.</span> <span class="nav-text">optimization.chunkIds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization-runtimeChunk"><span class="nav-number">1.3.2.</span> <span class="nav-text">optimization.runtimeChunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5%EF%BC%88dynamic-import%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">动态导入（dynamic import）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prefetch%E5%92%8CPreload"><span class="nav-number">1.4.1.</span> <span class="nav-text">Prefetch和Preload</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniCssExtractPlugin"><span class="nav-number">3.</span> <span class="nav-text">MiniCssExtractPlugin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.</span> <span class="nav-text">JS压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Terser"><span class="nav-number">4.1.</span> <span class="nav-text">Terser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#terser-webpack-plugin"><span class="nav-number">4.2.</span> <span class="nav-text">terser-webpack-plugin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%8E%8B%E7%BC%A9"><span class="nav-number">5.</span> <span class="nav-text">CSS压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree-Shaking"><span class="nav-number">6.</span> <span class="nav-text">Tree Shaking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#usedExports"><span class="nav-number">6.1.</span> <span class="nav-text">usedExports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sideEffects"><span class="nav-number">6.2.</span> <span class="nav-text">sideEffects</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E5%AE%9E%E7%8E%B0Tree-Shaking"><span class="nav-number">7.</span> <span class="nav-text">CSS实现Tree Shaking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-Hoisting"><span class="nav-number">8.</span> <span class="nav-text">Scope Hoisting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8E%8B%E7%BC%A9"><span class="nav-number">9.</span> <span class="nav-text">HTTP压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack%E6%89%93%E5%8C%85%E5%90%8E%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-number">10.</span> <span class="nav-text">webpack打包后文件分析</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -281,7 +281,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-21 23:02:25" itemprop="dateModified" datetime="2025-06-21T23:02:25+08:00">2025-06-21</time>
+      <time title="修改时间：2025-06-22 23:52:18" itemprop="dateModified" datetime="2025-06-22T23:52:18+08:00">2025-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,14 +311,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
+      <span>5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>16 分钟</span>
+      <span>18 分钟</span>
     </span>
 </div>
 
@@ -643,6 +643,62 @@
 <p>但usedExports的使用是有弊端的，具体可以看上方文档：</p>
 <img data-src="/2025/06/17/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/usedExports%E7%9A%84%E5%BC%8A%E7%AB%AF.png" class="" title="usedExports的弊端">
 <h3 id="sideEffects">sideEffects</h3>
+<p>sideEffects用于告知<code>webpack compiler</code>哪些模块时有副作用的，它需要在<code>package.json</code>中声明。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>如果我们将sideEffects设置为false，就是告知webpack可以安全的删除未用到的exports。</p>
+</li>
+<li class="lvl-2">
+<p>如果有一些我们希望保留，可以设置为数组。</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;sideEffects&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./utils/utils.js&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="CSS实现Tree-Shaking">CSS实现Tree Shaking</h2>
+<p>CSS要实现<code>Tree Shaking</code>，需要使用PurgeCss插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i purgecss-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+<p>我们同时需要借助一个文件路径匹配工具——<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/glob">glob</a>，glob 提供了声明式的文件匹配能力，使 PurgeCSS 能高效、准确地定位所有可能使用CSS的源文件，这是实现CSS Tree Shaking的基础。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i glob -D</span><br></pre></td></tr></table></figure>
+<p>webpack配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const glob  = require(&#x27;glob&#x27;);</span></span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">PurgeCSSPlugin</span>(&#123;</span><br><span class="line">    <span class="comment">// paths：表示要检测哪些目录下的内容需要被分析</span></span><br><span class="line">    <span class="attr">paths</span>: glob.<span class="title function_">sync</span>(<span class="string">`style/**/*`</span>, &#123; <span class="attr">nodir</span>: <span class="literal">true</span> &#125;),</span><br><span class="line">    <span class="comment">// 默认情况下，Purgecss会将我们的html标签的样式移除掉，如果我们希望保留，可以添加一个safelist的属性</span></span><br><span class="line">    <span class="attr">safelist</span>: [<span class="string">&#x27;body&#x27;</span>, <span class="string">&#x27;html&#x27;</span>],</span><br><span class="line">  &#125;),</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p><mark>注意：purgecss也可以对less文件进行处理（因为它是对打包后的css进行tree shaking操作）。</mark></p>
+<h2 id="Scope-Hoisting">Scope Hoisting</h2>
+<p>Scope Hoisting从webpack3开始增加的一个新功能，功能是对作用域进行提升，并且让webpack打包后的代码更小、运行更快。</p>
+<p>默认情况下webpack打包会有很多的函数作用域，包括一些（比如最外层的）IIFE：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无论是从最开始的代码运行，还是加载一个模块，都需要执行一系列的函数。</p>
+</li>
+<li class="lvl-2">
+<p>Scope Hoisting可以将函数合并到一个模块中来运行。</p>
+</li>
+</ul>
+<p>在生产模式下，Scope Hoisting会默认开启。</p>
+<p>在开发环境中，我们需要手动开启：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const  webpack = require(&#x27;webpack&#x27;);</span></span><br><span class="line"></span><br><span class="line"><span class="attr">plugins</span>: [<span class="keyword">new</span> webpack.<span class="property">optimize</span>.<span class="title class_">ModuleConcatenationPlugin</span>()];</span><br></pre></td></tr></table></figure>
+<h2 id="HTTP压缩">HTTP压缩</h2>
+<p>HTTP压缩是一种内置在 服务器 和 客户端 之间的，以改进传输速度和带宽利用率的方式。</p>
+<p>HTTP压缩的流程：</p>
+<ol>
+<li class="lvl-3">
+<p>HTTP数据在服务器发送前就已经被压缩了。</p>
+</li>
+<li class="lvl-3">
+<p>兼容的浏览器在向服务器发送请求时，会通过请求头<code>Accept-Encoding</code>告知服务器自己支持哪些压缩格式。</p>
+</li>
+<li class="lvl-3">
+<p>服务器在浏览器支持的压缩格式下，直接返回对应的压缩后的文件，并且在响应头<code>Content-Encoding</code>中告知浏览器。</p>
+</li>
+</ol>
+<p>Webpack中对文件的压缩，我们可以通过<a target="_blank" rel="noopener" href="https://webpack.docschina.org/plugins/compression-webpack-plugin/"><code>compression-webpack-plugin</code></a>插件来实现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D compression-webpack-plugin</span><br></pre></td></tr></table></figure>
+<p>在<code>webpack.config.js</code>中添加如下配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">CompressionPlugin</span>(&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.(css|js)$/</span>, <span class="comment">// 匹配文件</span></span><br><span class="line">    <span class="attr">minRatio</span>: <span class="number">0.7</span>, <span class="comment">// 压缩比</span></span><br><span class="line">    <span class="attr">algorithm</span>: <span class="string">&#x27;gzip&#x27;</span>, <span class="comment">// 压缩算法</span></span><br><span class="line">  &#125;),</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h2 id="webpack打包后文件分析">webpack打包后文件分析</h2>
+<p>我们可以通过<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/webpack-bundle-analyzer"><code>webpack-bundle-analyzer</code></a>工具查看打包后的文件大小。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D webpack-bundle-analyzer</span><br></pre></td></tr></table></figure>
+<p>在webpack配置文件中添加如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins</span>: [<span class="keyword">new</span> <span class="title class_">BundleAnalyzerPlugin</span>()];</span><br></pre></td></tr></table></figure>
+<p>进行以上配置后，在打包webpack的时候，这个工具是帮助我们打开一个8888端口上的服务，我们可以直接的看到每个包的大小。</p>
 
     </div>
 
@@ -768,14 +824,14 @@ window.SeniverseWeatherWidget('show', {
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">76k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:34</span>
+    <span title="站点阅读时长">4:37</span>
   </span>
 </div>
 <div class="busuanzi-count">
